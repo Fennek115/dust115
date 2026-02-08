@@ -1,0 +1,13 @@
+<div style="font-family: monospace; font-size: 0.85em; opacity: 0.6; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-color);">
+  <p style="margin: 0;">
+    <span style="color: var(--accent);">commit</span> {{ .Get "hash" }}
+  </p>
+  <p style="margin: 0;">
+    <span style="opacity: 0.5;">Date:</span> {{ .Get "date" }}
+  </p>
+  {{ with .Get "message" }}
+  <p style="margin: 0; margin-top: 5px; font-style: italic;">
+    {{ . }}
+  </p>
+  {{ end }}
+</div>

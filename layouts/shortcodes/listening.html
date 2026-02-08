@@ -1,0 +1,10 @@
+<div style="border-left: 3px solid var(--accent); padding-left: 15px; margin: 20px 0; font-style: italic; opacity: 0.9;">
+  <p style="margin: 0;">
+    🎵 <strong>{{ .Get "track" }}</strong> — {{ .Get "artist" }}
+  </p>
+  {{ with .Get "album" }}
+  <p style="margin: 0; opacity: 0.7; font-size: 0.9em;">
+    de <em>{{ . }}</em>
+  </p>
+  {{ end }}
+</div>
