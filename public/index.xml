@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dust115 // SkullFox Digital Archive</title>
+    <link>http://localhost:1313/dust115/</link>
+    <description>Recent content on Dust115 // SkullFox Digital Archive</description>
+    <generator>Hugo</generator>
+    <language>es-cl</language>
+    <lastBuildDate>Sat, 08 Feb 2025 20:00:00 -0300</lastBuildDate>
+    <atom:link href="http://localhost:1313/dust115/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Primer Commit del Eterno Retorno</title>
+      <link>http://localhost:1313/dust115/post/primer-post/</link>
+      <pubDate>Sat, 08 Feb 2025 20:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/post/primer-post/</guid>
+      <description>&lt;p&gt;Este es el primer commit en el repositorio de mi autenticidad.&lt;/p&gt;&#xA;&lt;p&gt;Como en Git, cada post es una instantánea de mi pensamiento en un momento específico. Cada entrada tiene su hash único, su timestamp, su mensaje de commit.&lt;/p&gt;&#xA;&lt;p&gt;La diferencia es que en Git puedes hacer &lt;code&gt;git revert&lt;/code&gt;. En la vida, no. Aunque según Nietzsche, si el tiempo es infinito y la materia finita, eventualmente todo se repetirá. Quizás ya hemos vivido este momento miles de veces. Quizás ya he escrito este post en iteraciones anteriores del universo.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>about</title>
+      <link>http://localhost:1313/dust115/about/</link>
+      <pubDate>Sat, 08 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/dust115/about/</guid>
+      <description>&lt;h2 id=&#34;dust115&#34;&gt;Dust115&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;Especie:&lt;/strong&gt; Skullfox&lt;br&gt;&#xA;&lt;strong&gt;Colores:&lt;/strong&gt; Negro con violeta&lt;br&gt;&#xA;&lt;strong&gt;Personalidad:&lt;/strong&gt; Tranquilo, reflexivo, algo sarcástico, pero buena onda&lt;/p&gt;&#xA;&lt;h3 id=&#34;un-poco-de-lore&#34;&gt;Un poco de lore&lt;/h3&gt;&#xA;&lt;p&gt;Un día desperté y me di cuenta de que estaba muerto. No fue tan grave como suena, la verdad fue&amp;hellip; liberador. Era como si el &amp;ldquo;yo&amp;rdquo; de antes se hubiera ido a tomar vacaciones permanentes, dejando espacio para algo más simple: vivir sin miedo ni disfraces.&lt;/p&gt;&#xA;&lt;p&gt;No volví buscando cerebros ni venganza — solo buenos riffs y mejores charlas. Toco la guitarra de vez en cuando, me gusta reflexionar, y si surge una conversación profunda a las tres de la mañana sobre la vida o los algoritmos, probablemente ahí estaré: medio muerto, pero bien despierto.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

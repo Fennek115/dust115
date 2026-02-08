@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Inicio on Dust115 // SkullFox Digital Archive</title>
+    <link>http://localhost:1313/dust115/tags/inicio/</link>
+    <description>Recent content in Inicio on Dust115 // SkullFox Digital Archive</description>
+    <generator>Hugo</generator>
+    <language>es-cl</language>
+    <lastBuildDate>Sat, 08 Feb 2025 20:00:00 -0300</lastBuildDate>
+    <atom:link href="http://localhost:1313/dust115/tags/inicio/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Primer Commit del Eterno Retorno</title>
+      <link>http://localhost:1313/dust115/post/primer-post/</link>
+      <pubDate>Sat, 08 Feb 2025 20:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/post/primer-post/</guid>
+      <description>&lt;p&gt;Este es el primer commit en el repositorio de mi autenticidad.&lt;/p&gt;&#xA;&lt;p&gt;Como en Git, cada post es una instantánea de mi pensamiento en un momento específico. Cada entrada tiene su hash único, su timestamp, su mensaje de commit.&lt;/p&gt;&#xA;&lt;p&gt;La diferencia es que en Git puedes hacer &lt;code&gt;git revert&lt;/code&gt;. En la vida, no. Aunque según Nietzsche, si el tiempo es infinito y la materia finita, eventualmente todo se repetirá. Quizás ya hemos vivido este momento miles de veces. Quizás ya he escrito este post en iteraciones anteriores del universo.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

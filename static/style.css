@@ -1,0 +1,224 @@
+/* static/style.css - Dust115 Custom Theme */
+
+/* Importa Fira Code (fuente monospace con ligaduras) */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
+
+:root {
+  /* Colores principales - Negro profundo con violeta */
+  --background: #241f31;
+  --foreground: #ffffff;
+  --accent: #9141ac;
+  
+  /* Variables adicionales para Terminal */
+  --color: var(--foreground);
+  --border-color: rgba(145, 65, 172, 0.3);
+  --code-background: rgba(145, 65, 172, 0.1);
+}
+
+/* Fuerza Fira Code en todo el sitio */
+body {
+  font-family: "Fira Code", "JetBrains Mono", Monaco, Consolas, "Ubuntu Mono", monospace !important;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Logo en violeta */
+.logo__mark,
+.logo__text,
+.logo__cursor {
+  background-color: var(--accent) !important;
+}
+
+/* Links */
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: #b19cd9;
+  text-decoration: underline;
+}
+
+/* Tags */
+.tags .tag {
+  background-color: var(--accent);
+  color: var(--background);
+  border-radius: 3px;
+  padding: 3px 8px;
+}
+
+.tags .tag:hover {
+  background-color: #b19cd9;
+}
+
+/* Botones */
+button,
+.button {
+  background: transparent;
+  color: var(--accent);
+  border: 2px solid var(--accent);
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+button:hover,
+.button:hover {
+  background: rgba(145, 65, 172, 0.15);
+}
+
+/* Code blocks */
+pre {
+  background: rgba(145, 65, 172, 0.05) !important;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 16px;
+  overflow-x: auto;
+}
+
+code {
+  background: rgba(145, 65, 172, 0.1);
+  color: #e0b0ff;
+  border: 1px solid rgba(145, 65, 172, 0.25);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.95em;
+}
+
+pre code {
+  background: transparent !important;
+  border: none;
+  padding: 0;
+}
+
+/* Header y Footer */
+.header {
+  border-bottom: 2px solid var(--border-color);
+  padding: 20px 0;
+}
+
+.footer {
+  border-top: 2px solid var(--border-color);
+  padding: 20px 0;
+  color: #888;
+  margin-top: 40px;
+}
+
+/* Paginación */
+.pagination {
+  border-top: 1px solid var(--border-color);
+  margin-top: 40px;
+  padding-top: 20px;
+}
+
+.pagination__title-h {
+  color: var(--accent);
+}
+
+/* Posts */
+.post {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+}
+
+.post-title a {
+  color: var(--foreground);
+}
+
+.post-title a:hover {
+  color: var(--accent);
+}
+
+.post-meta {
+  color: #888;
+  font-size: 0.9em;
+}
+
+/* Blockquotes estilo terminal */
+blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 20px;
+  margin-left: 0;
+  font-style: italic;
+  color: #ccc;
+}
+
+blockquote::before {
+  content: ">";
+  color: var(--accent);
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+/* Horizontal rule */
+hr {
+  border: none;
+  height: 2px;
+  background: var(--accent);
+  margin: 30px 0;
+}
+
+/* Tablas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+th,
+td {
+  border: 1px solid var(--border-color);
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background: rgba(145, 65, 172, 0.1);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Scrollbar personalizada (solo Chromium) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b19cd9;
+}
+
+/* Selection color */
+::selection {
+  background: var(--accent);
+  color: var(--background);
+}
+
+::-moz-selection {
+  background: var(--accent);
+  color: var(--background);
+}
+
+/* Menu items */
+.menu__inner > li {
+  margin: 0 10px;
+}
+
+.menu__inner > li > a {
+  color: var(--foreground);
+}
+
+.menu__inner > li > a:hover {
+  color: var(--accent);
+}

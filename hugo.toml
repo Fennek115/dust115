@@ -1,0 +1,57 @@
+baseURL = "https://TU_USUARIO.github.io/dust115/"
+languageCode = "es-cl"
+title = "Dust115 // SkullFox Digital Archive"
+theme = "terminal"
+
+[pagination]
+  pagerSize = 10
+
+enableRobotsTXT = true
+
+# Necesario para Chroma (syntax highlighting)
+[markup.highlight]
+  noClasses = false
+
+[params]
+  contentTypeName = "posts"
+  showMenuItems = 2
+  showLanguageSelector = false
+  fullWidthTheme = false
+  centerTheme = false
+  autoCover = true
+  showLastUpdated = false
+
+[languages]
+  [languages.en]
+    languageName = "Español"
+    title = "Dust115 // SkullFox Digital Archive"
+
+    [languages.en.params]
+      subtitle = "Un archivo digital donde la muerte es solo el primer commit del repositorio de la autenticidad."
+      owner = "Dust115"
+      copyright = "2024-∞"
+      menuMore = "Más"
+      readMore = "Leer más"
+      readOtherPosts = "Otros posts"
+      newerPosts = "Más recientes"
+      olderPosts = "Más antiguos"
+      missingContentMessage = "404: El eterno retorno te llevó a una página que no existe..."
+      missingBackButtonLabel = "← Volver al inicio"
+      minuteReadingTime = "min de lectura"
+      words = "palabras"
+
+      [languages.en.params.logo]
+        logoText = "dust115$"
+        logoHomeLink = "/"
+
+    [[languages.en.menu.main]]
+      identifier = "about"
+      name = "about"
+      url = "/about"
+      weight = 1
+
+    [[languages.en.menu.main]]
+      identifier = "archive"
+      name = "archive"
+      url = "/posts"
+      weight = 2
