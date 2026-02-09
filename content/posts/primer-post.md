@@ -19,5 +19,7 @@ El eterno retorno no es una condena. Es una invitación a vivir cada momento com
 Este archivo digital es mi respuesta. Cada post es una huella. Cada commit es decir: "esto existió, esta fue mi marca en este ciclo".
 
 ---
-{{< commit hash="a7d9f82" date="2025-02-08 03:47 AM" message="Reflections on eternal recurrence" >}}
+
 `git log --all --graph --oneline` para ver el árbol de tu historia.
+
+{{< commit hash="a7d9f82" date="2025-02-08 03:47 AM" message="Reflections on eternal recurrence" >}}
