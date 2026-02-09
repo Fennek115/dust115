@@ -42,7 +42,7 @@ enableRobotsTXT = true
 
       [languages.en.params.logo]
         logoText = "dust115$"
-        logoHomeLink = "/"
+        logoHomeLink = "/dust115"
 
     [[languages.en.menu.main]]
       identifier = "about"
