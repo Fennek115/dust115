@@ -13,7 +13,7 @@
       <link>http://localhost:1313/dust115/posts/primer-post/</link>
       <pubDate>Sat, 08 Feb 2025 20:00:00 -0300</pubDate>
       <guid>http://localhost:1313/dust115/posts/primer-post/</guid>
-      <description>&lt;div style=&#34;border-left: 3px solid var(--accent); padding-left: 15px; margin: 20px 0; font-style: italic; opacity: 0.9;&#34;&gt;&#xA;  &lt;p style=&#34;margin: 0;&#34;&gt;&#xA;    🎵 &lt;strong&gt;Bleed&lt;/strong&gt; — Meshuggah&#xA;  &lt;/p&gt;&#xA;  &#xA;  &lt;p style=&#34;margin: 0; opacity: 0.7; font-size: 0.9em;&#34;&gt;&#xA;    de &lt;em&gt;obZen&lt;/em&gt;&#xA;  &lt;/p&gt;&#xA;  &#xA;&lt;/div&gt;&#xA;&#xA;&lt;p&gt;Este es el primer commit en el repositorio de mi autenticidad.&lt;/p&gt;&#xA;&lt;p&gt;Como en Git, cada post es una instantánea de mi pensamiento en un momento específico. Cada entrada tiene su hash único, su timestamp, su mensaje de commit.&lt;/p&gt;&#xA;&lt;p&gt;La diferencia es que en Git puedes hacer &lt;code&gt;git revert&lt;/code&gt;. En la vida, no. Aunque según Nietzsche, si el tiempo es infinito y la materia finita, eventualmente todo se repetirá. Quizás ya hemos vivido este momento miles de veces. Quizás ya he escrito este post en iteraciones anteriores del universo.&lt;/p&gt;</description>
+      <description>Este es el primer commit en el repositorio de mi autenticidad. Una reflexión sobre el eterno retorno y el control de versiones.</description>
     </item>
     <item>
       <title>about</title>

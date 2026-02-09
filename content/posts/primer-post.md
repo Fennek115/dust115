@@ -2,6 +2,7 @@
 title: "Primer Commit del Eterno Retorno"
 date: 2025-02-08T20:00:00-03:00
 draft: false
+summary: "Este es el primer commit en el repositorio de mi autenticidad. Una reflexión sobre el eterno retorno y el control de versiones."
 tags: ["meta", "filosofía", "inicio"]
 ---
 
