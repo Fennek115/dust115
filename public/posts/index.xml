@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Inicio on Dust115 // SkullFox Digital Archive</title>
-    <link>http://localhost:1313/dust115/tags/inicio/</link>
-    <description>Recent content in Inicio on Dust115 // SkullFox Digital Archive</description>
+    <title>Posts on Dust115 // SkullFox Digital Archive</title>
+    <link>http://localhost:1313/dust115/posts/</link>
+    <description>Recent content in Posts on Dust115 // SkullFox Digital Archive</description>
     <generator>Hugo</generator>
     <language>es-cl</language>
     <lastBuildDate>Sat, 08 Feb 2025 20:00:00 -0300</lastBuildDate>
-    <atom:link href="http://localhost:1313/dust115/tags/inicio/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/dust115/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Primer Commit del Eterno Retorno</title>
       <link>http://localhost:1313/dust115/posts/primer-post/</link>

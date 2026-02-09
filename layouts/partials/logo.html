@@ -1,13 +1,19 @@
-<a href="{{ .Site.BaseURL }}" style="text-decoration: none; display: flex; align-items: center;">
+<a href="{{ .Site.BaseURL }}" style="text-decoration: none; display: flex; align-items: center;">    
   <img 
-    src="{{ "dust_logo.png" | relURL }}" 
+      src="{{ "dust_logo.png" | relURL }}" 
     alt="Dust115"
     style="
-      height: 50px; /* Ajusta esta altura hasta que se vea bien en la barra */
-      width: auto;  /* Mantiene la proporción para que no se estire */
-      vertical-align: middle;
-      /* Opcional: si no hiciste el fondo transparente y se nota el recuadro */
-      /* mix-blend-mode: screen; */ 
+      /* 1. Altura: El 100% del hueco + los 50px que te faltan */
+      height:150px; 
+      
+      /* 2. Margen negativo: Sube la imagen 25px (la mitad de 50) para centrarla */
+      margin-top: 0px;
+      margin-bottom: 0px;
+
+      /* 3. Ajustes estándar */
+      width: auto;
+      object-fit: contain;
+      display: block;
     "
   >
   </a>

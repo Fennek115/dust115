@@ -14,10 +14,10 @@
     <loc>http://localhost:1313/dust115/tags/meta/</loc>
     <lastmod>2025-02-08T20:00:00-03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/dust115/post/</loc>
+    <loc>http://localhost:1313/dust115/posts/</loc>
     <lastmod>2025-02-08T20:00:00-03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/dust115/post/primer-post/</loc>
+    <loc>http://localhost:1313/dust115/posts/primer-post/</loc>
     <lastmod>2025-02-08T20:00:00-03:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/dust115/tags/</loc>

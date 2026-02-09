@@ -105,11 +105,25 @@
   <header class="header">
   <div class="header__inner">
     <div class="header__logo">
-      <a href="/">
-  <div class="logo">
-    dust115$
-  </div>
-</a>
+      <a href="http://localhost:1313/dust115/" style="text-decoration: none; display: flex; align-items: center;">    
+  <img 
+      src="/dust115/dust_logo.png" 
+    alt="Dust115"
+    style="
+      /* 1. Altura: El 100% del hueco + los 50px que te faltan */
+      height:150px; 
+      
+      /* 2. Margen negativo: Sube la imagen 25px (la mitad de 50) para centrarla */
+      margin-top: 0px;
+      margin-bottom: 0px;
+
+      /* 3. Ajustes estándar */
+      width: auto;
+      object-fit: contain;
+      display: block;
+    "
+  >
+  </a>
 
     </div>
     
@@ -164,7 +178,7 @@
     
       <article class="post on-list">
         <h1 class="post-title">
-          <a href="http://localhost:1313/dust115/post/primer-post/">Primer Commit del Eterno Retorno</a>
+          <a href="http://localhost:1313/dust115/posts/primer-post/">Primer Commit del Eterno Retorno</a>
         </h1>
         <div class="post-meta"><time class="post-date">2025-02-08</time></div>
 
@@ -185,7 +199,18 @@
 
         <div class="post-content">
           
-            <p>Este es el primer commit en el repositorio de mi autenticidad.</p>
+            <div style="border-left: 3px solid var(--accent); padding-left: 15px; margin: 20px 0; font-style: italic; opacity: 0.9;">
+  <p style="margin: 0;">
+    🎵 <strong>Bleed</strong> — Meshuggah
+  </p>
+  
+  <p style="margin: 0; opacity: 0.7; font-size: 0.9em;">
+    de <em>obZen</em>
+  </p>
+  
+</div>
+
+<p>Este es el primer commit en el repositorio de mi autenticidad.</p>
 <p>Como en Git, cada post es una instantánea de mi pensamiento en un momento específico. Cada entrada tiene su hash único, su timestamp, su mensaje de commit.</p>
 <p>La diferencia es que en Git puedes hacer <code>git revert</code>. En la vida, no. Aunque según Nietzsche, si el tiempo es infinito y la materia finita, eventualmente todo se repetirá. Quizás ya hemos vivido este momento miles de veces. Quizás ya he escrito este post en iteraciones anteriores del universo.</p>
           
@@ -193,7 +218,7 @@
 
         
           <div>
-            <a class="read-more button inline" href="/dust115/post/primer-post/">[Leer más]</a>
+            <a class="read-more button inline" href="/dust115/posts/primer-post/">[Leer más]</a>
           </div>
         
       </article>
