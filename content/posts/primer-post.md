@@ -4,6 +4,7 @@ date: 2025-02-08T20:00:00-03:00
 draft: false
 tags: ["meta", "filosofía", "inicio"]
 ---
+
 {{< listening track="Bleed" artist="Meshuggah" album="obZen" >}}
 
 Este es el primer commit en el repositorio de mi autenticidad.
