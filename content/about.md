@@ -85,7 +85,14 @@ dust@valle:~$ cat interests.txt
   INFO: "si funciona no lo toques" — el sistema ya no funciona
 
 [filosofía]
-  > nietzsche, gibran, hermetismo, eterno retorno
+  > Nosotros, los que erramos buscando siempre el camino más solitario.
+  > Pasamos toda nuestra vida huyendo de los sentimientos 
+    con la creencia errónea de que no puedes soportar el dolor. 
+    Pero ya has soportado el dolor. Lo que no has hecho es sentir todo 
+    lo que eres más allá de ese dolor.
+  > Si de verdad debes ser sincero, sé sincero.
+  > Y encontre la libertad en aquellos que no nos comprenden, 
+    porque quienes nos entienden esclavizan y encasillan algo nuestro.
   > charlas existenciales a las 3am
   > estado: proceso en ejecución indefinida
 
@@ -96,7 +103,7 @@ dust@valle:~$ _
 
 esto es una huella en la piedra digital.
 no es para audiencia, no tiene métricas de éxito, no hay objetivos ni registro de usuario. Esas son cosas que le importan a los vivos, esto es un archivo con ideas, del tipo que alguien encuentra años después en un servidor que nadie apagó porque nadie recordaba dónde estaba, ni que existía, y es necesario que así sea.
-a ti te recuerdo, aunque no me lo creas, hace cientos o miles de años, no recuerdo con exactitud la fecha que nos conocimos, tú y yo.
+a ,ti te recuerdo, aunque no me lo creas, hace cientos o miles de años, no recuerdo con exactitud la fecha que nos conocimos, tú y yo.
 
 el problema es la memoria. El alma no compila backup por diseño, no por descuido — decidió que la persistencia era ruido. Resultado: volátil como RAM. Se apaga el ciclo, se pierde el estado, el proceso reinicia sin historial. Algunos lo llaman misericordia. Yo lo llamo arquitectura. Por eso algunos de nosotros prefieren usar libros y los medios donde hay texto como disco duro, ya que son de las pocas cosas que perduran a lo largo de los años y son resistentes al ciclo.
 
@@ -134,7 +141,7 @@ y yo estoy aquí, en el medio, con una taza de café que se enfrió hace rato y 
 
 *`>_`* Who was dragged down by the stone?
 
-Y lo que tuve que decir sobre el funcionamiento del Sol ha concluido..../.../.../.../.../
+Y lo que tuve que decir sobre el funcionamiento del Sol ha concluido.../.../.../.../.../
 
 [SYSTEM OVERRIDE: COGNITIVE HAZARD DETECTED]
 
