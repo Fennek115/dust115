@@ -17,7 +17,7 @@ enableRobotsTXT = true
   showMenuItems = 2
   showLanguageSelector = false
   fullWidthTheme = false
-  centerTheme = false
+  centerTheme = true
   autoCover = true
   showLastUpdated = false
 
