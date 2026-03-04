@@ -29,5 +29,292 @@
       <guid>http://localhost:1313/dust115/about/</guid>
       <description>&lt;h2 id=&#34;dust115&#34;&gt;Dust115&lt;/h2&gt;&#xA;&lt;div style=&#34;border-left: 3px solid var(--accent); padding-left: 15px; margin: 20px 0; font-style: italic; opacity: 0.9;&#34;&gt;&#xA;  &lt;p style=&#34;margin: 0;&#34;&gt;&#xA;    🎵 &lt;strong&gt;The Hollow&lt;/strong&gt; — A Perfect Circle&#xA;  &lt;/p&gt;&#xA;  &#xA;  &lt;p style=&#34;margin: 0; opacity: 0.7; font-size: 0.9em;&#34;&gt;&#xA;    de &lt;em&gt;Mer De Noms&lt;/em&gt;&#xA;  &lt;/p&gt;&#xA;  &#xA;&lt;/div&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;Especie:&lt;/strong&gt; Skullfox&lt;br&gt;&#xA;&lt;strong&gt;Colores:&lt;/strong&gt; Negro con violeta&lt;br&gt;&#xA;&lt;strong&gt;Estado:&lt;/strong&gt; Operacional. Más o menos.&lt;/p&gt;&#xA;&lt;pre class=&#34;ascii-art&#34; style=&#34;font-size: 0.7rem; line-height: 1.1; overflow-x: auto;&#34;&gt;&#xA;    &#xA;⠀⠀⠀⠀⠄⡂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢌⢎⢞⢜⢎⢎⢎⠎⠎⢎⢎⢎⢎⠢⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀&#xA;⠀⠀⠀⠄⠡⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠑⠄⠀⠀⠀⠄⢕⢕⢕⢕⢕⠅⠂⠈⠀⢂⢪⢢⠃⠁⠀⡐⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀&#xA;⠀⠀⠌⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡐⠀⠀⠀⠡⠀⠀⠈⠘⡜⡜⡎⡦⡡⠠⡐⢌⠆⡇⠃⠀⠀⠠⠀⠀⠀⠠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀&#xA;⠠⠈⠀⠀⠀⠀⠀⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠠⠀⠀⠈⠪⡪⡪⡪⡪⢪⠢⡑⠀⠀⠀⠠⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠄⠂⡀&#xA;⠀⠀⢀⠀⠀⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠐⢀⠀⠀⠈⠪⡊⡎⡪⡊⠀⠀⠀⠔⠁⠀⠀⠀⠀⠀⠀⠠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠌⢀⠀&#xA;⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠁⠀⠀⠐⠀⠀⠀⠀⠀⠀⠑⢀⠀⠀⠈⠊⠈⠀⠀⠀⠊⠀⠀⠀⠀⠀⠀⠀⠀⠀⢇⠀⠀⠀⠀⠨⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠄⠨⢐⠨⡀⡂&#xA;⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠂⠄⠀⠀⠀⢀⠀⠀⡀⠀⠀⠀⠀⠀⠁⠄⠀⠀⠀⠀⠀⠠⠀⠀⠀⡀⠀⠀⠀⠀⠀⠀⠘⡄⠀⠀⡠⠁⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡈⠌⠠⠁⠀⠂&#xA;⠀⠀⠀⠀⠀⢀⠀⠠⠐⠈⠀⠀⠀⠐⠀⠀⠀⠀⠂⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠡⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠁⠐⠀⠠⠀⠄⠣⠐⠈⠀⠠⠀⠀⠀⠀⠀⠀⢀⠀⠀⠀⠀⠀⡀⠄⡂⡂⠀⠀⠀&#xA;⠀⠀⠀⠠⠈⠀⠀⠀⠀⠀⠀⠀⠀⠂⠀⠀⠀⠀⠂⠀⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠄⠁⠀⠀⠀⠀⢀⠠⠁⠀⠀⠀⠀⠂⠀⡂⠆⡂⠀⠀⠀&#xA;⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠂⠀⠀⠀⠀⠂⠁⠀⠀⠀⢀⠀⠀⠀⡀⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠐⠀⠄⠀⠂⠀⠌⠀⠀⠀⠀⠠⠀⢐⠠⡑⢄⠁⠀⠀&#xA;⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠂⠐⠀⠀⠐⠀⠀⠡⠀⠀⠀⠀⠀⠀⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠀⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠄⠀⡀⠀⠂⠁⠀⠀⠀⠀⠀⠐⠀⠂⡑⢍⠆⡂⢈⠀&#xA;⠀⠀⠀⡀⠀⡀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡅⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠁⢀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠀⢂⠸⡐⢅⢂⠠⠀&#xA;⠀⠀⠀⠀⠂⠠⠀⠄⠀⠀⡀⠄⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠄⠀⢀⠐⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠄⠀⢰⣿⣤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠀⠀⠀⠀⠀⠀⠠⠐⠀⠄⠕⢕⠱⢐⠠⡁&#xA;⠀⠀⠀⠀⠠⠠⠀⠀⠀⠁⠀⠀⠀⠀⠀⠠⠈⠀⠀⠀⡀⠂⢀⠐⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠌⠀⢀⣽⣿⣿⣿⣦⡄⡀⠈⠀⠀⠀⢀⠀⠀⠀⠑⡈⠀⠀⠀⠀⠀⠀⠀⠠⠡⡑⢌⢂⢂⠐&#xA;⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠂⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀⠄⠀⠀⠀⠀⠀⠀⠠⠀⠀⡀⠄⠀⢀⠁⢀⢶⣷⣿⣯⢿⣿⣿⡆⣆⠄⠂⠀⠀⠐⠄⡀⠀⠐⠀⠀⠀⠀⠀⠂⠁⠀⠌⢂⠢⢂⠢⠡&#xA;⠀⠀⠀⠀⠀⠀⠀⠀⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠄⠀⠀⠀⠀⠀⠀⠀⡀⠄⡂⡀⠀⢀⠀⠀⠀⠀⠉⠻⣿⡯⣿⣿⣿⢼⡇⡂⢁⠀⠀⠂⠀⠠⠀⠁⠀⠀⠀⠀⠀⠀⠀⢀⠂⠠⢑⠨⡈&#xA;⠀⠀⠀⠀⠀⠀⠀⠂⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠀⠀⠀⠀⠀⠀⠀⠄⠀⢨⢙⡲⣕⢀⠀⠀⠀⠀⠀⠀⠸⣿⣹⣿⣿⡯⡇⠨⡀⠀⠀⢅⠀⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⢑⢌⠆&#xA;⠀⠀⠀⠀⠀⠀⠀⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠂⠀⠠⠀⠀⠀⠀⠀⠀⠀⠨⡆⢂⠹⣷⣄⢀⠀⠀⠀⠀⠂⣻⣼⣿⣿⣿⡣⠐⠀⠀⠀⠰⠀⠀⠀⠀⠀⠀⠀⠀⠀⠂⠀⠐⠀⠀⡱⢨⢊&#xA;⠀⠀⠀⠀⠀⠀⠂⠀⠠⠀⠀⠀⠀⠀⠀⠀⢀⠠⠀⠀⡀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⣻⡀⢐⠹⣿⣷⣦⣄⣡⡠⢡⢻⢿⣿⢺⣿⣯⡳⣤⠀⠀⠈⠂⡀⠀⠀⠀⠀⠀⢀⠀⠀⠀⠀⠀⠀⢜⠰⡡&#xA;⠨⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠁⠈⠀⠀⠀⠀⠀⠀⠁⠀⠄⠀⠀⠈⠀⠀⠀⠸⣧⡐⢄⢉⠻⡿⣿⣿⣿⣿⣾⣿⣯⣗⢞⣿⣿⣮⡷⣄⠀⠀⠀⠂⠐⠀⠂⠈⠀⠀⠀⠀⠀⠀⠐⠀⠑⠀&#xA;⠀⢅⢂⠀⠀⠀⠀⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢁⠀⠀⠂⡀⠀⠀⠄⠀⡀⠹⣿⡔⢔⠠⠀⠠⢹⠽⣿⣿⣿⣿⣿⣺⣜⠿⡛⠙⠝⡢⠀⠐⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠄⠀&#xA;⠀⢘⠬⡹⠔⠀⡁⠂⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀⡈⠀⠀⠀⠀⠀⠀⠀⠈⠀⠐⠀⠀⢁⠈⠿⣯⢡⡾⠀⠌⠰⠓⣫⡟⢿⢿⣿⣿⣦⠀⡀⢐⢐⠀⠀⠈⠀⠄⢀⠀⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀&#xA;⠀⠀⠨⡊⢀⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠄⠀⠀⠀⠀⠀⠐⠀⡙⢷⣽⣸⡇⢂⠀⠂⠨⠛⢼⢻⡻⣿⣯⣶⣴⠃⠀⠀⠐⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀&#xA;⠀⠀⠀⠀⠄⠀⢀⠄⠀⠀⠀⠀⠀⠀⠀⠀⠄⠂⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠄⠙⢷⣧⣻⢅⣅⠀⢂⠠⣻⡏⣾⢜⡎⡇⡊⠄⠁⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀&#xA;⠀⠀⠀⠈⠀⠀⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠄⠀⠀⠀⠀⠀⠀⠄⠂⠁⠄⠻⣿⣷⢣⣗⠠⣊⡟⡁⠋⠈⠁⠅⢀⠂⠀⠄⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀&#xA;⠀⠀⠀⠁⠀⠌⠀⠀⢀⠠⠀⠂⠂⠐⠀⠂⠀⠂⠀⠀⠁⠀⠀⠀⠀⠀⠀⢀⠀⠀⠄⠀⠀⢀⠀⠈⠀⠀⠀⠁⢌⠻⡮⡣⡿⡸⣸⣮⡠⠈⠆⢀⠂⡀⠀⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀&#xA;⠀⠀⠀⠈⡐⠀⠠⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⡀⠀⠀⠀⠀⠐⠀⠐⠀⠁⠀⠀⠀⠁⠀⠀⠀⠀⠄⠠⠑⠳⠛⠸⣿⣗⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀&#xA;⠀⠀⡀⡔⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀⠐⠀⠀⠀⠀⠀⠁⠀⠀⠀⠀⠀⠁⠈⠠⢀⠐⠈⠐⠀⠀⠀⢐⣿⣟⠀⠀⡀⠐⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀&#xA;⠀⡁⠀⠠⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠀⠀⠀⠀⠀⠐⠀⠀⠀⠀⠀⠀⠀⠀⠠⠐⠐⠀⢀⠀⢜⣾⠃⠀⠀⠀⠡⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀&#xA;⠐⠠⠨⡠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠀⠀⠀⠠⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠈⡀⠨⡫⠣⢄⠠⠀⠀⠀⠐⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀&#xA;⠀⢀⠊⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀⠅⠀⠀⠀⢀⠀⠀⠐⠐⠀⠀⠀⠀⠀⠀⠀⠄⠡⠀⠀⠀⠂⢀⠀⠀⠐⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀&#xA;⠈⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠄⠀⠀⠠⠀⠠⠂⠈⡀⠀⠀⠠⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠐⠀⠀⠀⠀⠁⢄⠀⠀⠀⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀&#xA;⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠀⠀⠀⠐⢀⠄⠀⠀⠐⠀⠀⠀⠀⠀⠀⠀⠀⠌⠀⠀⠀⠐⠀⠀⠀⠀⢀⠀⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀&#xA;&#xA;&lt;/pre&gt;&#xA;&#xA;&lt;h3 id=&#34;lore-o-lo-que-queda-de-él&#34;&gt;lore, o lo que queda de él&lt;/h3&gt;&#xA;&lt;p&gt;un día me desperté muerto.&lt;/p&gt;</description>
     </item>
+    <item>
+      <title>Códice | Epílogo — Pulvis</title>
+      <link>http://localhost:1313/dust115/posts/codice-epilogo-pulvis/</link>
+      <pubDate>Wed, 30 Sep 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-epilogo-pulvis/</guid>
+      <description>Desde el principio. Entonces.</description>
+    </item>
+    <item>
+      <title>Códice | Epílogo (Preludio) — El Peso del Vacío</title>
+      <link>http://localhost:1313/dust115/posts/codice-epilogo-preludio-el-peso-del-vacio/</link>
+      <pubDate>Wed, 23 Sep 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-epilogo-preludio-el-peso-del-vacio/</guid>
+      <description>Le hablé al espacio y del espacio nadie me contesta.</description>
+    </item>
+    <item>
+      <title>Códice | D-4</title>
+      <link>http://localhost:1313/dust115/posts/codice-d4/</link>
+      <pubDate>Wed, 16 Sep 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-d4/</guid>
+      <description>[añade tu summary aquí]</description>
+    </item>
+    <item>
+      <title>Códice | D-3c</title>
+      <link>http://localhost:1313/dust115/posts/codice-d3c/</link>
+      <pubDate>Wed, 09 Sep 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-d3c/</guid>
+      <description>[añade tu summary aquí]</description>
+    </item>
+    <item>
+      <title>Códice | D-3b</title>
+      <link>http://localhost:1313/dust115/posts/codice-d3b/</link>
+      <pubDate>Wed, 02 Sep 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-d3b/</guid>
+      <description>[añade tu summary aquí]</description>
+    </item>
+    <item>
+      <title>Códice | D-3a</title>
+      <link>http://localhost:1313/dust115/posts/codice-d3a/</link>
+      <pubDate>Wed, 26 Aug 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-d3a/</guid>
+      <description>[añade tu summary aquí]</description>
+    </item>
+    <item>
+      <title>Códice | D-2.7</title>
+      <link>http://localhost:1313/dust115/posts/codice-d2-7/</link>
+      <pubDate>Wed, 19 Aug 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-d2-7/</guid>
+      <description>[añade tu summary aquí]</description>
+    </item>
+    <item>
+      <title>Códice | D-2.5</title>
+      <link>http://localhost:1313/dust115/posts/codice-d2-5/</link>
+      <pubDate>Wed, 12 Aug 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-d2-5/</guid>
+      <description>[añade tu summary aquí]</description>
+    </item>
+    <item>
+      <title>Códice | D-2</title>
+      <link>http://localhost:1313/dust115/posts/codice-d2/</link>
+      <pubDate>Wed, 05 Aug 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-d2/</guid>
+      <description>[añade tu summary aquí]</description>
+    </item>
+    <item>
+      <title>Códice | D-1.5b — Cambiamos Con Las Estaciones</title>
+      <link>http://localhost:1313/dust115/posts/codice-d1-5b-cambiamos-con-las-estaciones/</link>
+      <pubDate>Wed, 29 Jul 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-d1-5b-cambiamos-con-las-estaciones/</guid>
+      <description>El nombre que dijo no era el de Dust. Era el del serval que entró a la Colmena y no volvió.</description>
+    </item>
+    <item>
+      <title>Códice | D-1.5</title>
+      <link>http://localhost:1313/dust115/posts/codice-d1-5/</link>
+      <pubDate>Wed, 22 Jul 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-d1-5/</guid>
+      <description>[añade tu summary aquí]</description>
+    </item>
+    <item>
+      <title>Códice | D-1</title>
+      <link>http://localhost:1313/dust115/posts/codice-d1/</link>
+      <pubDate>Wed, 15 Jul 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-d1/</guid>
+      <description>[añade tu summary aquí]</description>
+    </item>
+    <item>
+      <title>Códice | P-4</title>
+      <link>http://localhost:1313/dust115/posts/codice-p4/</link>
+      <pubDate>Wed, 08 Jul 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-p4/</guid>
+      <description>[añade tu summary aquí]</description>
+    </item>
+    <item>
+      <title>Códice | P-3</title>
+      <link>http://localhost:1313/dust115/posts/codice-p3/</link>
+      <pubDate>Wed, 01 Jul 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-p3/</guid>
+      <description>[añade tu summary aquí]</description>
+    </item>
+    <item>
+      <title>Códice | P-2</title>
+      <link>http://localhost:1313/dust115/posts/codice-p2/</link>
+      <pubDate>Wed, 24 Jun 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-p2/</guid>
+      <description>[añade tu summary aquí]</description>
+    </item>
+    <item>
+      <title>Códice | P-1 — Naturaleza en Hexadecimal</title>
+      <link>http://localhost:1313/dust115/posts/codice-p1-naturaleza-en-hexadecimal/</link>
+      <pubDate>Wed, 17 Jun 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-p1-naturaleza-en-hexadecimal/</guid>
+      <description>La ciudad habla antes de que yo decida escucharla. No es metáfora. Es protocolo.</description>
+    </item>
+    <item>
+      <title>Códice | XV — Lo Que el Valle No Sabe Que Es</title>
+      <link>http://localhost:1313/dust115/posts/codice-15-lo-que-el-valle-no-sabe/</link>
+      <pubDate>Wed, 10 Jun 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-15-lo-que-el-valle-no-sabe/</guid>
+      <description>Si el Valle era tránsito, había una salida. Si había salida, tenía vulnerabilidades.</description>
+    </item>
+    <item>
+      <title>Códice | XIV-C — La Forma en Que Se Van</title>
+      <link>http://localhost:1313/dust115/posts/codice-14c-la-forma-en-que-se-van/</link>
+      <pubDate>Wed, 03 Jun 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-14c-la-forma-en-que-se-van/</guid>
+      <description>¿Hay alguna razón por la que la gente debería cambiar y después cambiar la forma en que se van?</description>
+    </item>
+    <item>
+      <title>Códice | XIV-B — A Dónde Vas Cuando Caes</title>
+      <link>http://localhost:1313/dust115/posts/codice-14b-a-donde-vas-cuando-caes/</link>
+      <pubDate>Wed, 27 May 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-14b-a-donde-vas-cuando-caes/</guid>
+      <description>¿A dónde vas cuando caes? Supongo que es un lugar que nadie quiere conocer.</description>
+    </item>
+    <item>
+      <title>Códice | XIV — Acompañar Sin Salvar</title>
+      <link>http://localhost:1313/dust115/posts/codice-14-acompanar-sin-salvar/</link>
+      <pubDate>Wed, 20 May 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-14-acompanar-sin-salvar/</guid>
+      <description>No salvo a nadie. Acompañar no requiere que yo sepa a dónde va el otro.</description>
+    </item>
+    <item>
+      <title>Códice | XIII-B — Café y Sedimento</title>
+      <link>http://localhost:1313/dust115/posts/codice-13b-cafe-y-sedimento/</link>
+      <pubDate>Wed, 13 May 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-13b-cafe-y-sedimento/</guid>
+      <description>El café estaba malo. No de manera interesante. De la manera ordinaria. Lo tomamos igual.</description>
+    </item>
+    <item>
+      <title>Códice | XIII — Lo Que Significa Ser Operacional</title>
+      <link>http://localhost:1313/dust115/posts/codice-13-operacional/</link>
+      <pubDate>Wed, 06 May 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-13-operacional/</guid>
+      <description>Ya muerto, por lo menos puedo beber café frío sin existencializarlo.</description>
+    </item>
+    <item>
+      <title>Códice | XII — El Script Kiddie</title>
+      <link>http://localhost:1313/dust115/posts/codice-12-script-kiddie/</link>
+      <pubDate>Wed, 29 Apr 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-12-script-kiddie/</guid>
+      <description>Buscaba llave, no mapa. Seguirá buscando. Probable que encuentre algo peor. Clásico.</description>
+    </item>
+    <item>
+      <title>Códice | XI — La Guitarra y la Pared</title>
+      <link>http://localhost:1313/dust115/posts/codice-11-la-guitarra/</link>
+      <pubDate>Wed, 22 Apr 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-11-la-guitarra/</guid>
+      <description>Tocaba en el Valle. El sonido no viajaba a ningún lugar. Lo tocaba igual. Alguien golpeó la pared.</description>
+    </item>
+    <item>
+      <title>Códice | X-C — Nadie Me Dijo</title>
+      <link>http://localhost:1313/dust115/posts/codice-10c-nadie-me-dijo/</link>
+      <pubDate>Wed, 15 Apr 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-10c-nadie-me-dijo/</guid>
+      <description>Nadie me dijo que estabas muerto. —No pregunté si alguien debía decírtelo.</description>
+    </item>
+    <item>
+      <title>Códice | X-B — La Olvidada</title>
+      <link>http://localhost:1313/dust115/posts/codice-10b-calx/</link>
+      <pubDate>Wed, 08 Apr 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-10b-calx/</guid>
+      <description>Tocaba en el Valle. El sonido no viajaba a ningún lugar. Lo tocaba igual.</description>
+    </item>
+    <item>
+      <title>Códice | X-A — Lo que el agua devuelve</title>
+      <link>http://localhost:1313/dust115/posts/codice-10a-lo-que-el-agua/</link>
+      <pubDate>Wed, 01 Apr 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-10a-lo-que-el-agua/</guid>
+      <description>Llovió el martes&amp;hellip;</description>
+    </item>
+    <item>
+      <title>Códice | X — Las Siete Cadenas</title>
+      <link>http://localhost:1313/dust115/posts/codice-10-las-siete-cadenas/</link>
+      <pubDate>Wed, 25 Mar 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-10-las-siete-cadenas/</guid>
+      <description>No son las cadenas que se ven. Son las otras. Las que no hacen ruido al cerrarse.</description>
+    </item>
+    <item>
+      <title>Códice | IX-A — Preambulo, 2 momentos</title>
+      <link>http://localhost:1313/dust115/posts/codice-09a-preambulo/</link>
+      <pubDate>Wed, 18 Mar 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-09a-preambulo/</guid>
+      <description>Aun lo recuerdo como si fuera ayer.</description>
+    </item>
+    <item>
+      <title>Códice | IX — El Vagabundo de los Siete Mil Años</title>
+      <link>http://localhost:1313/dust115/posts/codice-09-el-vagabundo/</link>
+      <pubDate>Wed, 11 Mar 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-09-el-vagabundo/</guid>
+      <description>Comencé a vagar. No porque tuviera un destino, sino porque moverse parecía más honesto.</description>
+    </item>
+    <item>
+      <title>Códice | VIII — Una Noche Vacía</title>
+      <link>http://localhost:1313/dust115/posts/codice-08-sesion-de-reconocimiento/</link>
+      <pubDate>Wed, 04 Mar 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-08-sesion-de-reconocimiento/</guid>
+      <description>La pantalla parpadeaba violeta sobre negro. Encontré un nombre que me hizo detenerme.</description>
+    </item>
+    <item>
+      <title>Códice | VII — El Despertar del Polvo</title>
+      <link>http://localhost:1313/dust115/posts/codice-07-el-despertar-del-polvo/</link>
+      <pubDate>Wed, 26 Feb 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-07-el-despertar-del-polvo/</guid>
+      <description>El abismo tiene memoria. Lo que emergió del sedimento no tenía piel para esconderse.</description>
+    </item>
+    <item>
+      <title>Códice | VI — El Renacimiento en la Nada</title>
+      <link>http://localhost:1313/dust115/posts/codice-06-renacimiento-en-la-nada/</link>
+      <pubDate>Wed, 19 Feb 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-06-renacimiento-en-la-nada/</guid>
+      <description>Darse cuenta del ciclo no lo rompe. La consciencia es irrelevante para una realidad indiferente.</description>
+    </item>
+    <item>
+      <title>Códice | V — Los Tres Hijos de la Libertad</title>
+      <link>http://localhost:1313/dust115/posts/codice-05-tres-hijos/</link>
+      <pubDate>Wed, 12 Feb 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-05-tres-hijos/</guid>
+      <description>El tercer hijo de la Libertad nació muerto. Eso me dio una paz extraña.</description>
+    </item>
+    <item>
+      <title>Códice | IV — Nigredo</title>
+      <link>http://localhost:1313/dust115/posts/codice-04-nigredo/</link>
+      <pubDate>Wed, 05 Feb 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-04-nigredo/</guid>
+      <description>La oscuridad me tragó no para borrarme, sino para gestarme de nuevo.</description>
+    </item>
+    <item>
+      <title>Códice | III-B — El Único Lugar Donde No Pensaba</title>
+      <link>http://localhost:1313/dust115/posts/codice-03b-el-unico-lugar-donde-no-pensaba/</link>
+      <pubDate>Wed, 29 Jan 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-03b-el-unico-lugar-donde-no-pensaba/</guid>
+      <description>Correr era lo único que no necesitaba justificación. El cuerpo decidió que ya no.</description>
+    </item>
+    <item>
+      <title>Códice | III — El Momento del Despertar Incompleto</title>
+      <link>http://localhost:1313/dust115/posts/codice-03-despertar-incompleto/</link>
+      <pubDate>Wed, 22 Jan 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-03-despertar-incompleto/</guid>
+      <description>Hubo un día en que me detuve frente a un espejo. No fue un momento dramático.</description>
+    </item>
+    <item>
+      <title>Códice | II — La Ejecución del Script Heredado</title>
+      <link>http://localhost:1313/dust115/posts/codice-02-script-heredado/</link>
+      <pubDate>Wed, 15 Jan 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-02-script-heredado/</guid>
+      <description>Mi padre trabajó treinta años en la misma empresa. Me entregó un sobre.</description>
+    </item>
+    <item>
+      <title>Códice | I — El Zorro Sin Nombre</title>
+      <link>http://localhost:1313/dust115/posts/codice-01-el-zorro-sin-nombre/</link>
+      <pubDate>Wed, 08 Jan 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-01-el-zorro-sin-nombre/</guid>
+      <description>Fui uno de los Umbra Caudati. Viví, que es diferente a estar vivo.</description>
+    </item>
+    <item>
+      <title>Códice del Polvo — Nota de Archivo</title>
+      <link>http://localhost:1313/dust115/posts/codice-00-nota-de-archivo/</link>
+      <pubDate>Wed, 01 Jan 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-00-nota-de-archivo/</guid>
+      <description>Este documento fue encontrado en una terminal abandonada. No tiene firmas digitales.</description>
+    </item>
+    <item>
+      <title>Códice del Polvo</title>
+      <link>http://localhost:1313/dust115/codice/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/dust115/codice/</guid>
+      <description>&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[ARCHIVO RECUPERADO — TERMINAL_7749 — SECTOR ABANDONADO]&#xA;[INTEGRIDAD: VARIABLE]&#xA;[ADVERTENCIA: LA LECTURA ES IRREVERSIBLE]&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Un documento encontrado en los suburbios digitales de un servidor medio destruido. Tinta violeta sobre negro. Bajo ciertas luces, las palabras parecen moverse — reorganizarse — como si la historia misma no pudiera decidir cómo termina.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;era-i--el-zorro-anthropomórfico&#34;&gt;ERA I — El Zorro Anthropomórfico&lt;/h2&gt;&#xA;&lt;p&gt;&lt;em&gt;Época pre-digital. Prosa densa, tiempo casi lineal. El lenguaje de los sistemas todavía no existe.&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
   </channel>
 </rss>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Post-Protogen-Era on Dust115 // SkullFox Digital Archive</title>
+    <link>http://localhost:1313/dust115/tags/post-protogen-era/</link>
+    <description>Recent content in Post-Protogen-Era on Dust115 // SkullFox Digital Archive</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 23 Sep 2020 03:00:00 -0300</lastBuildDate>
+    <atom:link href="http://localhost:1313/dust115/tags/post-protogen-era/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Códice | Epílogo (Preludio) — El Peso del Vacío</title>
+      <link>http://localhost:1313/dust115/posts/codice-epilogo-preludio-el-peso-del-vacio/</link>
+      <pubDate>Wed, 23 Sep 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/posts/codice-epilogo-preludio-el-peso-del-vacio/</guid>
+      <description>Le hablé al espacio y del espacio nadie me contesta.</description>
+    </item>
+  </channel>
+</rss>

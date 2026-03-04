@@ -55,3 +55,9 @@ enableRobotsTXT = true
       name = "archive"
       url = "/posts"
       weight = 2
+
+    [[languages.en.menu.main]]
+      identifier = "codice"
+      name = "códice"
+      url = "/codice"
+      weight = 3

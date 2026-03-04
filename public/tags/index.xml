@@ -85,5 +85,40 @@
       <guid>http://localhost:1313/dust115/tags/meta/</guid>
       <description></description>
     </item>
+    <item>
+      <title>Códice</title>
+      <link>http://localhost:1313/dust115/tags/c%C3%B3dice/</link>
+      <pubDate>Wed, 30 Sep 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/tags/c%C3%B3dice/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Protogen-Era</title>
+      <link>http://localhost:1313/dust115/tags/protogen-era/</link>
+      <pubDate>Wed, 30 Sep 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/tags/protogen-era/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Post-Protogen-Era</title>
+      <link>http://localhost:1313/dust115/tags/post-protogen-era/</link>
+      <pubDate>Wed, 23 Sep 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/tags/post-protogen-era/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Skull-Fox-Era</title>
+      <link>http://localhost:1313/dust115/tags/skull-fox-era/</link>
+      <pubDate>Wed, 10 Jun 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/tags/skull-fox-era/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Zorro-Era</title>
+      <link>http://localhost:1313/dust115/tags/zorro-era/</link>
+      <pubDate>Wed, 19 Feb 2020 03:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/dust115/tags/zorro-era/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>
