@@ -29,7 +29,7 @@ Dust consideró la pregunta.
 
 —No sé si no me volví loco —dijo—. No tengo el punto de referencia.
 
-—Pero funciones. Excavas servidores. Tocas guitarra. Hablas con gente.
+—Pero funcionas. Excavas servidores. Tocas guitarra. Hablas con gente.
 
 —Sí.
 

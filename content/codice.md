@@ -12,9 +12,9 @@ Un documento encontrado en los suburbios digitales de un servidor medio destruid
 
 ---
 
-## ERA I — El Zorro Anthropomórfico
+## ERA I
 
-*Época pre-digital. Prosa densa, tiempo casi lineal. El lenguaje de los sistemas todavía no existe.*
+*Hay un animal que nace con los ojos abiertos y pasa la vida entera aprendiendo a cerrarlos. Le dicen madurez. Le dicen adaptación. Le dicen "las cosas están bien" tantas veces que la frase pierde las vocales y queda solo el gesto: la boca moviéndose alrededor de un hueco donde alguna vez hubo una verdad que no supo decir a tiempo. El último rey de su propia historia murió sin corona y sin testigos, en un hospital que olía a cloro, preguntándose si la vida que vivió fue suya o si solo la estuvo guardando para alguien que nunca vino a reclamarla.*
 
 - [00 — Nota de Archivo](/dust115/posts/codice-00-nota-de-archivo/)
 - [I — El Zorro Sin Nombre](/dust115/posts/codice-01-el-zorro-sin-nombre/)
@@ -28,9 +28,9 @@ Un documento encontrado en los suburbios digitales de un servidor medio destruid
 
 ---
 
-## ERA II — El Skull Fox / Valle de la Sombra
+## ERA II
 
-*Era Cyberpunk. Prosa híbrida: narración + logs de terminal. El código y la filosofía hablan el mismo idioma.*
+*Dicen que al otro lado de la muerte hay silencio. Mienten. Al otro lado hay un zumbido constante y un servidor que nadie apagó y un río que arrastra las decisiones que no tomaste en vida. Yo camino entre los restos. No busco redención porque la redención es un invento de los que todavía creen que alguien lleva la cuenta. Nadie lleva la cuenta. Solo el polvo, que se acumula donde nadie limpia, que se deposita en las superficies que nadie toca, que es lo único honesto que queda cuando la carne termina de mentir. Soy eso. Lo que queda cuando lo demás se cansa de fingir que importaba.*
 
 - [VII — El Despertar del Polvo](/dust115/posts/codice-07-el-despertar-del-polvo/)
 - [VIII — Sesión de reconocimiento en una Noche Vacía](/dust115/posts/codice-08-sesion-de-reconocimiento/)
@@ -51,12 +51,12 @@ Un documento encontrado en los suburbios digitales de un servidor medio destruid
 
 ---
 
-## ERA III — El Protogen / Post-Cyberpunk
+## ERA III
 
-*Era post-cyberpunk. Narración técnica, sensorial, fragmentada. El hardware es el cuerpo.*
+*Desperté con las manos de otro y los recuerdos de todos los que fui. Las orejas de este cuerpo escuchan frecuencias que yo pasé vidas enteras ignorando — el sonido de lo que callé, la vibración de cada puerta que cerré creyendo que protegía algo cuando solo estaba encerrándome con mis propios fantasmas. Ahora veo el mundo con ojos que no son míos y lo primero que encuentro es el reflejo de todo lo que no miré cuando los ojos eran míos. El ciclo no es castigo. Es un espejo puesto en el camino tantas veces como haga falta hasta que dejes de esquivar tu propia cara.*
 
 **Vesper**
-- [P-1 — Naturaleza en Hexadecimal](/dust115/posts/codice-p1-naturaleza-en-hexadecimal/)
+- [P-1](/dust115/posts/codice-p1-naturaleza-en-hexadecimal/)
 - [P-2](/dust115/posts/codice-p2/)
 - [P-3](/dust115/posts/codice-p3/)
 - [P-4](/dust115/posts/codice-p4/)

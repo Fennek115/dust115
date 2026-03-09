@@ -1,0 +1,17 @@
+{{ define "main" }}
+  <div class="post">
+    <h1 class="post-title">404 — {{ $.Site.Params.missingContentMessage | default "Page not found..." }}</h1>
+
+    <div class="post-content">
+      <a href="/dust115/">{{ $.Site.Params.missingBackButtonLabel | default "Back to home page" }}&nbsp;→</a>
+    </div>
+
+  </div>
+
+  <script>
+    // Otorga 6 segundos para leer el mensaje antes de volver al inicio
+    setTimeout(function() {
+      window.location.href = "/dust115/";
+    }, 5000);
+  </script>
+{{ end }}
