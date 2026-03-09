@@ -1,5 +1,6 @@
 baseURL = "https://dust115.github.io/dust115/"
 languageCode = "es-cl"
+canonifyURLs = true
 title = "Dust115 // SkullFox Digital Archive"
 theme = "terminal"
 
@@ -61,3 +62,5 @@ enableRobotsTXT = true
       name = "códice"
       url = "/codice"
       weight = 3
+[permalinks]
+  post = "/post/:title/"
