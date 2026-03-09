@@ -63,4 +63,4 @@ enableRobotsTXT = true
       url = "/codice"
       weight = 3
 [permalinks]
-  post = "/post/:title/"
+  posts = "/posts/:title/"
