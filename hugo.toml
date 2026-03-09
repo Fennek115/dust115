@@ -1,6 +1,5 @@
 baseURL = "https://dust115.github.io/dust115/"
 languageCode = "es-cl"
-canonifyURLs = true
 title = "Dust115 // SkullFox Digital Archive"
 theme = "terminal"
 
@@ -8,6 +7,8 @@ theme = "terminal"
   pagerSize = 10
 
 enableRobotsTXT = true
+[permalinks]
+  posts = "/posts/:contentbasename/"
 
 # Necesario para Chroma (syntax highlighting)
 [markup.highlight]
@@ -62,5 +63,3 @@ enableRobotsTXT = true
       name = "códice"
       url = "/codice"
       weight = 3
-[permalinks]
-  posts = "/posts/:title/"
