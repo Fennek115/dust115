@@ -1,5 +1,5 @@
 ---
-title: "Códice | XV — Lo Que el Valle No Sabe Que Es"
+title: "Códice | XV — Lo Que el Valle No Sabe"
 date: 2025-07-02T03:00:00-03:00
 draft: false
 tags: ["códice", "skull-fox-era"]

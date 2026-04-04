@@ -1,5 +1,5 @@
 ---
-title: "Códice | X — Las Siete Cadenas"
+title: "Códice | X — Lo Que Se Cierra Sin Sonido"
 date: 2025-04-02T03:00:00-03:00
 draft: false
 tags: ["códice", "skull-fox-era"]
