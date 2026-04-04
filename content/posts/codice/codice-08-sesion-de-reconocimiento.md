@@ -1,6 +1,6 @@
 ---
 title: "Códice | VIII — Una Noche Vacía"
-date: 2026-03-12T03:00:00-03:00
+date: 2025-03-12T03:00:00-03:00
 draft: false
 tags: ["códice", "skull-fox-era"]
 series: ["Códice del Polvo"]
@@ -790,4 +790,4 @@ Y eso también era un dato.
 
 ---
 
-{{< commit hash="28b4055" date="2026-03-12T03:00:00-03:00" message="feat: expandir diario del zorro — centro, renata, fade to black" >}}
+{{< commit hash="28b4055" date="2025-03-12T03:00:00-03:00" message="feat: expandir diario del zorro — centro, renata, fade to black" >}}

@@ -1,6 +1,6 @@
 ---
 title: "Códice | XI — La Guitarra y la Pared"
-date: 2026-04-30T03:00:00-03:00
+date: 2025-04-30T03:00:00-03:00
 draft: false
 tags: ["códice", "skull-fox-era"]
 series: ["Códice del Polvo"]
@@ -171,4 +171,4 @@ Que era todo lo que el Valle podía hacer.
 
 ---
 
-{{< commit hash="51e7400" date="2026-04-30T03:00:00-03:00" message="feat: la guitarra y la pared — negociación de frecuencias" >}}
+{{< commit hash="51e7400" date="2025-04-30T03:00:00-03:00" message="feat: la guitarra y la pared — negociación de frecuencias" >}}

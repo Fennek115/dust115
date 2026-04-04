@@ -1,6 +1,6 @@
 ---
 title: "Códice | XIII — Lo Que Significa Ser Operacional"
-date: 2026-05-14T03:00:00-03:00
+date: 2025-05-14T03:00:00-03:00
 draft: false
 tags: ["códice", "skull-fox-era"]
 series: ["Códice del Polvo"]
@@ -55,4 +55,4 @@ Que era buscar algo. No en particular, que es la única forma honesta de buscar.
 
 ---
 
-{{< commit hash="73095a0" date="2026-05-14T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="73095a0" date="2025-05-14T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}

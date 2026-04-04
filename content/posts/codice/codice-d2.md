@@ -1,6 +1,6 @@
 ---
 title: "Códice | D-2"
-date: 2026-08-27T03:00:00-03:00
+date: 2025-08-27T03:00:00-03:00
 draft: false
 tags: ["códice", "protogen-era"]
 series: ["Códice del Polvo"]
@@ -174,4 +174,4 @@ Dust tardó menos que antes.
 
 *Sí.*
 
-{{< commit hash="028ie39" date="2026-08-27T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="028ie39" date="2025-08-27T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}

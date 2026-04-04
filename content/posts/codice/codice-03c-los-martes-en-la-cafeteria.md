@@ -1,6 +1,6 @@
 ---
 title: "Códice | III-C — Los Martes en la Cafetería"
-date: 2026-02-05T03:00:00-03:00
+date: 2025-02-05T03:00:00-03:00
 draft: false
 tags: ["códice", "zorro-era"]
 series: ["Códice del Polvo"]
@@ -209,4 +209,4 @@ Sin preguntar.
 
 ---
 
-{{< commit hash="3c0001" date="2026-02-05T03:00:00-03:00" message="feat: los martes en la cafetería — la serval que escuchaba" >}}
+{{< commit hash="3c0001" date="2025-02-05T03:00:00-03:00" message="feat: los martes en la cafetería — la serval que escuchaba" >}}

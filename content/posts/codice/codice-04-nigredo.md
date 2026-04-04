@@ -1,6 +1,6 @@
 ---
 title: "Códice | IV — Nigredo"
-date: 2026-02-12T03:00:00-03:00
+date: 2025-02-12T03:00:00-03:00
 draft: false
 tags: ["códice", "zorro-era"]
 series: ["Códice del Polvo"]
@@ -114,4 +114,4 @@ El Valle de la Sombra.
 Donde los muertos conscientes esperan instrucciones que nunca llegan.
 
 
-{{< commit hash="e4d6c11" date="2026-02-12T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="e4d6c11" date="2025-02-12T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}

@@ -1,6 +1,6 @@
 ---
 title: "Códice | III — El Momento del Despertar Incompleto"
-date: 2026-01-22T03:00:00-03:00
+date: 2025-01-22T03:00:00-03:00
 draft: false
 tags: ["códice", "zorro-era"]
 series: ["Códice del Polvo"]
@@ -53,4 +53,4 @@ Y así pasaron años. Envejecí sin crecer, acumulé experiencias sin sabiduría
 
 ---
 
-{{< commit hash="d3c7d00" date="2026-01-22T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="d3c7d00" date="2025-01-22T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}

@@ -1,6 +1,6 @@
 ---
 title: "Códice | X-A — Lo que el agua devuelve"
-date: 2026-04-09T03:00:00-03:00
+date: 2025-04-09T03:00:00-03:00
 draft: false
 tags: ["códice", "skull-fox-era"]
 series: ["Códice del Polvo"]

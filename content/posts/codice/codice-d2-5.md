@@ -1,6 +1,6 @@
 ---
 title: "Códice | D-2.5"
-date: 2026-09-03T03:00:00-03:00
+date: 2025-09-03T03:00:00-03:00
 draft: false
 tags: ["códice", "protogen-era"]
 series: ["Códice del Polvo"]
@@ -292,4 +292,4 @@ Los tres puntos. El más cercano a once días.
 
 Vesper y Riven esperaban.
 
-{{< commit hash="139jf40" date="2026-09-03T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="139jf40" date="2025-09-03T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}

@@ -1,6 +1,6 @@
 ---
 title: "Códice | XIV-E — El Isomorfismo del Polvo"
-date: 2026-06-25T03:00:00-03:00
+date: 2025-06-25T03:00:00-03:00
 draft: false
 tags: ["códice", "skull-fox-era"]
 series: ["Códice del Polvo"]
@@ -279,4 +279,4 @@ Emitiendo de todas formas.
 
 ---
 
-{{< commit hash="b7e3d91" date="2026-06-25T03:00:00-03:00" message="el isomorfismo del polvo — 115 compilaciones del mismo patrón en arquitecturas que no se tocan" >}}
+{{< commit hash="b7e3d91" date="2025-06-25T03:00:00-03:00" message="el isomorfismo del polvo — 115 compilaciones del mismo patrón en arquitecturas que no se tocan" >}}

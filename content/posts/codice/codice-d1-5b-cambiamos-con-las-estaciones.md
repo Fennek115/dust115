@@ -1,6 +1,6 @@
 ---
 title: "Códice | D-1.5b — Cambiamos Con Las Estaciones"
-date: 2026-08-20T03:00:00-03:00
+date: 2025-08-20T03:00:00-03:00
 draft: false
 tags: ["códice", "protogen-era"]
 series: ["Códice del Polvo"]
@@ -189,4 +189,4 @@ Dust continuó también.
 
 ---
 
-{{< commit hash="d15b001" date="2026-08-20T03:00:00-03:00" message="feat: cambiamos con las estaciones — reconocimiento del cuerpo serval" >}}
+{{< commit hash="d15b001" date="2025-08-20T03:00:00-03:00" message="feat: cambiamos con las estaciones — reconocimiento del cuerpo serval" >}}

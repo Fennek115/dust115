@@ -1,6 +1,6 @@
 ---
 title: "Códice | D-2.7"
-date: 2026-09-10T03:00:00-03:00
+date: 2025-09-10T03:00:00-03:00
 draft: false
 tags: ["códice", "protogen-era"]
 series: ["Códice del Polvo"]
@@ -149,4 +149,4 @@ Lo sé.
 Dust llegó a la puerta.
 La abrió.
 
-{{< commit hash="240kg51" date="2026-09-10T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="240kg51" date="2025-09-10T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}

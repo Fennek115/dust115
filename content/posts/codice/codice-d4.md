@@ -1,6 +1,6 @@
 ---
 title: "Códice | D-4"
-date: 2026-10-08T03:00:00-03:00
+date: 2025-10-08T03:00:00-03:00
 draft: false
 tags: ["códice", "protogen-era"]
 series: ["Códice del Polvo"]
@@ -156,4 +156,4 @@ El servidor en el segundo nivel seguía corriendo.
 
 Dust tomó la dirección de las coordenadas.
 
-{{< commit hash="684ok95" date="2026-10-08T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="684ok95" date="2025-10-08T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}

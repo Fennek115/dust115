@@ -1,6 +1,6 @@
 ---
 title: "Códice | XIV-D — Las Moradas del Polvo"
-date: 2026-06-18T03:00:00-03:00
+date: 2025-06-18T03:00:00-03:00
 draft: false
 tags: ["códice", "skull-fox-era"]
 series: ["Códice del Polvo"]
@@ -498,4 +498,4 @@ El que sabe leer la catedral no necesita el nombre del arquitecto.
 
 ---
 
-{{< commit hash="a1c4e93" date="2026-06-18T03:00:00-03:00" message="las moradas del polvo — arquitectura para quien sepa leer edificios" >}}
+{{< commit hash="a1c4e93" date="2025-06-18T03:00:00-03:00" message="las moradas del polvo — arquitectura para quien sepa leer edificios" >}}
