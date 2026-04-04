@@ -1,6 +1,6 @@
 ---
 title: "Códice | P-4"
-date: 2020-07-08T03:00:00-03:00
+date: 2026-07-30T03:00:00-03:00
 draft: false
 tags: ["códice", "protogen-era"]
 series: ["Códice del Polvo"]
@@ -171,4 +171,4 @@ Está bien, dije.
 Las orejas giraron norte.
 Esta vez esperé el eco con algo que no era exactamente paciencia y que AZOTH tampoco podía clasificar exactamente, que era — como la mayoría de las cosas que importan — un estado sin nombre que el sistema sostiene porque no tiene instrucciones de qué otra cosa hacer con él.
 
-{{< commit hash="d95fb06" date="2020-07-08T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="d95fb06" date="2026-07-30T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}

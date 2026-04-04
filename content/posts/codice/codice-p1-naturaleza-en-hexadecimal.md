@@ -1,6 +1,6 @@
 ---
 title: "Códice | P-1 — Naturaleza en Hexadecimal"
-date: 2020-06-17T03:00:00-03:00
+date: 2026-07-09T03:00:00-03:00
 draft: false
 tags: ["códice", "protogen-era"]
 series: ["Códice del Polvo"]
@@ -156,4 +156,4 @@ Me disolví hacia adentro.
 Las orejas se quedaron afuera, quietas, en el cuerpo que piloto automático se encargaba de mantener en posición, enviando la señal de siempre al espacio vacío de siempre, esperando el eco de siempre que no llega.
 El cursor parpadeando en el lugar donde debería haber más.
 
-{{< commit hash="a62c8d3" date="2020-06-17T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="a62c8d3" date="2026-07-09T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}

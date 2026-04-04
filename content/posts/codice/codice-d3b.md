@@ -1,6 +1,6 @@
 ---
 title: "Códice | D-3b"
-date: 2020-09-02T03:00:00-03:00
+date: 2026-09-24T03:00:00-03:00
 draft: false
 tags: ["códice", "protogen-era"]
 series: ["Códice del Polvo"]
@@ -227,4 +227,4 @@ Ninguno de los dos lo nombró.
 
 No hacía falta.
 
-{{< commit hash="462mi73" date="2020-09-02T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="462mi73" date="2026-09-24T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}

@@ -1,6 +1,6 @@
 ---
 title: "Códice | XIV-B — A Dónde Vas Cuando Caes"
-date: 2020-05-27T03:00:00-03:00
+date: 2026-06-04T03:00:00-03:00
 draft: false
 tags: ["códice", "skull-fox-era"]
 series: ["Códice del Polvo"]
@@ -139,4 +139,4 @@ Lo tomaron igual.
 
 ---
 
-{{< commit hash="840a6b2" date="2020-05-27T03:00:00-03:00" message="feat: a dónde vas cuando caes — diagnóstico compartido" >}}
+{{< commit hash="840a6b2" date="2026-06-04T03:00:00-03:00" message="feat: a dónde vas cuando caes — diagnóstico compartido" >}}

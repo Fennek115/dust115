@@ -1,6 +1,6 @@
 ---
 title: "Códice | V — Los Tres Hijos de la Libertad"
-date: 2020-02-12T03:00:00-03:00
+date: 2026-02-19T03:00:00-03:00
 draft: false
 tags: ["códice", "zorro-era"]
 series: ["Códice del Polvo"]
@@ -87,4 +87,4 @@ La dejé.
 
 ---
 
-{{< commit hash="f5e5b22" date="2020-02-12T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="f5e5b22" date="2026-02-19T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}

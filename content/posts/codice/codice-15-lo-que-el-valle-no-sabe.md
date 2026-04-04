@@ -1,6 +1,6 @@
 ---
 title: "Códice | XV — Lo Que el Valle No Sabe Que Es"
-date: 2020-06-10T03:00:00-03:00
+date: 2026-07-02T03:00:00-03:00
 draft: false
 tags: ["códice", "skull-fox-era"]
 series: ["Códice del Polvo"]
@@ -154,4 +154,4 @@ Lo tomó igual.
 
 ---
 
-{{< commit hash="951b7c2" date="2020-06-10T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="951b7c2" date="2026-07-02T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}

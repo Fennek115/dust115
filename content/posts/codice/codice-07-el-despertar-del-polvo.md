@@ -1,6 +1,6 @@
 ---
 title: "Códice | VII — El Despertar del Polvo"
-date: 2020-02-26T03:00:00-03:00
+date: 2026-03-05T03:00:00-03:00
 draft: false
 tags: ["códice", "skull-fox-era"]
 series: ["Códice del Polvo"]
@@ -66,4 +66,4 @@ Pero también porque necesitaba un nombre para interactuar en este extraño mund
 
 ---
 
-{{< commit hash="17a3944" date="2020-02-26T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="17a3944" date="2026-03-05T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}

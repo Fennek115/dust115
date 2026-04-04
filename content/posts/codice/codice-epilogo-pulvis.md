@@ -1,6 +1,6 @@
 ---
 title: "Códice | Epílogo — Pulvis"
-date: 2020-09-30T03:00:00-03:00
+date: 2026-10-22T03:00:00-03:00
 draft: false
 tags: ["códice", "protogen-era"]
 series: ["Códice del Polvo"]
@@ -398,4 +398,4 @@ dust desde el hardware que aprendió a habitar, desde el único lugar en el univ
 
 *entonces.*
 
-{{< commit hash="0x4A7F" date="2020-09-30T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="0x4A7F" date="2026-10-22T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}

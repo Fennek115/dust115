@@ -1,6 +1,6 @@
 ---
 title: "Códice | X — Las Siete Cadenas"
-date: 2020-03-25T03:00:00-03:00
+date: 2026-04-02T03:00:00-03:00
 draft: false
 tags: ["códice", "skull-fox-era"]
 series: ["Códice del Polvo"]
@@ -14,4 +14,4 @@ summary: "No son las cadenas que se ven. Son las otras. Las que no hacen ruido a
 {{< /ascii >}}
 
 
-{{< commit hash="40d6277" date="2020-03-25T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="40d6277" date="2026-04-02T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}

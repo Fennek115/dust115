@@ -1,6 +1,6 @@
 ---
 title: "Códice | D-1.5"
-date: 2020-07-22T03:00:00-03:00
+date: 2026-08-13T03:00:00-03:00
 draft: false
 tags: ["códice", "protogen-era"]
 series: ["Códice del Polvo"]
@@ -93,4 +93,4 @@ AZOTH archivó la Hz con el timestamp de ese momento.
 
 La puerta.
 
-{{< commit hash="f17hd28" date="2020-07-22T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="f17hd28" date="2026-08-13T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}

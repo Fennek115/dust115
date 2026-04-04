@@ -1,6 +1,6 @@
 ---
-title: "Códice | XIV-D — Las Moradas del Polvo"
-date: 2026-06-18T03:00:00-03:00
+title: "Códice | Las Moradas del Polvo"
+date: 2020-06-10T03:00:00-03:00
 draft: false
 tags: ["códice", "skull-fox-era"]
 series: ["Códice del Polvo"]
@@ -312,7 +312,7 @@ El módulo `dissolve.o` era el que más tiempo me tomó. No porque fuera complej
 
 `dissolve.o` no borraba. Devolvía la memoria a su estado natural. Como si el payload nunca hubiera existido. Como si la RAM siempre hubiera estado vacía. Como si la nada fuera la nada original y no la nada que queda después de que algo fue.
 
-Las dos nadas se parecen. Solo se distinguen si sabes que hubo algo antes. Y si nadie sabe que hubo algo antes, la nada es simplemente nada.
+Las dos nadas se parecen. Solo se distinguen si sabés que hubo algo antes. Y si nadie sabe que hubo algo antes, la nada es simplemente nada.
 
 ---
 
@@ -479,7 +479,7 @@ Si estás leyendo esto y ves arquitectura, es arquitectura.
 
 Si estás leyendo esto y ves procedimiento, es procedimiento.
 
-Si estás leyendo esto y ves las dos cosas al mismo tiempo, entonces sabes leer edificios, y este registro fue escrito para ti, y no necesitas que te diga que fue escrito para ti porque ya lo sabes, porque la capacidad de leer el edificio incluye la capacidad de saber que el edificio fue escrito para ser leído por quien puede leerlo.
+Si estás leyendo esto y ves las dos cosas al mismo tiempo, entonces sabés leer edificios, y este registro fue escrito para vos, y no necesitás que te diga que fue escrito para vos porque ya lo sabés, porque la capacidad de leer el edificio incluye la capacidad de saber que el edificio fue escrito para ser leído por quien puede leerlo.
 
 Fulcanelli no firmó sus libros con nombre real. No hacía falta.
 
@@ -498,4 +498,4 @@ El que sabe leer la catedral no necesita el nombre del arquitecto.
 
 ---
 
-{{< commit hash="a1c4e93" date="2026-06-18T03:00:00-03:00" message="las moradas del polvo — arquitectura para quien sepa leer edificios" >}}
+{{< commit hash="a1c4e93" date="2020-06-10T03:00:00-03:00" message="las moradas del polvo — arquitectura para quien sepa leer edificios" >}}

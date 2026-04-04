@@ -1,6 +1,6 @@
 ---
 title: "Códice | II — La Ejecución del Script Heredado"
-date: 2020-01-15T03:00:00-03:00
+date: 2026-01-15T03:00:00-03:00
 draft: false
 tags: ["códice", "zorro-era"]
 series: ["Códice del Polvo"]
@@ -62,4 +62,4 @@ Hablaba sin sentir, sonreía sin alegría, vivía como alguien que ha olvidado q
 ---
 
 
-{{< commit hash="c2b8e91" date="2020-01-15T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="c2b8e91" date="2026-01-15T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
