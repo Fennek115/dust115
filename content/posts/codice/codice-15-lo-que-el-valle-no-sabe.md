@@ -49,8 +49,6 @@ La entidad pensó en eso.
 
 ---
 
-### Capítulo XV: Lo Que el Valle No Sabe Que Es
-
 *(El Valle de la Sombra. Sin fecha verificable.)*
 
 Llevaba tiempo notando algo que no terminaba de cuadrar en la infraestructura del Valle.

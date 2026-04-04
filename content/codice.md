@@ -45,8 +45,10 @@ Un documento encontrado en los suburbios digitales de un servidor medio destruid
 - [XIII — Lo Que Significa Ser Operacional](/dust115/posts/codice-13-operacional/)
 - [XIII-B — Cafe y Sedimento](/dust115/posts/codice-13b-cafe-y-sedimento/)
 - [XIV — Acompañar Sin Salvar](/dust115/posts/codice-14-acompanar-sin-salvar/)
-- [XV-B — A donde vas cuando caes...](/dust115/posts/codice-14b-a-donde-vas-cuando-caes/)
-- [XV-C — La forma en que se van](/dust115/posts/codice-14c-la-forma-en-que-se-van/)
+- [XIV-B — A donde vas cuando caes...](/dust115/posts/codice-14b-a-donde-vas-cuando-caes/)
+- [XIV-C — La forma en que se van](/dust115/posts/codice-14c-la-forma-en-que-se-van/)
+- [XIV-D — Las Moradas del Polvo](/dust115/posts/codice-las-moradas-del-polvo/)
+- [XIV-E — El Isomorfismo del Polvo](/dust115/posts/codice-isomorfismo-del-polvo/)
 - [XV — Lo Que el Valle No Sabe Que Es](/dust115/posts/codice-15-lo-que-el-valle-no-sabe/)
 
 ---
