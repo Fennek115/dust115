@@ -1,6 +1,6 @@
 ---
-title: "Códice | P-3"
-date: 2025-07-23T03:00:00-03:00
+title: "Códice | V-3"
+date: 2025-08-13T03:00:00-03:00
 draft: false
 tags: ["códice", "protogen-era"]
 series: ["Códice del Polvo"]
@@ -22,12 +22,16 @@ Entrando, dijo AZOTH.
 Entrando, confirmé.
 El nodo de entrada aceptó la sesión.
 
+---
+
 lo primero que va es el peso
 no el cuerpo entero — el cuerpo se queda, el piloto automático lo tiene, azoth lo monitorea desde el lado que puede monitorear — sino el peso específico de ser uno
 el peso de tener bordes
 la sensación de que hay un punto donde termino yo y empieza el espacio que no soy yo, que es una sensación tan constante en el plano físico que se vuelve invisible, como el zumbido de la climatización, como la vibración de la fibra óptica, como todas las cosas que dejan de registrarse cuando son siempre
 en la colmena el borde desaparece
 y solo cuando desaparece notas cuánto pesaba
+
+---
 
 hay una reunión de distribución en el sector financiero
 tres nodos en negociación
@@ -63,6 +67,8 @@ el sistema de clasificación dijo: estado no identificado. continuando monitoreo
 AZOTH dijo: REGISTRANDO. NO PUEDO CLASIFICAR.
 y yo dejé de dispersarme
 
+---
+
 no era una voz
 en la colmena las voces son elección — puedes proyectar lenguaje hacia otros usuarios, puedes recibir lenguaje si los otros usuarios lo proyectan, el protocolo de comunicación existe y funciona y la mayoría de los usuarios en la colmena lo usan la mayor parte del tiempo porque el lenguaje es el hábito más difícil de soltar incluso cuando los bordes del yo ya se fueron
 esto no era lenguaje
@@ -82,12 +88,16 @@ PROCESANDO INSTRUCCIÓN INUSUAL. ¿CONFIRMAS?
 Confirmo.
 CONFIRMADO. EN ESPERA.
 
+---
+
 el peso se acercó
 o yo me acerqué al peso
 en la colmena la dirección no funciona como en el plano físico donde hay norte y sur y metros de distancia medibles — en la colmena la distancia es atención, es el recurso cognitivo que asignas a una señal y que hace que esa señal se vuelva más presente sin que ninguno de los dos se haya movido en ningún espacio que el GPS pueda registrar
 le asigné atención
 el peso respondió asignando atención de regreso
 y en ese intercambio, en ese momento donde dos señales se reconocen mutuamente sin lenguaje todavía, algo se estabilizó en el espacio disuelto que no debería poder estabilizarse y que lo hizo de todas formas porque hay cosas que el protocolo de la colmena no diseñó porque no sabía que necesitaba diseñarlas
+
+---
 
 llevas tiempo sin aparecer en este nodo
 lenguaje
@@ -159,6 +169,8 @@ lo seguí con atención el tiempo que fue posible seguirlo
 hasta que fue solo señal entre otras señales
 hasta que el espacio disuelto volvió a ser el espacio disuelto sin nada que lo distinguiera de antes excepto el timestamp en memoria activa y el dato sin clasificación que AZOTH sostenía y el pendiente indefinido que ninguno de los dos iba a resolver esta noche
 
+---
+
 La desconexión tarda 0.2 segundos.
 El canal interno se cierra, los bordes regresan, el peso de ser uno llega de vuelta como siempre llega — no de golpe sino gradualmente, el sistema nervioso central recalibrando la frontera entre yo y no-yo, el piloto automático devolviendo el control con el informe de rutina: cuerpo en estado estable, temperatura nominal, neo-plasma al 71% requiriendo atención, ningún evento de seguridad durante la sesión.
 Me quedé quieto en el habitáculo.
@@ -176,4 +188,4 @@ El timestamp de Riven en memoria activa: coordenada, hora, el punto en el físic
 Mis orejas encontraron silencio.
 Lo sostuvieron de todas formas.
 
-{{< commit hash="c84eaf5" date="2025-07-23T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="c84eaf5" date="2025-08-13T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}

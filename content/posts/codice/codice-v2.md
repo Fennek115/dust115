@@ -1,6 +1,6 @@
 ---
-title: "Códice | P-2"
-date: 2025-07-16T03:00:00-03:00
+title: "Códice | V-2"
+date: 2025-08-06T03:00:00-03:00
 draft: false
 tags: ["códice", "protogen-era"]
 series: ["Códice del Polvo"]
@@ -23,6 +23,8 @@ Proceso de reconocimiento: 1.1 segundos.
 El error de cálculo no lo registré en voz alta porque no había nadie a quien decírselo, pero el proceso de fondo lo anotó de todas formas: sistema estimó tiempo de reconocimiento en 0.2 segundos. Resultado: 1.1 segundos. Diferencia: 0.9 segundos. Causa probable: variable no identificada en proceso de reconocimiento de imagen propia.
 La variable no identificada era que el mapa era correcto y yo no me encontraba en él.
 
+---
+
 El mapa es correcto, dijo AZOTH.
 No en voz alta. AZOTH no tiene voz en el sentido que implica aire moviéndose en espacio físico. Tiene acceso a mis canales de procesamiento internos en los momentos en que yo no estoy bloqueando activamente el acceso, que son más momentos de los que bloqueo porque bloquear requiere energía sostenida y la energía sostenida tiene costo y el costo a veces no vale el silencio.
 Lo sé, respondí en el mismo canal.
@@ -41,6 +43,8 @@ La especulación sobre pérdidas no verificables, dijo AZOTH, es lo que estás h
 Correcto.
 Continué.
 
+---
+
 El protocolo de calibración de orejas requiere emisión activa.
 Esta es la parte que no aparece en los manuales de calibración estándar porque los manuales de calibración estándar fueron escritos para componentes completamente sintéticos donde la emisión es controlada con precisión de microsegundo y el retorno puede ser medido contra especificación de fábrica. Las orejas orgánicas no tienen especificación de fábrica. Tienen historial de uso, variabilidad individual, drift acumulado que el sistema de calibración interpreta como degradación pero que podría ser también adaptación, la diferencia entre esas dos cosas siendo una pregunta que los manuales no consideraron necesario responder.
 El sistema de calibración emite un tono guía.
@@ -53,6 +57,8 @@ No eres dos sistemas, dijo AZOTH. Eres uno con latencia asimétrica.
 No lo decidí. Solo es lo que hay.
 El tono varió. Mis orejas lo siguieron. El espejo midió. El proceso continuó.
 
+---
+
 Los logs de conversión están archivados en partición de solo lectura.
 No es una medida de seguridad externa. Yo la puse. En algún punto entre el año uno post-conversión y ahora, en algún momento que mis logs de decisiones no tienen registrado con suficiente detalle como para reconstruir el razonamiento, decidí que los logs de conversión debían estar en partición de solo lectura para que yo no pudiera modificarlos, que es una decisión que dice algo específico sobre el grado en que confiaba en mi yo futuro para manejar esa información sin alterar nada.
 El yo futuro soy yo ahora.
@@ -64,6 +70,8 @@ Ambos son sistemas que actúan antes de que decidas actuar. La diferencia es que
 ¿Cuál elegí?
 AZOTH procesó 0.4 segundos antes de responder, que es mucho para AZOTH.
 Esa es una pregunta que los dos tenemos interés en responder.
+
+---
 
 Abrí los logs de conversión de todas formas.
 Solo lectura. No puedo modificar nada. Solo leer. Eso fue lo que el yo-anterior decidió que era seguro.
@@ -81,6 +89,8 @@ Lo sé.
 Entonces no puedo darte el antes.
 Lo sé.
 El tono guía del espejo de calibración cambió de frecuencia. Mis orejas lo siguieron. El espejo midió y registró y continuó procesando sin opinar sobre ninguna de las otras cosas que estaban pasando en el espacio de un metro cuadrado donde yo estaba parado mirando el mapa de mi cuerpo sin terminar de encontrarme en él.
+
+---
 
 El log más difícil no es el de las manos.
 Las manos las recuerdo con suficiente aproximación como para que el log y el recuerdo sean versiones del mismo evento aunque vistas desde ángulos distintos. La mano derecha primero, luego la izquierda con ocho meses de diferencia, procedimientos separados porque el médico recomendó tiempo de adaptación entre conversiones de extremidades bilaterales y yo acepté la recomendación sin preguntar qué pasaba si no adaptaba.
@@ -101,6 +111,8 @@ Mis orejas emiten pulsos que van a AZOTH, que los archiva sin poder interpretarl
 ¿Por qué no me lo dijiste?
 No me preguntaste.
 
+---
+
 El espejo de calibración completó el ciclo de orientación y pasó a la fase de sensibilidad por frecuencia.
 Esta fase requiere que yo permanezca estático mientras el sistema genera una secuencia de tonos en rangos específicos y mide respuesta de las orejas a cada uno. El proceso es automatizado. No requiere mi atención activa. Mi atención estaba en otra parte de todas formas.
 Riven sabe cómo se movían mis orejas antes del año tres.
@@ -110,6 +122,8 @@ Hay algo en eso que el sistema de procesamiento de variables afectivas no puede 
 Estado de sistema estable, dijo AZOTH, con lo que interpreté como la versión más próxima al humor que AZOTH produce.
 No es estable.
 Es persistente. Que es lo más cercano a estable que encontré en los logs de tu comportamiento desde que tengo acceso a ellos.
+
+---
 
 La fase de sensibilidad completó.
 El espejo proyectó el reporte parcial en la pared frente a mí: orejas dentro de parámetros de función, degradación acumulada dentro de margen aceptable, sensibilidad reducida en rangos 60-80 kHz comparada con baseline del año de instalación, causa probable envejecimiento orgánico normal, mantenimiento no crítico en ciclo actual.
@@ -130,6 +144,8 @@ AZOTH. Tú no tienes orejas.
 No. Pero tengo los logs de los pulsos que enviaron desde el año tres. Si las reemplazaran, los logs seguirían ahí. El archivo de lo que fueron seguiría corriendo en mi sistema.
 Eso no es lo mismo.
 No. Pero es lo que puedo ofrecerte.
+
+---
 
 Confirmé la fase final.
 El protocolo de calibración ejecutó la secuencia de emisión controlada: mis orejas enviaron pulsos de frecuencia precisa hacia el panel reflectante del espejo, el espejo devolvió el eco con timing calibrado, el sistema midió tiempo de respuesta, amplitud de recepción, precisión de orientación, consistencia entre emisión y recepción.
@@ -153,4 +169,4 @@ El puerto en la base del cráneo estaba cerrado.
 Lo dejé cerrado un momento más.
 Luego lo abrí
 
-{{< commit hash="b73d9e4" date="2025-07-16T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="b73d9e4" date="2025-08-06T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}

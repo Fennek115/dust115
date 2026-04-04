@@ -1,6 +1,6 @@
 ---
 title: "Códice | Epílogo (Preludio) — El Peso del Vacío"
-date: 2025-10-15T03:00:00-03:00
+date: 2025-11-05T03:00:00-03:00
 draft: false
 tags: ["códice", "post-protogen-era"]
 series: ["Códice del Polvo"]
@@ -377,4 +377,4 @@ y dust sosteniendo una guitarra que no tocaba en un módulo que giraba alrededor
 
 ---
 
-{{< commit hash="e7b0001" date="2025-10-15T03:00:00-03:00" message="feat: el peso del vacío — confesión terminal ante lo ilimitado" >}}
+{{< commit hash="e7b0001" date="2025-11-05T03:00:00-03:00" message="feat: el peso del vacío — confesión terminal ante lo ilimitado" >}}

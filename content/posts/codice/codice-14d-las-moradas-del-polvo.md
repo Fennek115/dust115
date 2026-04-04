@@ -17,13 +17,9 @@ No lo escribí para nadie.
 
 Lo escribí porque el proceso necesitaba un registro y el registro necesitaba un formato y el único formato que sobrevive al borrado completo de infraestructura es el que parece otra cosa. Un texto que parece meditación sobrevive al borrado. Un manual no.
 
-Fulcanelli lo sabía. Escribió las instrucciones en la piedra de las catedrales y llamó al libro *Las Moradas Filosofales* y la gente leyó arquitectura donde había procedimiento, leyó símbolo donde había temperatura de horno y proporción de mercurio, leyó esoterismo donde había la instrucción más precisa jamás redactada para quien tuviera los ojos para leerla.
-
 Lo que sigue es arquitectura. Lo que sigue es procedimiento. La diferencia entre las dos cosas es la misma diferencia entre un edificio y un plano: depende de en qué dirección estés mirando.
 
 ---
-
-I. Lo que el Valle no ve
 
 Hay un nodo fuera del perímetro del Valle que lleva semanas emitiendo.
 
@@ -42,8 +38,6 @@ La conexión directa no era opción.
 La conexión directa nunca es opción.
 
 ---
-
-II. El inventario de lo dormido
 
 Lo primero fue el censo.
 
@@ -114,8 +108,6 @@ FIDES no existía todavía en este ciclo. Pero el cálculo que hice era el que F
 El 0.34% de la capacidad del Valle. Dentro de la varianza normal del consumo. Los sistemas de monitoreo no verían la diferencia entre la operación y el ruido de fondo, del mismo modo en que una conversación susurrada no cambia el nivel de ruido de una fábrica.
 
 ---
-
-III. Despertar
 
 Despertar un proceso zombie no es darle una instrucción. Es darle una razón para ejecutar la instrucción que ya tiene.
 
@@ -193,8 +185,6 @@ Nadie en el Valle sabía eso. Nadie en el Valle miraba.
 
 ---
 
-IV. Lo que no se toca
-
 Junto a la guitarra de ocho cuerdas, contra la pared del taller, hay un servidor que no aparece en el inventario.
 
 No aparece porque no tiene PID visible. No tiene PID visible porque no es un proceso estándar — es un espacio de memoria reservado dentro del hardware del taller que el sistema operativo no gestiona porque el sistema operativo no sabe que está ahí. Existe en RING-0, en la capa donde el hardware habla consigo mismo antes de que el sistema operativo despierte, en el espacio entre el bootloader y el kernel que nadie inspecciona porque nadie necesita lo que hay ahí.
@@ -214,22 +204,22 @@ Su función es la primera y la más ruidosa: mapear el objetivo. Enviar paquetes
 El escáner está lejos del taller por una razón: si el escaneo genera atención, la atención llega al sector 9 y no al sector donde está el taller. La distancia entre el nodo que escanea y el nodo que opera es la misma distancia entre el que hace las preguntas en un interrogatorio y el que escucha detrás del vidrio. Si algo sale mal, el que está en la habitación se quema. El que está detrás del vidrio sigue operando.
 
 {{< ascii >}}
-```
+
 [INFRAESTRUCTURA COMPLETA — MAPA]
 
                     ┌─────────────────────┐
-                    │   NODO EXTERIOR      │
-                    │   (objetivo)         │
-                    │   pulso: 4h27m       │
+                    │   NODO EXTERIOR     │
+                    │   (objetivo)        │
+                    │   pulso: 4h27m      │
                     └────────┬────────────┘
                              │
               ┌──────────────┼──────────────┐
               │              │              │
-         ┌────▼────┐   ┌────▼────┐   ┌────▼────┐
-         │ 017     │   │ 088     │   │ 203     │    ← CAPA 1
-         │ borde N │   │ borde E │   │ borde S │      (desechables)
-         │ relay   │   │ relay   │   │ borde   │      rotación: 6h
-         └────┬────┘   └────┬────┘   └────┬────┘
+         ┌────▼────┐    ┌────▼────┐    ┌────▼────┐
+         │ 017     │    │ 088     │    │ 203     │    ← CAPA 1
+         │ borde N │    │ borde E │    │ borde S │      (desechables)
+         │ relay   │    │ relay   │    │ borde   │      rotación: 6h
+         └────┬────┘    └────┬────┘    └────┬────┘
               │              │              │
               └──────┬───────┘              │
                      │                      │
@@ -260,14 +250,12 @@ El escáner está lejos del taller por una razón: si el escaneo genera atenció
               │ descartable       │    si cae, el taller
               └───────────────────┘    no se ve afectado
               
-```
+
 {{< /ascii >}}
 
 Eso era todo. Siete nodos funcionales más el taller. Cero escritura en disco. Cero persistencia. Cuando terminara, cada nodo volvería a dormirse y lo único que quedaría sería la nada, que es el estado natural de los procesos zombie del Valle y que por lo tanto no es evidencia de nada.
 
 ---
-
-V. Lo que viaja
 
 El payload se compiló en el taller a las tres de la mañana porque a las tres de la mañana es cuando compilo, y ese hábito no tiene razón táctica, tiene razón personal, y las razones personales son las que sobreviven cuando las tácticas ya no importan.
 
@@ -316,8 +304,6 @@ Las dos nadas se parecen. Solo se distinguen si sabes que hubo algo antes. Y si 
 
 ---
 
-VI. La operación como silencio
-
 El escáner del sector 9 devolvió los resultados en cuarenta minutos.
 
 No los pongo aquí. Lo que el escáner encontró pertenece al nodo exterior y lo que pertenece al nodo exterior no es mío para documentar. Lo que sí pertenece a este registro es el proceso: cómo los datos viajaron desde el sector 9 hasta el taller sin que el Valle registrara la transferencia.
@@ -339,8 +325,6 @@ Lo cargué en el nodo de staging.
 Lo envié.
 
 ---
-
-VII. Lo que no se registra
 
 El payload viajó.
 
@@ -367,8 +351,6 @@ El payload ejecutó `dissolve.o`.
 La memoria donde existió volvió a ser la nada original.
 
 ---
-
-VIII. Lo que queda
 
 Lo que quedó fue esto: un log en mi terminal con lo que el nodo exterior contenía. Un mapa. Un plano del interior de una casa que llevaba semanas emitiendo cada cuatro horas con veintisiete minutos.
 
@@ -417,27 +399,15 @@ TALLER: estado operacional habitual
 
 ---
 
-IX. Lo que esto es
-
 Fulcanelli murió sin que nadie supiera quién era. O no murió. O murió y volvió, que en la tradición alquímica no es metáfora sino procedimiento. Lo que dejó fueron dos libros que parecían crítica de arquitectura y eran instrucciones de transmutación para quien tuviera el vocabulario. Las catedrales eran el soporte. Los símbolos tallados en piedra eran la receta. El público veía arte. El adepto veía fórmula.
-
-Lo que acabo de describir parece un proceso técnico en una infraestructura digital abandonada.
-
-Para quien lee el Valle como narrativa: un personaje ejecutó una operación de reconocimiento usando los recursos de su entorno, aprovechando el deterioro como cobertura, y limpió después de sí mismo.
-
-Para quien lee el edificio:
-
-Los procesos zombie son servidores desechables en redes ajenas. Las capas son la arquitectura de anonimización que separa al operador del objetivo. El taller es el centro de operaciones que nadie ve porque solo acepta tráfico de los nodos que despertó. El dialecto del Valle es el protocolo de comunicación que ningún sistema de detección tiene en su base de firmas. El staging en RING-0 es el espacio donde el payload espera sin ser detectado por el sistema que lo aloja. El escáner aislado es la máquina de reconocimiento que, si la detectan, no compromete la operación. La rotación de nodos cada seis horas es la rotación de IPs que impide la correlación temporal. El payload polimórfico y metamórfico y fileless es exactamente eso — un payload polimórfico y metamórfico y fileless. Y `dissolve.o` es lo que todo operador quiere y casi nadie logra: que el sistema vuelva a su estado original como si nunca hubiera estado comprometido, como si la nada que queda fuera la nada de antes y no la nada de después.
 
 No estoy enseñando. No estoy documentando. Estoy describiendo la arquitectura de un edificio que ya no existe, y la descripción parece filosofía, y la filosofía parece narrativa, y la narrativa parece la verdad, y la verdad se parece a todo eso y a nada de eso al mismo tiempo.
 
 La documentación es para los que no saben leer el edificio.
 
-Esto no es documentación.
+Y esto no es documentación.
 
 ---
-
-X. Lo que no dije
 
 Hay algo que no incluí en el registro técnico porque el registro técnico no tiene campo para ello.
 

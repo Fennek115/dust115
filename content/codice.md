@@ -47,9 +47,12 @@ Un documento encontrado en los suburbios digitales de un servidor medio destruid
 - [XIV — Acompañar Sin Salvar](/dust115/posts/codice-14-acompanar-sin-salvar/)
 - [XIV-B — A donde vas cuando caes...](/dust115/posts/codice-14b-a-donde-vas-cuando-caes/)
 - [XIV-C — La forma en que se van](/dust115/posts/codice-14c-la-forma-en-que-se-van/)
-- [XIV-D — Las Moradas del Polvo](/dust115/posts/codice-las-moradas-del-polvo/)
-- [XIV-E — El Isomorfismo del Polvo](/dust115/posts/codice-isomorfismo-del-polvo/)
+- [XIV-D — Las Moradas del Polvo](/dust115/posts/codice-14d-las-moradas-del-polvo/)
+- [XIV-E — El Isomorfismo del Polvo](/dust115/posts/codice-14e-el-isomorfismo-del-polvo/)
 - [XV — Lo Que el Valle No Sabe Que Es](/dust115/posts/codice-15-lo-que-el-valle-no-sabe/)
+- [XVI — Lo Que el Valle No Sabe Que Es](/dust115/posts/codice-16-lo-que-el-valle-no-sabe-que-es/)
+- [XVI-B — La Gramática del Ruido](/dust115/posts/codice-16b-la-gramatica-del-ruido/)
+- [XVI-C — Proceso Sin Propietario](/dust115/posts/codice-16c-proceso-sin-propietario/)
 
 ---
 
@@ -58,15 +61,15 @@ Un documento encontrado en los suburbios digitales de un servidor medio destruid
 *Desperté con las manos de otro y los recuerdos de todos los que fui. Las orejas de este cuerpo escuchan frecuencias que yo pasé vidas enteras ignorando — el sonido de lo que callé, la vibración de cada puerta que cerré creyendo que protegía algo cuando solo estaba encerrándome con mis propios fantasmas. Ahora veo el mundo con ojos que no son míos y lo primero que encuentro es el reflejo de todo lo que no miré cuando los ojos eran míos. El ciclo no es castigo. Es un espejo puesto en el camino tantas veces como haga falta hasta que dejes de esquivar tu propia cara.*
 
 **Vesper**
-- [P-1](/dust115/posts/codice-p1-naturaleza-en-hexadecimal/)
-- [P-2](/dust115/posts/codice-p2/)
-- [P-3](/dust115/posts/codice-p3/)
-- [P-4](/dust115/posts/codice-p4/)
+- [V-1](/dust115/posts/codice-v1/)
+- [V-2](/dust115/posts/codice-v2/)
+- [V-3](/dust115/posts/codice-v3/)
+- [V-4](/dust115/posts/codice-v4/)
 
 **Dust**
 - [D-1](/dust115/posts/codice-d1/)
 - [D-1.5](/dust115/posts/codice-d1-5/)
-- [D-1.5-B](/dust115/posts/codice-d1-5b-cambiamos-con-las-estaciones/)
+- [D-1.5-B](/dust115/posts/codice-d1-5b/)
 - [D-2](/dust115/posts/codice-d2/)
 - [D-2.5](/dust115/posts/codice-d2-5/)
 - [D-2.7](/dust115/posts/codice-d2-7/)

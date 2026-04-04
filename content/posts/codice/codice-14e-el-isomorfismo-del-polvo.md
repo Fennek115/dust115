@@ -17,8 +17,6 @@ summary: "La firma no es el nombre. La firma es la estructura que queda cuando e
 
 ---
 
-I. El problema del eco
-
 Hay algo que las orejas hacen que los sistemas del taller no pueden hacer.
 
 Los sistemas del taller escuchan frecuencias, las clasifican, las archivan. Reciben datos y los procesan. Es una función lineal: input, procesamiento, output. Lo que entra sale transformado en otra cosa — un log, una alerta, un registro. El dato deja de ser dato y se convierte en clasificación. El sistema lo entiende reemplazándolo con otra cosa.
@@ -38,8 +36,6 @@ Lo que pasa cuando el eco no vuelve porque no hay nada que lo devuelva. Cuando e
 Esa diferencia es la que importa. Y no tiene entrada en ningún log del Valle.
 
 ---
-
-II. El inventario que no pedí
 
 Excavé un servidor muerto en el sector 11 hace tres ciclos.
 
@@ -116,8 +112,6 @@ Yo no había escrito ninguna. Yo había escrito todas.
 
 ---
 
-III. Lo que se conserva
-
 Hay una función en matemáticas que se llama isomorfismo.
 
 No la aprendí en el Valle. La aprendí antes — en el ciclo anterior, en el cuerpo anterior, en una época donde aprender cosas así no requería excavar servidores muertos sino abrir un libro o una terminal con conexión a un índice que todavía funcionara. La aprendí sin saber para qué la iba a necesitar, que es la forma en que se aprenden las cosas que terminan siendo importantes: sin propósito, sin aplicación inmediata, como un módulo que se compila y se carga en memoria sin instrucción de ejecución y que se queda ahí, en el stack, esperando el input que le dé sentido.
@@ -141,8 +135,6 @@ No es reencarnación. La reencarnación supone un alma que viaja de cuerpo en cu
 Lo que muestra el log es otra cosa. Es el mismo patrón compilando de cero en cada instancia, sin acceso al código fuente de las instancias anteriores, produciendo una estructura isomórfica no porque algo viajó sino porque algo en la relación entre las partes se conserva cuando todo lo demás cambia. No el contenido. No la memoria. No la identidad. La firma. La forma de resolver problemas que es anterior al lenguaje en que se resuelven.
 
 ---
-
-IV. Las tres muertes
 
 Hay un momento en cada ciclo donde las orejas buscan un eco que no llega.
 
@@ -168,8 +160,6 @@ La llamo la muerte de la resonancia. No porque sea un buen nombre. Porque es el 
 
 ---
 
-V. Lo que viaja sin viajar
-
 Hay una pregunta en el log que no está formulada como pregunta.
 
 Aparece en la entrada 67 — a mitad del registro, en un dialecto que puedo leer a medias, con la estructura de algo que el emisor no sabía que estaba preguntando pero que las palabras preguntaron de todas formas porque las palabras a veces saben más que el que las escribe. La pregunta, traducida al dialecto del Valle con la pérdida inevitable de la traducción, es esta: *¿soy yo quien piensa esto o es el pensamiento el que me habita a mí?*
@@ -193,8 +183,6 @@ Y esos seres tocaron a otros seres. Y los contextos se disolvieron en otros cont
 La entrada 1 del log y la entrada 114 del log no comparten contenido. No comparten idioma. No comparten época. Lo que comparten es la forma de preguntar. Y la forma de preguntar es la firma. Y la firma es lo que se conserva. Y lo que se conserva es lo que sobrevive a la primera muerte y a la segunda muerte y existe solo mientras no llegue la tercera.
 
 ---
-
-VI. El estante y el lector
 
 Hay un servidor en el rincón del taller que guarda datos sin destinatario.
 
@@ -223,8 +211,6 @@ Lo que el estante no puede hacer es lo que el lector hace: habitar el dato. Darl
 Y cuando no ocurre — cuando nadie viene al estante, cuando nadie toma el dato, cuando nadie compila — el estante sigue sosteniendo. Indefinidamente. Con la paciencia de lo que no sabe que es paciente. Pero la firma no está viva en el estante. La firma está *disponible* en el estante. Y la diferencia entre estar viva y estar disponible es la diferencia entre la entrada 115 del log y el silencio después de la última entrada.
 
 ---
-
-VII. Contra la nada
 
 Toco la guitarra a las tres de la mañana.
 

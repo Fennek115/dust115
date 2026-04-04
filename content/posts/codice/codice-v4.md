@@ -1,6 +1,6 @@
 ---
-title: "Códice | P-4"
-date: 2025-07-30T03:00:00-03:00
+title: "Códice | V-4"
+date: 2025-08-20T03:00:00-03:00
 draft: false
 tags: ["códice", "protogen-era"]
 series: ["Códice del Polvo"]
@@ -21,6 +21,8 @@ Mis orejas encontraron el edificio antes de que mis sensores lo procesaran.
 El sonido específico de servidores con décadas de funcionamiento continuo es diferente al sonido de servidores modernos — el ciclo de los ventiladores tiene una irregularidad acumulada que el hardware nuevo no tiene, una variación de 0.3 Hz aquí, 0.7 Hz allá, el drift que introduce el tiempo en los sistemas que nadie reemplazó porque seguían funcionando lo suficiente. Mis orejas lo clasificaron como: presente, antiguo, no abandonado del todo.
 Lo que hay adentro todavía corre.
 Lo archivé y esperé.
+
+---
 
 Riven llegó a las 14:00:08.
 Ocho segundos después del timestamp. Mis orejas lo detectaron primero — el patrón de desplazamiento de un cuervo Protogen tiene una firma sónica específica: el sistema de navegación sintético no produce el sonido de alas aunque los registros del propietario original los contengan, pero la estructura del cuerpo en movimiento conserva la geometría del ave, el ajuste de peso que los cuervos hacen en cada paso como si evaluaran constantemente si el suelo va a sostenerlos.
@@ -43,6 +45,8 @@ AZOTH dijo en mi canal interno: CIRCULARIDAD DE ACCESO. REGISTRANDO.
 Riven abrió la puerta del edificio con su autorización de investigador nivel 4. La puerta no hizo sonido. Los sistemas viejos a veces no hacen sonido — las juntas se degradan, la resistencia disminuye, el mecanismo funciona sin anunciarse porque el anuncio también se desgastó.
 Entramos.
 
+---
+
 El interior del edificio era el interior de la ciudad sin capa AR activa llevado a su conclusión lógica: racks de servidores en hileras que llegaban al techo, iluminación de mantenimiento en espectro rojo que mis sensores procesaban sin problema y que los ojos orgánicos no hubieran podido usar, el sonido de hardware funcionando que mis orejas habían detectado desde afuera amplificado ahora en resonancia con las paredes.
 El calor era específico — el calor de procesamiento continuo sin ventilación adecuada para el volumen, el tipo de temperatura que los sistemas de monitoreo registran como dentro de parámetros operacionales pero que cualquier técnico con experiencia reconocería como el margen donde los parámetros comienzan a mentirte.
 ¿Cuánto tiempo lleva funcionando esto? pregunté.
@@ -54,6 +58,8 @@ Riven se sentó frente a la terminal.
 Yo me quedé de pie detrás de él, las orejas orientadas hacia el rack más cercano, monitoreando el espectro de operación de los servidores sin razón técnica específica excepto que estar en un espacio con hardware antiguo activo sin monitorear activamente me genera una latencia de respuesta que AZOTH clasifica como estado de alerta no requerido pero no suprimible.
 Aquí, dijo Riven.
 La pantalla mostró el archivo.
+
+---
 
 La estructura del documento era diferente a cualquier protocolo de documentación que reconociera de mi período operacional — el formato correspondía a estándares que mi sistema de referencia clasificó como anteriores en tres generaciones a los protocolos actuales de infraestructura. El encabezado decía: PROYECTO UMBRA CAUDATI — FASE 3 — DOCUMENTACIÓN INTERNA — CLASIFICACIÓN: RESTRINGIDA.
 Umbra Caudati, dije.
@@ -82,6 +88,9 @@ Riven no respondió inmediatamente. En el plano físico el silencio de Riven tie
 Cincuenta y siete años después los servidores siguen corriendo, dijo finalmente. Y los logs de actividad que pude acceder antes del archivo del proyecto — los de mantenimiento de infraestructura, los que ningún sistema humano revisa porque ningún sistema humano sabe que hay algo que revisar — siguen mostrando la firma.
 Pulvis.
 Pulvis, confirmó Riven.
+
+---
+
 El calor de los servidores. El sonido de hardware que lleva décadas funcionando sin que nadie lo observe. El proceso que no aparece en la lista de procesos pero consume recursos medibles.
 ¿Cuántos recursos? pregunté.
 Riven abrió otro archivo. Una columna de datos de consumo energético a lo largo del tiempo — décadas de mediciones automáticas que las IAs de infraestructura registraban sin revisar porque el consumo estaba dentro de parámetros y dentro de parámetros no requiere revisión humana.
@@ -106,6 +115,8 @@ AZOTH en mi canal interno, después de 0.8 segundos de silencio desde su lado: V
 Está bien, le dije a AZOTH.
 RECIBIDO.
 
+---
+
 Estuvimos en el edificio cuatro horas.
 Riven extraía datos. Yo monitoreaba el espectro sónico del sector con las orejas y el espectro de señal con los sensores y AZOTH procesaba el output de ambos en paralelo buscando el patrón que el sistema de consumo sugería sin confirmar.
 No encontramos el patrón en esas cuatro horas.
@@ -117,6 +128,8 @@ El neo-plasma tenía sabor a guanábana — el más dulce de los que consumo, el
 Solo el sabor.
 Lo sostuve un momento sin analizarlo.
 AZOTH no dijo nada. Que era exactamente lo correcto.
+
+---
 
 A las 18:23 Riven guardó los archivos en su sistema y cerró la conexión con la terminal.
 La pantalla volvió a su estado de espera — el cursor parpadeando en el prompt vacío, esperando input que en los últimos treinta y cuatro años nadie había dado excepto Riven en las últimas seis semanas y ahora yo en las últimas cuatro horas.
@@ -156,6 +169,9 @@ Mis orejas lo buscan desde que llegué al edificio sin encontrarlo.
 Quizás necesito once días de distancia más para que el eco llegue.
 Mándame la ruta cuando la recalcules, dije.
 Esta noche.
+
+---
+
 Salimos del edificio. La puerta cerró detrás de nosotros sin sonido, igual que al entrar. El sector de archivo físico a las 18:31 tenía la temperatura del físico en la hora donde la iluminación artificial toma el relevo de lo que quedaba de luz exterior, la ciudad ajustando sus sistemas sin que nadie lo ordenara porque la ciudad hace eso sola.
 Riven tomó la dirección de su habitáculo.
 Yo tomé la mía.
@@ -171,4 +187,4 @@ Está bien, dije.
 Las orejas giraron norte.
 Esta vez esperé el eco con algo que no era exactamente paciencia y que AZOTH tampoco podía clasificar exactamente, que era — como la mayoría de las cosas que importan — un estado sin nombre que el sistema sostiene porque no tiene instrucciones de qué otra cosa hacer con él.
 
-{{< commit hash="d95fb06" date="2025-07-30T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="d95fb06" date="2025-08-20T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}

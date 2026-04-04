@@ -1,6 +1,6 @@
 ---
 title: "Códice | D-1"
-date: 2025-08-06T03:00:00-03:00
+date: 2025-08-27T03:00:00-03:00
 draft: false
 tags: ["códice", "protogen-era"]
 series: ["Códice del Polvo"]
@@ -150,4 +150,4 @@ Lo sabía ahora de la manera en que se sabe lo que no tiene vuelta.
 
 El sistema registró el estado como: *operacional.*
 
-{{< commit hash="e06gc17" date="2025-08-06T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="e06gc17" date="2025-08-27T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}

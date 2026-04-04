@@ -1,6 +1,6 @@
 ---
 title: "Códice | D-3c"
-date: 2025-10-01T03:00:00-03:00
+date: 2025-10-22T03:00:00-03:00
 draft: false
 tags: ["códice", "protogen-era"]
 series: ["Códice del Polvo"]
@@ -330,4 +330,4 @@ Esta vez lo que encontraron fue el ruido del servidor debajo y el silencio del e
 
 Como siempre.
 
-{{< commit hash="573nj84" date="2025-10-01T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="573nj84" date="2025-10-22T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
