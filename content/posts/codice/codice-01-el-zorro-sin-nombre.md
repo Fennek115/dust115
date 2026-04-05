@@ -1,6 +1,6 @@
 ---
 title: "Códice | I — El Zorro Sin Nombre"
-date: 2025-01-08T03:00:00-03:00
+date: 2024-01-08T03:00:00-03:00
 draft: false
 tags: ["códice", "zorro-era"]
 series: ["Códice del Polvo"]
@@ -27,4 +27,4 @@ Viví, que es diferente a estar vivo.
 
 Pagué cuentas, celebré cumpleaños, asistí a funerales. Reí en reuniones sociales, lloré en cuartos oscuros. Lo que no sabía entonces — lo que no podía saber — es que cada acto cotidiano era una cadena más. No las cadenas que se ven. Las otras. Las que no hacen ruido al caminar con ellas.
 
-{{< commit hash="b1a9f82" date="2025-01-08T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="b1a9f82" date="2024-01-08T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}

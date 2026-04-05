@@ -1,6 +1,6 @@
 ---
 title: "Códice | X-B — La Olvidada"
-date: 2025-04-16T03:00:00-03:00
+date: 2024-04-15T03:00:00-03:00
 draft: false
 tags: ["códice", "skull-fox-era"]
 series: ["Códice del Polvo"]
@@ -198,4 +198,4 @@ O ya pasó en otro ciclo y no hay registro.
 Dust prefería la primera opción, aunque sabía que la preferencia no era criterio válido.
 
 
-{{< commit hash="51e7388" date="2025-04-16T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="51e7388" date="2024-04-15T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}

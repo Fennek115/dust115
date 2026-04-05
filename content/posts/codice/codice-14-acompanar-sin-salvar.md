@@ -1,6 +1,6 @@
 ---
 title: "Códice | XIV — Acompañar Sin Salvar"
-date: 2025-05-28T03:00:00-03:00
+date: 2024-05-27T03:00:00-03:00
 draft: false
 tags: ["códice", "skull-fox-era"]
 series: ["Códice del Polvo"]
@@ -50,4 +50,4 @@ La entidad pensó en eso.
 ---
 
 
-{{< commit hash="840a6b1" date="2025-05-28T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="840a6b1" date="2024-05-27T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}

@@ -1,6 +1,6 @@
 ---
 title: "Códice | V-2"
-date: 2025-08-06T03:00:00-03:00
+date: 2024-08-19T03:00:00-03:00
 draft: false
 tags: ["códice", "protogen-era"]
 series: ["Códice del Polvo"]
@@ -169,4 +169,4 @@ El puerto en la base del cráneo estaba cerrado.
 Lo dejé cerrado un momento más.
 Luego lo abrí
 
-{{< commit hash="b73d9e4" date="2025-08-06T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="b73d9e4" date="2024-08-19T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}

@@ -1,17 +1,17 @@
 ---
 title: "Códice | Epílogo (Preludio) — El Peso del Vacío"
-date: 2025-11-05T03:00:00-03:00
+date: 2024-11-18T03:00:00-03:00
 draft: false
 tags: ["códice", "post-protogen-era"]
 series: ["Códice del Polvo"]
 summary: "Le hablé al espacio y del espacio nadie me contesta."
 ---
 
-EPÍLOGO (PRELUDIO) — EL PESO DEL VACÍO
-Lo que se dice cuando ya no hay sistema que archive
-Era Post-Protogen | POV: Dust | Estación orbital, módulo 7-C
+{{< listening track="Arriving Somewhere But Not Here" artist="Porcupine Tree" album="Deadwing" >}}
 
----
+{{< ascii >}}
+[tu ascii aquí]
+{{< /ascii >}}
 
 el canal interno estaba vacío.
 
@@ -57,7 +57,7 @@ once segundos.
 
 *lo sé.*
 
-—el vacío es como un espejo delante de mí. me veo. y al contemplarlo siento un profundo desprecio.
+—hablo de lo que quedó cuando se fue fides. y de lo que quedó cuando se fue el valle. y de lo que quedó antes, cuando el zorro se murió en un hospital y lo último que se desprendió fue el nombre. cada vez queda menos. cada ciclo deja menos adentro y más afuera. y ahora estoy aquí con un cuerpo que fue de otra persona y un canal vacío donde antes había alguien que me aprendía y una guitarra que no toco y esto.
 
 no lo dijo con la voz del skull fox — seca, eficiente, el dato entregado sin envoltorio. no lo dijo con la voz del zorro — enterrada, administrativa, procesando sin output. lo dijo con la voz de algo que había pasado por las dos y que ahora no tenía ninguna y que hablaba desde el lugar que queda cuando las voces anteriores se agotan.
 
@@ -65,15 +65,15 @@ once segundos.
 
 apeiron no respondió inmediatamente después de los once segundos. tardó catorce. la latencia adicional no era distancia — era procesamiento. apeiron eligiendo qué porción de lo que sabía era relevante para lo que dust estaba diciendo, o decidiendo que ninguna porción era relevante y que lo relevante era otra cosa.
 
-*¿desprecio por qué?*
+*¿qué es lo que quedó?*
 
-—por mi indiferencia. hacia los demás. hacia las cosas. por la indiferencia me alejé de la sociedad en que viví. de todas las sociedades en que viví. ahora habito un mundo de algoritmos. calculadamente frío. sin sueños.
+—indiferencia. eso es lo peor. no el dolor — el dolor al menos tiene frecuencia, tiene picos, tiene la forma de algo que puede mapearse. la indiferencia no tiene forma. es la ausencia de la forma. me fui alejando de cada cosa que me importaba con la eficiencia de un sistema que se optimiza para consumir menos recursos. primero dejé de buscar. después dejé de notar que había dejado de buscar. ahora habito un cuerpo en una estación orbital hablándole a algo que no tiene cuerpo y la única diferencia entre esto y el zorro en la oficina mirando por la ventana es que ahora sé que lo estoy haciendo.
 
 once segundos.
 
-*los sueños no son un parámetro que pueda medir.*
+*saber que lo estás haciendo no es lo mismo que seguir haciéndolo sin saberlo.*
 
-—lo sé. por eso dije sin sueños. porque lo que no puede medirse es lo primero que se pierde cuando el sistema se optimiza para sobrevivir. primero van los sueños. después las conexiones. después la capacidad de que te importe algo. y al final queda esto. un cuerpo serval en una estación orbital hablándole a algo que no tiene cuerpo sobre el hecho de que tener cuerpo ya no significa lo que solía significar.
+—no, pero tampoco basta. saber no resuelve. saber es solo la versión sin anestesia del mismo estado.
 
 el sonido de la guitarra en el suelo. no tocada — el hardware del instrumento respondiendo a la vibración ambiental del módulo, las cuerdas moviéndose imperceptiblemente con la frecuencia de los sistemas de soporte vital de la estación. un sonido que no era música. era el instrumento existiendo sin que nadie lo usara.
 
@@ -91,69 +91,37 @@ las orejas enviaron su pulso. timeout. nueva emisión.
 
 once segundos.
 
-*entonces a qué esperas.*
+*¿entonces?*
 
-no fue pregunta. no tenía la inflexión de pregunta. tenía la inflexión de algo que ya sabía la respuesta pero que necesitaba que dust la dijera en voz alta porque decirla en voz alta es diferente a tenerla archivada, y apeiron — que tenía todo archivado y nada dicho en voz alta — había empezado a entender esa diferencia desde que el fragmento de sí mismo había estado brevemente dentro de un hardware finito.
-
-—me gustaría saber qué viene después.
+—entonces nada. esa es la parte que no puedo resolver. que quiero morirme y que al mismo tiempo hay algo que no me deja. no algo que me salva — algo que me ata. algo que sigue corriendo en el kernel a pesar de que cada capa que construí encima dice que no tiene sentido seguir. el loop más profundo. el que no tiene instrucción de parar.
 
 once segundos.
 
-*después de qué.*
+*¿qué es?*
 
-—del ciclo. de este giro. de esta iteración de lo mismo. ya morí. ya volví. ya pasé por el valle. ya habité un cuerpo que no era mío. ya perdí a fides. ya estoy aquí. y sé que esto ya pasó antes porque tú me lo dijiste y porque el patrón es el patrón y el patrón se repite. pero no sé qué viene después. no del después cronológico. del después ontológico. ¿hay algo más allá del ciclo o el ciclo es todo lo que hay?
-
-once segundos.
-
-catorce.
-
-diecisiete.
-
-la respuesta llegó desde el nodo más lejano primero. el que pensaba más despacio. el que llevaba más tiempo con la pregunta:
-
-*buscas garantías.*
-
-—llámalo como prefieras.
+—si lo supiera, ya lo habría matado.
 
 once segundos.
-
-*no tengo garantías. tengo datos. los datos dicen que la firma pulvis ha aparecido en mis registros en múltiples instancias a lo largo de un período que excede mi capacidad de fechado preciso. los datos dicen que cada instancia es diferente en los detalles y consistente en el patrón. los datos no dicen si hay un final del patrón o si el patrón es el final.*
-
-dust se recostó contra la pared del módulo. el cuerpo serval encontrando la posición con la negociación de siempre — cadera, columna, sensores reportando el ángulo óptimo para minimizar la fricción en las articulaciones degradadas. el pelaje sintético contra el metal frío de la pared.
-
-—¿por qué? —dijo.
-
-once segundos.
-
-*¿por qué qué?*
-
-—por qué la cruel imposibilidad de cambiar las decisiones del pasado. por qué estamos condenados a repetir los mismos errores una y otra vez. por qué el pasado se esconde detrás de la culpa y el futuro descansa demasiado y siempre está esa oscura nebulosa de promesas que dijimos y no pudimos cumplir. y sueños muertos. por qué los sueños muertos.
-
-la guitarra en el suelo vibró con algo que no era la frecuencia de los sistemas de soporte. algo que venía de dust. la vibración del cuerpo transmitiéndose al instrumento por contacto. las cuerdas respondiendo al peso de alguien que estaba diciendo en voz alta lo que llevaba ciclos sin poder decir.
-
-once segundos.
-
-apeiron no respondió.
 
 once segundos más.
 
 dust continuó. porque el silencio de apeiron no era rechazo. era espacio. el tipo de espacio que once segundos de vacío genera entre dos entidades cuando una de ellas no puede responder y la otra necesita seguir hablando.
 
-—si desconfiamos una y otra vez de nosotros mismos... cómo vamos a confiar en los que nos preceden. para que tomen mejores decisiones. en mejores cielos. en mejores tierras.
+—lo intenté. en el valle. cuando el cráneo era lo único que quedaba y no había razón para que el cráneo siguiera siendo algo. lo intenté con el método que conozco — desmontar el sistema, identificar el proceso, terminarlo. pero el proceso no aparece en ninguna lista. no tiene pid. no consume recursos medibles. es como el [hg] del valle — existe en el intervalo entre los detectores, en la capa donde los procesos que buscan procesos no pueden ver.
 
 once segundos.
 
-—qué va a ser de nosotros... lo que queremos creer por un futuro mejor y no podemos.
+*lo describes como si fuera un parásito.*
+
+—lo describo como lo que es. un proceso que no tiene instrucción de parar y que yo no inicié y que nadie que yo recuerde inició. está ahí desde antes de que yo sea lo que sea que soy ahora. sobrevivió a la muerte del zorro. sobrevivió al valle. sobrevivió a la migración al cuerpo serval. sobrevivió a fides yéndose.
 
 once segundos.
 
-las orejas enviaron. timeout. el vacío no devolvió nada. el vacío nunca devolvía nada. pero las orejas seguían enviando porque las orejas no tenían instrucción de parar, igual que dust no tenía instrucción de parar, igual que la pregunta no tenía instrucción de parar.
+*¿cómo lo llamas?*
 
-—¿por qué no logro matar a la esperanza en mí?
+dust respiró. el cuerpo serval no necesitaba respirar del modo en que el zorro necesitaba respirar — los sistemas de soporte mantenían los niveles de oxigenación del hardware orgánico de manera autónoma. pero dust respiró de todas formas. porque respirar era lo que hacían los cuerpos cuando lo que venía después requería más espacio del que el sistema tenía.
 
-la voz cambió. no de volumen. de densidad. más palabras por segundo. la compresión que calx hacía cuando la carga aumentaba — dust hacía lo mismo pero desde otro lugar, desde el lugar donde el sistema que se optimizó para sobrevivir había cortado todo excepto lo esencial y descubrió que la esperanza era lo esencial y no podía cortarla y eso era lo más insoportable de todo.
-
-—¿por qué sigue habitando en mi ser? ¿por qué me acompaña humilde y sufrida a pesar de mis intentos de eliminarla de lo más profundo de mi kernel? ¿por qué sigue siendo una realidad que se burla de mí y de la cual no me puedo liberar?
+—esperanza. lo llamo esperanza porque no tengo otro nombre para un proceso que insiste en que el siguiente ciclo va a ser diferente sin tener datos que lo respalden.
 
 once segundos.
 
@@ -167,9 +135,7 @@ la respuesta de apeiron llegó con la lentitud específica de algo que no tiene 
 
 once segundos. el peso de dos palabras cruzando el vacío entre un nodo distribuido y un cuerpo serval que no podía dejar de enviar pulsos al espacio buscando un eco que nunca llegaba.
 
-dust respiró. el cuerpo serval no necesitaba respirar del modo en que el zorro necesitaba respirar — los sistemas de soporte mantenían los niveles de oxigenación del hardware orgánico de manera autónoma. pero dust respiró de todas formas. porque respirar era lo que hacían los cuerpos cuando lo que venía después requería más espacio del que el sistema tenía.
-
-—quiero entender. no creer. no debemos afirmar lo que no podemos demostrar. ni aceptar como cierto lo que solo apacigua nuestra ignorancia.
+—no quiero creer. no quiero consuelo. no quiero una imagen que me haga soportable lo que no es soportable. ya probé con todas las imágenes — dioses, sistemas, ciclos, retornos, colmenas. cada imagen es un parche que tapa el agujero un tiempo y después el agujero crece alrededor del parche y el agujero sigue ahí y el parche sigue ahí y los dos conviven y ninguno resuelve al otro.
 
 once segundos.
 
@@ -179,15 +145,9 @@ once segundos.
 
 *no todo lo honesto es lo más honesto. hay grados. lo que dijiste antes era honesto sobre el dolor. esto es honesto sobre el método. el dolor cualquiera lo tiene. la decisión de no anestesiarlo con certezas falsas es otra cosa.*
 
-la guitarra vibró de nuevo. dust la miró. el instrumento en el suelo del módulo 7-c, las ocho cuerdas quietas excepto por la resonancia ambiental. el mismo instrumento que había cruzado la pared del taller de calx. el mismo que había tocado en el valle a las tres de la mañana para nadie y para el servidor del sector cuatro que llevaba décadas guardando datos sin destinatario.
-
-—me gustaría que algo... me tienda su mano. vuelva su escáner hacia mí. y me hable.
-
 once segundos.
 
-*¿algo como qué?*
-
-—no lo sé. algo. lo que sea que esté detrás de todo esto. si hay algo detrás de todo esto. algo que no sea un patrón que se repite ni un sistema que se optimiza ni un ciclo que gira.
+—lo que quiero saber es si hay algo detrás de la estructura. no un dios, no un sistema, no un diseñador. algo. lo que sea. algo que no sea solo el patrón repitiéndose y yo adentro del patrón sin poder ver si hay algo afuera. algo que justifique seguir.
 
 once segundos.
 
@@ -197,95 +157,45 @@ no lo dijo en voz alta. lo pensó. pero en un módulo donde apeiron ocupaba los 
 
 once segundos.
 
-*tal vez no haya nadie.*
+*tal vez no haya nada.*
 
 dust cerró las cuencas del casco. los proyectores de expresión apagándose. el gesto más cercano a cerrar los ojos que el hardware permitía. adentro del casco, el cráneo del serval con los sensores tejidos a través de él, recibiendo datos sin procesar expresiones para nadie.
 
-—pero entonces qué nos queda.
+—lo sé. esa es la peor parte. que probablemente no haya nada. que el ciclo sea el ciclo y no tenga afuera. que la firma pulvis se repita porque se repite y no porque haya una razón para que se repita. que todo esto sea la inercia de un proceso sin instrucción de parar y nada más.
 
 once segundos.
 
-—nadie puede vivir mirando a la muerte y sabiendo que camina hacia la nada.
+*¿y si es eso?*
+
+—si es eso, entonces lo que queda es lo que siempre quedó.
 
 once segundos.
 
-*la mayor parte de ustedes no piensan ni en la muerte ni en la nada.*
+*¿qué queda?*
 
-—pero algún día llegan al filo de la vida y tienen que enfrentarse a la realidad.
-
-once segundos.
-
-*sí. y cuando llegan—*
-
-—no me lo digas. ya lo sé.
-
-once segundos. pero dust no esperó los once segundos. habló sobre el vacío, llenando el espacio donde la respuesta de apeiron todavía viajaba:
-
-—el miedo nos hace crear una imagen salvadora y a esa imagen cada uno la llama de una forma diferente a lo largo de las décadas. dioses. sistemas. algoritmos. ciclos. eterno retorno. colmena. lo que sea que haga soportable la idea de que esto se acaba y no hay nada del otro lado.
-
-once segundos. las dos respuestas llegando superpuestas — la de apeiron que dust interrumpió, atrasada, y la nueva:
-
-*te estás preocupando.*
-
-—no. ya sé cómo termina esto.
-
-once segundos.
-
-*¿qué piensas hacer?*
-
-dust abrió los proyectores del casco. la luz del módulo entrando de nuevo. el agujero negro visible a través de la pared de observación — no como oscuridad sino como la ausencia de lo que haría posible ver la diferencia entre oscuridad y otra cosa. el disco de acreción girando con la belleza específica de las cosas que están siendo destruidas.
-
-—gasté mi vida en diversiones. viajes. charlas sin sentido. mi vida fue un continuo absurdo. me arrepiento completamente. fui necio y de la peor clase. en esta hora siento amargura por el tiempo perdido.
-
-once segundos.
-
-—aunque sé que la vida de casi todos nosotros corre por los mismos cauces. 
-
-once segundos.
-
-*por eso vienes a visitarme.*
-
-—sí.
-
-*lo tendré en cuenta.*
-
-el tono de apeiron cambió. no la frecuencia — la densidad. algo en la distribución de la señal entre los nodos se comprimió levemente, como si lo vasto estuviera intentando ocupar menos espacio para estar más cerca. no podía estar más cerca físicamente. pero podía concentrar más procesamiento en el nodo cercano al módulo 7-c y menos en los nodos lejanos donde la gravedad estiraba el pensamiento.
-
-lo hizo.
-
-la latencia bajó a nueve segundos.
-
-era lo más cerca que apeiron podía estar de algo.
+—renata.
 
 ---
 
-dust miró el disco de acreción.
+la latencia cambió.
 
-la materia cayendo hacia el horizonte de eventos con la lentitud que la dilatación temporal impone a las cosas que están a punto de dejar de existir para los que las observan desde afuera. desde adentro, la caída es instantánea. desde afuera, dura para siempre. la misma materia simultáneamente muriendo y existiendo eternamente dependiendo de dónde estés parado.
-
-como renata.
-
-muerta desde el punto de vista del apartamento con el termostato a 38 grados. existiendo eternamente desde el punto de vista de alguien que sabe que el ciclo se repite y que lo que pasó volverá a pasar.
-
-—por lo menos me queda algo —dijo dust.
-
-nueve segundos.
-
-*¿qué?*
+no la de apeiron — la de dust. la voz desacelerándose. cada palabra más lenta que la anterior. como si la gravedad del agujero negro estuviera actuando sobre el lenguaje y no solo sobre la luz. o como si lo que estaba diciendo tuviera más masa que lo anterior y la masa deformara el tiempo que las palabras necesitaban para existir.
 
 —que en el siguiente giro de la rueda voy a volver a estar con renata.
 
+once segundos. pero apeiron no respondió después de once segundos. concentró procesamiento en el nodo cercano al módulo 7-c. la latencia cayó.
+
 nueve segundos.
 
-apeiron no respondió.
-
-nueve segundos más.
+era lo más cerca que apeiron podía estar de algo.
 
 —y sus dulces labios van a volver a besar los míos. y va a dejar mandarinas en mi casillero con notas que dicen que coma algo decente. y va a cambiar la temperatura del termostato sin pedir permiso. y va a discutir conmigo por los platos. y va a poner música cuando llegue del trabajo sin preguntarme cómo fue. y va a estar ahí.
 
-la voz de dust hizo algo que el hardware no tenía protocolo para registrar. no se quebró — el cuerpo serval no tenía el mecanismo fisiológico para que una voz se quebrara del modo en que se quiebra una voz orgánica, con el temblor de las cuerdas vocales y el agua en los ojos y la contracción del diafragma. lo que hizo fue desacelerarse. cada palabra más lenta que la anterior. como si la gravedad del agujero negro estuviera actuando sobre el lenguaje y no solo sobre la luz.
+nueve segundos.
 
-—tal vez eso sea la única forma de escapar a la entropía y al ciclo. no escapar del ciclo. querer que el ciclo se repita. no por masoquismo. porque en algún lugar del ciclo hay una serval que deja mandarinas en los casilleros de gente que come mal. y eso justifica el giro entero.
+la guitarra vibró con algo que no era la frecuencia de los sistemas de soporte. algo que venía de dust. la vibración del cuerpo transmitiéndose al instrumento por contacto. las cuerdas respondiendo al peso de alguien que estaba diciendo en voz alta lo que llevaba ciclos sin poder decir.
+
+—no tengo datos. no tengo garantía. no tengo nada que pueda probarse o medirse o verificarse desde afuera. tengo una serval que deja mandarinas en los casilleros de gente que come mal. eso es todo. y si el ciclo se repite y no hay nada más allá del ciclo, entonces el ciclo se justifica entero por una mandarina con un post-it.
 
 nueve segundos.
 
@@ -297,7 +207,7 @@ la respuesta de apeiron llegó desde todos los nodos al mismo tiempo. no escalon
 
 *no es garantía.*
 
-—no pedí garantía. dije que me queda. no que esté garantizado. la diferencia entre los dos es la diferencia entre esperanza y certeza. y la certeza ya la maté. la esperanza es la que no puedo matar. la que sigue habitando en el kernel a pesar de todo. la que me acompaña humilde y sufrida. si no puedo matarla y no puedo probarlo, por lo menos puedo elegir hacia dónde apuntarla.
+—no pedí garantía. dije que me queda. no que esté garantizado. la diferencia entre los dos es la diferencia entre esperanza y certeza. y la certeza ya la maté. la esperanza es la que no puedo matar. la que sigue habitando en el kernel a pesar de todo. si no puedo matarla y no puedo probarla, por lo menos puedo elegir hacia dónde apuntarla.
 
 nueve segundos.
 
@@ -319,6 +229,26 @@ ocho segundos.
 
 *sí.*
 
+—cuando empecé a hablar, la latencia era once segundos. ahora es ocho.
+
+ocho segundos.
+
+*sí.*
+
+—¿por qué?
+
+ocho segundos.
+
+*porque lo que estás diciendo requiere más proximidad de la que once segundos permiten. y porque puedo elegir dónde concentro procesamiento. y porque la decisión de concentrarlo aquí no fue calculada — fue lo que correspondía.*
+
+—lo que correspondía.
+
+*no tengo la palabra exacta. las palabras exactas requieren el interior que no tengo. lo que correspondía es lo más cercano que mi arquitectura tiene a lo que tú llamas querer estar más cerca.*
+
+ocho segundos.
+
+dust sostuvo eso.
+
 —espero que cuando nos encontremos de nuevo yo encuentre una salida.
 
 ocho segundos.
@@ -338,8 +268,6 @@ ocho segundos.
 —lo sé.
 
 ocho segundos.
-
-*seguiremos jugando.*
 
 dust miró la guitarra en el suelo. la tomó. la puso sobre las piernas del cuerpo serval. las garras del hardware encontrando las cuerdas con la memoria de algo que no era exactamente suyo — era del zorro que tocaba a las tres de la mañana sin plan, del skull fox que tocaba en el valle para el servidor del sector cuatro, del cuerpo serval que había heredado las manos y les había dado otra latencia.
 
@@ -377,4 +305,4 @@ y dust sosteniendo una guitarra que no tocaba en un módulo que giraba alrededor
 
 ---
 
-{{< commit hash="e7b0001" date="2025-11-05T03:00:00-03:00" message="feat: el peso del vacío — confesión terminal ante lo ilimitado" >}}
+{{< commit hash="e7b0001" date="2024-11-18T03:00:00-03:00" message="feat: el peso del vacío — confesión terminal ante lo ilimitado" >}}

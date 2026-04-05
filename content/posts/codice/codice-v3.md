@@ -1,6 +1,6 @@
 ---
 title: "Códice | V-3"
-date: 2025-08-13T03:00:00-03:00
+date: 2024-08-26T03:00:00-03:00
 draft: false
 tags: ["códice", "protogen-era"]
 series: ["Códice del Polvo"]
@@ -188,4 +188,4 @@ El timestamp de Riven en memoria activa: coordenada, hora, el punto en el físic
 Mis orejas encontraron silencio.
 Lo sostuvieron de todas formas.
 
-{{< commit hash="c84eaf5" date="2025-08-13T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="c84eaf5" date="2024-08-26T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}

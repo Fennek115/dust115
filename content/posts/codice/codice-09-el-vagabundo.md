@@ -1,6 +1,6 @@
 ---
 title: "Códice | IX — El Vagabundo de los Siete Mil Años"
-date: 2025-03-19T03:00:00-03:00
+date: 2024-03-18T03:00:00-03:00
 draft: false
 tags: ["códice", "skull-fox-era"]
 series: ["Códice del Polvo"]
@@ -75,4 +75,4 @@ El resto es documentación sobre vulnerabilidades que ya eran conocidas.
 
 ---
 
-{{< commit hash="39c5166" date="2025-03-19T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="39c5166" date="2024-03-18T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}

@@ -1,6 +1,6 @@
 ---
 title: "Códice | IX-A — Preámbulo: El Turno de Noche"
-date: 2025-03-26T03:00:00-03:00
+date: 2024-03-25T03:00:00-03:00
 draft: false
 tags: ["códice", "skull-fox-era"]
 series: ["Códice del Polvo"]
@@ -334,4 +334,4 @@ El proceso de Viscus completó otro ciclo mientras escribía esto.
 
 ---
 
-{{< commit hash="39c5166" date="2025-03-26T03:00:00-03:00" message="feat: el turno de noche — viscus y la autoexplotación sin nombre" >}}
+{{< commit hash="39c5166" date="2024-03-25T03:00:00-03:00" message="feat: el turno de noche — viscus y la autoexplotación sin nombre" >}}

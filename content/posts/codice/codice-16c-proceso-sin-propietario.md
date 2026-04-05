@@ -1,6 +1,6 @@
 ---
 title: "Códice | XVI-C — Proceso Sin Propietario"
-date: 2025-07-23T03:00:00-03:00
+date: 2024-08-05T03:00:00-03:00
 draft: false
 tags: ["códice", "skull-fox-era"]
 series: ["Códice del Polvo"]
@@ -231,4 +231,4 @@ Las dos cosas no se excluyen.
 
 ---
 
-{{< commit hash="0x000000" date="2025-07-23T03:00:00-03:00" message="fin del arco del Valle. continuación: sin registro disponible desde este lado." >}}
+{{< commit hash="0x000000" date="2024-08-05T03:00:00-03:00" message="fin del arco del Valle. continuación: sin registro disponible desde este lado." >}}

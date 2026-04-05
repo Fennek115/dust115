@@ -1,6 +1,6 @@
 ---
 title: "Códice | V-1"
-date: 2025-07-30T03:00:00-03:00
+date: 2024-08-12T03:00:00-03:00
 draft: false
 tags: ["códice", "protogen-era"]
 series: ["Códice del Polvo"]
@@ -199,4 +199,4 @@ El cursor parpadeando en el lugar donde debería haber más.
 
 ---
 
-{{< commit hash="a62c8d3" date="2025-07-30T03:00:00-03:00" message="feat: naturaleza en hexadecimal — el serval como mercancía, la percepción como producto" >}}
+{{< commit hash="a62c8d3" date="2024-08-12T03:00:00-03:00" message="feat: naturaleza en hexadecimal — el serval como mercancía, la percepción como producto" >}}

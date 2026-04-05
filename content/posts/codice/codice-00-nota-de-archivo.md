@@ -1,6 +1,6 @@
 ---
 title: "Códice del Polvo — Nota de Archivo"
-date: 2025-01-01T03:00:00-03:00
+date: 2024-01-01T03:00:00-03:00
 draft: false
 tags: ["códice", "zorro-era"]
 series: ["Códice del Polvo"]
@@ -56,4 +56,4 @@ La otra voz, desde el hardware que aprendió a habitar:
 
 *Entonces.*
 
-{{< commit hash="a0000000" date="2025-01-01T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="a0000000" date="2024-01-01T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}

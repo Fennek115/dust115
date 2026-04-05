@@ -1,6 +1,6 @@
 ---
 title: "Códice | XIV-C — La Forma en Que Se Van"
-date: 2025-06-11T03:00:00-03:00
+date: 2024-06-10T03:00:00-03:00
 draft: false
 tags: ["códice", "skull-fox-era"]
 series: ["Códice del Polvo"]
@@ -117,4 +117,4 @@ Nadie la limpió.
 
 ---
 
-{{< commit hash="840a6b3" date="2025-06-11T03:00:00-03:00" message="feat: la forma en que se van — calx y el protocolo que no existe" >}}
+{{< commit hash="840a6b3" date="2024-06-10T03:00:00-03:00" message="feat: la forma en que se van — calx y el protocolo que no existe" >}}

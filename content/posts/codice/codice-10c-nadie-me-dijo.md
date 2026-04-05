@@ -1,6 +1,6 @@
 ---
 title: "Códice | X-C — Nadie Me Dijo"
-date: 2025-04-23T03:00:00-03:00
+date: 2024-04-22T03:00:00-03:00
 draft: false
 tags: ["códice", "skull-fox-era"]
 series: ["Códice del Polvo"]
@@ -169,4 +169,4 @@ El Valle afuera sostuvo la disonancia de siempre. El disipador nuevo en la esqui
 
 ---
 
-{{< commit hash="51e7399" date="2025-04-23T03:00:00-03:00" message="feat: calx aparece sin invitación — primera sesión compartida" >}}
+{{< commit hash="51e7399" date="2024-04-22T03:00:00-03:00" message="feat: calx aparece sin invitación — primera sesión compartida" >}}

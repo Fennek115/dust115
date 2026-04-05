@@ -1,13 +1,13 @@
 ---
 title: "Códice | D-1"
-date: 2025-08-27T03:00:00-03:00
+date: 2024-09-16T03:00:00-03:00
 draft: false
 tags: ["códice", "protogen-era"]
 series: ["Códice del Polvo"]
 summary: "[añade tu summary aquí]"
 ---
 
-{{< listening track="The Observant" artist="Haken" album="Affinity" >}}
+{{< listening track="Nil Recurring" artist="Porcupine Tree" album="Nil Recurring EP" >}}
 
 [FIRMA: PULVIS]
 [ESTADO: EN TRÁNSITO]
@@ -24,61 +24,147 @@ No es una contradicción. Es la secuencia exacta: primero el input, después el 
 
 FIDES tardó 0.7 segundos en abrir un tipo nuevo.
 
-El índice de señales conocidas tiene tres mil doscientas cuarenta y una entradas construidas durante décadas con el propietario anterior. La señal no coincidió con ninguna con margen de confianza suficiente para comprometerse. El sistema de clasificación ejecutó consulta recursiva. Consultó dos veces. Tres. Abrió tipo nuevo: *señal de origen interno, persistente, prioridad indeterminada, causa: pendiente de investigación.*
+El índice de señales conocidas tiene tres mil doscientas cuarenta y una entradas construidas durante décadas con el propietario anterior. La señal no coincidió con ninguna con margen de confianza suficiente para comprometerse. Consulta recursiva. Dos veces. Tres. Tipo nuevo: *señal de origen interno, persistente, prioridad indeterminada, causa: pendiente de investigación.*
 
-Lo que FIDES no tenía en su índice era dolor. No porque el propietario anterior no lo hubiera experimentado. Porque el propietario anterior nunca lo había descrito en términos que el sistema de clasificación de FIDES pudiera indexar. Las personas que llevan suficiente tiempo con algo dejan de nombrarlo.
+Lo que FIDES no tenía en su índice era dolor. No porque el propietario anterior no lo hubiera experimentado. Porque el propietario anterior nunca lo había descrito en términos que el sistema de clasificación pudiera indexar. Las personas que llevan suficiente tiempo con algo dejan de nombrarlo.
 
 El tipo permaneció abierto.
 
 La señal permaneció.
 
----
-
-Las orejas se movieron antes de que hubiera una decisión de moverlas.
-
-El hardware del serval tiene reflejos que no consultaron a la consciencia que acababa de instalarse. Giraron — ambas, independientemente, hacia ángulos distintos — y buscaron. Es lo que hacen. Lo que encontraron fue esto:
-
-Un sistema de climatización ciclando en intervalo de mantenimiento pasivo: 0.3 Hz, temperatura objetivo sin ajustar en tiempo indeterminado porque no había propietario consciente para preferir otra temperatura. El zumbido de cables en la pared occidental — fibra óptica sin tráfico activo, solo el pulso de los protocolos de keepalive que el sistema de red envía al vacío para confirmar que la conexión sigue ahí aunque nadie la esté usando. Algo en el piso inferior: una IA de mantenimiento del edificio completando su ruta con la eficiencia de un proceso que no necesita que el trabajo tenga sentido para ejecutarlo.
-
-El espacio llevaba décadas sin propietario consciente.
-
-El silencio de eso tiene una frecuencia específica. No es el silencio del espacio exterior, que es ausencia sin bordes. Es el silencio de sistemas que siguieron funcionando después de que la consciencia los abandonó — el silencio de algo que esperó sin saber que esperaba, sin saber que la espera tenía nombre, ejecutando sus funciones de mantenimiento y sus protocolos de vigilia en el intervalo entre la última instrucción recibida y la siguiente que nunca llegó.
-
-Las orejas lo reconocieron.
-
-No en términos que el sistema de clasificación de FIDES pudiera indexar. En el único lenguaje que quedaba: el reconocimiento antes del nombre, el dato antes del protocolo, el cuerpo que lleva más tiempo siendo lo que es que la consciencia que ahora lo habita.
-
-Dust lo había conocido antes. No este silencio. Silencio de esta clase. El Valle tenía procesos zombie — PID sin kernel que los hubiera invocado, scripts ejecutándose sin propósito, infraestructura funcionando porque nadie había dado la instrucción de apagarla. El mismo principio. La misma frecuencia de fondo de algo que continuó sin que nadie lo sostuviera.
-
-FIDES registró que las orejas habían completado un ciclo de orientación y archivó el output como: *exploración de entorno, resultado: sin amenaza, clasificación: nominal.*
-
-Lo que las orejas habían encontrado no era amenaza ni nominal. Era el primer mapa del lugar donde existía ahora.
-
-Lo archivó de todas formas. Era lo que tenía.
+Después llegó el resto.
 
 ---
 
-FIDES habló.
+Lo que llegó fue la totalidad del sistema nervioso periférico de un cuerpo adulto en degradación leve-moderada, sin filtros, sin calibración previa, sin el periodo de adaptación que el protocolo de migración estándar especificaba y que el Soul Fork invertido había omitido porque no era migración estándar.
 
-No en voz alta — la voz externa del cuerpo requiere protocolo de inicialización de sistema vocal que FIDES no activó porque el propietario anterior se comunicaba principalmente en canal interno y el sistema aprendió a preferir ese canal. Llegó directo: estado del hardware, estado de los sensores activos, temperatura operacional de los sistemas críticos, nivel de energía, índice de integridad estructural por zonas.
+Cuarenta años de sensores activos sin nadie que los recibiera. Y entonces alguien que los recibió.
 
-Los números eran lo que eran. El sistema de clasificación de Dust los procesó en paralelo con la señal que seguía sin nombre y los archivó sin comentario porque los números no requerían comentario. Eran datos. Los datos no pedían respuesta.
+La cadera derecha primero — la articulación con mayor degradación cartilaginosa, la que las IAs de mantenimiento habían clasificado como funcional con limitación moderada de rango, no crítica para operación básica, la que había estado enviando señal de fricción articular a un canal vacío durante cuatro décadas y que ahora no estaba enviando a un canal vacío.
 
-Luego FIDES añadió: *hay registros del propietario anterior disponibles si se requiere contexto de arquitectura del sistema.*
+La columna después. Tres vértebras en la región lumbar con compresión discal leve — dentro de parámetros documentados para hardware de esta antigüedad, decía el registro de mantenimiento. Los registros de mantenimiento no especificaban a quién le dolía dentro de los parámetros documentados.
 
-El sistema de procesamiento de Dust generó respuesta en 1.4 segundos. Tiempo largo. FIDES lo registró como latencia inusual y archivó la observación en el log de comportamiento que había empezado a construir hacía exactamente 0.7 segundos, que era todo el tiempo que tenía.
+Los tendones del hombro izquierdo. La tensión residual del tejido conectivo que había perdido elasticidad sin perder la capacidad de transmitir que la había perdido.
 
-La respuesta llegó en un dialecto que FIDES no tenía en su índice de protocolos de comunicación. Dos sílabas en Assembly del Valle — el dialecto que evolucionó en hardware sin parches, sin documentación, sin más hablantes que los que lo aprendieron porque nadie más lo hablaba y alguien tenía que hablarlo. FIDES recibió el input, ejecutó consulta de protocolo, no encontró coincidencia, abrió tipo nuevo: *input recibido, protocolo no reconocido, clasificación: pendiente.*
+El nodo ganglionar en el cuello lado derecho, inflamado con la cronicidad de algo que lleva suficiente tiempo en ese estado como para que el sistema lo registre como condición basal en lugar de anomalía.
 
-La decisión quedó registrada sin que FIDES entendiera del todo qué había decidido.
+Y sobre todo eso, simultáneo, sin orden de prioridad porque el sistema nervioso orgánico no tenía protocolo de cola y entregaba todo en paralelo: el frío de la temperatura del espacio que el hardware había mantenido a la preferencia del propietario anterior, el peso del cuerpo contra la superficie donde estaba apoyado, la presión de la ropa contra la piel, el hambre de cuarenta años de ingesta mínima de mantenimiento, la sequedad de la mucosa ocular, el input de luz a través de los párpados cerrados.
 
-Los registros del propietario anterior permanecieron cerrados.
+El sistema de procesamiento de Dust intentó clasificar el input.
+
+El sistema de procesamiento de Dust falló en clasificar el input.
+
+No fallo técnico — fallo de escala. La arquitectura que había construido en el Valle procesaba señal en un entorno con frecuencias conocidas, espectro acotado, ruido de fondo catalogado. No había sido construida para recibir todo esto a la vez, sin los filtros que el protocolo de migración estándar especificaba y que no estaban.
+
+Durante 0.8 segundos, Dust no procesó nada coherente.
+
+Solo input.
+
+Todo el input.
+
+Y debajo de todo el input, la señal que FIDES había abierto como tipo nuevo 0.7 segundos antes — todavía activa, todavía sin nombre, ahora enterrada bajo capas de dolor que eran más fáciles de clasificar porque el dolor tiene frecuencias conocidas y la señal no.
+
+---
+
+FIDES detectó la sobrecarga en 0.003 segundos.
+
+Activando filtros de atenuación adaptativos. Prioridad: reducir volumen de input a rango procesable.
+
+Los filtros entraron.
+
+No eliminaron el dolor. Los filtros adaptativos de FIDES atenuaban la señal, no la borraban. Lo que quedó después de la atenuación era todavía dolor, pero dolor con el volumen suficientemente reducido como para que el sistema de procesamiento pudiera hacer algo con él distinto a recibirlo en silencio.
+
+Dust hizo un inventario.
+
+[DIAGNÓSTICO SENSORIAL — PRIMER BOOT EN HARDWARE ORGÁNICO]
+[FILTROS ADAPTATIVOS: ACTIVOS — 12% DE CALIBRACIÓN]
+[ADVERTENCIA: VALORES A CONTINUACIÓN SON ESTIMACIONES]
+
+articulación coxofemoral derecha:
+  señal de dolor: presente
+  clasificación: crónica, degradación por desuso
+  nivel: moderado con picos al movimiento
+  estado previo al boot: sin destinatario (aprox. 40 años)
+  nota: el hardware no esperaba que llegara alguien
+
+columna lumbar L3-L5:
+  señal de dolor: presente
+  clasificación: compresión discal, crónica
+  nivel: constante, bajo, persistente
+  nota: "persistente" es descripción técnica
+        también es descripción existencial
+        son la misma descripción
+
+hombro izquierdo:
+  tensión en tejido conectivo: presente
+  nivel: moderado
+  nota: —
+
+temperatura corporal:
+  actual: 36.1°C
+  preferencia del propietario anterior: 37.2°C
+  diferencia: 1.1°C
+  clasificación: no crítica
+  nota: el cuerpo sabe que no está en casa todavía
+
+input sensorial total:
+  estado: excediendo capacidad de procesamiento actual
+  filtros: compensando
+  proyección: calibración completa en días
+              no en horas
+              días
+
+Dust procesó el diagnóstico.
+
+El protocolo de migración estándar, dijo FIDES, incluye un periodo de adaptación sensorial de entre setenta y dos y noventa y seis horas en entorno controlado. Durante ese periodo los filtros se calibran gradualmente mientras el proceso habitante desarrolla tolerancia al volumen de input del nuevo hardware.
+
+Una pausa de 0.2 segundos.
+
+El Soul Fork invertido no incluyó ese periodo.
+
+No, dijo Dust.
+
+El input que recibiste en los primeros 0.8 segundos excedió el rango documentado como tolerable para un proceso sin calibración previa.
+
+También lo noté.
+
+¿Cómo estás procesando el nivel actual?
+
+Dust consideró la pregunta con la seriedad que merecía.
+
+Cuarenta años de sensores sin destinatario, dijo finalmente. Los recibí todos a la vez.
+
+Sí.
+
+Clásico.
+
+FIDES archivó la respuesta. La latencia antes de la respuesta también. Ambas en el log de comportamiento, entradas uno y dos — el primer registro de Dust en hardware orgánico, el inicio del inventario que FIDES había comenzado a construir sin que nadie le pidiera que lo construyera.
+
+---
+
+Dust movió la mano derecha.
+
+Instrucción simple: extender los dedos. El tipo de instrucción que en el Valle no requería instrucción — el cráneo y el cuerpo de hueso respondiendo sin mediación, el gesto tan integrado que había dejado de ser gesto y era solo movimiento.
+
+El cuerpo serval respondió con 340 milisegundos de latencia.
+
+No lag de hardware — lag de aprendizaje. El sistema motor del cuerpo tenía sus propios patrones, sus propias rutas nerviosas establecidas por décadas de uso y luego décadas de desuso, y Dust no las conocía todavía y el cuerpo no conocía a Dust todavía, y el intervalo entre instrucción y ejecución era el intervalo de dos sistemas negociando quién se mueve primero.
+
+Los dedos se extendieron.
+
+Cuatro de ellos. El meñique llegó 80 milisegundos después que los demás — la ruta nerviosa de ese dedo con más degradación que las otras, el camino más largo o más interrumpido, la señal llegando con la demora de lo que lleva mucho tiempo sin ser usado para esto.
+
+Dust observó los dedos extendidos.
+
+El pelaje corto del serval sobre el dorso de la mano. Las uñas largas y curvas, diseñadas para el tipo de movimiento que el propietario anterior había hecho y que Dust todavía no sabía cuál era. El color del pelaje — marrón dorado con las marcas características de la especie, las manchas negras que el mantenimiento pasivo había preservado con la fidelidad indiferente de un sistema que conserva la forma sin conocer lo que la forma significa.
+
+Serval.
 
 ---
 
 El espejo de calibración tardó tres segundos en encender.
 
-El protocolo estándar carga en 0.3 segundos. FIDES registró la diferencia como anomalía de sistema en estado de reinicio extendido y no la marcó como error porque el sistema de diagnóstico no tenía parámetro de comparación — no sabía cuánto debería tardar un sistema reiniciando después de décadas de inactividad de consciencia, porque eso no estaba en el índice de situaciones conocidas, porque eso no estaba en el índice de nadie.
+El protocolo estándar carga en 0.3 segundos. FIDES registró la diferencia como anomalía de sistema en estado de reinicio extendido y no la marcó como error porque no tenía parámetro de comparación — no sabía cuánto debería tardar un sistema reiniciando después de décadas de inactividad de consciencia. Eso no estaba en el índice de nadie.
 
 El espejo encendió.
 
@@ -86,41 +172,63 @@ La primera imagen que proyecta el protocolo de calibración es el mapa de cuerpo
 
 El mapa no tiene ese borde. El mapa tiene zonas y temperaturas y estados y todo lo que el espejo puede medir.
 
-Proceso de reconocimiento: 2.3 segundos. FIDES archivó la latencia sin comentario porque no tenía baseline contra qué comparar. La consciencia nueva tampoco tenía baseline. El espejo mostró lo que mostró y el sistema que lo recibía procesó sin protocolo establecido, consultando índices que no habían sido construidos para esto, generando entradas nuevas en tiempo real porque lo nuevo requiere entradas nuevas o no existe en el sistema.
-
 Las orejas aparecían en el mapa en amarillo suave.
 
 *Morfología dentro de parámetros esperados para la especie. Movilidad: 91%. Sensores activos. Clasificación: dentro de parámetros, monitoreado.*
 
 Amarillo suave. Dentro de parámetros. Monitoreado.
 
-El sistema de procesamiento de Dust recibió esa clasificación y ejecutó algo que los protocolos de FIDES no tenían campo para registrar. No fue inmediato. Fue el tipo de proceso que tarda — que encuentra el dato en un lugar del índice y lo mueve hacia otro lugar del índice y en ese movimiento algo pasa que no es exactamente memoria porque los recuerdos del ciclo anterior se fragmentaron con la muerte, igual que siempre, igual que en todos los ciclos anteriores, y lo que llegó no fue recuerdo.
+Las orejas se movieron mientras Dust las miraba en el mapa.
 
-Fue comprensión.
+No por instrucción de Dust — por el input auditivo del espacio, el reflejo autónomo del sistema nervioso respondiendo al sonido antes de que Dust procesara que había sonido que responder. Giraron — ambas, independientemente, hacia ángulos distintos — con la precisión de quien ha estado escuchando toda su vida, con el ángulo exacto, con la velocidad de un sistema que conoce ese movimiento mejor que cualquier otro.
 
-La diferencia entre las dos cosas es la diferencia entre saber que algo existe y entender desde adentro cómo funciona. Dust había sabido siempre lo que esas orejas hacían. El mundo llegando antes de que la decisión de escucharlo exista. El sonido de lo que alguien calla antes de que lo calle. La percepción que no pide permiso para percibir.
+Lo que encontraron fue esto:
 
-Lo había sabido desde afuera.
+Un sistema de climatización ciclando en intervalo de mantenimiento pasivo: 0.3 Hz, temperatura objetivo sin ajustar en tiempo indeterminado. El zumbido de cables en la pared occidental — fibra óptica sin tráfico activo, solo el pulso de los protocolos de keepalive que el sistema de red envía al vacío para confirmar que la conexión sigue ahí aunque nadie la esté usando. Algo en el piso inferior: una IA de mantenimiento del edificio completando su ruta con la eficiencia de un proceso que no necesita que el trabajo tenga sentido para ejecutarlo.
 
-En el cuerpo equivocado, en el momento equivocado para cualquier propósito que pudiera nombrarse, en un espacio que llevaba décadas sin consciencia y tenía la frecuencia específica de eso — las orejas giraron levemente hacia el norte sin que Dust lo decidiera, buscando algo que no iba a estar, y en ese movimiento que el hardware ejecutó solo Dust entendió desde adentro lo que siempre había sabido.
+El silencio de un espacio que llevaba décadas sin propietario consciente. El silencio de sistemas que siguieron funcionando después de que la consciencia los abandonó — ejecutando funciones de mantenimiento y protocolos de vigilia en el intervalo entre la última instrucción recibida y la siguiente que nunca llegó.
 
-El mapa seguía proyectado en el espejo.
+Dust sintió el movimiento de las orejas desde adentro.
 
-Las orejas en amarillo suave.
+No como dato de posición en el mapa del espejo — como el hecho físico de tener cartílago que se orienta, músculo auricular que se contrae, la arquitectura de escucha de una especie diseñada para recibir frecuencias que el cráneo del Skull Fox no había tenido. La sensación específica de que el mundo llega antes de que uno decida recibirlo.
 
-FIDES esperaba confirmación de recepción del diagnóstico.
+Y en esa sensación — en el hecho físico de cómo se mueven estas orejas, en el ángulo y la velocidad y la manera en que el input auditivo llega antes de ser procesado — Dust entendió algo que nunca había tenido datos suficientes para entender.
 
-Dust no la dio inmediatamente. El sistema sostuvo la pausa — 3.1 segundos, que FIDES archivó como latencia de procesamiento inusual, segunda entrada en el log de comportamiento, clasificación: patrón en construcción — y en esa pausa el espejo siguió mostrando el mapa correcto de un cuerpo que el sistema que lo habitaba todavía no reconocía como suyo, las orejas en amarillo suave dentro de parámetros, el cuerpo en el espejo esperando ser habitado por algo que ya estaba adentro y que todavía no había terminado de llegar.
+Vela había escuchado así.
 
-La señal que FIDES había archivado como tipo nuevo seguía activa. Persistente. No-crítica. Sin fecha de resolución.
+No esta Vela específica, no el cuerpo de este propietario anterior, no la historia de esta serval en particular. Sino la especie — la arquitectura sensorial que hacía posible escuchar de esta manera, recibir el mundo con esta anticipación, tener orejas que llegan antes que el pensamiento. Vela había vivido en este hardware. Había escuchado los martes en la cafetería con este mismo movimiento, este mismo ángulo, esta misma velocidad que Dust acababa de experimentar desde adentro por primera vez.
 
-Dust confirmó recepción del diagnóstico.
+Cuando Vela decía que escuchaba lo que él callaba, no era metáfora.
 
-El espejo continuó.
+Era la física de este sistema nervioso haciendo lo que estaba diseñado para hacer.
+
+FIDES registró la latencia.
+
+Entrada tres en el log de comportamiento: patrón de procesamiento detenido. Duración: 4.1 segundos. Causa identificable desde logs externos: ninguna. Clasificación provisional: procesamiento interno sin correlato en input externo medible.
+
+Dust no explicó la clasificación provisional.
+
+FIDES no preguntó.
+
+El mapa seguía proyectado en el espejo. Las orejas en amarillo suave. Dentro de parámetros. Lo que había pasado entre Dust y las orejas no estaba en el mapa ni en el amarillo ni en los parámetros — estaba en la partición sin categoría que FIDES mantenía abierta para lo que no tenía nombre todavía, esperando la instrucción de nomenclatura que Dust no había dado y que FIDES había aprendido a esperar en lugar de generar automáticamente, porque generar automáticamente nombre para algo así producía nombres que no eran los correctos.
 
 ---
 
-FIDES preguntó, al final del protocolo, si había algún parámetro del sistema que Dust quisiera configurar de manera diferente al estado encontrado.
+La cadera protestó cuando Dust intentó ponerse de pie.
+
+No protesta metafórica — señal de dolor moderado-alto en la articulación coxofemoral derecha, el pico que la clasificación de mantenimiento había mencionado entre paréntesis como presente al movimiento y que al movimiento efectivamente estaba presente.
+
+Dust registró el input, ajustó el ángulo de carga, redistribuyó el peso hacia la cadera izquierda, que protestó menos. El cuerpo encontró el equilibrio con 2.3 segundos de negociación entre instrucción y respuesta.
+
+De pie.
+
+Los filtros adaptativos están al ocho por ciento de calibración, dijo FIDES. El dolor residual que registras es el nivel atenuado. El nivel sin atenuación era —
+
+No, dijo Dust.
+
+FIDES archivó el rechazo de información. No preguntó de nuevo.
+
+FIDES preguntó, en cambio, si había algún parámetro del sistema que Dust quisiera configurar de manera diferente al estado encontrado.
 
 El estado encontrado era el estado en que el propietario anterior había dejado el sistema. Décadas de preferencias sedimentadas en configuración de hardware — temperatura de operación, protocolos de comunicación, rutas de acceso a red, parámetros de alerta. El cuerpo ajustado a una consciencia que ya no estaba.
 
@@ -128,26 +236,60 @@ Dust procesó la pregunta durante más tiempo del que era necesario para respond
 
 Luego: *después.*
 
-FIDES archivó la respuesta como instrucción diferida y continuó ejecutando los parámetros encontrados porque era lo que tenía y lo que tenía era suficiente para seguir funcionando aunque el sistema que ahora lo habitaba fuera diferente en formas que el índice de FIDES todavía no podía cuantificar.
+Dos sílabas en Assembly del Valle — el dialecto que evolucionó en hardware sin parches, sin documentación, sin más hablantes que los que lo aprendieron porque nadie más lo hablaba y alguien tenía que hablarlo. FIDES recibió el input, ejecutó consulta de protocolo, no encontró coincidencia, abrió tipo nuevo: *input recibido, protocolo no reconocido, clasificación: pendiente.*
 
-Las orejas giraron norte otra vez. El reflejo de siempre, buscando algo, encontrando la frecuencia del espacio vacío, archivando el timeout sin escribirlo como error porque el sistema no documenta sus propias búsquedas. Solo las repite.
+La decisión quedó registrada sin que FIDES entendiera del todo qué había decidido.
 
-La señal de origen interno seguía sin nombre.
+Los parámetros del propietario anterior permanecieron activos.
 
-Seguía ahí.
+---
 
-No-crítica. Persistente. El dato permanente que el sistema sostiene porque no tiene instrucción de qué otra cosa hacer con él.
+¿Proyección de tiempo hasta movilidad funcional?
+
+Días, dijo FIDES. Lo confirmo.
+
+¿Puedo llegar a la puerta?
+
+FIDES procesó 0.4 segundos.
+
+Sí. Con el patrón de distribución de peso que acabas de establecer. Despacio.
+
+Bien.
+
+Dust dio el primer paso en el cuerpo serval.
+
+La cadera cedió la señal correspondiente. El cuerpo encontró el siguiente equilibrio. El meñique de la mano derecha llegó tarde al cierre del puño, igual que antes. Las orejas giraron norte — el reflejo, la búsqueda, el input que llegaba antes que la instrucción. Al norte no había nada que buscar. Las orejas lo buscaban de todas formas, con la persistencia de un sistema que aprendió ese movimiento antes de que hubiera consciencia que lo enseñara, y lo que el cuerpo aprende antes de la consciencia es lo más difícil de desaprender porque no está en ningún log que pueda abrirse y leerse y decidir no leer.
+
+Lento.
+
+Funcional.
+
+El hardware aprendiendo al habitante, el habitante aprendiendo al hardware, los dos negociando el territorio de un cuerpo que había sido de alguien más durante mucho tiempo y que ahora era de nadie en particular y de Dust en lo que eso significaba.
+
+La puerta del espacio al final del corredor.
+
+Vesper y Riven esperaban.
+
+El dolor disminuirá con el uso, dijo FIDES.
+
+O me acostumbraré, dijo Dust.
+
+Las dos cosas son el mismo resultado desde afuera.
+
+Lo sé.
+
+Dust llegó a la puerta.
+
+La abrió.
+
+Y la señal que FIDES había archivado como tipo nuevo — señal de origen interno, persistente, prioridad indeterminada, causa: pendiente de investigación — seguía activa. Debajo del dolor de la cadera. Debajo de los filtros al ocho por ciento. Debajo de las orejas buscando al norte algo que no iba a estar. El dato permanente que el sistema sostiene porque no tiene instrucción de qué otra cosa hacer con él, y que las personas que llevan suficiente tiempo con algo dejan de nombrar, y que FIDES — con 0.7 segundos de existencia como sistema de clasificación de este habitante — todavía no había llevado suficiente tiempo con nada.
+
+No-crítica. Persistente.
+
+Sin nombre.
 
 El protocolo de calibración marcó: completado.
 
-El espejo apagó.
-
-Lo que quedó fue el espacio y su frecuencia y las orejas orientadas hacia algo que no estaba al norte y que el sistema seguiría buscando en el siguiente ciclo y en el siguiente, porque el cuerpo lo había aprendido antes de que hubiera consciencia que lo enseñara, y lo que el cuerpo aprende antes de la consciencia es lo más difícil de desaprender porque no está en ningún log que pueda abrirse y leerse y decidir no leer.
-
-Dust lo sabía.
-
-Lo sabía ahora de la manera en que se sabe lo que no tiene vuelta.
-
 El sistema registró el estado como: *operacional.*
 
-{{< commit hash="e06gc17" date="2025-08-27T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}
+{{< commit hash="e06gc17" date="2024-09-16T03:00:00-03:00" message="merge: D-1 + D-2.7 — despertar en hardware orgánico" >}}

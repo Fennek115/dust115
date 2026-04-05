@@ -1,6 +1,6 @@
 ---
 title: "Códice | XVI-B — La Gramática del Ruido"
-date: 2025-07-16T03:00:00-03:00
+date: 2024-07-29T03:00:00-03:00
 draft: false
 tags: ["códice", "skull-fox-era"]
 series: ["Códice del Polvo"]
@@ -212,4 +212,4 @@ Guardó el papel.
 
 ---
 
-{{< commit hash="3f9e1a7" date="2025-07-16T03:00:00-03:00" message="ring-0 abrió el canal. la ruta existe. pendiente: usarla." >}}
+{{< commit hash="3f9e1a7" date="2024-07-29T03:00:00-03:00" message="ring-0 abrió el canal. la ruta existe. pendiente: usarla." >}}

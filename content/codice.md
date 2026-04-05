@@ -47,6 +47,8 @@ Un documento encontrado en los suburbios digitales de un servidor medio destruid
 - [XIV — Acompañar Sin Salvar](/dust115/posts/codice-14-acompanar-sin-salvar/)
 - [XIV-B — A donde vas cuando caes...](/dust115/posts/codice-14b-a-donde-vas-cuando-caes/)
 - [XIV-C — La forma en que se van](/dust115/posts/codice-14c-la-forma-en-que-se-van/)
+- [XIV-C2 — Lo Que No Se Descalibra](/dust115/posts/codice-14c2-lo-que-no-se-descalibra/)
+- [XIV-C3 — El Ángulo del Aluminio](/dust115/posts/codice-14c3-calx-post-partida/)
 - [XIV-D — Las Moradas del Polvo](/dust115/posts/codice-14d-las-moradas-del-polvo/)
 - [XIV-E — El Isomorfismo del Polvo](/dust115/posts/codice-14e-el-isomorfismo-del-polvo/)
 - [XV — Lo Que el Valle No Sabe](/dust115/posts/codice-15-lo-que-el-valle-no-sabe/)
@@ -65,6 +67,7 @@ Un documento encontrado en los suburbios digitales de un servidor medio destruid
 - [V-2](/dust115/posts/codice-v2/)
 - [V-3](/dust115/posts/codice-v3/)
 - [V-4](/dust115/posts/codice-v4/)
+- [V-5](/dust115/posts/codice-v5/)
 
 **Dust**
 - [D-1](/dust115/posts/codice-d1/)
@@ -72,7 +75,6 @@ Un documento encontrado en los suburbios digitales de un servidor medio destruid
 - [D-1.5-B](/dust115/posts/codice-d1-5b/)
 - [D-2](/dust115/posts/codice-d2/)
 - [D-2.5](/dust115/posts/codice-d2-5/)
-- [D-2.7](/dust115/posts/codice-d2-7/)
 - [D-3a](/dust115/posts/codice-d3a/)
 - [D-3b](/dust115/posts/codice-d3b/)
 - [D-3c](/dust115/posts/codice-d3c/)

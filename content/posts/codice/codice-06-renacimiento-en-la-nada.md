@@ -1,6 +1,6 @@
 ---
 title: "Códice | VI — El Renacimiento en la Nada"
-date: 2025-02-26T03:00:00-03:00
+date: 2024-02-26T03:00:00-03:00
 draft: false
 tags: ["códice", "zorro-era"]
 series: ["Códice del Polvo"]
@@ -73,4 +73,4 @@ Polvo que mira.
 
 ---
 
-{{< commit hash="06f4a33" date="2025-02-26T03:00:00-03:00" message="feat: renacimiento en la nada — nigredo sin ornamento" >}}
+{{< commit hash="06f4a33" date="2024-02-26T03:00:00-03:00" message="feat: renacimiento en la nada — nigredo sin ornamento" >}}

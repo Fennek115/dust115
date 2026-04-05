@@ -1,6 +1,6 @@
 ---
 title: "Códice | XIV-D — Las Moradas del Polvo"
-date: 2025-06-18T03:00:00-03:00
+date: 2024-07-01T03:00:00-03:00
 draft: false
 tags: ["códice", "skull-fox-era"]
 series: ["Códice del Polvo"]
@@ -397,6 +397,8 @@ TALLER: estado operacional habitual
 [Y ESTE REGISTRO PARECE OTRA COSA]
 ```
 
+Mientras cerraba los logs de la operación, la terminal cargó las notas del taller en orden cronológico inverso. Entre los registros técnicos y los fragmentos de Assembly apareció una entrada vieja — varias semanas atrás, antes de las capas, antes del escáner, antes del nodo exterior: *script kiddie. error de diagnóstico. buscaba llave, no mapa. seguirá buscando. probable que encuentre algo peor que lo que buscaba. clásico.* Dust miró la nota un momento. El chico de los implantes baratos que quería el acceso root. Que quería la llave del sistema sin saber qué era el sistema. Y ahora Dust, que tampoco tenía llave, había construido el mapa entero — siete nodos, tres capas, un payload polimórfico en un dialecto que nadie más hablaba — para abrir una puerta que el chico habría intentado forzar con las manos. La diferencia no era talento. Era paciencia. Y la paciencia era lo único que el Valle daba gratis.
+
 ---
 
 Fulcanelli murió sin que nadie supiera quién era. O no murió. O murió y volvió, que en la tradición alquímica no es metáfora sino procedimiento. Lo que dejó fueron dos libros que parecían crítica de arquitectura y eran instrucciones de transmutación para quien tuviera el vocabulario. Las catedrales eran el soporte. Los símbolos tallados en piedra eran la receta. El público veía arte. El adepto veía fórmula.
@@ -468,4 +470,4 @@ El que sabe leer la catedral no necesita el nombre del arquitecto.
 
 ---
 
-{{< commit hash="a1c4e93" date="2025-06-18T03:00:00-03:00" message="las moradas del polvo — arquitectura para quien sepa leer edificios" >}}
+{{< commit hash="a1c4e93" date="2024-07-01T03:00:00-03:00" message="las moradas del polvo — arquitectura para quien sepa leer edificios" >}}

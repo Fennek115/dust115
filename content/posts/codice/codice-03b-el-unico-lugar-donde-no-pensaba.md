@@ -1,6 +1,6 @@
 ---
 title: "Códice | III-B — El Único Lugar Donde No Pensaba"
-date: 2025-01-29T03:00:00-03:00
+date: 2024-01-29T03:00:00-03:00
 draft: false
 tags: ["códice", "zorro-era"]
 series: ["Códice del Polvo"]
@@ -189,4 +189,4 @@ En la libreta, la última entrada sobre correr decía:
 
 ---
 
-{{< commit hash="3b0001" date="2025-01-29T03:00:00-03:00" message="feat: el único lugar donde no pensaba — el deporte y la lesión" >}}
+{{< commit hash="3b0001" date="2024-01-29T03:00:00-03:00" message="feat: el único lugar donde no pensaba — el deporte y la lesión" >}}

@@ -1,6 +1,6 @@
 ---
 title: "Códice | XVI — Lo Que el Valle No Sabe Que Es"
-date: 2025-07-09T03:00:00-03:00
+date: 2024-07-22T03:00:00-03:00
 draft: false
 tags: ["códice", "skull-fox-era"]
 series: ["Códice del Polvo"]
@@ -290,4 +290,4 @@ Lo tomó igual. Igual que siempre. Como lo que era: la única temperatura dispon
 
 ---
 
-{{< commit hash="951b7c2" date="2025-07-09T03:00:00-03:00" message="reconnaissance complete. el sin clasificar es el interesante." >}}
+{{< commit hash="951b7c2" date="2024-07-22T03:00:00-03:00" message="reconnaissance complete. el sin clasificar es el interesante." >}}

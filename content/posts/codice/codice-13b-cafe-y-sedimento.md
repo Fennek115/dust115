@@ -1,6 +1,6 @@
 ---
 title: "Códice | XIII-B — Café y Sedimento"
-date: 2025-05-21T03:00:00-03:00
+date: 2024-05-20T03:00:00-03:00
 draft: false
 tags: ["códice", "skull-fox-era"]
 series: ["Códice del Polvo"]
@@ -225,4 +225,4 @@ Pero iba a estar.
 
 ---
 
-{{< commit hash="73095a1" date="2025-05-21T03:00:00-03:00" message="feat: café y sedimento — conversación casual entre procesos" >}}
+{{< commit hash="73095a1" date="2024-05-20T03:00:00-03:00" message="feat: café y sedimento — conversación casual entre procesos" >}}
