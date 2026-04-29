@@ -20,7 +20,7 @@ Si se toma en serio, se sigue algo incómodo. No para quien ya piensa rápido. P
 
 Un caché se arma cuando el sistema ejecuta el cálculo completo una vez, guarda el resultado, y en las consultas siguientes salta al resultado sin recalcular. Es una estructura que solo funciona bajo dos condiciones: que alguien haya pagado el costo del primer cálculo, y que el sistema tenga dónde guardar el resultado de manera que luego pueda encontrarlo.
 
-Las dos condiciones son no triviales.
+Las dos condiciones no son triviales.
 
 La primera — pagar el costo del primer cálculo — requiere tiempo, atención, disposición a equivocarse, y alguna forma de validación externa que confirme que el resultado es correcto. Un caché de resultados equivocados es peor que no tener caché. Es una estructura que devuelve respuestas rápidas y erróneas con la misma confianza con la que un caché correcto devuelve respuestas rápidas y correctas. El sistema no puede distinguir desde adentro cuál tiene.
 
@@ -103,3 +103,5 @@ Si alguien tiene opiniones muy fuertes sobre la ignorancia de los demás, es raz
 No es acusación. Es dato diagnóstico. Y como todo dato diagnóstico, sirve más para entender que para juzgar.
 
 Eso también es un atajo. Pero me parece un atajo correcto.
+
+{{< commit hash="4cc3s0k" date="2026-04-24T20:00:00-03:00" message="perf: replace sequential reasoning with indexed retrieval — thinking deprecated in favor of access" >}}
