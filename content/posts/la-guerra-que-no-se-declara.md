@@ -1,7 +1,7 @@
 ---
 title: "La guerra que no se declara"
 summary: "Sobre el objetivo real del conflicto digital y dónde termina lo que llamamos seguridad"
-date: 2026-05-10T20:00:00-03:00
+date: 2026-05-10
 draft: false
 tags: ["ciberguerra", "supply-chain", "confianza", "ensayo"]
 ---
