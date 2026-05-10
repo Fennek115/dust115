@@ -8,7 +8,7 @@ tags: ["ciberguerra", "supply-chain", "confianza", "ensayo"]
 
 {{< listening track="Holy Wars... The Punishment Is Due" artist="Megadeth" album="Rust in Peace" >}}
 
-Hay una pregunta que casi nunca se hace en serio en este oficio, y que es la única que importa: *¿para qué sirve la ciberguerra?* No técnicamente — eso se contesta con manuales de operaciones — sino estratégicamente, civilizatoriamente. ¿Cuál es el objetivo real de invertir miles de horas-hombre, millones de dólares y décadas de inteligencia en mantener implantes durmientes en infraestructura ajena que tal vez nunca se activen?
+Hay una pregunta que casi nunca se hace en serio en este oficio, y que es la única que importa: *¿para qué sirve la ciberguerra?* No técnicamente — eso se contesta con manuales de operaciones — sino estratégicamente, civilizatoriamente. ¿Cuál es el objetivo real de invertir miles de horas-humanas, millones de dólares y décadas de inteligencia en mantener implantes durmientes en infraestructura ajena que tal vez nunca se activen?
 
 La respuesta corta es: no es lo que parece.
 
@@ -164,7 +164,7 @@ La tercera es que se desarrollen capacidades defensivas basadas en IA con sufici
 
 Las tres están abiertas. Probablemente lo que ocurra sea una combinación de las tres en proporciones que dependerán de decisiones políticas que se están tomando ahora, en habitaciones a las que la mayor parte de los que vamos a vivir las consecuencias no tenemos acceso.
 
-Mi trabajo, mientras tanto, sigue siendo el que era. Leer logs. Cazar señales. Diseñar sistemas con la honestidad de que van a ser comprometidos. Escribir cosas como esta, que no resuelven nada pero al menos no contribuyen al ruido del optimismo profesional. Y sostener, todos los días, la disciplina mental de no creer las certezas que mi industria vende y que mis colegas, muchos de ellos, han comprado.
+Mi trabajo, mientras tanto, sigue siendo el que era. Leer logs. Cazar señales. Diseñar sistemas con la honestidad de que van a ser comprometidos. Escribir cosas como esta, que no resuelven nada pero al menos no contribuyen al ruido del optimismo profesional. Y sostener, todos los días, la disciplina mental de no creer las certezas que la industria vende y que algunos toman por cierto, y otros muchos de ellos, han comprado ya sea literal, metaforicamente, etc.
 
 La guerra que no se declara sigue. Va a seguir mientras existan Estados con capacidad ofensiva asimétrica, infraestructura digital crítica para la vida cotidiana, y la geometría actual de incentivos económicos y políticos que premia el ataque y subsidia mal la defensa.
 
