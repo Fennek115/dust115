@@ -110,7 +110,7 @@ El operador disciplinado se esconde en el centro de tu distribución de comporta
 
 **¿Y entonces dónde termina la ciberseguridad?**
 
-Acá llego a la pregunta que planteás y que es, en mi opinión, la pregunta más importante que el campo no se está haciendo en voz alta.
+Acá llego a una de las preguntas planteadas y que es, en mi opinión, la pregunta más importante que el campo no se está haciendo en voz alta.
 
 La ciberseguridad como disciplina nació con un mandato relativamente claro: proteger sistemas de información de accesos no autorizados, garantizar integridad de datos, sostener disponibilidad. Esa es la tríada CIA — *confidentiality, integrity, availability* — que cualquier estudiante de seguridad puede recitar. Es una buena tríada. Sigue siendo útil. Y es completamente insuficiente para describir lo que se le pide hoy a un equipo de seguridad maduro.
 
