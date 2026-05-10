@@ -104,7 +104,7 @@ Mandia, el CEO de FireEye que descubrió todo esto, dijo una frase que vale la p
 
 Contra ese tipo de operador, la pregunta de si tu EDR detecta o no detecta es secundaria. Tu EDR está mirando comportamientos anómalos. El comportamiento de este operador no es anómalo. Es perfectamente normal. Es, en algún sentido fuerte, *más* normal que el comportamiento de tus propios usuarios legítimos, que cometen errores, que abren correos sospechosos, que descargan cosas raras, que generan toda la fricción operativa que el ML de tu EDR está entrenado para tolerar como base de normalidad.
 
-El operador disciplinado se esconde en el centro de tu distribución de comportamientos, no en la cola. Y nada de lo que tenés instalado está mirando el centro.
+El operador disciplinado se esconde en el centro de tu distribución de comportamientos, no en la cola. Y nada de lo que tienes instalado está mirando el centro.
 
 ---
 
