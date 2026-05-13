@@ -48,7 +48,7 @@ A la luz fría de un análisis post mortem, esto se ve como negligencia coordina
 
 **El guardia que ya no mira.**
 
-El ejemplo que pusiste — el guardia de seguridad de una instalación física que no está preparado para que alguien armado entre corriendo a una sala de conferencias — es exacto, y vale la pena tratarlo con cuidado porque ilumina el problema sin las complicaciones del dominio digital.
+El guardia de seguridad de una instalación física que no está preparado para que alguien armado entre corriendo a una sala de conferencias — es exacto, y vale la pena tratarlo con cuidado porque ilumina el problema sin las complicaciones del dominio digital.
 
 Un guardia que ha trabajado en la misma puerta durante tres años, sin haber visto nunca a una persona armada entrar, *no puede* mantener el mismo nivel de alerta que tenía la primera semana. No es cuestión de profesionalismo. No es cuestión de entrenamiento. Es cuestión de que la atención humana sostenida en preparación para un evento que nunca ocurre se degrada por la propia ausencia del evento. Es un problema físico, no moral.
 
@@ -92,7 +92,7 @@ Después viene la fase de comodidad. Los controles nuevos llevan dos años sin h
 
 Después viene el siguiente incidente. Y el bucle reinicia.
 
-Este bucle es el que describes en tu pregunta. Y la pregunta correcta no es cómo evitarlo, porque no se puede evitar. La pregunta correcta es cómo reducir su amplitud — cómo hacer que la fase de comodidad sea menos profunda y la fase de aprendizaje sea más persistente.
+Y la pregunta correcta no es cómo evitarlo, porque no se puede evitar. La pregunta correcta es cómo reducir su amplitud — cómo hacer que la fase de comodidad sea menos profunda y la fase de aprendizaje sea más persistente.
 
 ---
 
@@ -152,7 +152,7 @@ La diferencia entre las dos no es invertida en seguridad. Es entendimiento de la
 
 **Una última.**
 
-Cuando llevás suficiente tiempo en este oficio, dejás de sentir el bucle como tragedia y empezás a sentirlo como respiración. Inspiración, expiración. Crisis, calma. Aprendizaje, olvido. Es el ritmo del campo. Lo único que cambia es la profundidad con que cada organización lo respira, y la velocidad con que el ciclo se repite.
+Cuando llevás suficiente tiempo estudiando ataques, dejás de sentir el bucle como tragedia y empiezas a sentirlo mas como respiración. Inspiración, expiración. Crisis, calma. Aprendizaje, olvido. Es el ritmo del campo. Lo único que cambia es la profundidad con que cada organización lo respira, y la velocidad con que el ciclo se repite.
 
 No sé escribir esto sin que suene a resignación, y no es resignación. La resignación deja de actuar. Esto es lo contrario: es seguir actuando con plena conciencia de que la acción no va a producir el estado de paz permanente que la gente fuera del campo cree que es el objetivo. El objetivo, cuando se entiende bien, no es la paz. Es la disciplina sostenida dentro de una condición de conflicto que no termina.
 
