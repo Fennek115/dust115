@@ -8,7 +8,7 @@ tags: ["seguridad", "comodidad", "ensayo", "bucle"]
 
 {{< listening track="Mother" artist="Danzig" album="Danzig" >}}
 
-Hay un problema que casi no se nombra en serio en este oficio y que está debajo de casi todo lo demás. El problema es el siguiente: los sistemas de seguridad que funcionan generan, por su propio funcionamiento exitoso, la condición que los va a hacer fallar.
+Hay un problema que casi no se nombra en la seguridad en general y que está debajo de casi todo lo demás. El problema es el siguiente: los sistemas de seguridad que funcionan generan, por su propio funcionamiento exitoso, la condición que los va a hacer fallar.
 
 Esto suena paradójico. No lo es. Es el más estructural de los problemas del campo, y entenderlo bien es lo que separa al operador maduro del operador entrenado.
 
