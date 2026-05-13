@@ -1,7 +1,7 @@
 ---
 title: "Cuando no pasa nada"
 summary: "Sobre la comodidad como vulnerabilidad y el bucle que no se rompe"
-date: 2026-04-28
+date: 2026-05-12
 draft: false
 tags: ["seguridad", "comodidad", "ensayo", "bucle"]
 ---
