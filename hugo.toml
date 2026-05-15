@@ -63,3 +63,9 @@ enableRobotsTXT = true
       name = "códice"
       url = "/codice"
       weight = 3
+
+    [[languages.en.menu.main]]
+      identifier = "apt115"
+      name = "apt115"
+      url = "/apt115/"
+      weight = 4

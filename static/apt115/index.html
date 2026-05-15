@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APT115 // CODEX ARCANUM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Nunito:wght@600;700;800;900&family=VT323&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Cyber Status Bar -->
+<div class="cyber-status">
+  <div class="cyber-status-left">
+    <span><span class="cyber-status-dot"></span>ONLINE</span>
+    <span>SYS://APT115::CODEX_ARCANUM</span>
+    <span id="cyberClock">00:00:00</span>
+  </div>
+  <div class="cyber-status-right">quod est superius est sicut quod inferius</div>
+</div>
+
+<!-- Toast -->
+<div class="copy-toast" id="copyToast">⬡ COPIED TO CLIPBOARD</div>
+
+<!-- Header -->
+<div class="hdr">
+  <div class="hdr-logo">
+    <canvas id="threejs-orb"></canvas>
+    <div>
+      <div class="hdr-title glitch-text" data-text="APT115 // CODEX ARCANUM">APT115 // CODEX ARCANUM</div>
+      <div style="font-family:'VT323',monospace;font-size:9px;color:var(--text3);letter-spacing:2px">solve et coagula</div>
+    </div>
+    <div class="hdr-badge">v1.0</div>
+  </div>
+  <div class="search-wrap">
+    <span class="search-icon">⌕</span>
+    <input id="searchInput" placeholder="search://commands, TTPs, frameworks..." autocomplete="off">
+    <span class="search-kbd">Ctrl+K</span>
+  </div>
+  <div class="hdr-right">
+    <span class="session-timer" id="sessionTimer">⏱ 00:00</span>
+    <button class="hdr-btn custom-btn" onclick="openCustomModal()">＋ ADD</button>
+    <button class="hdr-btn" onclick="toggleFav()">★ FAVS <span id="favCount">0</span></button>
+    <button class="hdr-btn" onclick="toggleHistory()">⏱ HIST</button>
+    <button class="hdr-btn" onclick="exportFavs()">↓ EXPORT</button>
+    <button class="hdr-btn" onclick="toggleShortcuts()" title="Keyboard Shortcuts">⌨</button>
+    <button class="hdr-btn" onclick="toggleIntel()" title="Target Intel / Engagement Notes" style="border-color:rgba(255,45,111,.4);color:var(--red);box-shadow:0 0 8px rgba(255,45,111,.2)">🎯 INTEL</button>
+    <button class="hdr-btn" onclick="toggleNotesPanel()" title="Side Notes" style="border-color:rgba(255,210,0,.35);color:#ffe066;">📓 NOTES <span id="notesCount" style="font-size:9px;background:rgba(255,210,0,.12);border:1px solid rgba(255,210,0,.3);border-radius:3px;padding:1px 5px;margin-left:2px;">0</span></button>
+    <span id="globalProgress" title="Completed / Total commands">✔ 0/0</span>
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeToggleBtn" title="Light / Dark mode">🌙 DARK</button>
+    <div class="warn-badge">⚠ VULPES CRANII</div>
+  </div>
+</div>
+
+<!-- Variables Bar -->
+<div class="vars-bar" id="varsBar">
+  <div class="vars-bar-inner">
+    <span class="vars-lbl">Variables</span>
+    <div class="vg"><span class="vl">LHOST</span><input class="vi" id="lhost" value="10.10.14.1"></div>
+    <div class="vg"><span class="vl">RHOST</span><input class="vi" id="rhost" value="10.10.10.10"></div>
+    <div class="vg"><span class="vl">LPORT</span><input class="vi" id="lport" value="4444" style="min-width:55px"></div>
+    <div class="vg"><span class="vl">RPORT</span><input class="vi" id="rport" value="9001" style="min-width:55px"></div>
+    <div class="vg"><span class="vl">Domain</span><input class="vi" id="domain" value="corp.local" style="min-width:100px"></div>
+    <div class="vg"><span class="vl">DC IP</span><input class="vi" id="dc" value="192.168.1.10"></div>
+    <div class="vg"><span class="vl">User</span><input class="vi" id="user" value="john" style="min-width:65px"></div>
+    <div class="vg"><span class="vl">Pass</span><input class="vi" id="pass" value="Password123" style="min-width:110px"></div>
+    <div class="vg"><span class="vl">Hash</span><input class="vi" id="hash" value="NTLM_HASH_HERE" style="min-width:130px"></div>
+    <div class="vg"><span class="vl">URL</span><input class="vi" id="url" value="http://10.10.10.10" style="min-width:130px"></div>
+    <button class="vars-toggle" onclick="resetVars()" title="Reset to defaults" style="margin-left:4px">↺ Reset</button>
+    <button class="vars-toggle" onclick="toggleVarsBar()" id="varToggleBtn">▲ Hide</button>
+  </div>
+</div>
+<div class="vars-collapsed-bar" id="varsCollapsedBar">
+  <span style="font-size:9px;color:var(--text3);font-family:'Orbitron',monospace;letter-spacing:1px">VARIABLES HIDDEN</span>
+  <button class="vars-toggle" onclick="toggleVarsBar()">▼ SHOW VARS</button>
+</div>
+
+<!-- Body -->
+<div class="body">
+  <div class="sidebar" id="sidebar">
+    <div class="sb-top">
+      <span class="sb-label">NAV_MENU</span>
+      <button class="sb-collapse-btn" onclick="toggleSidebar()" id="sbCollapseBtn" title="Collapse sidebar">‹</button>
+    </div>
+  </div>
+  <div class="main" id="main">
+    <div id="searchResults"></div>
+    <div id="sections"></div>
+  </div>
+</div>
+
+<!-- Favorites Panel -->
+<div id="favPanel">
+  <div class="fav-panel-hdr">
+    <div class="fav-panel-title">★ SAVED_FAVORITES</div>
+    <div style="display:flex;gap:6px">
+      <button class="close-btn" onclick="clearAllFavs()">Clear All</button>
+      <button class="close-btn" onclick="toggleFav()">Close ✕</button>
+    </div>
+  </div>
+  <div id="favList"><div class="empty"><div class="empty-icon">☆</div>No favorites yet.<br><span style="font-family:'VT323',monospace;font-size:14px">Star commands to save them here.</span></div></div>
+</div>
+
+<!-- Target Intel Panel -->
+<div id="intelPanel">
+  <div class="intel-hdr">
+    <div class="intel-title">🎯 Target Intel</div>
+    <div style="display:flex;gap:6px">
+      <button class="intel-clear-btn" onclick="clearIntel()">Clear All</button>
+      <button class="close-btn" onclick="toggleIntel()">Close ✕</button>
+    </div>
+  </div>
+  <div class="intel-field">
+    <label>Engagement / Machine Name</label>
+    <input id="intel-name" placeholder="e.g. HTB - Absolute, OSCP Exam #3" oninput="saveIntel()">
+  </div>
+  <div class="intel-field">
+    <label>Target Scope (IPs / Ranges)</label>
+    <textarea id="intel-scope" rows="2" placeholder="192.168.45.0/24&#10;10.10.10.x" oninput="saveIntel()"></textarea>
+  </div>
+  <div class="intel-field">
+    <label>Objective / Current Focus</label>
+    <input id="intel-obj" placeholder="e.g. Priv esc via unquoted service path" oninput="saveIntel()">
+  </div>
+  <div class="intel-divider"></div>
+  <div class="intel-field">
+    <label>💰 Found Credentials</label>
+    <div id="intelCredsList"></div>
+    <div class="intel-add-row">
+      <input id="intelCredsInput" placeholder="user:password or NTLM hash" onkeydown="if(event.key==='Enter')addIntelItem('creds')">
+      <button class="intel-add-btn" onclick="addIntelItem('creds')">＋</button>
+    </div>
+  </div>
+  <div class="intel-field">
+    <label>🚩 Captured Flags</label>
+    <div id="intelFlagsList"></div>
+    <div class="intel-add-row">
+      <input id="intelFlagsInput" placeholder="user.txt / root.txt hash" onkeydown="if(event.key==='Enter')addIntelItem('flags')">
+      <button class="intel-add-btn" onclick="addIntelItem('flags')">＋</button>
+    </div>
+  </div>
+  <div class="intel-field">
+    <label>🕳 Pivot Points / Shells</label>
+    <div id="intelPivotsList"></div>
+    <div class="intel-add-row">
+      <input id="intelPivotsInput" placeholder="10.10.10.5 via chisel SOCKS" onkeydown="if(event.key==='Enter')addIntelItem('pivots')">
+      <button class="intel-add-btn" onclick="addIntelItem('pivots')">＋</button>
+    </div>
+  </div>
+  <div class="intel-divider"></div>
+  <div class="intel-field">
+    <label>📝 Quick Notes</label>
+    <textarea id="intel-notes" rows="5" placeholder="Anything goes — ports, findings, rabbit holes..." oninput="saveIntel()"></textarea>
+  </div>
+  <div class="intel-save-row">
+    <button class="intel-save-btn" onclick="exportIntel()">⬇ Export Intel as .txt</button>
+  </div>
+</div>
+
+<!-- Notes Panel -->
+<div id="notesPanel">
+  <div class="notes-hdr">
+    <div class="notes-title">📓 SIDE NOTES</div>
+    <div style="display:flex;gap:6px;align-items:center">
+      <button class="notes-add-btn" onclick="addNote()">＋ New Note</button>
+      <button class="close-btn" onclick="toggleNotesPanel()">Close ✕</button>
+    </div>
+  </div>
+  <div id="notesList"></div>
+</div>
+
+<!-- History Panel -->
+<div id="histPanel">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+    <span style="font-family:'Orbitron',monospace;font-size:10px;font-weight:700;color:var(--accent);letter-spacing:.5px;text-shadow:0 0 10px rgba(145,65,172,.5)">⏱ COPY_HISTORY::LAST_20</span>
+    <div style="display:flex;gap:6px">
+      <button class="close-btn" onclick="clearHistory()">Clear</button>
+      <button class="close-btn" onclick="toggleHistory()">Close ✕</button>
+    </div>
+  </div>
+  <div id="histList"><div style="color:var(--text3);font-size:12px;font-family:'VT323',monospace">// No history yet. Copy some commands!</div></div>
+</div>
+
+<!-- Keyboard Shortcuts Panel -->
+<div id="shortcutPanel">
+  <div style="font-family:'Orbitron',monospace;font-size:10px;font-weight:700;color:var(--accent);margin-bottom:10px;letter-spacing:.5px;text-shadow:0 0 10px rgba(145,65,172,.5)">⌨ KEYBOARD_SHORTCUTS</div>
+  <div class="sc-row"><span class="sc-desc">Focus search</span><kbd class="sc-key">Ctrl+K</kbd></div>
+  <div class="sc-row"><span class="sc-desc">Clear search</span><kbd class="sc-key">Esc</kbd></div>
+  <div class="sc-row"><span class="sc-desc">Next section</span><kbd class="sc-key">Ctrl+→</kbd></div>
+  <div class="sc-row"><span class="sc-desc">Prev section</span><kbd class="sc-key">Ctrl+←</kbd></div>
+  <div class="sc-row"><span class="sc-desc">Add command</span><kbd class="sc-key">Ctrl+Shift+A</kbd></div>
+  <div class="sc-row"><span class="sc-desc">Toggle favorites</span><kbd class="sc-key">Ctrl+Shift+F</kbd></div>
+  <div class="sc-row"><span class="sc-desc">Toggle sidebar</span><kbd class="sc-key">Ctrl+B</kbd></div>
+  <div class="sc-row"><span class="sc-desc">Target Intel panel</span><kbd class="sc-key">Ctrl+I</kbd></div>
+  <div class="sc-row"><span class="sc-desc">Toggle shortcuts</span><kbd class="sc-key">Ctrl+/</kbd></div>
+  <div class="sc-row"><span class="sc-desc">Close panels</span><kbd class="sc-key">Esc</kbd></div>
+</div>
+
+<!-- Jump to top -->
+<button id="jumpTop" onclick="document.querySelector('.main').scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+
+<!-- Custom Command Modal -->
+<div id="customModal">
+  <div class="modal-box">
+    <div class="modal-title">⬡ <span id="modalTitleText">ADD_CUSTOM_COMMAND</span></div>
+    <input type="hidden" id="editingId">
+    <div class="mf">
+      <label>Command Name / Title</label>
+      <input class="mf-text" id="cmdName" placeholder="e.g. My Reverse Shell" style="font-family:inherit">
+    </div>
+    <div class="mf">
+      <label>Category (Group)</label>
+      <select id="cmdCategory">
+        <option value="custom">My Commands</option>
+        <option value="recon">Recon</option>
+        <option value="web">Web Attacks</option>
+        <option value="api">API Attacks</option>
+        <option value="shells">Shells</option>
+        <option value="lpe">Linux PrivEsc</option>
+        <option value="wpe">Windows PrivEsc</option>
+        <option value="adrecon">AD Recon</option>
+        <option value="adatk">AD Attacks</option>
+        <option value="adlat">AD Lateral</option>
+        <option value="adpst">Persistence</option>
+        <option value="evasion">Evasion / OPSEC</option>
+        <option value="inject">Injection</option>
+        <option value="c2">C2 Frameworks</option>
+        <option value="tunnel">Tunneling</option>
+        <option value="transfer">File Transfer</option>
+        <option value="crack">Hash Cracking</option>
+        <option value="attck">ATT&CK</option>
+        <option value="atlas">ATLAS / AI</option>
+        <option value="sparta">SPARTA / Space</option>
+        <option value="apt">APT Intel</option>
+        <option value="intel_cycle">Ciclo de Inteligencia</option>
+        <option value="osint_ops">OSINT Framework</option>
+        <option value="humint_ops">HUMINT / Ing. Social</option>
+        <option value="counterint">Contra-Inteligencia</option>
+        <option value="psyop_ops">PSYOP / Cognitive Warfare</option>
+        <option value="misc">Misc / Snippets</option>
+      </select>
+    </div>
+    <div class="mf">
+      <label>Command — use {LHOST}, {RHOST}, {LPORT}, {RPORT}, {DOMAIN}, {DC}, {USER}, {PASS}, {HASH}, {URL}</label>
+      <textarea id="cmdBody" placeholder="e.g. nc -nlvp {LPORT}"></textarea>
+    </div>
+    <div class="mf">
+      <label>Tags</label>
+      <div class="tag-checks">
+        <label class="tag-chk"><input type="checkbox" id="t_crit" value="crit"> 🔴 Critical</label>
+        <label class="tag-chk"><input type="checkbox" id="t_high" value="high"> 🟡 High</label>
+        <label class="tag-chk"><input type="checkbox" id="t_med" value="med"> 🟢 Medium</label>
+        <label class="tag-chk"><input type="checkbox" id="t_osep" value="osep"> 💜 OSEP</label>
+        <label class="tag-chk"><input type="checkbox" id="t_new" value="new"> 🔵 New</label>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeCustomModal()">Cancel</button>
+      <button class="btn-save" onclick="saveCustomCommand()">Save Command</button>
+    </div>
+  </div>
+</div>
+
+<!-- Three.js CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<!-- Data modules -->
+<script src="data/core.js"></script>
+<script src="data/mitre.js"></script>
+<script src="data/intel.js"></script>
+<!-- Core logic -->
+<script src="app.js"></script>
+</body>
+</html>
