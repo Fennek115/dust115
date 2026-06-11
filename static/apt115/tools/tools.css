@@ -243,3 +243,38 @@
   color: var(--teal); background: rgba(0,229,176,.1); border: 1px solid rgba(0,229,176,.25);
   border-radius: 3px; padding: 2px 6px; min-width: 70px; text-align: center; align-self: flex-start;
 }
+
+/* ════ Motor YARA (Malware Triage) ════ */
+.yr-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 10px 0 6px; }
+.yr-run {
+  font-family: 'Fira Code', monospace; font-size: 11px; font-weight: 700;
+  color: var(--accent); background: rgba(145,65,172,.1); cursor: pointer;
+  border: 1px solid var(--accent); border-radius: var(--radius-sm); padding: 5px 13px;
+}
+.yr-run:hover { background: rgba(145,65,172,.2); color: var(--purple); }
+.yr-run:disabled { opacity: .5; cursor: progress; }
+.yr-status { font-size: 10.5px; }
+.yr-editor {
+  width: 100%; min-height: 160px; resize: vertical; box-sizing: border-box;
+  font-family: 'Fira Code', monospace; font-size: 11.5px; line-height: 1.5; color: var(--text);
+  background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: 9px 11px; outline: none; white-space: pre; tab-size: 4;
+}
+.yr-editor:focus { border-color: var(--accent); }
+.yr-out { margin-top: 8px; }
+.yr-msgs { margin-top: 5px; font-family: 'Fira Code', monospace; font-size: 10.5px; color: var(--orange); }
+.yr-rule {
+  border: 1px solid var(--border); border-left: 2px solid var(--accent);
+  border-radius: var(--radius-sm); background: var(--bg2); padding: 8px 10px; margin: 8px 0;
+}
+.yr-rule-h { font-size: 13px; font-weight: 700; color: var(--purple); font-family: 'Fira Code', monospace; }
+.yr-rule-desc { font-size: 11px; color: var(--text2); margin: 2px 0 4px; }
+.yr-meta { display: flex; flex-wrap: wrap; gap: 8px; font-size: 10.5px; margin: 2px 0 4px; }
+.yr-meta-k { color: var(--teal); }
+.yr-meta-v { color: var(--text3); }
+.yr-matches { margin-top: 4px; }
+.yr-matches td { vertical-align: top; }
+.yr-off { color: var(--code); white-space: nowrap; }
+.yr-sid { color: var(--accent); white-space: nowrap; }
+.yr-hex { font-family: 'Fira Code', monospace; color: var(--text2); word-break: break-all; }
+.yr-asc { font-family: 'Fira Code', monospace; color: var(--text3); white-space: pre; }
