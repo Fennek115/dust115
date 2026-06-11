@@ -1,6 +1,6 @@
 ---
 title: "Bloqueado por defecto"
-date: 2026-06-11T20:00:00-03:00
+date: 2026-06-11
 draft: false
 tags: ["ensayo", "pensamiento-crítico", "ciberseguridad", "teatro"]
 summary: "Todo sistema bloquea por defecto lo que no puede integrar sin reescribirse. Las organizaciones también. Las cabezas también."
