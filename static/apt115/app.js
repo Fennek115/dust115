@@ -244,19 +244,26 @@ function renderFavList() {
   if (!keys.length) { fl.innerHTML = '<div class="empty"><div class="empty-icon">⭐</div>No favorites yet.</div>'; return; }
   let h = '';
   keys.forEach(id => {
-    const parts = id.replace('c_','').split('_');
-    const secId = parts[0]; const gi = parseInt(parts[1]); const ci = parseInt(parts[2]);
-    const sec = D.find(x => x.id === secId);
-    if (!sec || !sec.groups[gi] || !sec.groups[gi].c[ci]) return;
-    const cmd = sec.groups[gi].c[ci];
+    let name, body, label;
+    if (id.startsWith('custom_')) {
+      const cmd = customCmds.find(c => c.id === id.slice('custom_'.length));
+      if (!cmd) return;
+      name = cmd.name; body = cmd.body; label = 'My Commands';
+    } else {
+      const parts = id.replace('c_','').split('_');
+      const sec = D.find(x => x.id === parts[0]);
+      const gi = parseInt(parts[1]); const ci = parseInt(parts[2]);
+      if (!sec || !sec.groups[gi] || !sec.groups[gi].c[ci]) return;
+      const cmd = sec.groups[gi].c[ci];
+      name = cmd[0]; body = cmd[1]; label = sec.label;
+    }
     h += `<div class="row fav-row" style="margin-bottom:6px">
       <div class="ri">
-        <div class="rd">${escHtml(cmd[0])} <span style="color:var(--text3);font-size:10px">${sec.label}</span></div>
-        <div class="rc">${escHtml(sub(cmd[1]))}</div>
+        <div class="rd">${escHtml(name)} <span style="color:var(--text3);font-size:10px">${escHtml(label)}</span></div>
+        <div class="rc" id="favrc_${id}">${escHtml(sub(body))}</div>
       </div>
       <div class="row-actions">
-        <button class="cp" onclick="doCopy(this,'fav_c_${id}');document.getElementById('fav_c_${id}').textContent=document.getElementById('${id}').textContent" style="display:none">-</button>
-        <button class="cp" onclick="copyText('${id}')">Copy</button>
+        <button class="cp" onclick="copyText('favrc_${id}',this)">Copy</button>
         <button class="fav-btn on" onclick="removeFav('${id}')">★</button>
       </div>
     </div>`;
@@ -450,13 +457,21 @@ function exportFavs() {
   Object.entries(v).forEach(([k,val]) => { txt += `# ${k} = ${val}\n`; });
   txt += '\n';
   keys.forEach(id => {
-    const parts = id.replace('c_','').split('_');
-    const sec = D.find(x => x.id === parts[0]);
-    if (!sec) return;
-    const cmd = sec.groups[parseInt(parts[1])]?.c[parseInt(parts[2])];
-    if (!cmd) return;
-    txt += `\n## [${sec.label}] ${cmd[0]}\n`;
-    txt += sub(cmd[1]) + '\n';
+    let label, name, body;
+    if (id.startsWith('custom_')) {
+      const cmd = customCmds.find(c => c.id === id.slice('custom_'.length));
+      if (!cmd) return;
+      label = 'My Commands'; name = cmd.name; body = cmd.body;
+    } else {
+      const parts = id.replace('c_','').split('_');
+      const sec = D.find(x => x.id === parts[0]);
+      if (!sec) return;
+      const cmd = sec.groups[parseInt(parts[1])]?.c[parseInt(parts[2])];
+      if (!cmd) return;
+      label = sec.label; name = cmd[0]; body = cmd[1];
+    }
+    txt += `\n## [${label}] ${name}\n`;
+    txt += sub(body) + '\n';
     if (notes[id]) txt += `# Note: ${notes[id]}\n`;
   });
   const blob = new Blob([txt], {type:'text/plain'});
@@ -492,6 +507,10 @@ function doSearch(q) {
     });
   });
 
+  // Also search user-defined custom commands
+  const customResults = customCmds.filter(c =>
+    (c.name + ' ' + c.body).toLowerCase().includes(ql));
+
   // Safe highlight: escape raw string first, then wrap match
   function hl(raw) {
     const escaped = escHtml(raw);
@@ -500,8 +519,9 @@ function doSearch(q) {
     return escaped.replace(re, '<span class="hl">$1</span>');
   }
 
-  let h = `<div class="sr-count">Found <span>${results.length}</span> result${results.length !== 1 ? 's' : ''} for "<b>${escHtml(q)}</b>"</div>`;
-  if (!results.length) h += '<div class="empty"><div class="empty-icon">🔍</div>No commands match.</div>';
+  const totalResults = results.length + customResults.length;
+  let h = `<div class="sr-count">Found <span>${totalResults}</span> result${totalResults !== 1 ? 's' : ''} for "<b>${escHtml(q)}</b>"</div>`;
+  if (!totalResults) h += '<div class="empty"><div class="empty-icon">🔍</div>No commands match.</div>';
   results.forEach(({s, g, gi, cmd, ci}) => {
     const id = mkId(s.id, gi, ci);
     const isFav = favorites[id]; const hasNote = notes[id];
@@ -517,17 +537,51 @@ function doSearch(q) {
       </div>
     </div>`;
   });
+  customResults.forEach(cmd => {
+    const cid = 'custom_' + cmd.id;
+    const isFav = favorites[cid]; const hasNote = notes[cid];
+    h += `<div class="row${isFav ? ' fav-row' : ''}">
+      <div class="ri">
+        <div class="rd">${hl(cmd.name)} <span class="custom-badge">CUSTOM</span> ${renderTags(cmd.tags || [])}</div>
+        <div class="rc" id="sr_${cid}">${hl(sub(cmd.body))}</div>
+        ${hasNote ? `<div class="note-display">📝 ${escHtml(notes[cid])}</div>` : ''}
+      </div>
+      <div class="row-actions">
+        <button class="cp" onclick="copyText('sr_${cid}',this)">Copy</button>
+        <button class="fav-btn${isFav ? ' on' : ''}" onclick="toggleFavItem('${cid}','${escHtml(cmd.name).replace(/'/g,"\\'")}',this)">★</button>
+      </div>
+    </div>`;
+  });
   sr.innerHTML = h;
 }
 
 // ─── VARS DEFAULTS ─────────────────────────────────────────
 const VARS_DEFAULTS = {lhost:'10.10.14.1',rhost:'10.10.10.10',lport:'4444',rport:'9001',domain:'corp.local',dc:'192.168.1.10',user:'john',pass:'Password123',hash:'NTLM_HASH_HERE',url:'http://10.10.10.10'};
 
+function saveVars() {
+  const out = {};
+  Object.keys(VARS_DEFAULTS).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) out[id] = el.value;
+  });
+  localStorage.setItem('cs_vars', JSON.stringify(out));
+}
+
+function restoreVars() {
+  const saved = JSON.parse(localStorage.getItem('cs_vars') || 'null');
+  if (!saved) return;
+  Object.entries(saved).forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    if (el) { el.value = val; el.classList.toggle('modified', val !== (VARS_DEFAULTS[id] || '')); }
+  });
+}
+
 function resetVars() {
   Object.entries(VARS_DEFAULTS).forEach(([id, val]) => {
     const el = document.getElementById(id);
     if (el) { el.value = val; el.classList.remove('modified'); }
   });
+  saveVars();
   refreshAllCmds();
 }
 
@@ -599,8 +653,10 @@ document.addEventListener('keydown', e => {
   // Escape — clear search / close panels
   if (e.key === 'Escape') {
     closeCustomModal();
-    document.getElementById('shortcutPanel').classList.remove('on');
-    document.getElementById('intelPanel').classList.remove('on');
+    ['shortcutPanel','intelPanel','favPanel','histPanel','notesPanel'].forEach(pid => {
+      const p = document.getElementById(pid);
+      if (p) p.classList.remove('on');
+    });
     const si = document.getElementById('searchInput');
     if (si.value) { si.value = ''; doSearch(''); return; }
   }
@@ -626,6 +682,7 @@ document.querySelectorAll('.vi').forEach(i => {
   const def = VARS_DEFAULTS[i.id] || '';
   i.addEventListener('input', () => {
     i.classList.toggle('modified', i.value !== def);
+    saveVars();
     refreshAllCmds();
   });
 });
@@ -882,6 +939,7 @@ function exportIntel() {
 }
 
 // ─── INIT ─────────────────────────────────────────────────
+restoreVars();
 buildSidebar();
 buildSections();
 buildCustomSection();
@@ -969,19 +1027,19 @@ function renderNotes() {
   const list = document.getElementById('notesList');
   if (!list) return;
   if (!notesData.length) {
-    list.innerHTML = '<div class="notes-empty"><div class="notes-empty-icon">📓</div>Koi note nahi hai abhi.<br><span style="font-size:11px;opacity:.6">+ New Note se banao</span></div>';
+    list.innerHTML = '<div class="notes-empty"><div class="notes-empty-icon">📓</div>No notes yet.<br><span style="font-size:11px;opacity:.6">Create one with + New Note</span></div>';
     return;
   }
   list.innerHTML = notesData.map(n => `
     <div class="note-card" id="nc_${n.id}">
       <div class="note-card-top">
         <input class="note-card-title" id="nt_${n.id}"
-          placeholder="Note ka title..."
+          placeholder="Note title..."
           oninput="updateNoteTitle('${n.id}', this.value)">
         <button class="note-card-del" onclick="deleteNote('${n.id}')" title="Delete note">✕</button>
       </div>
       <textarea class="note-card-body" id="nb_${n.id}"
-        placeholder="Yahan apne notes likho..."
+        placeholder="Write your notes here..."
         oninput="updateNoteBody('${n.id}', this.value)"></textarea>
       <div class="note-card-ts">🕐 ${n.ts}</div>
     </div>

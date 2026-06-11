@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>APT115 // CODEX ARCANUM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Nunito:wght@600;700;800;900&family=VT323&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -25,11 +25,12 @@
 
 <!-- Header -->
 <div class="hdr">
+  <a class="hdr-home" href="../" title="Volver a dust115">‹ inicio</a>
   <div class="hdr-logo">
-    <canvas id="threejs-orb"></canvas>
+    <span class="hdr-sigil">⬡</span>
     <div>
-      <div class="hdr-title glitch-text" data-text="APT115 // CODEX ARCANUM">APT115 // CODEX ARCANUM</div>
-      <div style="font-family:'VT323',monospace;font-size:9px;color:var(--text3);letter-spacing:2px">solve et coagula</div>
+      <div class="hdr-title">APT115 // CODEX ARCANUM</div>
+      <div style="font-family:'Fira Code',monospace;font-size:9px;color:var(--text3);letter-spacing:2px">solve et coagula</div>
     </div>
     <div class="hdr-badge">v1.0</div>
   </div>
@@ -45,7 +46,7 @@
     <button class="hdr-btn" onclick="toggleHistory()">⏱ HIST</button>
     <button class="hdr-btn" onclick="exportFavs()">↓ EXPORT</button>
     <button class="hdr-btn" onclick="toggleShortcuts()" title="Keyboard Shortcuts">⌨</button>
-    <button class="hdr-btn" onclick="toggleIntel()" title="Target Intel / Engagement Notes" style="border-color:rgba(255,45,111,.4);color:var(--red);box-shadow:0 0 8px rgba(255,45,111,.2)">🎯 INTEL</button>
+    <button class="hdr-btn" onclick="toggleIntel()" title="Target Intel / Engagement Notes" style="border-color:rgba(255,45,111,.35);color:var(--red)">🎯 INTEL</button>
     <button class="hdr-btn" onclick="toggleNotesPanel()" title="Side Notes" style="border-color:rgba(255,210,0,.35);color:#ffe066;">📓 NOTES <span id="notesCount" style="font-size:9px;background:rgba(255,210,0,.12);border:1px solid rgba(255,210,0,.3);border-radius:3px;padding:1px 5px;margin-left:2px;">0</span></button>
     <span id="globalProgress" title="Completed / Total commands">✔ 0/0</span>
     <button class="theme-toggle" onclick="toggleTheme()" id="themeToggleBtn" title="Light / Dark mode">🌙 DARK</button>
@@ -262,8 +263,6 @@
   </div>
 </div>
 
-<!-- Three.js CDN -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <!-- Data modules -->
 <script src="data/core.js"></script>
 <script src="data/mitre.js"></script>
