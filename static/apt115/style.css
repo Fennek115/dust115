@@ -190,7 +190,7 @@ body{
   font-family:'Fira Code',monospace;pointer-events:none;
 }
 #searchInput{
-  width:100%;padding:7px 50px 7px 30px;
+  width:100%;padding:7px 64px 7px 30px;
   background:rgba(145,65,172,.04);
   border:1px solid rgba(145,65,172,.2);
   border-radius:var(--radius);color:var(--text);font-size:12px;
