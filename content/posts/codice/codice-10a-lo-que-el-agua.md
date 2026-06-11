@@ -90,7 +90,7 @@ Lo que no supe, hasta mucho después, era si yo quería que lo dijera o si me ba
 
 Hay una imagen que me persigue desde que empecé a mirar charcos con más atención de la que merecen.
 
-En la quietud del reflejo se despliega la esencia de lo que somos. Como si al mirar profundamente en el agua pudieras ver no solo tus aspiraciones y tus miedos sino también las conexiones — las reales, las posibles, las que nunca se hicieron — que tenés con todo lo demás.
+En la quietud del reflejo se despliega la esencia de lo que somos. Como si al mirar profundamente en el agua pudieras ver no solo tus aspiraciones y tus miedos sino también las conexiones — las reales, las posibles, las que nunca se hicieron — que tienes con todo lo demás.
 
 Y en ese "todo lo demás" estaba él.
 
@@ -150,7 +150,7 @@ Yo llevaba demasiado tiempo mirando el charco.
 
 Hay un animal — no recuerdo dónde lo leí o si lo soñé — que cuelga invertido en la oscuridad. Un murciélago. Impasible. Inadvertido. Mirando el mundo desde una perspectiva que nadie más tiene porque nadie más está colgado al revés.
 
-El murciélago ve lo que nosotros vemos pero invertido. Y en esa inversión hay algo que los que estamos del lado correcto no podemos acceder: una perspectiva que solo es posible cuando soltás lo que te sostiene del lado convencional y aceptás que el techo puede ser suelo y el suelo puede ser cielo y que la diferencia entre los dos es una cuestión de dónde ponés los pies.
+El murciélago ve lo que nosotros vemos pero invertido. Y en esa inversión hay algo que los que estamos del lado correcto no podemos acceder: una perspectiva que solo es posible cuando sueltas lo que te sostiene del lado convencional y aceptás que el techo puede ser suelo y el suelo puede ser cielo y que la diferencia entre los dos es una cuestión de dónde ponés los pies.
 
 Yo veía al zorro desde esa perspectiva. Invertida. No porque estuviera al revés sino porque lo escuchaba al revés: no escuchaba lo que decía, escuchaba lo que no decía, y lo que no decía era más elocuente que cualquier discurso, y la forma de lo que callaba me contaba una historia que él no sabía que estaba contando.
 

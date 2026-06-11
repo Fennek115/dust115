@@ -119,7 +119,7 @@ No me gustaba. No me disgustaba. Me dejaba expuesto de una manera que no podía 
 
 Un martes le pregunté algo que no sabía que iba a preguntar hasta que lo pregunté:
 
-—¿Por qué venís los martes?
+—¿Por qué vienes los martes?
 
 Ella sostuvo la taza. Las dos manos. Los dedos largos rodeando la cerámica. Cada uña atenta al calor como si las manos fueran otro sistema sensorial separado.
 
