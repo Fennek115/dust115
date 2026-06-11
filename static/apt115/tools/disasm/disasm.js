@@ -6,8 +6,10 @@
 // PEREZOSAMENTE al primer "Desensamblar". Pareja natural del revshell/convert:
 // pegás el shellcode que generaste y lo leés instrucción por instrucción.
 //
-// Motor: vendor/capstone/ (Capstone, BSD-3 · capstone-wasm) — ver
-// vendor/LICENSE-capstone.txt.
+// El motor, el mapa de arquitecturas y el render de tabla viven en el servicio
+// compartido `LAB.capstone` (tools/capstone-core.js); este tool sólo aporta el
+// parseo de la entrada (hex/base64) y la UI. Misma fuente de verdad que usa el
+// analyzer `epdisasm` del triage.
 //
 // Carga: import() dinámico del módulo ESM vendorizado. Funciona en el sitio
 // servido (deploy / `hugo server`); abierto como file:// el navegador bloquea
@@ -16,37 +18,19 @@
 (function () {
   'use strict';
 
-  const ENGINE_URL = 'vendor/capstone/index.mjs';
-  const CAP = 4000; // tope de instrucciones renderizadas
+  // Servicio compartido (loader + arches + render). En browser viene del
+  // <script> previo; en Node (tests) se resuelve por require.
+  const CS = (typeof window !== 'undefined' && window.LAB && window.LAB.capstone) ||
+    (typeof require === 'function' ? (function () { try { return require('../capstone-core.js'); } catch (_) { return null; } })() : null);
 
-  // arch/mode por nombre de constante (se resuelven con el Const del módulo).
-  const ARCHES = [
-    { id: 'x64', label: 'x86-64', a: 'CS_ARCH_X86', m: ['CS_MODE_64'] },
-    { id: 'x32', label: 'x86-32', a: 'CS_ARCH_X86', m: ['CS_MODE_32'] },
-    { id: 'x16', label: 'x86-16', a: 'CS_ARCH_X86', m: ['CS_MODE_16'] },
-    { id: 'arm', label: 'ARM', a: 'CS_ARCH_ARM', m: ['CS_MODE_ARM'] },
-    { id: 'thumb', label: 'ARM Thumb', a: 'CS_ARCH_ARM', m: ['CS_MODE_THUMB'] },
-    { id: 'arm64', label: 'ARM64', a: 'CS_ARCH_ARM64', m: ['CS_MODE_ARM'] },
-    { id: 'mips32', label: 'MIPS32', a: 'CS_ARCH_MIPS', m: ['CS_MODE_32'] },
-    { id: 'mips64', label: 'MIPS64', a: 'CS_ARCH_MIPS', m: ['CS_MODE_64'] },
-  ];
+  const ARCHES = (CS && CS.ARCHES) || [];
 
-  let enginePromise = null;
   let lastText = '';
 
   function esc(s) {
+    if (CS) return CS.esc(s);
     return String(s == null ? '' : s)
       .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  }
-
-  function ensureEngine() {
-    if (!enginePromise) {
-      const url = new URL(ENGINE_URL, document.baseURI).href;
-      enginePromise = import(url)
-        .then((m) => m.loadCapstone().then(() => m))
-        .catch((e) => { enginePromise = null; throw new Error('no se pudo cargar el motor: ' + (e && e.message || e)); });
-    }
-    return enginePromise;
   }
 
   // Acepta: "55 48 89 e5", "5548 89e5", "\x55\x48", "0x55,0x48", "0x5548",
@@ -67,54 +51,6 @@
     const out = new Uint8Array(hex.length / 2);
     for (let i = 0; i < out.length; i++) out[i] = parseInt(hex.substr(i * 2, 2), 16);
     return out;
-  }
-
-  function resolveMode(names, Const) {
-    return names.reduce((acc, n) => acc | (Const[n] || 0), 0);
-  }
-
-  // Clase de color según el tipo de instrucción (control de flujo / syscalls).
-  function mnClass(mn) {
-    if (/^j/.test(mn)) return 'ds-jmp';                 // jmp, je, jne...
-    if (/^(call|loop)/.test(mn)) return 'ds-call';
-    if (/^(ret|leave|iret)/.test(mn)) return 'ds-ret';
-    if (/^(syscall|sysenter|int|int3|svc)/.test(mn)) return 'ds-sys';
-    if (/^(nop|hlt)/.test(mn)) return 'ds-dim';
-    return '';
-  }
-
-  function toHex(b) { return b.toString(16).padStart(2, '0'); }
-
-  function renderInsns(insns, bytes, base) {
-    if (!insns.length) {
-      return '<div class="lab-err">Capstone no decodificó ninguna instrucción ' +
-        '(¿bytes inválidos para esta arquitectura?).</div>';
-    }
-    let decoded = 0;
-    const lines = [];
-    let html = '<table class="lab-table ds-table"><thead><tr>' +
-      '<th>Dirección</th><th>Bytes</th><th>Instrucción</th></tr></thead><tbody>';
-    for (const ins of insns.slice(0, CAP)) {
-      decoded += ins.size;
-      const addr = '0x' + (typeof ins.address === 'bigint' ? ins.address.toString(16) : (ins.address >>> 0).toString(16));
-      const hex = [...ins.bytes].map(toHex).join(' ');
-      const cls = mnClass(ins.mnemonic);
-      html += '<tr><td class="ds-addr">' + addr + '</td>' +
-        '<td class="ds-bytes">' + hex + '</td>' +
-        '<td class="ds-insn"><span class="ds-mn ' + cls + '">' + esc(ins.mnemonic) + '</span>' +
-        (ins.opStr ? ' <span class="ds-ops">' + esc(ins.opStr) + '</span>' : '') + '</td></tr>';
-      lines.push(addr.padEnd(12) + hex.padEnd(24) + ins.mnemonic + (ins.opStr ? ' ' + ins.opStr : ''));
-    }
-    html += '</tbody></table>';
-    lastText = lines.join('\n');
-
-    let note = insns.length + ' instrucciones · ' + decoded + '/' + bytes.length + ' bytes decodificados';
-    if (insns.length > CAP) note += ' · <span class="lab-dim">mostrando ' + CAP + '</span>';
-    if (decoded < bytes.length) {
-      note += ' · <span class="ds-warn">se detuvo en un byte inválido @ 0x' +
-        (base + decoded).toString(16) + '</span>';
-    }
-    return '<div class="lab-row1" style="margin-bottom:6px">' + note + '</div>' + html;
   }
 
   function render(container) {
@@ -162,17 +98,14 @@
     if (!bytes.length) { out.innerHTML = '<div class="lab-note">Pegá algunos bytes para desensamblar.</div>'; return; }
 
     btn.disabled = true;
-    const firstLoad = !enginePromise;
+    const firstLoad = !CS.loaded();
     out.innerHTML = '<div class="lab-loading">⬡ ' + (firstLoad ? 'Cargando el motor Capstone…' : 'Desensamblando…') + '</div>';
     try {
-      const m = await ensureEngine();
+      const insns = await CS.run(bytes, { arch: archId, address: base });
       if (status) status.textContent = '';
-      const arch = ARCHES.find(a => a.id === archId) || ARCHES[0];
-      const cs = new m.Capstone(m.Const[arch.a], resolveMode(arch.m, m.Const));
-      let insns;
-      try { insns = cs.disasm(bytes, { address: base }); }
-      finally { cs.close(); }
-      out.innerHTML = renderInsns(insns, bytes, base);
+      const res = CS.renderTable(insns, bytes, base);
+      lastText = res.text;
+      out.innerHTML = res.html;
     } catch (e) {
       console.error('[disasm]', e);
       out.innerHTML = '<div class="lab-err">Error del desensamblador: ' + esc(e && e.message || e) + '</div>';
@@ -185,5 +118,5 @@
     LAB.registerTool({ id: 'disasm', label: 'Disassembler', icon: '⚙', group: '🧪 LAB / TOOLS', render });
   }
   // Hook de test (no-op en browser).
-  if (typeof module !== 'undefined' && module.exports) module.exports = { parseInput, mnClass, resolveMode };
+  if (typeof module !== 'undefined' && module.exports) module.exports = { parseInput };
 })();
