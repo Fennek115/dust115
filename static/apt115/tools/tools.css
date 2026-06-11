@@ -138,3 +138,78 @@
 
 /* Marca el grupo LAB en el sidebar */
 .lab-sg { color: var(--purple); }
+
+/* ════ Reverse Shell & C2 Generator ════ */
+.rs-vars { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+.rs-var {
+  font-size: 11px; color: var(--text2); background: var(--bg2);
+  border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 3px 9px;
+}
+.rs-var b { color: var(--text3); font-weight: 700; margin-right: 4px; }
+.rs-var span { color: var(--code); }
+
+.rs-tabs { display: flex; flex-wrap: wrap; gap: 5px; margin: 12px 0 8px; }
+.rs-tab {
+  font-family: 'Fira Code', monospace; font-size: 11px; font-weight: 700;
+  color: var(--text2); background: var(--bg2); cursor: pointer;
+  border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 5px 11px;
+  transition: all .12s;
+}
+.rs-tab:hover { color: var(--accent); border-color: var(--border2); }
+.rs-tab.on { color: var(--accent); border-color: var(--accent); background: rgba(145,65,172,.1); }
+
+.rs-enc { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; margin: 4px 0 10px; }
+.rs-enc-lbl { font-size: 10.5px; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; margin-right: 4px; }
+.rs-encb {
+  font-family: 'Fira Code', monospace; font-size: 10.5px; color: var(--text2);
+  background: var(--bg3); border: 1px solid var(--border); border-radius: 3px;
+  padding: 2px 8px; cursor: pointer;
+}
+.rs-encb:hover { color: var(--accent); }
+.rs-encb.on { color: var(--accent); border-color: var(--accent); background: rgba(145,65,172,.12); }
+
+.rs-item {
+  display: flex; align-items: center; gap: 8px; padding: 6px 8px;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg2); margin: 5px 0;
+}
+.rs-item-l { font-size: 11px; font-weight: 700; color: var(--purple); flex-shrink: 0; min-width: 110px; }
+.rs-item-c {
+  flex: 1; min-width: 0; font-size: 11px; color: var(--code); cursor: pointer;
+  white-space: pre-wrap; word-break: break-all; line-height: 1.5;
+}
+.rs-item-c:hover { color: var(--text); }
+.rs-copy {
+  flex-shrink: 0; font-family: 'Fira Code', monospace; font-size: 10px; font-weight: 700;
+  color: var(--accent); background: rgba(145,65,172,.08); cursor: pointer;
+  border: 1px solid var(--border2); border-radius: 3px; padding: 3px 9px; text-transform: uppercase;
+}
+.rs-copy:hover { background: rgba(145,65,172,.18); }
+
+/* ════ Mini-CyberChef ════ */
+.cv-io {
+  width: 100%; min-height: 70px; resize: vertical; box-sizing: border-box;
+  font-family: 'Fira Code', monospace; font-size: 12px; color: var(--text);
+  background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: 9px 11px; outline: none; margin: 6px 0;
+}
+.cv-io:focus { border-color: var(--accent); }
+.cv-io.out { color: var(--code); background: var(--bg3); }
+.cv-keyrow { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
+.cv-keyrow label { font-size: 11px; color: var(--text3); white-space: nowrap; }
+.cv-key {
+  flex: 1; max-width: 220px; font-family: 'Fira Code', monospace; font-size: 12px;
+  color: var(--text); background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 5px 9px; outline: none;
+}
+.cv-key:focus { border-color: var(--accent); }
+.cv-ops { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0; }
+.cv-grp { display: flex; align-items: center; gap: 4px; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 4px 6px; background: var(--bg2); }
+.cv-glbl { font-size: 9.5px; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; margin-right: 2px; }
+.cv-btn {
+  font-family: 'Fira Code', monospace; font-size: 11px; font-weight: 700;
+  color: var(--text2); background: var(--bg3); cursor: pointer;
+  border: 1px solid var(--border); border-radius: 3px; padding: 3px 9px;
+}
+.cv-btn:hover { color: var(--accent); border-color: var(--accent); }
+.cv-outrow { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }

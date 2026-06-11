@@ -123,7 +123,20 @@ window.LAB = (function () {
     build();
   }
 
-  return { registerTool, initLab, activate, tools };
+  // Copia compartida por los widgets (reusa el toast de app.js si existe).
+  function copy(text) {
+    try { navigator.clipboard.writeText(text); }
+    catch (e) {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch (_) {}
+      document.body.removeChild(ta);
+    }
+    if (typeof showToast === 'function') showToast('✓ Copiado');
+  }
+
+  return { registerTool, initLab, activate, copy, tools };
 })();
 
 // Auto-init cuando el DOM esté listo (los tools se registran durante el parse,
