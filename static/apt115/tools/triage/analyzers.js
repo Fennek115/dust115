@@ -40,6 +40,11 @@ Triage.analyzers = (function () {
           rows.push(['TimeDateStamp', '0x' + U.toHex(ctx.pe.timestamp, 8) +
             ' <span class="lab-dim">(no es fecha válida — posible reproducible build o stomping)</span>']);
         }
+      } else if (ctx.elf) {
+        const e = ctx.elf;
+        rows.push(['Arquitectura', U.esc(e.machineName) + ' · ' + e.classLabel + ' · ' + e.endian]);
+        rows.push(['Tipo ELF', U.esc(e.typeName) + (e.isStatic ? ' <span class="lab-dim">(linkeo estático)</span>' : '')]);
+        rows.push(['OS/ABI', U.esc(e.osabiName)]);
       }
       return kvTable(rows);
     },
@@ -60,6 +65,7 @@ Triage.analyzers = (function () {
       ];
       if (ctx.pe && ctx.pe.imphash) rows.push(['imphash', hashCell(ctx.pe.imphash) + ' <span class="lab-dim">(nombres; ordinales como ordN)</span>']);
       if (ctx.pe && ctx.pe.rich && ctx.pe.rich.hash) rows.push(['richhash', hashCell(ctx.pe.rich.hash) + ' <span class="lab-dim">(toolchain de compilación · clustering)</span>']);
+      if (ctx.elf && ctx.elf.buildId) rows.push(['build-id', hashCell(ctx.elf.buildId) + ' <span class="lab-dim">(GNU build-id · clustering / symbol server)</span>']);
       const tlsh = (Triage.fuzzy && Triage.fuzzy.hashBytes) ? Triage.fuzzy.hashBytes(ctx.bytes) : null;
       if (tlsh) rows.push(['TLSH', hashCell(tlsh) + ' <span class="lab-dim">(fuzzy · similitud entre muestras)</span>']);
       else rows.push(['TLSH', '<span class="lab-dim">N/A — archivo chico o de baja complejidad</span>']);
@@ -262,6 +268,85 @@ Triage.analyzers = (function () {
     },
   });
 
+  // ── 4d. ELF structure (binarios Linux/Unix) ─────────────────
+  register({
+    id: 'elf', title: 'ELF Structure', icon: '🐧',
+    applies(ctx) { return !!ctx.elf; },
+    run(ctx) {
+      const e = ctx.elf;
+      let html = kvTable([
+        ['Clase', e.classLabel + ' · ' + e.endian],
+        ['Máquina', U.esc(e.machineName)],
+        ['Tipo', U.esc(e.typeName)],
+        ['OS/ABI', U.esc(e.osabiName)],
+        ['Entry point', '0x' + e.entry.toString(16)],
+        ['Linkeo', e.isStatic ? 'estático (sin intérprete)' : ('dinámico' + (e.interp ? ' — <code>' + U.esc(e.interp) + '</code>' : ''))],
+        ['Símbolos', e.stripped ? '<span class="lab-mit off">stripped</span> <span class="lab-dim">(sin tabla de símbolos de debug)</span>' : 'presentes (.symtab)'],
+      ].concat(e.soname ? [['SONAME', U.esc(e.soname)]] : []));
+
+      // Mitigaciones (análogo a las de PE)
+      const relroOn = e.relro === 'completo';
+      const sec = [
+        badge(e.nx === true, 'NX'),
+        badge(e.isPie, 'PIE'),
+        badge(relroOn, 'RELRO ' + e.relro + (relroOn ? '' : '')),
+        badge(e.canary, 'Stack canary'),
+        badge(e.fortify, 'FORTIFY'),
+        badge(e.bindNow, 'BIND_NOW'),
+      ];
+      html += '<div class="lab-sub">Mitigaciones</div><div class="lab-badges">' + sec.join('') + '</div>';
+      if (e.nx === false) html += '<div class="lab-note">⚠ Pila ejecutable (GNU_STACK con bit X) — inusual y de riesgo.</div>';
+      if (e.rpath || e.runpath) {
+        html += '<div class="lab-note">⚠ ' + (e.rpath ? 'RPATH=<code>' + U.esc(e.rpath) + '</code> ' : '') +
+          (e.runpath ? 'RUNPATH=<code>' + U.esc(e.runpath) + '</code>' : '') +
+          ' — rutas de búsqueda embebidas; potencial vector de secuestro de librerías.</div>';
+      }
+
+      // Dependencias dinámicas (DT_NEEDED) — el equivalente a los imports de PE
+      if (e.needed.length) {
+        html += '<div class="lab-sub">Dependencias dinámicas (' + e.needed.length + ')</div><div class="lab-imps">' +
+          e.needed.map(n => '<span class="lab-imp">' + U.esc(n) + '</span>').join('') + '</div>';
+      } else if (e.isStatic) {
+        html += '<div class="lab-note">Binario estático: trae todo adentro, sin dependencias externas.</div>';
+      }
+
+      // Símbolos importados (UND) con resaltado de los notables
+      if (e.imports.length) {
+        const sus = e.imports.filter(n => ELF_SUSPECT[n]);
+        html += '<div class="lab-sub">Símbolos importados — ' + e.imports.length +
+          ' <span class="lab-dim">(funciones resueltas por el loader' + (sus.length ? '; ' + sus.length + ' notables' : '') + ')</span></div>';
+        html += '<div class="lab-imps">' + e.imports.slice(0, 400).map(n => {
+          const s = ELF_SUSPECT[n];
+          return '<span class="lab-imp' + (s ? ' sus" title="' + U.esc(s) : '') + '">' + U.esc(n) + '</span>';
+        }).join('') + '</div>';
+        if (e.imports.length > 400) html += '<div class="lab-dim" style="font-size:10.5px;margin-top:4px">… ' + (e.imports.length - 400) + ' más (truncado).</div>';
+      }
+
+      // Exportados (sobre todo en .so) — colapsado
+      if (e.exports.length) {
+        html += '<details class="lab-dll"><summary>Símbolos exportados (' + e.exports.length + ')</summary><div class="lab-imps">' +
+          e.exports.slice(0, 400).map(n => '<span class="lab-imp">' + U.esc(n) + '</span>').join('') + '</div></details>';
+      }
+
+      // Inventario de secciones / segmentos
+      if (e.sections.length) {
+        html += '<div class="lab-sub">Secciones (' + e.sections.length + ')</div>';
+        html += '<table class="lab-table"><thead><tr><th>Nombre</th><th>Tipo</th><th>Addr</th><th>Tamaño</th></tr></thead><tbody>';
+        for (const s of e.sections) {
+          if (s.type === 0) continue;
+          html += '<tr><td>' + U.esc(s.name || '—') + '</td><td>' + U.esc(s.typeName) +
+            '</td><td>0x' + s.addr.toString(16) + '</td><td>' + U.formatBytes(s.size) + '</td></tr>';
+        }
+        html += '</tbody></table>';
+      } else {
+        html += '<div class="lab-note">Sin tabla de secciones — el análisis se hizo sobre los program headers ' +
+          '(el .dynamic y las dependencias sobreviven igual al strip).</div>';
+      }
+      if (e.warnings.length) html += '<div class="lab-note">⚠ ' + e.warnings.map(U.esc).join(' · ') + '</div>';
+      return html;
+    },
+  });
+
   // ── 5. Strings ──────────────────────────────────────────────
   register({
     id: 'strings', title: 'Strings', icon: '🔡',
@@ -349,6 +434,23 @@ Triage.analyzers = (function () {
     'isdebuggerpresent': 'anti-debug', 'checkremotedebuggerpresent': 'anti-debug',
     'ntqueryinformationprocess': 'anti-debug / evasión', 'gettickcount': 'anti-sandbox (timing)',
     'adjusttokenprivileges': 'escalada de privilegios', 'openprocesstoken': 'tokens',
+  };
+
+  // Símbolos ELF notables para triage (resaltado en imports). Valor = motivo.
+  const ELF_SUSPECT = {
+    'system': 'ejecuta comando shell', 'popen': 'ejecuta comando shell', 'execve': 'reemplaza proceso (exec)',
+    'execl': 'exec', 'execlp': 'exec', 'execv': 'exec', 'execvp': 'exec',
+    'fork': 'crea proceso', 'vfork': 'crea proceso', 'clone': 'crea proceso/hilo (low-level)',
+    'ptrace': 'anti-debug / inyección', 'dlopen': 'carga librería en runtime', 'dlsym': 'resuelve símbolo en runtime',
+    'mmap': 'mapea memoria (posible RWX)', 'mprotect': 'cambia permisos de memoria (RWX)',
+    'prctl': 'control de proceso (anti-debug / sandbox)', 'syscall': 'syscall directo (evasión)',
+    'socket': 'red / C2', 'connect': 'conexión saliente', 'bind': 'escucha (bind shell)',
+    'listen': 'escucha (bind shell)', 'accept': 'acepta conexión', 'recv': 'socket', 'send': 'socket',
+    'gethostbyname': 'resuelve DNS', 'inet_addr': 'red', 'getaddrinfo': 'resuelve DNS',
+    'setuid': 'cambia UID (privilegios)', 'setgid': 'cambia GID', 'seteuid': 'cambia EUID', 'setresuid': 'privilegios',
+    'crypt': 'cripto', 'unlink': 'borra archivo', 'chmod': 'cambia permisos', 'chown': 'cambia dueño',
+    'inotify_init': 'observa archivos', 'kill': 'señales a procesos', 'getpid': 'reconocimiento',
+    'pthread_create': 'crea hilo', 'daemon': 'se demoniza (persistencia)', 'setsid': 'nueva sesión (daemon)',
   };
 
   return { register, all };

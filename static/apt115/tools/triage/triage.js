@@ -77,9 +77,12 @@ Triage.copy = function (text) {
       dv: new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength),
       file: { name: file.name, size: file.size },
       pe: null,
+      elf: null,
     };
     try { ctx.pe = Triage.pe.parse(bytes); }
     catch (e) { console.error('[triage] PE parse', e); }
+    try { if (!ctx.pe && Triage.elf) ctx.elf = Triage.elf.parse(bytes); }
+    catch (e) { console.error('[triage] ELF parse', e); }
 
     results.innerHTML = '';
     const analyzers = Triage.analyzers.all().filter(a => !a.applies || a.applies(ctx));
