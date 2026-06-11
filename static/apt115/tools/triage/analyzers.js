@@ -60,7 +60,16 @@ Triage.analyzers = (function () {
       ];
       if (ctx.pe && ctx.pe.imphash) rows.push(['imphash', hashCell(ctx.pe.imphash) + ' <span class="lab-dim">(nombres; ordinales como ordN)</span>']);
       if (ctx.pe && ctx.pe.rich && ctx.pe.rich.hash) rows.push(['richhash', hashCell(ctx.pe.rich.hash) + ' <span class="lab-dim">(toolchain de compilación · clustering)</span>']);
+      const tlsh = (Triage.fuzzy && Triage.fuzzy.hashBytes) ? Triage.fuzzy.hashBytes(ctx.bytes) : null;
+      if (tlsh) rows.push(['TLSH', hashCell(tlsh) + ' <span class="lab-dim">(fuzzy · similitud entre muestras)</span>']);
+      else rows.push(['TLSH', '<span class="lab-dim">N/A — archivo chico o de baja complejidad</span>']);
       let html = kvTable(rows, true);
+      if (tlsh) {
+        html += '<div class="tlsh-cmp lab-actions">' +
+          '<input class="tlsh-cmp-in" placeholder="pegá otro TLSH para medir similitud…" spellcheck="false">' +
+          '<button class="rs-copy" onclick="Triage.fuzzy.compare(this)">comparar</button>' +
+          '<span class="tlsh-cmp-out lab-dim"></span></div>';
+      }
       // Lookups opt-in (no consultan solos: sólo abren el link si hacés click)
       if (ctx.pe || true) {
         const s256 = sha256;
