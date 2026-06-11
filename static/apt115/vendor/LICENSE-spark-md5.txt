@@ -1,0 +1,4 @@
+spark-md5 — https://github.com/satazor/js-spark-md5
+Copyright (c) 2014 André Cruz
+Licensed under the MIT License.
+Vendored locally to keep APT115 fully offline (no CDN at runtime).

@@ -1,0 +1,140 @@
+/* APT115 CODEX ARCANUM — LAB / TOOLS widgets
+   Estética terminal-clean, reusa las variables de style.css (paleta violeta,
+   Fira Code). Sobria, sin efectos llamativos. */
+
+.lab-sec { font-family: 'Fira Code', monospace; }
+
+.lab-intro {
+  font-size: 12.5px; color: var(--text2); line-height: 1.6;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-left: 2px solid var(--accent);
+  border-radius: var(--radius-sm); padding: 10px 12px; margin: 10px 0 14px;
+}
+.lab-intro b { color: var(--text); }
+
+/* ── Dropzone ── */
+.lab-drop {
+  border: 1.5px dashed var(--border2); border-radius: var(--radius);
+  background: var(--bg2); padding: 30px 20px; text-align: center;
+  cursor: pointer; transition: all .15s; outline: none;
+}
+.lab-drop:hover, .lab-drop:focus { border-color: var(--accent); background: var(--bg3); }
+.lab-drop.over { border-color: var(--purple); background: var(--bg3); border-style: solid; }
+.lab-drop-ic { font-size: 28px; color: var(--accent); margin-bottom: 6px; }
+.lab-drop-t { font-size: 13px; color: var(--text); font-weight: 700; }
+.lab-drop-s { font-size: 11px; color: var(--text3); margin-top: 4px; }
+
+.lab-loading { color: var(--text2); font-size: 13px; padding: 16px 4px; }
+
+/* ── Panels ── */
+.lab-panel {
+  border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--bg2); margin: 12px 0; overflow: hidden;
+}
+.lab-panel-h {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 9px 12px; cursor: pointer; user-select: none;
+  font-size: 12px; font-weight: 700; letter-spacing: .5px;
+  color: var(--accent); background: var(--bg3);
+  border-bottom: 1px solid var(--border);
+}
+.lab-panel-h:hover { color: var(--purple); }
+.lab-panel-x { transition: transform .2s; color: var(--text3); }
+.lab-panel.collapsed .lab-panel-x { transform: rotate(-90deg); }
+.lab-panel.collapsed .lab-panel-b { display: none; }
+.lab-panel-b { padding: 12px; font-size: 12px; color: var(--text); }
+
+/* ── Tablas clave/valor ── */
+.lab-kv { width: 100%; border-collapse: collapse; }
+.lab-kv th {
+  text-align: left; color: var(--text3); font-weight: 600; white-space: nowrap;
+  padding: 3px 14px 3px 0; vertical-align: top; width: 1%;
+}
+.lab-kv td { color: var(--text); padding: 3px 0; word-break: break-word; }
+.lab-kv.mono td { font-size: 11.5px; }
+
+.lab-table { width: 100%; border-collapse: collapse; margin-top: 6px; font-size: 11.5px; }
+.lab-table th {
+  text-align: left; color: var(--text3); font-weight: 600;
+  border-bottom: 1px solid var(--border); padding: 4px 8px 4px 0;
+}
+.lab-table td { padding: 3px 8px 3px 0; color: var(--text2); border-bottom: 1px solid var(--border); }
+
+.lab-sub {
+  margin: 14px 0 4px; font-size: 10.5px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1px; color: var(--purple);
+}
+.lab-row1 { font-size: 12.5px; color: var(--text); }
+.lab-note {
+  margin-top: 10px; font-size: 11px; color: var(--text2);
+  background: var(--bg3); border-radius: var(--radius-sm); padding: 7px 10px;
+  border-left: 2px solid var(--orange);
+}
+.lab-err {
+  font-size: 12px; color: var(--red);
+  background: rgba(255,45,111,.07); border: 1px solid rgba(255,45,111,.3);
+  border-radius: var(--radius-sm); padding: 8px 10px;
+}
+.lab-dim { color: var(--text3); font-weight: 400; }
+
+/* ── Hashes ── */
+.lab-hash {
+  color: var(--code); cursor: pointer; word-break: break-all;
+  border-bottom: 1px dotted var(--border2);
+}
+.lab-hash:hover { color: var(--purple); }
+.lab-actions { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.lab-ext {
+  font-size: 11px; color: var(--accent); text-decoration: none;
+  border: 1px solid var(--border2); border-radius: var(--radius-sm); padding: 3px 8px;
+}
+.lab-ext:hover { background: var(--bg3); color: var(--purple); }
+
+/* ── Entropía ── */
+.lab-ent { font-weight: 700; padding: 1px 7px; border-radius: 3px; font-size: 11.5px; }
+.lab-ent.lo  { color: var(--green);  background: rgba(0,255,136,.1); }
+.lab-ent.mid { color: var(--orange); background: rgba(255,140,32,.12); }
+.lab-ent.hi  { color: var(--red);    background: rgba(255,45,111,.12); }
+
+/* ── Mitigaciones / badges ── */
+.lab-badges { display: flex; flex-wrap: wrap; gap: 6px; }
+.lab-mit { font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 3px; border: 1px solid var(--border); }
+.lab-mit.on  { color: var(--green); border-color: rgba(0,255,136,.3); }
+.lab-mit.off { color: var(--text3); }
+
+/* ── Imports ── */
+.lab-dll { margin: 4px 0; }
+.lab-dll > summary {
+  cursor: pointer; font-size: 11.5px; color: var(--text); font-weight: 700;
+  padding: 3px 0; list-style: none;
+}
+.lab-dll > summary::-webkit-details-marker { display: none; }
+.lab-dll > summary::before { content: '▸ '; color: var(--text3); }
+.lab-dll[open] > summary::before { content: '▾ '; }
+.lab-imps { display: flex; flex-wrap: wrap; gap: 5px; padding: 4px 0 8px 14px; }
+.lab-imp {
+  font-size: 10.5px; color: var(--text2);
+  background: var(--bg3); border: 1px solid var(--border); border-radius: 3px; padding: 1px 6px;
+}
+.lab-imp.sus { color: var(--red); border-color: rgba(255,45,111,.35); background: rgba(255,45,111,.07); cursor: help; }
+
+/* ── Strings ── */
+.lab-strings { max-height: 320px; overflow: auto; margin-top: 6px; border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.lab-strings.dim { opacity: .85; }
+.lab-str { display: flex; gap: 8px; align-items: baseline; padding: 2px 8px; border-bottom: 1px solid var(--border); }
+.lab-str:last-child { border-bottom: none; }
+.lab-str code { font-size: 11px; color: var(--code); word-break: break-all; white-space: pre-wrap; }
+.lab-off { color: var(--text3); font-size: 10px; white-space: pre; flex-shrink: 0; }
+.lab-tag {
+  font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px;
+  padding: 1px 5px; border-radius: 3px; flex-shrink: 0; min-width: 38px; text-align: center;
+}
+.t-url { color: var(--red); background: rgba(255,45,111,.12); }
+.t-ip { color: var(--orange); background: rgba(255,140,32,.12); }
+.t-path, .t-unc { color: var(--purple); background: rgba(196,113,237,.12); }
+.t-reg { color: var(--teal); background: rgba(0,229,176,.12); }
+.t-b64 { color: var(--text2); background: var(--bg3); }
+.t-email { color: var(--green); background: rgba(0,255,136,.1); }
+
+/* Marca el grupo LAB en el sidebar */
+.lab-sg { color: var(--purple); }

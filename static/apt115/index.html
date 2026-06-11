@@ -4,9 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>APT115 // CODEX ARCANUM</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
+<!-- Fira Code self-hosteada (offline, sin CDN) -->
+<link rel="stylesheet" href="fonts/fira.css">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="tools/tools.css">
 </head>
 <body>
 
@@ -273,5 +274,13 @@
 <script src="data/intel.js"></script>
 <!-- Core logic -->
 <script src="app.js"></script>
+
+<!-- LAB / TOOLS framework + herramientas -->
+<script src="vendor/spark-md5.min.js"></script>
+<script src="tools/registry.js"></script>
+<script src="tools/triage/util.js"></script>
+<script src="tools/triage/pe.js"></script>
+<script src="tools/triage/analyzers.js"></script>
+<script src="tools/triage/triage.js"></script>
 </body>
 </html>
