@@ -197,6 +197,8 @@ Triage.pe = (function () {
 
     pe.imphash = computeImphash(pe);
     pe.importCount = pe.imports.reduce((a, x) => a + x.funcs.length, 0);
+    // Offset de archivo del entry point (lo usa el matcher PEiD). -1 si no resuelve.
+    pe.epOffset = (pe.optional && pe.optional.entryPoint != null) ? rvaToOffset(pe.optional.entryPoint) : -1;
 
     // Rich Header: huella del toolchain de compilación (linker MSVC). Sirve
     // para clustering/atribución — binarios de la misma máquina/compilador

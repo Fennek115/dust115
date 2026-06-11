@@ -302,3 +302,29 @@
 }
 .ioc-item:hover { border-color: var(--accent); }
 .ioc-item code { color: var(--code); }
+
+/* ════ Disassembler (Capstone) ════ */
+.ds-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 10px 0 6px; }
+.ds-table { font-family: 'Fira Code', monospace; }
+.ds-table td { padding: 2px 10px 2px 0; vertical-align: top; border-bottom: 1px solid var(--border); }
+.ds-addr { color: var(--text3); white-space: nowrap; }
+.ds-bytes { color: var(--text2); white-space: nowrap; }
+.ds-mn { font-weight: 700; color: var(--code); }
+.ds-ops { color: var(--text); }
+.ds-jmp { color: var(--orange); }
+.ds-call { color: var(--teal); }
+.ds-ret { color: var(--red); }
+.ds-sys { color: var(--purple); }
+.ds-dim { color: var(--text3); font-weight: 400; }
+.ds-warn { color: var(--red); }
+
+/* ════ Packer / Compiler (PEiD) ════ */
+.peid-hit {
+  font-family: 'Fira Code', monospace; font-size: 11px; font-weight: 700;
+  color: var(--orange); background: rgba(255,140,32,.1); border: 1px solid rgba(255,140,32,.3);
+  border-radius: 3px; padding: 3px 8px;
+}
+.peid-hit.alt { color: var(--text2); background: var(--bg3); border-color: var(--border); font-weight: 400; }
+.peid-list { display: flex; flex-direction: column; gap: 4px; margin-top: 4px; }
+.peid-row { display: flex; align-items: center; gap: 8px; }
+.peid-off { font-family: 'Fira Code', monospace; font-size: 10.5px; color: var(--code); white-space: nowrap; }

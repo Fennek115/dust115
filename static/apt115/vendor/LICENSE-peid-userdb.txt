@@ -1,0 +1,15 @@
+Base de firmas PEiD (data/peid-userdb.js)
+=========================================
+
+4445 firmas de identificación de packers / cryptors / protectores / compiladores
+para archivos PE, en el formato clásico de PEiD (userdb).
+
+Origen: base de datos comunitaria de firmas PEiD, recopilada a lo largo de los
+años con la herramienta "Add Signature" de BoB / BobSoft y aportes de la
+comunidad de análisis de malware. Mirror usado para vendorizar:
+https://github.com/ynadji/peid (userdb.txt).
+
+Las firmas PEiD son datos de identificación de uso comunitario, distribuidos
+históricamente sin una licencia formal única. Se incluyen aquí con fines de
+identificación/clasificación defensiva, con atribución a sus autores originales
+(BoB/BobSoft y contribuyentes de la comunidad PEiD).
