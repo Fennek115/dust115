@@ -242,20 +242,34 @@ window.Triage = window.Triage || {};
     const matched = vec(res.matchedRules);
     let html = '';
 
-    // libyara mete errores Y advertencias en la misma lista (sin nivel). Si una
-    // regla no compila, no aparece en matchedRules; las advertencias no bloquean.
-    if (compileMsgs.length) {
-      html += '<div class="lab-note">⚠ Mensajes del compilador (' + compileMsgs.length + '):' +
+    // libyara mete errores Y advertencias en la misma lista, pero cada mensaje
+    // trae un flag `warning`: true = advertencia (no fatal, la regla igual
+    // compila y escanea); false = error real (aborta TODA la compilación → 0
+    // matches). Las separamos para no alarmar por un warning cosmético.
+    const errors = compileMsgs.filter((m) => m.warning === false);
+    const warnings = compileMsgs.filter((m) => m.warning !== false);
+
+    if (errors.length) {
+      html += '<div class="lab-err">✖ Errores de compilación (' + errors.length + ') — ' +
+        'la compilación se abortó, ninguna regla se evaluó:' +
         '<div class="yr-msgs">' +
-        compileMsgs.map((m) => '<div>línea ' + (m.lineNumber != null ? m.lineNumber : '?') +
+        errors.map((m) => '<div>línea ' + (m.lineNumber != null ? m.lineNumber : '?') +
+          ': ' + esc(m.message) + '</div>').join('') +
+        '</div></div>';
+    }
+    if (warnings.length) {
+      html += '<div class="lab-note lab-dim">⚠ ' + warnings.length + ' advertencia' +
+        (warnings.length === 1 ? '' : 's') + ' del compilador (cosméticas; las reglas igual escanean):' +
+        '<div class="yr-msgs">' +
+        warnings.map((m) => '<div>línea ' + (m.lineNumber != null ? m.lineNumber : '?') +
           ': ' + esc(m.message) + '</div>').join('') +
         '</div></div>';
     }
 
     if (!matched.length) {
       html += '<div class="lab-row1" style="margin-top:8px">' +
-        (compileMsgs.length
-          ? 'Ninguna regla compilada produjo coincidencias.'
+        (errors.length
+          ? 'No hubo coincidencias: la compilación falló (ver errores arriba).'
           : '✓ Sin coincidencias. Las reglas compilaron pero nada matcheó este archivo.') +
         '</div>';
       return html;
