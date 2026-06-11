@@ -45,6 +45,9 @@
     <button class="hdr-btn" onclick="toggleFav()">★ FAVS <span id="favCount">0</span></button>
     <button class="hdr-btn" onclick="toggleHistory()">⏱ HIST</button>
     <button class="hdr-btn" onclick="exportFavs()">↓ EXPORT</button>
+    <button class="hdr-btn" onclick="exportSession()" title="Backup: export full session (favs, notes, custom, intel...) to a .json">⬇ SESSION</button>
+    <button class="hdr-btn" onclick="document.getElementById('sessionImport').click()" title="Import / switch session from a .json (overwrites current state)">⬆ IMPORT</button>
+    <input type="file" id="sessionImport" accept="application/json,.json" style="display:none" onchange="importSession(this)">
     <button class="hdr-btn" onclick="toggleShortcuts()" title="Keyboard Shortcuts">⌨</button>
     <button class="hdr-btn" onclick="toggleIntel()" title="Target Intel / Engagement Notes" style="border-color:rgba(255,45,111,.35);color:var(--red)">🎯 INTEL</button>
     <button class="hdr-btn" onclick="toggleNotesPanel()" title="Side Notes" style="border-color:rgba(255,210,0,.35);color:#ffe066;">📓 NOTES <span id="notesCount" style="font-size:9px;background:rgba(255,210,0,.12);border:1px solid rgba(255,210,0,.3);border-radius:3px;padding:1px 5px;margin-left:2px;">0</span></button>
