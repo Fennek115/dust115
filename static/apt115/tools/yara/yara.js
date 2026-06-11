@@ -115,6 +115,24 @@ window.Triage = window.Triage || {};
     return enginePromise;
   }
 
+  // Packs de reglas vendorizados, cargados perezosamente (data/yara-rules-*.js
+  // setean window.YARA_PACKS[<id>] = { name, count, rules }).
+  const PACK_SRC = { mandiant: 'data/yara-rules-mandiant.js' };
+  const packPromises = {};
+  function ensurePack(id) {
+    if (!packPromises[id]) {
+      const have = window.YARA_PACKS && window.YARA_PACKS[id];
+      packPromises[id] = (have ? Promise.resolve() : loadScript(PACK_SRC[id]))
+        .then(() => {
+          const p = window.YARA_PACKS && window.YARA_PACKS[id];
+          if (!p) throw new Error('el pack se cargó pero no expuso sus reglas');
+          return p;
+        })
+        .catch((e) => { packPromises[id] = null; throw e; });
+    }
+    return packPromises[id];
+  }
+
   // ── UI (devuelta por el analyzer; se inyecta vía innerHTML) ─────────────
   function scan(ctx) {
     lastCtx = ctx;
@@ -124,7 +142,12 @@ window.Triage = window.Triage || {};
       'el archivo nunca sale de tu navegador.</span></div>' +
       '<div class="yr-bar">' +
         '<button class="yr-run" onclick="Triage.yara.run(this)">▶ Escanear</button>' +
-        '<button class="lr-srcb" onclick="Triage.yara.reset(this)">Reglas de ejemplo</button>' +
+        '<select class="yr-pack lr-cat" onchange="Triage.yara.loadPack(this)" ' +
+          'title="Cargar un set de reglas en el editor">' +
+          '<option value="">cargar reglas…</option>' +
+          '<option value="example">Reglas de ejemplo</option>' +
+          '<option value="mandiant">Mandiant Red Team (169)</option>' +
+        '</select>' +
         '<span class="yr-status lab-dim"></span>' +
       '</div>' +
       '<textarea class="yr-editor" spellcheck="false" ' +
@@ -132,9 +155,22 @@ window.Triage = window.Triage || {};
       '<div class="yr-out"></div>';
   }
 
-  function reset(btn) {
-    const ed = btn.closest('.lab-panel-b').querySelector('.yr-editor');
-    if (ed) ed.value = DEFAULT_RULES;
+  // Carga un set de reglas en el editor. Los packs grandes se bajan lazy.
+  async function loadPack(sel) {
+    const val = sel.value;
+    const panel = sel.closest('.lab-panel-b');
+    const ed = panel.querySelector('.yr-editor');
+    sel.value = ''; // el select vuelve al placeholder; es una acción, no un estado
+    if (!val || !ed) return;
+    if (val === 'example') { ed.value = DEFAULT_RULES; setStatus(panel, 'reglas de ejemplo cargadas'); return; }
+    setStatus(panel, 'cargando pack…');
+    try {
+      const p = await ensurePack(val);
+      ed.value = p.rules;
+      setStatus(panel, p.count + ' reglas (' + p.name + ') — ⚠ set grande, el escaneo puede tardar');
+    } catch (e) {
+      setStatus(panel, 'no se pudo cargar el pack: ' + (e && e.message || e));
+    }
   }
 
   function setStatus(panel, msg) {
@@ -264,5 +300,5 @@ window.Triage = window.Triage || {};
     return html;
   }
 
-  window.Triage.yara = { scan, run, reset };
+  window.Triage.yara = { scan, run, loadPack };
 })();

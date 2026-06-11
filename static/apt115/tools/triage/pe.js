@@ -197,7 +197,57 @@ Triage.pe = (function () {
 
     pe.imphash = computeImphash(pe);
     pe.importCount = pe.imports.reduce((a, x) => a + x.funcs.length, 0);
+
+    // Rich Header: huella del toolchain de compilación (linker MSVC). Sirve
+    // para clustering/atribución — binarios de la misma máquina/compilador
+    // comparten el mismo rich hash.
+    try {
+      pe.rich = parseRich(bytes, dv, eLfanew);
+      if (pe.rich && typeof SparkMD5 !== 'undefined') {
+        pe.rich.hash = SparkMD5.ArrayBuffer.hash(pe.rich.clearData.buffer);
+      }
+    } catch (e) { warnings.push('Rich Header ilegible'); }
+
     return pe;
+  }
+
+  // Parsea el Rich Header (entre el DOS stub y el PE header). Devuelve null si
+  // no hay. Estructura: termina en "Rich" + XOR key; hacia atrás, todo está
+  // XOR'd con la key hasta el marcador "DanS"; entre medio hay pares
+  // (comp_id, count) donde comp_id = (productId << 16) | build.
+  function parseRich(bytes, dv, eLfanew) {
+    const DANS = 0x536E6144; // "DanS" LE
+    const end = Math.min(eLfanew, bytes.length - 8);
+    if (end <= 0x40) return null;
+    // "Rich" = 52 69 63 68. Suele estar alineado a 4; scan alineado primero.
+    let richOff = -1;
+    for (let i = 0x40; i < end; i += 4) {
+      if (bytes[i] === 0x52 && bytes[i + 1] === 0x69 && bytes[i + 2] === 0x63 && bytes[i + 3] === 0x68) { richOff = i; break; }
+    }
+    if (richOff < 0) return null;
+    const key = dv.getUint32(richOff + 4, true);
+    // Hacia atrás en pasos de 4, decodificando, hasta "DanS".
+    let dansOff = -1;
+    for (let i = richOff - 4; i >= 0x40; i -= 4) {
+      if ((dv.getUint32(i, true) ^ key) === DANS) { dansOff = i; break; }
+    }
+    if (dansOff < 0) return null;
+    const entries = [];
+    // Saltamos DanS (4) + 3 DWORDs de padding (12) = 16 bytes.
+    for (let i = dansOff + 16; i + 8 <= richOff; i += 8) {
+      const comp = (dv.getUint32(i, true) ^ key) >>> 0;
+      const count = (dv.getUint32(i + 4, true) ^ key) >>> 0;
+      if (comp === 0 && count === 0) continue;
+      entries.push({ prodId: comp >>> 16, build: comp & 0xFFFF, count });
+    }
+    // clear data = DWORDs decodificados desde DanS hasta "Rich" → base del hash.
+    const len = richOff - dansOff;
+    const clear = new Uint8Array(len);
+    const cdv = new DataView(clear.buffer);
+    for (let i = 0; i + 4 <= len; i += 4) {
+      cdv.setUint32(i, (dv.getUint32(dansOff + i, true) ^ key) >>> 0, true);
+    }
+    return { key, dansOff, richOff, entries, clearData: clear, hash: null };
   }
 
   // imphash estilo pefile: "<dll-sin-extensión>.<func>" en minúsculas, en

@@ -59,6 +59,7 @@ Triage.analyzers = (function () {
         ['SHA-256', hashCell(sha256)],
       ];
       if (ctx.pe && ctx.pe.imphash) rows.push(['imphash', hashCell(ctx.pe.imphash) + ' <span class="lab-dim">(nombres; ordinales como ordN)</span>']);
+      if (ctx.pe && ctx.pe.rich && ctx.pe.rich.hash) rows.push(['richhash', hashCell(ctx.pe.rich.hash) + ' <span class="lab-dim">(toolchain de compilación · clustering)</span>']);
       let html = kvTable(rows, true);
       // Lookups opt-in (no consultan solos: sólo abren el link si hacés click)
       if (ctx.pe || true) {
@@ -156,6 +157,29 @@ Triage.analyzers = (function () {
         html += '<div class="lab-note">Sin import table legible (¿packed / sin imports / corrupto?).</div>';
       }
       if (pe.warnings.length) html += '<div class="lab-note">⚠ ' + pe.warnings.map(U.esc).join(' · ') + '</div>';
+      return html;
+    },
+  });
+
+  // ── 4b. Rich Header ─────────────────────────────────────────
+  register({
+    id: 'rich', title: 'Rich Header', icon: '🏷',
+    applies(ctx) { return !!(ctx.pe && ctx.pe.rich && ctx.pe.rich.entries && ctx.pe.rich.entries.length); },
+    run(ctx) {
+      const r = ctx.pe.rich;
+      let html = '<div class="lab-row1">Huella del toolchain MSVC que compiló/linkeó el binario. ' +
+        'Dos muestras con el mismo <b>richhash</b> salieron de la misma cadena de build ' +
+        '<span class="lab-dim">(útil para clustering/atribución)</span>.</div>';
+      if (r.hash) html += kvTable([['richhash', hashCell(r.hash)], ['XOR key', '0x' + (r.key >>> 0).toString(16).toUpperCase()]], true);
+      html += '<div class="lab-sub">Entradas (' + r.entries.length + ')</div>';
+      html += '<table class="lab-table"><thead><tr><th>Product ID</th><th>Build</th><th>Count</th></tr></thead><tbody>';
+      for (const e of r.entries) {
+        html += '<tr><td>0x' + e.prodId.toString(16).toUpperCase().padStart(4, '0') +
+          '</td><td>' + e.build + '</td><td>' + e.count + '</td></tr>';
+      }
+      html += '</tbody></table>';
+      html += '<div class="lab-note">El <b>build</b> identifica la versión exacta del linker/compilador MSVC ' +
+        '(lookupable). La ausencia de Rich Header sugiere binario no-MSVC (MinGW/GCC), reescrito o stomped.</div>';
       return html;
     },
   });

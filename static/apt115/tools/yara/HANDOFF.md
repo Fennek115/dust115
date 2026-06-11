@@ -56,7 +56,12 @@
 ## Para mantener / extender
 
 - Cambiar reglas de ejemplo: editar `DEFAULT_RULES` en `tools/yara/yara.js`.
-  Evitar `import "pe"` / `import "math"`: este build mínimo no trae módulos;
-  usar strings, hex (`{ 4D 5A }`) y `uint8/uint16/uint32` (que sí están).
+  Este build **sí incluye el módulo `pe`** (verificado: `all-yara.yar` de Mandiant,
+  que hace `import "pe"`, compila con 0 errores). `import "math"` no está
+  confirmado — si una regla lo usa, probá antes. `uint8/16/32` van siempre.
+- Packs de reglas: viven en `data/yara-rules-<id>.js` (setean
+  `window.YARA_PACKS[<id>] = {name,count,rules}`), se cargan lazy desde el
+  selector del editor. Hay uno: `mandiant` (169 reglas, BSD-2). Para sumar otro,
+  agregá el data file + una `<option>` en `scan()` + la entrada en `PACK_SRC`.
 - Subir el motor de versión: `npm pack libyara-wasm`, copiar `dist/libyara-wasm.js`
   a `vendor/yara/`. Confirmar que sigue siendo single-file (base64 `AGFzbQ`…).

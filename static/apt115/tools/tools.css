@@ -278,3 +278,27 @@
 .yr-sid { color: var(--accent); white-space: nowrap; }
 .yr-hex { font-family: 'Fira Code', monospace; color: var(--text2); word-break: break-all; }
 .yr-asc { font-family: 'Fira Code', monospace; color: var(--text3); white-space: pre; }
+
+/* ════ IOC Extractor ════ */
+.ioc-bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 8px 0; }
+.ioc-chk { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text2); cursor: pointer; }
+.ioc-grp { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--bg2); margin: 8px 0; overflow: hidden; }
+.ioc-grp-h {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 6px 10px; font-size: 12px; font-weight: 700; color: var(--purple);
+  font-family: 'Fira Code', monospace; background: var(--bg3); border-bottom: 1px solid var(--border);
+}
+.ioc-copyg {
+  font-family: 'Fira Code', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase;
+  color: var(--accent); background: rgba(145,65,172,.08); cursor: pointer;
+  border: 1px solid var(--border2); border-radius: 3px; padding: 2px 8px;
+}
+.ioc-copyg:hover { background: rgba(145,65,172,.18); }
+.ioc-list { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 10px; }
+.ioc-item {
+  font-family: 'Fira Code', monospace; font-size: 11px; cursor: pointer;
+  background: var(--bg3); border: 1px solid var(--border); border-radius: 3px; padding: 3px 8px;
+  max-width: 100%; word-break: break-all;
+}
+.ioc-item:hover { border-color: var(--accent); }
+.ioc-item code { color: var(--code); }
