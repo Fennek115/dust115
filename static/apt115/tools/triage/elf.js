@@ -120,6 +120,10 @@ Triage.elf = (function () {
       return -1;
     }
 
+    // Offset de archivo del entry point (lo usa el analyzer epdisasm). -1 si el
+    // EP cae fuera de los segmentos LOAD mapeados (típico en .bss/anómalo).
+    elf.entryOffset = elf.entry ? vaddrToOffset(elf.entry) : -1;
+
     // ── .dynamic: dependencias y flags (vía program header, sobrevive al strip) ──
     if (dynSeg) {
       const step = is64 ? 16 : 8;
