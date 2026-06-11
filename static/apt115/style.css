@@ -149,8 +149,9 @@ body{
   background:rgba(26,21,37,.9);
   backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
   border-bottom:1px solid rgba(145,65,172,.25);
-  padding:0 14px;height:52px;
+  padding:7px 14px;height:auto;min-height:52px;
   display:flex;align-items:center;gap:10px;flex-shrink:0;
+  flex-wrap:wrap;row-gap:7px;
   position:sticky;top:0;z-index:100;
   box-shadow:0 2px 30px rgba(0,0,0,.8),0 1px 0 rgba(145,65,172,.15);
 }
@@ -202,7 +203,10 @@ body{
   background:rgba(145,65,172,.07);
 }
 #searchInput::placeholder{color:var(--text3);font-family:'Fira Code',monospace;font-size:13px}
-.hdr-right{display:flex;align-items:center;gap:5px;margin-left:auto;flex-shrink:0}
+/* hdr-right siempre baja a su propia fila (fila 2): así los botones y el timer
+   nunca se solapan con la barra de búsqueda, que queda en la fila 1 con el logo */
+.hdr-right{display:flex;align-items:center;gap:5px;flex-basis:100%;
+  justify-content:flex-end;flex-wrap:wrap;row-gap:6px}
 .hdr-btn{
   padding:4px 9px;
   background:rgba(145,65,172,.04);
@@ -1043,12 +1047,11 @@ body.light-mode .hdr-home:hover{color:var(--accent);border-color:var(--accent)}
 
 /* ── RESPONSIVE ── */
 @media (max-width:1280px){
-  .hdr{height:auto;min-height:52px;flex-wrap:wrap;padding:6px 12px;gap:8px}
-  .search-wrap{order:3;flex-basis:100%;max-width:none}
-  .hdr-right{flex-wrap:wrap;justify-content:flex-end}
+  .hdr{padding:6px 12px;gap:8px}
 }
 @media (max-width:720px){
   :root{--sidebar-w:170px}
+  .search-wrap{order:3;flex-basis:100%;max-width:none}
   .hdr-title{font-size:12px;letter-spacing:.5px}
   .hdr-right{gap:4px}
   .hdr-btn,.theme-toggle{font-size:10px;padding:3px 7px}

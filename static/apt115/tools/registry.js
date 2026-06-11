@@ -58,9 +58,18 @@ window.LAB = (function () {
     }
   }
 
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  // Inserta el grupo LAB ARRIBA del todo (justo después de .sb-top), antes
+  // de los grupos del cheatsheet, para que las herramientas sean lo primero
+  // visible en el sidebar (descubribilidad).
   function buildSidebar() {
     const sb = document.getElementById('sidebar');
     if (!sb) return;
+    const top = sb.querySelector('.sb-top');
     const groups = {};
     const order = [];
     tools.forEach(t => {
@@ -68,23 +77,18 @@ window.LAB = (function () {
       if (!groups[g]) { groups[g] = []; order.push(g); }
       groups[g].push(t);
     });
+    let h = '';
     order.forEach(g => {
-      const sg = document.createElement('div');
-      sg.className = 'sg lab-sg';
-      sg.textContent = g;
-      sb.appendChild(sg);
+      h += '<div class="sg lab-sg">' + esc(g) + '</div>';
       groups[g].forEach(t => {
-        const si = document.createElement('div');
-        si.className = 'si';
-        si.dataset.id = t.id;
-        si.title = t.label;
-        si.innerHTML =
+        h += '<div class="si" data-id="' + esc(t.id) + '" title="' + esc(t.label) +
+          '" onclick="LAB.activate(\'' + esc(t.id) + '\')">' +
           '<span class="si-icon">' + (t.icon || '') + '</span>' +
-          '<span class="si-label">' + t.label + '</span>';
-        si.onclick = () => activate(t.id);
-        sb.appendChild(si);
+          '<span class="si-label">' + esc(t.label) + '</span></div>';
       });
     });
+    if (top) top.insertAdjacentHTML('afterend', h);
+    else sb.insertAdjacentHTML('afterbegin', h);
   }
 
   function buildSections() {
