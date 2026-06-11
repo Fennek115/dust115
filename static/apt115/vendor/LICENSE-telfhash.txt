@@ -1,0 +1,19 @@
+telfhash — algorithm attribution
+=================================
+
+APT115 implements the telfhash algorithm (symbol hash for ELF files) in
+tools/triage/elf.js. The algorithm — symbol selection from the dynamic symbol
+table, the exclusion strings/regexes, lowercasing, sorting, comma-joining and
+TLSH hashing — is reimplemented from the reference project:
+
+    trendmicro/telfhash — https://github.com/trendmicro/telfhash
+    Copyright Trend Micro Inc.
+    Licensed under the Apache License, Version 2.0
+
+No source code from the project is bundled; only the algorithm is reproduced for
+interoperability (telfhash values are meant to match the public ones, e.g. those
+shown by VirusTotal). The underlying TLSH hashing is provided by the vendored
+TLSH bundle (vendor/fuzzy/tlsh.min.js, see vendor/LICENSE-tlsh.txt).
+
+A copy of the Apache License, Version 2.0 is available at:
+    http://www.apache.org/licenses/LICENSE-2.0

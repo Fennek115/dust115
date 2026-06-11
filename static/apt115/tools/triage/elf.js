@@ -68,8 +68,11 @@ Triage.elf = (function () {
       classLabel: is64 ? 'ELF64' : 'ELF32', endian: le ? 'little-endian' : 'big-endian',
       entry: null, interp: null, isPie: eType === 3, isStatic: false, stripped: true,
       segments: [], sections: [], needed: [], soname: null, runpath: null, rpath: null,
-      imports: [], exports: [], buildId: null,
+      imports: [], exports: [], buildId: null, telfhash: null,
       nx: null, relro: 'ninguno', bindNow: false, canary: false, fortify: false,
+      cet: null, abiTag: null, lang: null,           // CET (IBT/SHSTK), .note.ABI-tag, runtime (Go/Rust)
+      initArray: 0, hasInit: false, glibcVersions: [], minGlibc: null,
+      packer: { rwx: [], entryAnomaly: false, upx: false, memGrowExec: false, noSections: false },
       warnings,
     };
 
@@ -166,35 +169,41 @@ Triage.elf = (function () {
         }
         elf.sections = sections;
         elf.stripped = !sections.some(s => s.type === 2); // sin SYMTAB → stripped
-        // símbolos dinámicos: importados (UND) y exportados (definidos globales)
+        // símbolos dinámicos: importados (UND), exportados (definidos), telfhash
         const dynsym = sections.find(s => s.type === 11);
         if (dynsym && dynsym.entsize) parseSymbols(dynsym, sections);
-        // build-id desde .note.gnu.build-id
-        const noteSec = sections.find(s => s.name === '.note.gnu.build-id');
-        if (noteSec) elf.buildId = readBuildId(noteSec.offset, noteSec.size);
+        // constructores: .init_array = punteros a código que corre antes de main
+        const initArr = sections.find(s => s.type === 14); // SHT_INIT_ARRAY
+        if (initArr && initArr.size) elf.initArray = Math.floor(initArr.size / (is64 ? 8 : 4));
+        // symbol versioning: .gnu.version_r → versiones de glibc/libs requeridas
+        const verneed = sections.find(s => s.type === 0x6ffffffe); // SHT_GNU_verneed
+        if (verneed) parseVerneed(verneed, sections);
       } else warnings.push('Section headers fuera de rango');
     } else {
-      // binario sin secciones (stripped fuerte): build-id desde PT_NOTE
-      for (const ns of noteSegs) { const bid = readBuildId(ns.offset, ns.filesz); if (bid) { elf.buildId = bid; break; } }
+      elf.packer.noSections = true;
     }
+    // Notas (build-id, CET via gnu.property, ABI-tag) — vía PT_NOTE, robusto al strip
+    for (const ns of noteSegs) scanNotes(ns.offset, ns.filesz);
 
     function parseSymbols(symSec, secs) {
       const strSec = secs[symSec.link];
       const strBase = strSec ? strSec.offset : -1;
       const symStep = is64 ? 24 : 16;
       const count = Math.min(Math.floor(symSec.size / symStep), 20000);
-      const imp = [], exp = [];
+      const imp = [], exp = [], telf = [];
       for (let i = 0; i < count; i++) {
         const b = symSec.offset + i * symStep;
         if (b + symStep > bytes.length) break;
         const nameIdx = u32(b);
-        let info, shndx;
-        if (is64) { info = bytes[b + 4]; shndx = u16(b + 6); }
-        else { info = bytes[b + 12]; shndx = u16(b + 14); }
+        let info, other, shndx;
+        if (is64) { info = bytes[b + 4]; other = bytes[b + 5]; shndx = u16(b + 6); }
+        else { info = bytes[b + 12]; other = bytes[b + 13]; shndx = u16(b + 14); }
         const bind = info >> 4, type = info & 0xf; // bind: 1=GLOBAL 2=WEAK; type: 2=FUNC
         if (!nameIdx) continue;
         const nm = strBase >= 0 ? cstr(strBase + nameIdx, 256) : '';
         if (!nm) continue;
+        // telfhash: funciones GLOBAL con visibilidad DEFAULT (UND + definidas)
+        if (type === 2 && bind === 1 && (other & 0x3) === 0) telf.push(nm);
         if (shndx === 0) { // SHN_UNDEF → símbolo importado (lo resuelve el loader)
           imp.push(nm);
           if (nm === '__stack_chk_fail' || nm === '__stack_chk_guard') elf.canary = true;
@@ -205,30 +214,176 @@ Triage.elf = (function () {
       }
       elf.imports = dedup(imp);
       elf.exports = dedup(exp);
+      elf.telfhash = computeTelfhash(telf);
     }
 
-    function readBuildId(noteOff, noteSize) {
-      // ELF note: namesz(4), descsz(4), type(4), name(namesz, padded4), desc(descsz)
+    // telfhash (Trend Micro, Apache-2.0): hash de clustering sobre la tabla de
+    // símbolos dinámicos. Algoritmo fiel: filtra símbolos comunes/genéricos,
+    // minúscula, ordena, une con comas y aplica TLSH (forcehash). Compatible con
+    // el telfhash público (VirusTotal) por construcción.
+    function computeTelfhash(names) {
+      if (!names || !names.length) return null;
+      if (typeof window.TLSH === 'undefined' || typeof window.TLSH.forcehash !== 'function') return null;
+      const EXC_STR = { __libc_start_main: 1, main: 1, abort: 1, cachectl: 1, cacheflush: 1, puts: 1, atol: 1, malloc_trim: 1 };
+      const EXC_RE = [/^[_.].*$/, /^.*64$/, /^str.*$/, /^mem.*$/];
+      const list = [];
+      for (const n of names) {
+        if (EXC_STR[n]) continue;
+        if (EXC_RE.some((re) => re.test(n))) continue;
+        list.push(n.toLowerCase());
+      }
+      if (!list.length) return null;
+      list.sort();
+      try { return window.TLSH.forcehash(list.join(',')); } catch (e) { return null; }
+    }
+
+    // ELF note: namesz(4), descsz(4), type(4), name(namesz, padded4), desc(descsz)
+    function scanNotes(noteOff, noteSize) {
       const end = Math.min(noteOff + noteSize, bytes.length);
       let p = noteOff;
-      for (let g = 0; g < 32 && p + 12 <= end; g++) {
+      for (let g = 0; g < 64 && p + 12 <= end; g++) {
         const namesz = u32(p), descsz = u32(p + 4), ntype = u32(p + 8);
         const nameOff = p + 12;
         const descOff = nameOff + ((namesz + 3) & ~3);
+        if (descOff + descsz > end) break;
         const name = cstr(nameOff, namesz);
-        if (ntype === 3 && name === 'GNU' && descOff + descsz <= end) { // NT_GNU_BUILD_ID
-          let h = '';
-          for (let i = 0; i < descsz && i < 40; i++) h += bytes[descOff + i].toString(16).padStart(2, '0');
-          return h;
+        if (name === 'GNU' && ntype === 3 && !elf.buildId) { // NT_GNU_BUILD_ID
+          let h = ''; for (let i = 0; i < descsz && i < 40; i++) h += bytes[descOff + i].toString(16).padStart(2, '0');
+          elf.buildId = h;
+        } else if (name === 'GNU' && ntype === 1 && descsz >= 16) { // NT_GNU_ABI_TAG
+          const osn = u32(descOff);
+          const osName = { 0: 'Linux', 1: 'GNU/Hurd', 2: 'Solaris', 3: 'FreeBSD', 4: 'NetBSD' }[osn] || ('OS' + osn);
+          elf.abiTag = osName + ' kernel ≥ ' + u32(descOff + 4) + '.' + u32(descOff + 8) + '.' + u32(descOff + 12);
+        } else if (name === 'GNU' && ntype === 5) { // NT_GNU_PROPERTY_TYPE_0 (CET)
+          parseGnuProperty(descOff, descsz);
+        } else if (name === 'Go' && ntype === 4) { // NT_GO_BUILD_ID
+          // marca Go; la versión la extrae detectRuntime() del buildinfo
+          if (!elf.lang) elf.lang = { name: 'Go', version: null, module: null };
         }
         p = descOff + ((descsz + 3) & ~3);
         if (p <= noteOff) break;
       }
-      return null;
+    }
+    function parseGnuProperty(off, size) {
+      const end = Math.min(off + size, bytes.length);
+      const align = is64 ? 8 : 4;
+      let p = off;
+      for (let g = 0; g < 64 && p + 8 <= end; g++) {
+        const prType = u32(p), prSz = u32(p + 4), dataOff = p + 8;
+        if (dataOff + prSz > end) break;
+        if (prType === 0xc0000002 && prSz >= 4) { // GNU_PROPERTY_X86_FEATURE_1_AND
+          const feat = u32(dataOff);
+          elf.cet = { ibt: (feat & 0x1) !== 0, shstk: (feat & 0x2) !== 0 };
+        }
+        p = dataOff + ((prSz + align - 1) & ~(align - 1));
+        if (p <= off) break;
+      }
+    }
+
+    // .gnu.version_r → librerías y versiones de símbolos requeridas (GLIBC_2.x).
+    function parseVerneed(sec, secs) {
+      const strSec = secs[sec.link];
+      const strBase = strSec ? strSec.offset : -1;
+      if (strBase < 0) return;
+      const vers = {}; let p = sec.offset; const end = Math.min(sec.offset + sec.size, bytes.length);
+      for (let n = 0; n < 64 && p + 16 <= end; n++) {
+        const vn_cnt = u16(p + 2), vn_aux = u32(p + 8), vn_next = u32(p + 12);
+        let a = p + vn_aux;
+        for (let k = 0; k < Math.min(vn_cnt, 128) && a + 16 <= end; k++) {
+          const vna_name = u32(a + 8), vna_next = u32(a + 12);
+          const v = cstr(strBase + vna_name, 64);
+          if (v) vers[v] = 1;
+          if (!vna_next) break; a += vna_next;
+        }
+        if (!vn_next) break; p += vn_next;
+      }
+      elf.glibcVersions = Object.keys(vers).sort();
+      // glibc mínima requerida = la versión GLIBC_x.y más alta
+      let max = null;
+      for (const v of elf.glibcVersions) {
+        const m = /^GLIBC_(\d+)\.(\d+)(?:\.(\d+))?$/.exec(v);
+        if (m) { const tuple = [+m[1], +m[2], +(m[3] || 0)]; if (!max || cmp(tuple, max.t) > 0) max = { s: v, t: tuple }; }
+      }
+      elf.minGlibc = max ? max.s : null;
+      function cmp(a, b) { for (let i = 0; i < 3; i++) if (a[i] !== b[i]) return a[i] - b[i]; return 0; }
+    }
+
+    // Heurística de packer / anti-análisis (estructural).
+    function detectPacker() {
+      for (const s of elf.segments) {
+        if (s.type === 1) { // LOAD
+          const X = (s.flags & 1) !== 0, W = (s.flags & 2) !== 0;
+          if (X && W) elf.packer.rwx.push('0x' + s.vaddr.toString(16));
+          if (X && s.memsz > s.filesz * 1.2 && s.filesz > 0) elf.packer.memGrowExec = true;
+        }
+      }
+      // entry point fuera de .text (si hay secciones)
+      const text = elf.sections.find(s => s.name === '.text');
+      if (text && text.size) elf.packer.entryAnomaly = !(elf.entry >= text.addr && elf.entry < text.addr + text.size);
+      // UPX: magic en el archivo
+      elf.packer.upx = hasBytes([0x55, 0x50, 0x58, 0x21]) || // "UPX!"
+        (hasBytes([0x55, 0x50, 0x58, 0x30]) && hasBytes([0x55, 0x50, 0x58, 0x31])); // UPX0+UPX1
+    }
+    function hasBytes(sig, cap) {
+      const lim = Math.min(cap || bytes.length, bytes.length) - sig.length;
+      for (let i = 0; i <= lim; i++) { let ok = true; for (let j = 0; j < sig.length; j++) if (bytes[i + j] !== sig[j]) { ok = false; break; } if (ok) return true; }
+      return false;
+    }
+
+    // Fingerprint de runtime: Go (buildinfo) y Rust (rutas de build).
+    function detectRuntime() {
+      // Go: magic "\xff Go buildinf:" (14 bytes)
+      const GO = [0xff, 0x20, 0x47, 0x6f, 0x20, 0x62, 0x75, 0x69, 0x6c, 0x64, 0x69, 0x6e, 0x66, 0x3a];
+      const gi = indexOfSig(GO);
+      if (gi >= 0) {
+        if (!elf.lang) elf.lang = { name: 'Go', version: null, module: null };
+        elf.lang.name = 'Go';
+        // formato moderno (Go 1.18+): byte14=ptrSize, byte15=flags; si flags&2,
+        // version y modinfo van inline como strings con prefijo uvarint en off+32
+        const flags = bytes[gi + 15];
+        if ((flags & 0x2) && gi + 32 < bytes.length) {
+          const v = readUvarintStr(gi + 32);
+          if (v && /^go\d/.test(v.s)) { elf.lang.version = v.s; const m = readUvarintStr(v.next); if (m && m.s) elf.lang.module = parseGoModule(m.s); }
+        }
+        // fallback: buscar el string de versión cerca del magic
+        if (!elf.lang.version) { const vs = scanAsciiRe(gi, 256, /go\d+\.\d+(\.\d+)?/); if (vs) elf.lang.version = vs; }
+      }
+      // Rust: rutas /rustc/<hash>/ o el registro de cargo en strings
+      if (!elf.lang && (hasBytes(strToBytes('/rustc/')) || hasBytes(strToBytes('cargo/registry')))) {
+        elf.lang = { name: 'Rust', version: null, module: null };
+        const rv = scanAsciiRe(0, bytes.length, /rustc[ /-]1\.\d+\.\d+/);
+        if (rv) elf.lang.version = '1.' + rv.split('1.')[1];
+      }
+    }
+    function readUvarintStr(p) {
+      let len = 0, shift = 0, q = p;
+      for (let i = 0; i < 10 && q < bytes.length; i++) { const b = bytes[q++]; len |= (b & 0x7f) << shift; if (!(b & 0x80)) break; shift += 7; }
+      if (len <= 0 || len > 4096 || q + len > bytes.length) return null;
+      let s = ''; for (let i = 0; i < len; i++) s += String.fromCharCode(bytes[q + i]);
+      return { s, next: q + len };
+    }
+    function parseGoModule(modinfo) {
+      const m = /(?:^|\n)(?:path|mod)\t([^\t\n]+)/.exec(modinfo);
+      return m ? m[1] : null;
+    }
+    function strToBytes(s) { const a = []; for (let i = 0; i < s.length; i++) a.push(s.charCodeAt(i)); return a; }
+    function indexOfSig(sig) {
+      const lim = bytes.length - sig.length;
+      for (let i = 0; i <= lim; i++) { let ok = true; for (let j = 0; j < sig.length; j++) if (bytes[i + j] !== sig[j]) { ok = false; break; } if (ok) return i; }
+      return -1;
+    }
+    function scanAsciiRe(off, span, re) {
+      const end = Math.min(off + span, bytes.length);
+      let s = '';
+      for (let i = off; i < end; i++) { const c = bytes[i]; s += (c >= 0x20 && c < 0x7f) ? String.fromCharCode(c) : '\n'; }
+      const m = re.exec(s);
+      return m ? m[0] : null;
     }
 
     function dedup(arr) { const seen = {}, out = []; for (const x of arr) if (!seen[x]) { seen[x] = 1; out.push(x); } return out; }
 
+    detectPacker();
+    detectRuntime();
     return elf;
   }
 

@@ -66,6 +66,7 @@ Triage.analyzers = (function () {
       if (ctx.pe && ctx.pe.imphash) rows.push(['imphash', hashCell(ctx.pe.imphash) + ' <span class="lab-dim">(nombres; ordinales como ordN)</span>']);
       if (ctx.pe && ctx.pe.rich && ctx.pe.rich.hash) rows.push(['richhash', hashCell(ctx.pe.rich.hash) + ' <span class="lab-dim">(toolchain de compilación · clustering)</span>']);
       if (ctx.elf && ctx.elf.buildId) rows.push(['build-id', hashCell(ctx.elf.buildId) + ' <span class="lab-dim">(GNU build-id · clustering / symbol server)</span>']);
+      if (ctx.elf && ctx.elf.telfhash) rows.push(['telfhash', hashCell(ctx.elf.telfhash) + ' <span class="lab-dim">(símbolos · clustering ELF, compat. VirusTotal)</span>']);
       const tlsh = (Triage.fuzzy && Triage.fuzzy.hashBytes) ? Triage.fuzzy.hashBytes(ctx.bytes) : null;
       if (tlsh) rows.push(['TLSH', hashCell(tlsh) + ' <span class="lab-dim">(fuzzy · similitud entre muestras)</span>']);
       else rows.push(['TLSH', '<span class="lab-dim">N/A — archivo chico o de baja complejidad</span>']);
@@ -274,28 +275,57 @@ Triage.analyzers = (function () {
     applies(ctx) { return !!ctx.elf; },
     run(ctx) {
       const e = ctx.elf;
-      let html = kvTable([
+      const hdr = [
         ['Clase', e.classLabel + ' · ' + e.endian],
         ['Máquina', U.esc(e.machineName)],
         ['Tipo', U.esc(e.typeName)],
-        ['OS/ABI', U.esc(e.osabiName)],
+        ['OS/ABI', U.esc(e.osabiName) + (e.abiTag ? ' <span class="lab-dim">(' + U.esc(e.abiTag) + ')</span>' : '')],
         ['Entry point', '0x' + e.entry.toString(16)],
         ['Linkeo', e.isStatic ? 'estático (sin intérprete)' : ('dinámico' + (e.interp ? ' — <code>' + U.esc(e.interp) + '</code>' : ''))],
         ['Símbolos', e.stripped ? '<span class="lab-mit off">stripped</span> <span class="lab-dim">(sin tabla de símbolos de debug)</span>' : 'presentes (.symtab)'],
-      ].concat(e.soname ? [['SONAME', U.esc(e.soname)]] : []));
+      ];
+      if (e.soname) hdr.push(['SONAME', U.esc(e.soname)]);
+      if (e.minGlibc) hdr.push(['glibc mínima', U.esc(e.minGlibc) + ' <span class="lab-dim">(versión más alta requerida)</span>']);
+      if (e.lang) hdr.push(['Runtime', '<b>' + U.esc(e.lang.name) + '</b>' +
+        (e.lang.version ? ' ' + U.esc(e.lang.version) : '') +
+        (e.lang.module ? ' <span class="lab-dim">· ' + U.esc(e.lang.module) + '</span>' : '')]);
+      if (e.initArray) hdr.push(['Constructores', e.initArray + ' en .init_array <span class="lab-dim">(corren antes de main)</span>']);
+      let html = kvTable(hdr);
 
-      // Mitigaciones (análogo a las de PE)
+      // Mitigaciones (análogo a las de PE) + CET moderno
       const relroOn = e.relro === 'completo';
       const sec = [
         badge(e.nx === true, 'NX'),
         badge(e.isPie, 'PIE'),
-        badge(relroOn, 'RELRO ' + e.relro + (relroOn ? '' : '')),
+        badge(relroOn, 'RELRO ' + e.relro),
         badge(e.canary, 'Stack canary'),
         badge(e.fortify, 'FORTIFY'),
         badge(e.bindNow, 'BIND_NOW'),
       ];
+      if (e.cet) { sec.push(badge(e.cet.ibt, 'CET/IBT')); sec.push(badge(e.cet.shstk, 'Shadow Stack')); }
       html += '<div class="lab-sub">Mitigaciones</div><div class="lab-badges">' + sec.join('') + '</div>';
       if (e.nx === false) html += '<div class="lab-note">⚠ Pila ejecutable (GNU_STACK con bit X) — inusual y de riesgo.</div>';
+
+      // Heurística de packer / anti-análisis
+      const pk = e.packer, flags = [];
+      if (pk.rwx.length) flags.push('segmento(s) RWX cargados en ' + pk.rwx.join(', ') + ' (W+X simultáneo — típico de loaders / shellcode)');
+      if (pk.upx) flags.push('firma UPX presente (empaquetado)');
+      if (pk.entryAnomaly) flags.push('entry point fuera de .text (posible packing / hijack del flujo)');
+      if (pk.memGrowExec) flags.push('segmento ejecutable con memsz ≫ filesz (stub que se expande al ejecutar)');
+      if (pk.noSections) flags.push('sin tabla de secciones (stripping agresivo / packed)');
+      // entropía por segmento LOAD (datos cifrados/comprimidos)
+      const hot = [];
+      for (const s of e.segments) {
+        if (s.type === 1 && s.filesz && s.offset + s.filesz <= ctx.bytes.length) {
+          const en = U.entropy(ctx.bytes, s.offset, s.offset + s.filesz);
+          if (en >= 7.2) hot.push('LOAD@0x' + s.vaddr.toString(16) + ' (' + en.toFixed(2) + ')');
+        }
+      }
+      if (hot.length) flags.push('entropía alta en ' + hot.join(', ') + ' → datos comprimidos/cifrados');
+      if (flags.length) {
+        html += '<div class="lab-sub">Señales de packing / anti-análisis</div><div class="lab-note">⚠ ' +
+          flags.map(U.esc).join('<br>⚠ ') + '</div>';
+      }
       if (e.rpath || e.runpath) {
         html += '<div class="lab-note">⚠ ' + (e.rpath ? 'RPATH=<code>' + U.esc(e.rpath) + '</code> ' : '') +
           (e.runpath ? 'RUNPATH=<code>' + U.esc(e.runpath) + '</code>' : '') +
