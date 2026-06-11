@@ -342,8 +342,9 @@ body{
 .sg{
   font-family:'Fira Code',monospace;
   font-size:9.5px;font-weight:700;text-transform:uppercase;
-  letter-spacing:1px;color:var(--purple);
-  padding:10px 12px 3px;white-space:nowrap;overflow:hidden;
+  letter-spacing:.5px;color:var(--purple);
+  padding:10px 12px 3px;white-space:normal;line-height:1.35;
+  word-break:break-word;overflow-wrap:anywhere;
   border-top:1px solid rgba(196,113,237,.1);
   margin-top:4px;
 }
