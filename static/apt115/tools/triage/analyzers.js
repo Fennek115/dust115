@@ -193,6 +193,75 @@ Triage.analyzers = (function () {
     },
   });
 
+  // ── 4c. Recursos / Firma (version info, manifest, Authenticode) ──
+  register({
+    id: 'resources', title: 'Recursos / Firma', icon: '🪪',
+    applies(ctx) { return !!(ctx.pe && (ctx.pe.versionInfo || (ctx.pe.resources && ctx.pe.resources.length) || ctx.pe.authenticode)); },
+    run(ctx) {
+      const pe = ctx.pe;
+      const ident = (s) => s ? U.esc([s.CN, s.O].filter(Boolean).join(' · ')) : '—';
+      let html = '';
+
+      // Version info (CompanyName, OriginalFilename, versiones…)
+      const vi = pe.versionInfo;
+      if (vi && (vi.fixed || Object.keys(vi.strings).length)) {
+        html += '<div class="lab-sub">Version info</div>';
+        const rows = [];
+        if (vi.fixed) {
+          rows.push(['FileVersion (fixed)', U.esc(vi.fixed.fileVersion)]);
+          rows.push(['ProductVersion (fixed)', U.esc(vi.fixed.productVersion)]);
+        }
+        const order = ['CompanyName', 'ProductName', 'FileDescription', 'OriginalFilename',
+          'InternalName', 'FileVersion', 'ProductVersion', 'LegalCopyright'];
+        const seen = {};
+        for (const k of order) if (vi.strings[k]) { rows.push([U.esc(k), U.esc(vi.strings[k])]); seen[k] = 1; }
+        for (const k in vi.strings) if (!seen[k]) rows.push([U.esc(k), U.esc(vi.strings[k])]);
+        html += kvTable(rows);
+        html += '<div class="lab-note">Los campos del version info son <b>autodeclarados</b> y triviales de falsificar — ' +
+          'útiles para clustering y para detectar impersonación (un OriginalFilename que no pega con el nombre real).</div>';
+      }
+
+      // Manifest: nivel de ejecución pedido
+      if (pe.manifest && (pe.manifest.level || pe.manifest.uiAccess)) {
+        const lvl = pe.manifest.level || 'asInvoker';
+        const hi = /requireAdministrator|highestAvailable/i.test(lvl);
+        const mrows = [['requestedExecutionLevel',
+          '<span class="lab-mit ' + (hi ? 'off' : 'on') + '">' + U.esc(lvl) + '</span>' +
+          (hi ? ' <span class="lab-dim">(pide elevación de privilegios)</span>' : '')]];
+        if (pe.manifest.uiAccess) mrows.push(['uiAccess', U.esc(pe.manifest.uiAccess)]);
+        html += '<div class="lab-sub">Manifest</div>' + kvTable(mrows);
+      }
+
+      // Authenticode
+      const a = pe.authenticode;
+      html += '<div class="lab-sub">Firma digital (Authenticode)</div>';
+      if (a) {
+        const rows = [['Estado', '<span class="lab-mit on">✓ firma embebida</span> ' +
+          '<span class="lab-dim">(' + U.esc(a.certType) + ' · ' + U.formatBytes(a.size) + ')</span>']];
+        if (a.signer) rows.push(['Firmante', '<b>' + ident(a.signer) + '</b>']);
+        if (a.signingTime) rows.push(['Signing time', U.esc(a.signingTime)]);
+        html += kvTable(rows);
+        if (a.subjects && a.subjects.length) {
+          html += '<details class="lab-dll"><summary>Cadena de certificados (' + a.subjects.length + ')</summary>' +
+            '<div class="lab-imps">' + a.subjects.map(s => '<span class="lab-imp">' + ident(s) + '</span>').join('') + '</div></details>';
+        }
+        html += '<div class="lab-note">La firma prueba <b>integridad y emisor</b>, no inocuidad. ' +
+          'No se valida criptográficamente la cadena ni la revocación acá (eso requiere estado online).</div>';
+      } else {
+        html += '<div class="lab-note">Sin firma Authenticode embebida. Puede estar firmado por ' +
+          '<b>catálogo</b> (.cat del sistema, no verificable offline) o directamente sin firmar.</div>';
+      }
+
+      // Inventario de recursos
+      if (pe.resources && pe.resources.length) {
+        const tot = pe.resources.reduce((s, r) => s + r.count, 0);
+        html += '<div class="lab-sub">Recursos (' + tot + ')</div><div class="lab-imps">' +
+          pe.resources.map(r => '<span class="lab-imp">' + U.esc(r.name) + ' ×' + r.count + '</span>').join('') + '</div>';
+      }
+      return html || '<div class="lab-note">Sin recursos ni firma legibles.</div>';
+    },
+  });
+
   // ── 5. Strings ──────────────────────────────────────────────
   register({
     id: 'strings', title: 'Strings', icon: '🔡',
