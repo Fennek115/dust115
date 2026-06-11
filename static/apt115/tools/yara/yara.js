@@ -117,7 +117,11 @@ window.Triage = window.Triage || {};
 
   // Packs de reglas vendorizados, cargados perezosamente (data/yara-rules-*.js
   // setean window.YARA_PACKS[<id>] = { name, count, rules }).
-  const PACK_SRC = { mandiant: 'data/yara-rules-mandiant.js' };
+  const PACK_SRC = {
+    mandiant: 'data/yara-rules-mandiant.js',
+    gcti: 'data/yara-rules-gcti.js',
+    reversinglabs: 'data/yara-rules-reversinglabs.js',
+  };
   const packPromises = {};
   function ensurePack(id) {
     if (!packPromises[id]) {
@@ -147,6 +151,8 @@ window.Triage = window.Triage || {};
           '<option value="">cargar reglas…</option>' +
           '<option value="example">Reglas de ejemplo</option>' +
           '<option value="mandiant">Mandiant Red Team (169)</option>' +
+          '<option value="gcti">GCTI · Cobalt Strike / C2 (91)</option>' +
+          '<option value="reversinglabs">ReversingLabs · malware (1240)</option>' +
         '</select>' +
         '<span class="yr-status lab-dim"></span>' +
       '</div>' +
