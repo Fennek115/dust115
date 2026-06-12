@@ -59,28 +59,29 @@ test('...', () => { /* assert sobre Triage.<parser>.parse(bytes) */ });
 `loadTriage(...rutas)` evalúa archivos (relativos a `static/apt115/`) en un mismo
 sandbox, en orden. Para imphash, cargá `vendor/spark-md5.min.js` antes de `pe.js`.
 
-## Build (esbuild) — HÍBRIDO (Etapa 3 en curso)
+## Build (esbuild) — HÍBRIDO, PRESERVANDO POSICIÓN (Etapa 3 en curso)
 
 ```bash
-node build.mjs     # → dist/apt115.bundle.js (dev) + apt115.bundle.min.js (prod)
+node build.mjs     # → static/apt115/apt115.bundle.js (DEPLOY) + dist/ (dev)
 ```
 
-Toma los `<script src>` de `index.html` (fuente de verdad del orden) y produce un
-bundle file://-safe. `dist/` está gitignoreado (prueba de build; el artefacto a deployar
-se decide al cablear `index.html`).
+> **WORKFLOW:** `index.html` ya carga UN solo `<script src="apt115.bundle.js">`. Tras
+> **cualquier** cambio de fuente (`src/` o `tools/` o `data/`), hay que correr
+> `node build.mjs` para regenerar `static/apt115/apt115.bundle.js` y **commitear el
+> bundle** junto con el cambio. Editar un `tools/*.js` suelto ya no surte efecto sin rebuild.
 
-El build refleja la migración en curso:
-- **Convertidos a ESM** (`util`/`pe`/`elf`/`macho`, en `src/triage/`): esbuild los
-  empaqueta por **imports reales** (grafo de deps, tree-shaking) y los re-expone en
-  `window.Triage` para los consumidores aún no migrados (back-compat).
-- **Resto** (aún global-script en `static/apt115/tools/`): se **concatena** en orden.
-  Motivo de la concatenación: el código comparte estado entre `<script>` por el scope
-  léxico global (`data/core.js` define `const CORE_DATA=…`; `app.js` hace
-  `const D=[...CORE_DATA,…]`). Empaquetar eso por imports los aísla en módulos y rompe el
-  contrato (probado: esbuild tree-shakeaba core/mitre/intel). Se concatena hasta que esos
-  archivos también exporten/importen explícito.
+El manifiesto de fuentes (orden de carga) vive en `SOURCES` dentro de `build.mjs` (no en
+index.html). Cada fuente se emite **en su posición**:
+- **Convertida a ESM** (en `src/`): esbuild la empaqueta sola (IIFE) y la inserta acá; cuelga
+  su API de `window.Triage` para los consumidores aún no migrados (back-compat).
+- **No convertida**: se concatena su contenido viejo acá. Motivo: comparten estado por el
+  scope léxico global (`data/core.js` define `const CORE_DATA`; `app.js` hace
+  `const D=[...CORE_DATA]`), que el bundling por imports rompería (probado: tree-shakeaba
+  core/mitre/intel). Se concatenan hasta exportar explícito.
 
-A medida que se convierte más, los archivos pasan del bloque concatenado al de imports.
+**Por qué preservar la posición:** los analyzers/tools se registran en orden de carga
+(`Triage.analyzers.register` / `LAB.registerTool`). Insertar cada módulo en su posición
+permite convertir CUALQUIER archivo de a uno sin reordenar la cadena.
 
 Lazy (NO entran al bundle): libyara-wasm, capstone (`import(url)` dinámico), packs YARA,
 peid-userdb, gtfobins/lolbas.
@@ -98,12 +99,13 @@ Convertir un parser = cambiar el wrapper `window.Triage.X = (function(){…})()`
 `*.test.mjs` a `import` del src/, sumar el caso en `_parity.test.mjs`, y agregar la entrada
 en `CONVERTED` de `build.mjs`.
 
-**Hechos:** `util`, `pe`, `elf`, `macho` (los core sin deps de otros módulos). `_parity` y
-los tests de comportamiento en verde.
-**Pendiente:** el resto de parsers/analyzers, los tools del LAB, `app.js` y los `data/`
-(estos últimos comparten `const` global → convertir a `export`/`window.` explícito).
-`_parity.test.mjs` y los viejos `tools/` se borran al completar la migración + flip.
+**Hechos:** `util`, `pe`, `elf`, `macho`, `fuzzy` (parsers/libs order-independent). `_parity`
+y los tests de comportamiento en verde. El **flip ya pasó** (index.html carga el bundle;
+verificado en navegador con `.exe`/ELF reales).
 
-**Pendiente de tu lado** (el "flip", tras verificar el bundle en navegador): cablear
-`index.html` a un `<script>` único, borrar los viejos `tools/` ya migrados, y decidir dónde
-vive el artefacto (commitear en `static/apt115/` vs build en CI).
+**Pendiente:** los analyzers (`pdf`/`eml`/`capa`/`lnk`/`vba`/`peid`/…) y tools del LAB
+(`ioc`/`convert`/…) que se **auto-registran** — ahora convertibles de a uno gracias al build
+position-preserving, pero conviene convertir antes el framework (`analyzers.js`/`registry.js`).
+`cfb.js` necesita reestructura (usa `api` interno + asignación condicional, no el wrapper
+estándar). `app.js` y los `data/` comparten `const` global → pasar a `export`/`window.`
+explícito. `_parity.test.mjs` y los viejos `tools/` ya migrados se borran al completar todo.

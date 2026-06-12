@@ -1,24 +1,30 @@
-// Build de APT115 con esbuild — HÍBRIDO (Etapa 3 en curso).
+// Build de APT115 con esbuild — HÍBRIDO, PRESERVANDO POSICIÓN (Etapa 3 en curso).
 //
 // Produce el bundle único que carga index.html (static/apt115/apt115.bundle.js),
-// file://-safe. index.html ya NO lista las fuentes (carga el bundle), así que el
-// MANIFIESTO de fuentes vive acá (SOURCES), en el orden en que se cargaban.
+// file://-safe. El MANIFIESTO de fuentes (SOURCES) vive acá, en orden de carga
+// (index.html ya no las lista: carga el bundle).
 //
-// Estado de la migración:
-//   - CONVERTIDOS a ESM (src/triage/): esbuild los empaqueta por IMPORTS reales
-//     (grafo de deps, tree-shaking) y los re-expone en window.Triage para los
-//     consumidores aún no migrados (back-compat).
-//   - RESTO: se CONCATENA en orden. Comparten estado por el scope léxico global
-//     (data/core.js define `const CORE_DATA=…`; app.js hace `const D=[...CORE_DATA]`),
-//     que el bundling por imports rompería. Se concatena hasta que exporten explícito.
-// A medida que se convierte más, un archivo pasa de SOURCES (concat) a CONVERTED
-// (import). Cuando todo sea ESM, desaparece la concatenación.
+// Cada fuente se emite EN SU POSICIÓN del manifiesto:
+//   - CONVERTIDA a ESM (src/): esbuild la empaqueta sola (IIFE) y se inserta acá.
+//   - NO convertida: se concatena su contenido viejo acá.
+// Preservar la posición es CLAVE: los analyzers/tools se registran en orden de
+// carga (Triage.analyzers.register / LAB.registerTool), así que mover un archivo
+// de lugar cambiaría la cadena. Insertar en posición permite convertir CUALQUIER
+// archivo de a uno sin reordenar nada.
 //
-// Lazy fuera del bundle (se cargan en runtime, no son fuentes): libyara-wasm,
-// capstone (import(url) dinámico), packs YARA, peid-userdb, gtfobins/lolbas.
+// Los módulos convertidos cuelgan su API de window.Triage (back-compat con los
+// consumidores aún no migrados). Comparten estado por globals, no por imports;
+// por eso cada uno se empaqueta independiente (sin grafo compartido).
+//
+// Las fuentes que comparten scope léxico global (data/core.js define `const
+// CORE_DATA`; app.js hace `const D=[...CORE_DATA]`) deben seguir CONCATENADAS
+// hasta que exporten explícito — el bundling por imports las aislaría.
+//
+// Lazy fuera del bundle: libyara-wasm, capstone (import(url) dinámico), packs YARA,
+// peid-userdb, gtfobins/lolbas.
 //
 // Salidas: static/apt115/apt115.bundle.js (DEPLOY, minificado, se commitea) +
-// apt115-dev/dist/ (dev sin minificar + bloque ESM aislado, gitignoreado).
+// apt115-dev/dist/apt115.bundle.js (dev sin minificar, gitignoreado).
 // Regenerar con `node build.mjs` tras cada cambio de fuente, antes de commitear.
 
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
@@ -30,7 +36,7 @@ const APT = path.resolve(HERE, '..', 'static', 'apt115');
 const SRC = path.join(HERE, 'src');
 const OUT = path.join(HERE, 'dist');
 
-// Manifiesto de fuentes, en orden de carga (era el orden de los <script> de index.html).
+// Manifiesto de fuentes, en orden de carga.
 const SOURCES = [
   'data/core.js', 'data/mitre.js', 'data/intel.js', 'app.js',
   'vendor/spark-md5.min.js', 'vendor/fuzzy/tlsh.min.js',
@@ -45,49 +51,43 @@ const SOURCES = [
   'tools/stego/stego.js', 'tools/urlinsp/urlinsp.js', 'tools/cryptolab/cryptolab.js',
 ];
 
-// Módulos ya convertidos a ESM: ruta vieja → export en src/.
+// Módulos ya convertidos a ESM. `attach`: nombre del export → window.Triage.<attach>.
 const CONVERTED = {
-  'tools/triage/util.js': { mod: './triage/util.js', name: 'util' },
-  'tools/triage/pe.js': { mod: './triage/pe.js', name: 'pe' },
-  'tools/triage/elf.js': { mod: './triage/elf.js', name: 'elf' },
-  'tools/triage/macho.js': { mod: './triage/macho.js', name: 'macho' },
+  'tools/triage/util.js': { mod: './triage/util.js', attach: 'util' },
+  'tools/triage/pe.js': { mod: './triage/pe.js', attach: 'pe' },
+  'tools/triage/elf.js': { mod: './triage/elf.js', attach: 'elf' },
+  'tools/triage/macho.js': { mod: './triage/macho.js', attach: 'macho' },
+  'tools/triage/fuzzy.js': { mod: './triage/fuzzy.js', attach: 'fuzzy' },
 };
 
-// 1) Bloque ESM: importa los convertidos y los cuelga de window.Triage (back-compat).
-const names = Object.values(CONVERTED).map((c) => c.name);
-const entry =
-  Object.values(CONVERTED).map((c) => `import { ${c.name} } from ${JSON.stringify(c.mod)};`).join('\n') +
-  `\nwindow.Triage = window.Triage || {};\n` +
-  names.map((n) => `window.Triage.${n} = ${n};`).join('\n') + '\n';
-
-const esmBuild = await esbuild.build({
-  stdin: { contents: entry, resolveDir: SRC, sourcefile: '_esm-entry.js', loader: 'js' },
-  bundle: true, format: 'iife', target: ['es2020'], legalComments: 'none', write: false,
-});
-const esmBlock = esmBuild.outputFiles[0].text;
-
-// 2) Resto: concatenación de las fuentes NO convertidas, en orden. El `;\n` evita ASI.
-let rest = '';
-for (const s of SOURCES) {
-  if (CONVERTED[s]) continue; // va en el bloque ESM
-  rest += `\n/* ===== ${s} ===== */\n;\n` + readFileSync(path.join(APT, s), 'utf8') + '\n';
+// Empaqueta un módulo ESM convertido a un IIFE que lo cuelga de window.Triage.
+async function bundleConverted(c) {
+  const entry =
+    `import { ${c.attach} } from ${JSON.stringify(c.mod)};\n` +
+    `window.Triage = window.Triage || {};\nwindow.Triage.${c.attach} = ${c.attach};\n`;
+  const r = await esbuild.build({
+    stdin: { contents: entry, resolveDir: SRC, sourcefile: `_${c.attach}.js`, loader: 'js' },
+    bundle: true, format: 'iife', target: ['es2020'], legalComments: 'none', write: false,
+  });
+  return r.outputFiles[0].text;
 }
 
-// El bloque ESM va PRIMERO: deja util/pe/elf/macho en window.Triage antes de que
-// corran sus consumidores (analyzers/triage/capa), que aparecen después en el resto.
-const header = '// APT115 — bundle generado por apt115-dev/build.mjs. NO editar a mano.\n';
-const bundle = header +
-  '\n/* ===== [esbuild] módulos ESM convertidos → window.Triage ===== */\n' + esmBlock +
-  '\n/* ===== [concat] fuentes aún no migradas ===== */\n' + rest;
+// Arma el bundle emitiendo cada fuente EN SU POSICIÓN.
+const chunks = await Promise.all(SOURCES.map(async (s) => {
+  const c = CONVERTED[s];
+  if (c) return `\n/* ===== ${s} → ESM (esbuild) ===== */\n` + await bundleConverted(c) + '\n';
+  return `\n/* ===== ${s} ===== */\n;\n` + readFileSync(path.join(APT, s), 'utf8') + '\n'; // `;\n` evita ASI
+}));
+
+const bundle = '// APT115 — bundle generado por apt115-dev/build.mjs. NO editar a mano.\n' + chunks.join('');
 
 mkdirSync(OUT, { recursive: true });
 writeFileSync(path.join(OUT, 'apt115.bundle.js'), bundle);
-writeFileSync(path.join(OUT, 'esm-block.js'), esmBlock);
 const min = await esbuild.transform(bundle, { minify: true, legalComments: 'none', target: 'es2020' });
 writeFileSync(path.join(OUT, 'apt115.bundle.min.js'), min.code);
 writeFileSync(path.join(APT, 'apt115.bundle.js'), min.code); // artefacto de DEPLOY
 
+const converted = Object.values(CONVERTED).map((c) => c.attach);
 const kb = (s) => (Buffer.byteLength(s) / 1024).toFixed(0);
-console.log(`fuentes: ${SOURCES.length} (ESM import-bundle: ${names.join(', ')} | concat: ${SOURCES.length - names.length})`);
-console.log(`  deploy: static/apt115/apt115.bundle.js  ${kb(min.code)} KB (minificado)`);
-console.log(`  dev:    dist/apt115.bundle.js            ${kb(bundle)} KB`);
+console.log(`fuentes: ${SOURCES.length} (ESM: ${converted.join(', ')} | concat: ${SOURCES.length - converted.length})`);
+console.log(`  deploy: static/apt115/apt115.bundle.js  ${kb(min.code)} KB`);

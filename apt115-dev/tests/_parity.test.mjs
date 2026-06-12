@@ -25,12 +25,14 @@ globalThis.window = globalThis;
 
 // Viejo (global-script en sandbox, sin spark/tlsh) vs nuevo (ESM).
 const old = loadTriage(
-  'tools/triage/util.js', 'tools/triage/pe.js', 'tools/triage/elf.js', 'tools/triage/macho.js'
+  'tools/triage/util.js', 'tools/triage/pe.js', 'tools/triage/elf.js',
+  'tools/triage/macho.js', 'tools/triage/fuzzy.js'
 ).Triage;
 const { util } = await import('../src/triage/util.js');
 const { pe } = await import('../src/triage/pe.js');
 const { elf } = await import('../src/triage/elf.js');
 const { macho } = await import('../src/triage/macho.js');
+const { fuzzy } = await import('../src/triage/fuzzy.js');
 
 test('util: detectType / entropy / extractStrings idénticos', () => {
   const samples = [
@@ -63,6 +65,7 @@ test('elf.parse idéntico (sin TLSH en ninguno)', { skip: readMagic('/bin/ls', 0
 
 test('los módulos ESM exportan la misma superficie pública', () => {
   assert.deepEqual(Object.keys(util).sort(), Object.keys(old.util).sort());
+  assert.deepEqual(Object.keys(fuzzy).sort(), Object.keys(old.fuzzy).sort());
   assert.equal(typeof pe.parse, typeof old.pe.parse);
   assert.equal(typeof elf.parse, typeof old.elf.parse);
   assert.equal(typeof macho.parse, typeof old.macho.parse);
