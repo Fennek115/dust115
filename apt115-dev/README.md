@@ -120,14 +120,15 @@ Tools del LAB SIN núcleo testeable (convert/netcalc/lolref/revshell) son IIFE d
 side-effect (registran guardado por `if (window.LAB)`). Se marcan `export const X = (function
 (){…})()` aunque el IIFE no retorne nada (desambigua ESM; el registro corre igual).
 
-**Hechos (24 módulos ESM):** libs/parsers `util`, `pe`, `elf`, `macho`, `fuzzy`, `vba`; framework
-`registry` + `analyzers`; analyzers `capa`, `lnk`, `pdf`, `eml`, `maldoc`, `epdisasm`, `steg`,
-`yara`; tools del LAB `ioc`, `urlinsp`, `cryptolab`, `convert`, `netcalc`, `lolref`, `revshell`,
-`stego`. La **cadena de analyzers quedó completa** (fileinfo→…→steg) y verificada en sandbox.
+**Hechos (28 módulos ESM):** TODO el código de componentes — libs/parsers (`util`/`pe`/`elf`/
+`macho`/`fuzzy`/`vba`), framework (`registry`/`analyzers`/`capstone-core`), los 18 analyzers
+(cadena completa fileinfo→…→steg, incl. `peid`/`epdisasm`/`yara`) y todos los tools del LAB
+(`ioc`/`urlinsp`/`cryptolab`/`convert`/`netcalc`/`lolref`/`revshell`/`stego`/`disasm`/`triage`).
+Verificado en sandbox: cadena de analyzers, `LAB.tools`, y el servicio `window.LAB.capstone`.
 `_parity` + tests en verde. **Flip pasó** (verificado en navegador).
 
-**Pendiente (13 concat):** `peid` (window sin guardar + userdb lazy + `const U=Triage.util` al
-cargar), `triage` (orquestador), `disasm`+`capstone-core` (servicio `window.LAB.capstone`, coupled),
-`app.js`, los `data/` (`core`/`mitre`/`intel`/`magic-extra`/`payloads`, comparten `const` global →
-`export`/`window.` explícito), `cfb.js` (reestructura). Vendor (`spark-md5`/`tlsh`) no se convierte.
-`_parity.test.mjs` y los viejos `tools/` se borran al final.
+**Pendiente (9 concat, el tramo delicado):** los `data/` (`core`/`mitre`/`intel` declaran `const
+X=[…]` compartido por scope léxico con `app.js` → cambiar a `window.X=` para convertirlos;
+`magic-extra`/`payloads` ya usan `window.`), `app.js` (monolito 1200 LOC, Etapa 4) y `cfb.js`
+(reestructura: `api` interno + asignación condicional). Vendor (`spark-md5`/`tlsh`) NO se convierte
+(third-party minificado). `_parity.test.mjs` y los viejos `tools/` se borran al final.

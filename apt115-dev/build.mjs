@@ -57,6 +57,10 @@ const SOURCES = [
 // se registra/auto-inicializa al cargar).
 const CONVERTED = {
   'tools/registry.js': './lab/registry.js',
+  'tools/capstone-core.js': './lab/capstone-core.js',
+  'tools/triage/peid.js': './triage/peid.js',
+  'tools/triage/triage.js': './triage/triage.js',
+  'tools/disasm/disasm.js': './tools/disasm.js',
   'tools/triage/util.js': './triage/util.js',
   'tools/triage/pe.js': './triage/pe.js',
   'tools/triage/elf.js': './triage/elf.js',
