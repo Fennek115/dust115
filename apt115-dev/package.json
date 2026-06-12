@@ -1,0 +1,10 @@
+{
+  "name": "apt115-dev",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Tooling de desarrollo de APT115 CODEX ARCANUM: tests de regresión de los parsers y (próximamente) build con esbuild. NO se sirve ni se deploya: vive fuera de static/.",
+  "scripts": {
+    "test": "node --test"
+  }
+}
