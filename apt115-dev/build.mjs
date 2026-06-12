@@ -56,6 +56,11 @@ const SOURCES = [
 // efecto secundario (esto generaliza a módulos con side effects: el framework
 // se registra/auto-inicializa al cargar).
 const CONVERTED = {
+  'data/core.js': './data/core.js',
+  'data/mitre.js': './data/mitre.js',
+  'data/intel.js': './data/intel.js',
+  'data/magic-extra.js': './data/magic-extra.js',
+  'tools/revshell/payloads.js': './data/payloads.js',
   'tools/registry.js': './lab/registry.js',
   'tools/capstone-core.js': './lab/capstone-core.js',
   'tools/triage/peid.js': './triage/peid.js',
@@ -65,6 +70,7 @@ const CONVERTED = {
   'tools/triage/pe.js': './triage/pe.js',
   'tools/triage/elf.js': './triage/elf.js',
   'tools/triage/macho.js': './triage/macho.js',
+  'tools/triage/cfb.js': './triage/cfb.js',
   'tools/triage/analyzers.js': './triage/analyzers.js',
   'tools/triage/capa.js': './triage/capa.js',
   'tools/triage/lnk.js': './triage/lnk.js',

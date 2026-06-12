@@ -120,15 +120,14 @@ Tools del LAB SIN núcleo testeable (convert/netcalc/lolref/revshell) son IIFE d
 side-effect (registran guardado por `if (window.LAB)`). Se marcan `export const X = (function
 (){…})()` aunque el IIFE no retorne nada (desambigua ESM; el registro corre igual).
 
-**Hechos (28 módulos ESM):** TODO el código de componentes — libs/parsers (`util`/`pe`/`elf`/
-`macho`/`fuzzy`/`vba`), framework (`registry`/`analyzers`/`capstone-core`), los 18 analyzers
-(cadena completa fileinfo→…→steg, incl. `peid`/`epdisasm`/`yara`) y todos los tools del LAB
-(`ioc`/`urlinsp`/`cryptolab`/`convert`/`netcalc`/`lolref`/`revshell`/`stego`/`disasm`/`triage`).
-Verificado en sandbox: cadena de analyzers, `LAB.tools`, y el servicio `window.LAB.capstone`.
-`_parity` + tests en verde. **Flip pasó** (verificado en navegador).
+**Hechos (34 módulos ESM — Etapa 3 esencialmente completa):** TODO el código está en ESM —
+libs/parsers, framework, los 18 analyzers (cadena completa), todos los tools del LAB, y los
+`data/` (`core`/`mitre`/`intel` pasaron de `const X=[…]` a `window.X=`; `app.js` los lee igual,
+bare→global; `magic-extra`/`payloads` ya eran `window.`). `cfb` resultó ser lib estándar como
+`vba` (no necesitaba reestructura). `_parity` + tests en verde; verificado en sandbox que app.js
+lee los data globals y todo registra. **Flip pasó** (verificado en navegador).
 
-**Pendiente (9 concat, el tramo delicado):** los `data/` (`core`/`mitre`/`intel` declaran `const
-X=[…]` compartido por scope léxico con `app.js` → cambiar a `window.X=` para convertirlos;
-`magic-extra`/`payloads` ya usan `window.`), `app.js` (monolito 1200 LOC, Etapa 4) y `cfb.js`
-(reestructura: `api` interno + asignación condicional). Vendor (`spark-md5`/`tlsh`) NO se convierte
-(third-party minificado). `_parity.test.mjs` y los viejos `tools/` se borran al final.
+**Solo quedan 3 en concat:** `app.js` (monolito 1200 LOC → se convierte al partirlo en la
+**Etapa 4**) y los 2 vendor `spark-md5`/`tlsh` (third-party minificado, **no se convierten** —
+quedan como concat permanente). Al completar la Etapa 4: borrar los viejos `tools/`+`data/` ya
+migrados de `static/apt115/` y `_parity.test.mjs`.
