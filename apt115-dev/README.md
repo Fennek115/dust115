@@ -116,12 +116,17 @@ Los **tools del LAB** (ioc/urlinsp/cryptolab/…) son igual a los analyzers pero
 IIFE→`export const X`, `module.exports`→`return`. (cryptolab: el `return CORE` va al final, tras
 `window.__CRYPTOLAB_CORE`; se borró el `module.exports = CORE` muerto que avisaba esbuild.)
 
-**Hechos (14 módulos ESM):** libs/parsers `util`, `pe`, `elf`, `macho`, `fuzzy`; framework
-`registry` (LAB) + `analyzers`; analyzers `capa`, `lnk`, `pdf`, `eml`; tools del LAB `ioc`,
-`urlinsp`, `cryptolab`. `_parity` + tests en verde; cadena de analyzers y `LAB.tools` idénticos
-(verificado en sandbox). El **flip ya pasó** (verificado en navegador con `.exe`/ELF).
+Tools del LAB SIN núcleo testeable (convert/netcalc/lolref/revshell) son IIFE de puro
+side-effect (registran guardado por `if (window.LAB)`). Se marcan `export const X = (function
+(){…})()` aunque el IIFE no retorne nada (desambigua ESM; el registro corre igual).
 
-**Pendiente:** analyzers `vba`/`maldoc`/`peid`/`epdisasm`/`steg`/`yara`/`triage`, tools del LAB
-`convert`/`revshell`/`netcalc`/`lolref`/`disasm`/`stego`, `capstone-core`, `app.js` y los `data/`
-(comparten `const` global → `export`/`window.` explícito). `cfb.js` necesita reestructura (usa
-`api` interno + asignación condicional). `_parity.test.mjs` y los viejos `tools/` se borran al final.
+**Hechos (19 módulos ESM):** libs/parsers `util`, `pe`, `elf`, `macho`, `fuzzy`; framework
+`registry` + `analyzers`; analyzers `capa`, `lnk`, `pdf`, `eml`; tools del LAB `ioc`, `urlinsp`,
+`cryptolab`, `convert`, `netcalc`, `lolref`, `revshell`, `stego`. `_parity` + tests en verde;
+`LAB.tools` y la cadena de analyzers verificados en sandbox. **Flip pasó** (verificado en navegador).
+
+**Pendiente:** analyzers `vba`/`maldoc`/`peid`/`epdisasm`/`steg`/`yara`/`triage`, `disasm` +
+`capstone-core` (servicio compartido `window.LAB.capstone`, coupled — convertir juntos), `app.js`,
+los `data/` (`core`/`mitre`/`intel`/`magic-extra`/`payloads`, comparten `const` global → `export`/
+`window.` explícito). `cfb.js` necesita reestructura. Vendor (`spark-md5`/`tlsh`) no se convierte
+(third-party). `_parity.test.mjs` y los viejos `tools/` se borran al final.

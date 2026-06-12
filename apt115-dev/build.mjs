@@ -70,6 +70,11 @@ const CONVERTED = {
   'tools/ioc/ioc.js': './tools/ioc.js',
   'tools/urlinsp/urlinsp.js': './tools/urlinsp.js',
   'tools/cryptolab/cryptolab.js': './tools/cryptolab.js',
+  'tools/convert/convert.js': './tools/convert.js',
+  'tools/netcalc/netcalc.js': './tools/netcalc.js',
+  'tools/lolref/lolref.js': './tools/lolref.js',
+  'tools/revshell/revshell.js': './tools/revshell.js',
+  'tools/stego/stego.js': './tools/stego.js',
 };
 
 // Empaqueta un módulo ESM convertido a un IIFE (import por efecto secundario).
