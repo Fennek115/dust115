@@ -2,9 +2,8 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { requireModule } from './_load.mjs';
 
-const lnk = requireModule('tools/triage/lnk.js');
+import { lnk } from '../src/triage/lnk.js';
 
 const CLSID = [0x01, 0x14, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46];
 

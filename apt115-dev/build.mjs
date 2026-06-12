@@ -62,6 +62,10 @@ const CONVERTED = {
   'tools/triage/elf.js': './triage/elf.js',
   'tools/triage/macho.js': './triage/macho.js',
   'tools/triage/analyzers.js': './triage/analyzers.js',
+  'tools/triage/capa.js': './triage/capa.js',
+  'tools/triage/lnk.js': './triage/lnk.js',
+  'tools/triage/pdf.js': './triage/pdf.js',
+  'tools/triage/eml.js': './triage/eml.js',
   'tools/triage/fuzzy.js': './triage/fuzzy.js',
 };
 

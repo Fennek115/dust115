@@ -105,12 +105,18 @@ Los módulos convertidos **se auto-cuelgan de window internamente** (`if (typeof
 (`registry`/`analyzers`) capta sus deps al cargar (`const U = Triage.util`), por eso el build
 position-preserving es indispensable: `util` corre antes que `analyzers`.
 
-**Hechos:** parsers/libs `util`, `pe`, `elf`, `macho`, `fuzzy`; framework `registry` (LAB) y
-`analyzers` (registra los 10 core; orden idéntico al viejo, verificado). `_parity` + tests en
-verde. El **flip ya pasó** (index.html carga el bundle; verificado en navegador con `.exe`/ELF).
+Los **analyzers** que se registran aparte (pdf/eml/capa/lnk/…) tienen otra forma: un IIFE
+`(function(){ …helpers…; Tri.analyzers.register({…}); module.exports={…}; })()`. Conversión:
+`(function () {` → `export const X = (function () {` y el `module.exports={…}` interno →
+`return {…}`. El registro queda como **side effect dentro del IIFE** (en Node sin window se
+saltea, guardado por `if (Tri && Tri.analyzers)`), y el `export const X` da los helpers al test.
 
-**Pendiente:** los analyzers que se registran aparte (`capa`/`vba`/`maldoc`/`lnk`/`pdf`/`eml`/
-`peid`/`epdisasm`/`steg`/`triage`/`yara`) y los tools del LAB (`ioc`/`convert`/`revshell`/…),
-ahora convertibles de a uno. `cfb.js` necesita reestructura (usa `api` interno + asignación
-condicional). `app.js` y los `data/` comparten `const` global → pasar a `export`/`window.`
-explícito. `_parity.test.mjs` y los viejos `tools/` ya migrados se borran al completar todo.
+**Hechos (11 módulos ESM):** libs/parsers `util`, `pe`, `elf`, `macho`, `fuzzy`; framework
+`registry` (LAB) + `analyzers`; analyzers `capa`, `lnk`, `pdf`, `eml`. `_parity` + tests en
+verde; cadena de registro idéntica (verificado en sandbox). El **flip ya pasó** (verificado en
+navegador con `.exe`/ELF).
+
+**Pendiente:** analyzers `vba`/`maldoc`/`peid`/`epdisasm`/`steg`/`yara`/`triage`, tools del LAB
+(`ioc`/`convert`/`revshell`/…), `app.js` y los `data/` (comparten `const` global → pasar a
+`export`/`window.` explícito). `cfb.js` necesita reestructura (usa `api` interno + asignación
+condicional). `_parity.test.mjs` y los viejos `tools/` ya migrados se borran al completar todo.

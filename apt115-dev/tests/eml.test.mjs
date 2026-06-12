@@ -2,9 +2,9 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { requireModule, bytesOf } from './_load.mjs';
+import { bytesOf } from './_load.mjs';
 
-const eml = requireModule('tools/triage/eml.js');
+import { eml } from '../src/triage/eml.js';
 
 const SAMPLE = [
   'Return-Path: <bounce@mailer.ru>',

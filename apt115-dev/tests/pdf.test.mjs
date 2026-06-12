@@ -2,9 +2,9 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { requireModule, bytesOf } from './_load.mjs';
+import { bytesOf } from './_load.mjs';
 
-const pdf = requireModule('tools/triage/pdf.js');
+import { pdf } from '../src/triage/pdf.js';
 
 test('isPdf ubica %PDF en el primer KB', () => {
   assert.equal(pdf.isPdf(bytesOf('%PDF-1.7\n')), 0);

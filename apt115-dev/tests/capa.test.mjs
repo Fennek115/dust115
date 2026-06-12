@@ -4,9 +4,8 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { requireModule } from './_load.mjs';
 
-const capa = requireModule('tools/triage/capa.js');
+import { capa } from '../src/triage/capa.js';
 
 test('normApi: variantes A/W y alias Nt/Zw', () => {
   assert.deepEqual(capa.normApi('CreateFileA'), ['createfilea', 'createfile']);
