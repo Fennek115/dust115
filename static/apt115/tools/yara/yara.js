@@ -121,6 +121,7 @@ window.Triage = window.Triage || {};
     mandiant: 'data/yara-rules-mandiant.js',
     gcti: 'data/yara-rules-gcti.js',
     reversinglabs: 'data/yara-rules-reversinglabs.js',
+    'signature-base': 'data/yara-rules-signature-base.js',
   };
   const packPromises = {};
   function ensurePack(id) {
@@ -153,6 +154,7 @@ window.Triage = window.Triage || {};
           '<option value="mandiant">Mandiant Red Team (169)</option>' +
           '<option value="gcti">GCTI · Cobalt Strike / C2 (91)</option>' +
           '<option value="reversinglabs">ReversingLabs · malware (1240)</option>' +
+          '<option value="signature-base">signature-base · Florian Roth (5271)</option>' +
         '</select>' +
         '<span class="yr-status lab-dim"></span>' +
       '</div>' +
