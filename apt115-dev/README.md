@@ -120,13 +120,14 @@ Tools del LAB SIN núcleo testeable (convert/netcalc/lolref/revshell) son IIFE d
 side-effect (registran guardado por `if (window.LAB)`). Se marcan `export const X = (function
 (){…})()` aunque el IIFE no retorne nada (desambigua ESM; el registro corre igual).
 
-**Hechos (19 módulos ESM):** libs/parsers `util`, `pe`, `elf`, `macho`, `fuzzy`; framework
-`registry` + `analyzers`; analyzers `capa`, `lnk`, `pdf`, `eml`; tools del LAB `ioc`, `urlinsp`,
-`cryptolab`, `convert`, `netcalc`, `lolref`, `revshell`, `stego`. `_parity` + tests en verde;
-`LAB.tools` y la cadena de analyzers verificados en sandbox. **Flip pasó** (verificado en navegador).
+**Hechos (24 módulos ESM):** libs/parsers `util`, `pe`, `elf`, `macho`, `fuzzy`, `vba`; framework
+`registry` + `analyzers`; analyzers `capa`, `lnk`, `pdf`, `eml`, `maldoc`, `epdisasm`, `steg`,
+`yara`; tools del LAB `ioc`, `urlinsp`, `cryptolab`, `convert`, `netcalc`, `lolref`, `revshell`,
+`stego`. La **cadena de analyzers quedó completa** (fileinfo→…→steg) y verificada en sandbox.
+`_parity` + tests en verde. **Flip pasó** (verificado en navegador).
 
-**Pendiente:** analyzers `vba`/`maldoc`/`peid`/`epdisasm`/`steg`/`yara`/`triage`, `disasm` +
-`capstone-core` (servicio compartido `window.LAB.capstone`, coupled — convertir juntos), `app.js`,
-los `data/` (`core`/`mitre`/`intel`/`magic-extra`/`payloads`, comparten `const` global → `export`/
-`window.` explícito). `cfb.js` necesita reestructura. Vendor (`spark-md5`/`tlsh`) no se convierte
-(third-party). `_parity.test.mjs` y los viejos `tools/` se borran al final.
+**Pendiente (13 concat):** `peid` (window sin guardar + userdb lazy + `const U=Triage.util` al
+cargar), `triage` (orquestador), `disasm`+`capstone-core` (servicio `window.LAB.capstone`, coupled),
+`app.js`, los `data/` (`core`/`mitre`/`intel`/`magic-extra`/`payloads`, comparten `const` global →
+`export`/`window.` explícito), `cfb.js` (reestructura). Vendor (`spark-md5`/`tlsh`) no se convierte.
+`_parity.test.mjs` y los viejos `tools/` se borran al final.
