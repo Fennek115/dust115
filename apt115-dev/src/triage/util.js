@@ -277,3 +277,5 @@ export const util = (function () {
     SIGNATURES, INTEREST,
   };
 })();
+
+if (typeof window !== 'undefined') { window.Triage = window.Triage || {}; window.Triage.util = util; }

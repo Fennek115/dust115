@@ -513,3 +513,5 @@ export const pe = (function () {
 
   return { parse, computeImphash, MACHINE, SUBSYS };
 })();
+
+if (typeof window !== 'undefined') { window.Triage = window.Triage || {}; window.Triage.pe = pe; }

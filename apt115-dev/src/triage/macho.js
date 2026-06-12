@@ -398,3 +398,5 @@ export const macho = (function () {
 
   return { parse, probe, CPU, SUSPECT, DANGER_ENT };
 })();
+
+if (typeof window !== 'undefined') { window.Triage = window.Triage || {}; window.Triage.macho = macho; }

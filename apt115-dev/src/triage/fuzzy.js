@@ -56,3 +56,5 @@ export const fuzzy = (function () {
 
   return { hashBytes, compare };
 })();
+
+if (typeof window !== 'undefined') { window.Triage = window.Triage || {}; window.Triage.fuzzy = fuzzy; }

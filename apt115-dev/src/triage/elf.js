@@ -392,3 +392,5 @@ export const elf = (function () {
 
   return { parse, E_MACHINE, E_TYPE };
 })();
+
+if (typeof window !== 'undefined') { window.Triage = window.Triage || {}; window.Triage.elf = elf; }

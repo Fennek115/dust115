@@ -99,13 +99,18 @@ Convertir un parser = cambiar el wrapper `window.Triage.X = (function(){…})()`
 `*.test.mjs` a `import` del src/, sumar el caso en `_parity.test.mjs`, y agregar la entrada
 en `CONVERTED` de `build.mjs`.
 
-**Hechos:** `util`, `pe`, `elf`, `macho`, `fuzzy` (parsers/libs order-independent). `_parity`
-y los tests de comportamiento en verde. El **flip ya pasó** (index.html carga el bundle;
-verificado en navegador con `.exe`/ELF reales).
+Los módulos convertidos **se auto-cuelgan de window internamente** (`if (typeof window
+!== 'undefined') window.Triage.X = X`), así el build solo los importa por efecto secundario
+(uniforme con el framework, que además se registra/auto-inicializa al cargar). El framework
+(`registry`/`analyzers`) capta sus deps al cargar (`const U = Triage.util`), por eso el build
+position-preserving es indispensable: `util` corre antes que `analyzers`.
 
-**Pendiente:** los analyzers (`pdf`/`eml`/`capa`/`lnk`/`vba`/`peid`/…) y tools del LAB
-(`ioc`/`convert`/…) que se **auto-registran** — ahora convertibles de a uno gracias al build
-position-preserving, pero conviene convertir antes el framework (`analyzers.js`/`registry.js`).
-`cfb.js` necesita reestructura (usa `api` interno + asignación condicional, no el wrapper
-estándar). `app.js` y los `data/` comparten `const` global → pasar a `export`/`window.`
+**Hechos:** parsers/libs `util`, `pe`, `elf`, `macho`, `fuzzy`; framework `registry` (LAB) y
+`analyzers` (registra los 10 core; orden idéntico al viejo, verificado). `_parity` + tests en
+verde. El **flip ya pasó** (index.html carga el bundle; verificado en navegador con `.exe`/ELF).
+
+**Pendiente:** los analyzers que se registran aparte (`capa`/`vba`/`maldoc`/`lnk`/`pdf`/`eml`/
+`peid`/`epdisasm`/`steg`/`triage`/`yara`) y los tools del LAB (`ioc`/`convert`/`revshell`/…),
+ahora convertibles de a uno. `cfb.js` necesita reestructura (usa `api` interno + asignación
+condicional). `app.js` y los `data/` comparten `const` global → pasar a `export`/`window.`
 explícito. `_parity.test.mjs` y los viejos `tools/` ya migrados se borran al completar todo.

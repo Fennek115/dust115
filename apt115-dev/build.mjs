@@ -51,22 +51,24 @@ const SOURCES = [
   'tools/stego/stego.js', 'tools/urlinsp/urlinsp.js', 'tools/cryptolab/cryptolab.js',
 ];
 
-// Módulos ya convertidos a ESM. `attach`: nombre del export → window.Triage.<attach>.
+// Módulos ya convertidos a ESM (ruta vieja → módulo en src/). Cada uno se
+// AUTO-CUELGA de window internamente, así que el build solo lo importa por
+// efecto secundario (esto generaliza a módulos con side effects: el framework
+// se registra/auto-inicializa al cargar).
 const CONVERTED = {
-  'tools/triage/util.js': { mod: './triage/util.js', attach: 'util' },
-  'tools/triage/pe.js': { mod: './triage/pe.js', attach: 'pe' },
-  'tools/triage/elf.js': { mod: './triage/elf.js', attach: 'elf' },
-  'tools/triage/macho.js': { mod: './triage/macho.js', attach: 'macho' },
-  'tools/triage/fuzzy.js': { mod: './triage/fuzzy.js', attach: 'fuzzy' },
+  'tools/registry.js': './lab/registry.js',
+  'tools/triage/util.js': './triage/util.js',
+  'tools/triage/pe.js': './triage/pe.js',
+  'tools/triage/elf.js': './triage/elf.js',
+  'tools/triage/macho.js': './triage/macho.js',
+  'tools/triage/analyzers.js': './triage/analyzers.js',
+  'tools/triage/fuzzy.js': './triage/fuzzy.js',
 };
 
-// Empaqueta un módulo ESM convertido a un IIFE que lo cuelga de window.Triage.
-async function bundleConverted(c) {
-  const entry =
-    `import { ${c.attach} } from ${JSON.stringify(c.mod)};\n` +
-    `window.Triage = window.Triage || {};\nwindow.Triage.${c.attach} = ${c.attach};\n`;
+// Empaqueta un módulo ESM convertido a un IIFE (import por efecto secundario).
+async function bundleConverted(mod) {
   const r = await esbuild.build({
-    stdin: { contents: entry, resolveDir: SRC, sourcefile: `_${c.attach}.js`, loader: 'js' },
+    stdin: { contents: `import ${JSON.stringify(mod)};\n`, resolveDir: SRC, sourcefile: '_entry.js', loader: 'js' },
     bundle: true, format: 'iife', target: ['es2020'], legalComments: 'none', write: false,
   });
   return r.outputFiles[0].text;
@@ -87,7 +89,7 @@ const min = await esbuild.transform(bundle, { minify: true, legalComments: 'none
 writeFileSync(path.join(OUT, 'apt115.bundle.min.js'), min.code);
 writeFileSync(path.join(APT, 'apt115.bundle.js'), min.code); // artefacto de DEPLOY
 
-const converted = Object.values(CONVERTED).map((c) => c.attach);
+const converted = Object.keys(CONVERTED).map((s) => s.split('/').pop().replace('.js', ''));
 const kb = (s) => (Buffer.byteLength(s) / 1024).toFixed(0);
 console.log(`fuentes: ${SOURCES.length} (ESM: ${converted.join(', ')} | concat: ${SOURCES.length - converted.length})`);
 console.log(`  deploy: static/apt115/apt115.bundle.js  ${kb(min.code)} KB`);
