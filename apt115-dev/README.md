@@ -1,133 +1,125 @@
 # apt115-dev — tooling de desarrollo de APT115
 
-Vive **fuera de `static/`**: Hugo no lo sirve ni lo deploya. Acá van la red de
-seguridad de tests y (en la Etapa 2) el build con esbuild. No agrega ninguna
-dependencia de runtime al tool: APT115 sigue siendo 100% client-side y offline.
+Vive **fuera de `static/`**: Hugo no lo sirve ni lo deploya. Acá van el código
+fuente ESM (`src/`), la red de seguridad de tests, el build con esbuild y el
+type-check JSDoc. No agrega ninguna dependencia de runtime al tool: APT115
+sigue siendo 100% client-side y offline.
 
-## Tests
+Documentos hermanos:
+- **`ARCHITECTURE.md`** — mapa del sistema: framework LAB/triage, pipeline de build, qué es lazy y por qué.
+- **`CONTRIBUTING.md`** — recetas de cambio: workflow del bundle, cómo agregar un analyzer/tool/test.
+- **`../static/apt115/README.md`** — README de usuario (qué hace la app).
 
-Regresión de los parsers del triage. Cada parser se carga en un sandbox `vm`
-con un `window` falso mínimo (`tests/_load.mjs`) y se corre contra fixtures
-sintéticos + muestras-oráculo reales del sistema. **Cero dependencias**: usa el
-runner nativo `node --test`.
+## Workflow esencial (lo único que NO se puede saltear)
 
 ```bash
 cd apt115-dev
-node --test            # o: npm test
+npm run build       # regenera static/apt115/apt115.bundle.js (DEPLOY)
+npm test            # node --test
+npm run typecheck   # tsc --checkJs sobre src/app/
 ```
+
+> `index.html` carga UN solo `<script src="apt115.bundle.js">`. Tras **cualquier**
+> cambio en `src/`, correr `npm run build` y **commitear el bundle junto con el
+> cambio**. No hay archivos sueltos que editar en `static/apt115/`: todo el código
+> propio vive en `src/`.
+
+## Tests
+
+Regresión de los parsers del triage + smoke del cheatsheet. **Cero dependencias
+de test**: usa el runner nativo `node --test`. Los parsers con núcleo puro se
+importan directo del `src/`; el vendor `spark-md5` se requiere desde
+`static/apt115/vendor/` (`tests/_load.mjs`).
 
 Las muestras reales son **oportunistas**: un caso se salta (no falla) si el
 binario no está en la máquina (`/bin/ls`, DLLs mingw, `/mnt/c/.../notepad.exe`).
 Esto mantiene el suite verde en cualquier entorno y a la vez aprovecha binarios
 reales cuando existen.
 
-### Cobertura actual (12 suites, 56 tests)
+### Cobertura actual (13 suites, 63 tests)
 
-| Suite              | Qué prueba                                                      | Entrada | Carga |
-|--------------------|-----------------------------------------------------------------|---------|-------|
-| `util.test.mjs`    | magic bytes (detectType), entropía, extractStrings              | sintética | sandbox |
-| `pe.test.mjs`      | parser PE: clase, máquina, secciones, imports, imphash          | DLLs mingw, notepad | sandbox |
-| `elf.test.mjs`     | parser ELF: clase, máquina, entry, DT_NEEDED                    | /bin/ls, /bin/bash | sandbox |
-| `yara.test.mjs`    | motor libyara-wasm: compila/matchea, todo-o-nada, `lineNumber`  | EICAR, buffers | require |
-| `pdf.test.mjs`     | pdfid: isPdf, ofuscación `#xx`, struct, /URI + /Launch          | sintética | require |
-| `eml.test.mjs`     | headers/unfolding, parseAddr, b64/QP, URLs, dobles extensiones  | sintética | require |
-| `capa.test.mjs`    | normApi (A/W, Nt/Zw), gatherApis, matching de inyección         | sintética | require |
-| `lnk.test.mjs`     | isLnk (CLSID), FILETIME→fecha                                   | sintética | require |
-| `fuzzy.test.mjs`   | TLSH hashBytes (70 hex / null)                                  | sintética | sandbox |
-| `ioc.test.mjs`     | refang/defang, extracción IP/dominio/URL/hash/CVE/ATT&CK        | sintética | require |
-| `cryptolab.test.mjs`| parseBytes, XOR clave/brute (magic-first), detectMagic         | sintética | require |
-| `urlinsp.test.mjs` | Levenshtein, registeredDomain, punycode→Unicode, refang        | sintética | require |
+| Suite               | Qué prueba                                                      | Entrada |
+|---------------------|-----------------------------------------------------------------|---------|
+| `util.test.mjs`     | magic bytes (detectType), entropía, extractStrings              | sintética |
+| `pe.test.mjs`       | parser PE: clase, máquina, secciones, imports, imphash          | DLLs mingw, notepad |
+| `elf.test.mjs`      | parser ELF: clase, máquina, entry, DT_NEEDED                    | /bin/ls, /bin/bash |
+| `yara.test.mjs`     | motor libyara-wasm: compila/matchea, todo-o-nada, `lineNumber`  | EICAR, buffers |
+| `pdf.test.mjs`      | pdfid: isPdf, ofuscación `#xx`, struct, /URI + /Launch          | sintética |
+| `eml.test.mjs`      | headers/unfolding, parseAddr, b64/QP, URLs, dobles extensiones  | sintética |
+| `capa.test.mjs`     | normApi (A/W, Nt/Zw), gatherApis, matching de inyección         | sintética |
+| `lnk.test.mjs`      | isLnk (CLSID), FILETIME→fecha                                   | sintética |
+| `fuzzy.test.mjs`    | TLSH hashBytes (70 hex / null)                                  | sintética |
+| `ioc.test.mjs`      | refang/defang, extracción IP/dominio/URL/hash/CVE/ATT&CK        | sintética |
+| `cryptolab.test.mjs`| parseBytes, XOR clave/brute (magic-first), detectMagic          | sintética |
+| `urlinsp.test.mjs`  | Levenshtein, registeredDomain, punycode→Unicode, refang         | sintética |
+| `app.test.mjs`      | cheatsheet: init en sandbox DOM, handlers inline ↔ window, búsqueda/checklist/favoritos/historial | DOM stub |
+
+`app.test.mjs` empaqueta `src/app/index.js` con esbuild y lo ejecuta en un `vm`
+con DOM/localStorage stubeados. Su test más valioso es el **invariante de
+handlers inline**: escanea el HTML generado + `index.html` y exige que toda
+función referenciada en `onclick=` exista en `window` (caza wiring roto al
+refactorizar). No reemplaza la verificación en navegador.
 
 ### Pendiente de cobertura
 
-- **Necesitan fixture binario fabricado** en `tests/fixtures/`: `macho`, `vba`/`cfb`, `steg`.
-- **Necesitan refactor primero (Etapa 3)**: `peid` advierte `module.exports` pero toma
-  `Triage.util` y registra el analyzer al cargar (sin guardia `typeof window`) → no se puede
-  requerir en Node todavía. Se arregla al pasar a ESM.
+Necesitan fixture binario fabricado en `tests/fixtures/`: `macho`, `vba`/`cfb`,
+`steg`, `peid` (tarea aparte del roadmap, no bloquea).
 
 ### Cómo agregar un test
+
+Los módulos son ESM: importá directo del `src/` y asertá sobre el núcleo puro.
 
 ```js
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { loadTriage, bytesOf } from './_load.mjs';
+import { pdf } from '../src/triage/pdf.js';
 
-const { Triage } = loadTriage('tools/triage/<parser>.js'); // + deps si hace falta
-test('...', () => { /* assert sobre Triage.<parser>.parse(bytes) */ });
+test('...', () => { /* assert sobre pdf.<helper>(…) */ });
 ```
 
-`loadTriage(...rutas)` evalúa archivos (relativos a `static/apt115/`) en un mismo
-sandbox, en orden. Para imphash, cargá `vendor/spark-md5.min.js` antes de `pe.js`.
+Gotcha: los módulos con globals opcionales asumen que `window` existe
+(`typeof window.TLSH`) → si hace falta, setear `globalThis.window = globalThis`
+antes del import. `node --test` corre cada archivo en proceso separado, así que
+no hay contaminación de globals entre suites.
 
-## Build (esbuild) — HÍBRIDO, PRESERVANDO POSICIÓN (Etapa 3 en curso)
+## Build (esbuild) — un bundle, posición preservada
 
 ```bash
-node build.mjs     # → static/apt115/apt115.bundle.js (DEPLOY) + dist/ (dev)
+npm run build      # → static/apt115/apt115.bundle.js (DEPLOY) + dist/ (dev sin minificar)
 ```
 
-> **WORKFLOW:** `index.html` ya carga UN solo `<script src="apt115.bundle.js">`. Tras
-> **cualquier** cambio de fuente (`src/` o `tools/` o `data/`), hay que correr
-> `node build.mjs` para regenerar `static/apt115/apt115.bundle.js` y **commitear el
-> bundle** junto con el cambio. Editar un `tools/*.js` suelto ya no surte efecto sin rebuild.
+El manifiesto de fuentes (orden de carga) vive en `SOURCES` dentro de
+`build.mjs`. **35 de 37 fuentes están en ESM** (`CONVERTED` mapea ruta vieja →
+módulo en `src/`); cada una se empaqueta como IIFE independiente y se emite **en
+su posición**. Solo se concatenan los 2 vendor third-party (`spark-md5`/`tlsh`),
+que el build sigue leyendo de `static/apt115/vendor/`.
 
-El manifiesto de fuentes (orden de carga) vive en `SOURCES` dentro de `build.mjs` (no en
-index.html). Cada fuente se emite **en su posición**:
-- **Convertida a ESM** (en `src/`): esbuild la empaqueta sola (IIFE) y la inserta acá; cuelga
-  su API de `window.Triage` para los consumidores aún no migrados (back-compat).
-- **No convertida**: se concatena su contenido viejo acá. Motivo: comparten estado por el
-  scope léxico global (`data/core.js` define `const CORE_DATA`; `app.js` hace
-  `const D=[...CORE_DATA]`), que el bundling por imports rompería (probado: tree-shakeaba
-  core/mitre/intel). Se concatenan hasta exportar explícito.
+Detalles y decisiones (por qué esbuild y no ESM nativo, por qué la posición
+importa, qué queda lazy) en `ARCHITECTURE.md`.
 
-**Por qué preservar la posición:** los analyzers/tools se registran en orden de carga
-(`Triage.analyzers.register` / `LAB.registerTool`). Insertar cada módulo en su posición
-permite convertir CUALQUIER archivo de a uno sin reordenar la cadena.
+## Typecheck (JSDoc + tsc, sin migrar a TS)
 
-Lazy (NO entran al bundle): libyara-wasm, capstone (`import(url)` dinámico), packs YARA,
-peid-userdb, gtfobins/lolbas.
+```bash
+npm run typecheck   # tsc -p tsconfig.json (checkJs, noEmit)
+```
 
-## Migración a ESM (Etapa 3)
+Cubre `src/app/` (el cheatsheet, partido en módulos en la Etapa 4). Los DOM
+helpers tipados viven en `src/app/util.js` (`$`, `$in`, `$$`). El resto de
+`src/` no está tipado (se verificó contra oráculos con tests); extender el
+include de `tsconfig.json` es trabajo aparte.
 
-`src/` es el nuevo source ESM (vive en `apt115-dev/`, no se sirve). Patrón **strangler**:
-se convierte un archivo a la vez dejando el viejo intacto (runtime sin riesgo), con
-`tests/_parity.test.mjs` garantizando que el ESM nuevo da salida **byte-idéntica** al viejo
-(comparación estructural por JSON, porque el viejo corre en otro realm `vm`).
+## Historial de la migración (Fase 0, cerrada jun 2026)
 
-Convertir un parser = cambiar el wrapper `window.Triage.X = (function(){…})()` por
-`export const X = (function(){…})()`. Las refs a globals opcionales (`SparkMD5`, `window.TLSH`,
-`window.MAGIC_EXTRA`) quedan igual (resuelven en el bundle/navegador). Luego: repuntar su
-`*.test.mjs` a `import` del src/, sumar el caso en `_parity.test.mjs`, y agregar la entrada
-en `CONVERTED` de `build.mjs`.
+Patrón **strangler**: se convirtió un archivo a la vez dejando el viejo intacto,
+con un test de paridad transitorio (`_parity.test.mjs`, ya borrado) que comparaba
+la salida ESM contra el viejo corriendo en sandbox `vm`. Recetas de conversión
+por forma de módulo (parser / analyzer / tool / data) en `CONTRIBUTING.md`.
 
-Los módulos convertidos **se auto-cuelgan de window internamente** (`if (typeof window
-!== 'undefined') window.Triage.X = X`), así el build solo los importa por efecto secundario
-(uniforme con el framework, que además se registra/auto-inicializa al cargar). El framework
-(`registry`/`analyzers`) capta sus deps al cargar (`const U = Triage.util`), por eso el build
-position-preserving es indispensable: `util` corre antes que `analyzers`.
-
-Los **analyzers** que se registran aparte (pdf/eml/capa/lnk/…) tienen otra forma: un IIFE
-`(function(){ …helpers…; Tri.analyzers.register({…}); module.exports={…}; })()`. Conversión:
-`(function () {` → `export const X = (function () {` y el `module.exports={…}` interno →
-`return {…}`. El registro queda como **side effect dentro del IIFE** (en Node sin window se
-saltea, guardado por `if (Tri && Tri.analyzers)`), y el `export const X` da los helpers al test.
-
-Los **tools del LAB** (ioc/urlinsp/cryptolab/…) son igual a los analyzers pero registran con
-`LAB.registerTool` (guardado por `if (window.LAB)`). Viven en `src/tools/`. Misma conversión:
-IIFE→`export const X`, `module.exports`→`return`. (cryptolab: el `return CORE` va al final, tras
-`window.__CRYPTOLAB_CORE`; se borró el `module.exports = CORE` muerto que avisaba esbuild.)
-
-Tools del LAB SIN núcleo testeable (convert/netcalc/lolref/revshell) son IIFE de puro
-side-effect (registran guardado por `if (window.LAB)`). Se marcan `export const X = (function
-(){…})()` aunque el IIFE no retorne nada (desambigua ESM; el registro corre igual).
-
-**Hechos (34 módulos ESM — Etapa 3 esencialmente completa):** TODO el código está en ESM —
-libs/parsers, framework, los 18 analyzers (cadena completa), todos los tools del LAB, y los
-`data/` (`core`/`mitre`/`intel` pasaron de `const X=[…]` a `window.X=`; `app.js` los lee igual,
-bare→global; `magic-extra`/`payloads` ya eran `window.`). `cfb` resultó ser lib estándar como
-`vba` (no necesitaba reestructura). `_parity` + tests en verde; verificado en sandbox que app.js
-lee los data globals y todo registra. **Flip pasó** (verificado en navegador).
-
-**Solo quedan 3 en concat:** `app.js` (monolito 1200 LOC → se convierte al partirlo en la
-**Etapa 4**) y los 2 vendor `spark-md5`/`tlsh` (third-party minificado, **no se convierten** —
-quedan como concat permanente). Al completar la Etapa 4: borrar los viejos `tools/`+`data/` ya
-migrados de `static/apt115/` y `_parity.test.mjs`.
+- **Etapas 1–2:** tests de regresión + build híbrido con flip de `index.html`
+  (37 `<script>` → 1 bundle), verificado en navegador.
+- **Etapa 3:** libs/parsers, framework, los 18 analyzers, todos los tools del
+  LAB y los `data/` a ESM (34 módulos).
+- **Etapa 4:** `app.js` (cheatsheet, 1200 LOC) partido en 13 módulos en
+  `src/app/` por responsabilidad (state/render/búsqueda/favoritos/notas/custom/
+  intel/sesión/ui), JSDoc + `tsc --checkJs`, smoke test con DOM stub, y borrado
+  de los fuentes viejos de `static/apt115/` + `_parity.test.mjs`.
