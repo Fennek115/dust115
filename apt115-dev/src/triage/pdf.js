@@ -108,13 +108,14 @@ export const pdf = (function () {
     return { uris: [...uris], launch: [...launch] };
   }
 
-  let lastCtx = null, lastStr = '';
+  let lastCtx = null;
 
   function analyze(ctx) {
     lastCtx = ctx;
     const off = isPdf(ctx.bytes);
+    // Copia transitoria (local): NO se retiene — sería el archivo entero
+    // duplicado como string. streams() re-decodifica bajo demanda.
     const s = new TextDecoder('latin1').decode(ctx.bytes);
-    lastStr = s;
 
     const ver = (s.slice(off, off + 16).match(/%PDF-(\d\.\d)/) || [])[1] || '?';
     const { counts, obf } = scanNames(s);
@@ -217,11 +218,12 @@ export const pdf = (function () {
   async function streams(btn) {
     const panel = btn.closest('.lab-panel-b');
     const out = panel.querySelector('.pdf-streams');
-    const ctx = lastCtx, s = lastStr;
+    const ctx = lastCtx;
     if (!ctx) { out.innerHTML = '<div class="lab-err">No hay PDF cargado.</div>'; return; }
     btn.disabled = true;
     out.innerHTML = '<div class="lab-loading">⬡ Descomprimiendo streams…</div>';
     try {
+      const s = new TextDecoder('latin1').decode(ctx.bytes); // transitoria, ver analyze()
       let total = 0, inflated = 0, p = 0;
       const indicators = {}, snippets = [], embedded = [];
       const MAX = 400;
@@ -301,6 +303,7 @@ export const pdf = (function () {
       id: 'pdf', title: 'PDF (documento)', icon: '📕',
       applies(ctx) { return !ctx.pe && !ctx.elf && isPdf(ctx.bytes) >= 0; },
       run(ctx) { return analyze(ctx); },
+      release() { lastCtx = null; },
     });
   }
   return { isPdf, scanNames, decodeName, extractTargets, countWord, structCounts, asciiHex };

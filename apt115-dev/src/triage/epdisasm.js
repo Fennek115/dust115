@@ -299,6 +299,9 @@ export const epdisasm = (function () {
 
   function copy() { if (lastText && window.LAB) LAB.copy(lastText); }
 
+  // Suelta el archivo retenido para los botones (lo invoca releaseAll al cargar otro).
+  function release() { lastCtx = null; lastEp = null; lastText = ''; lastBranch = null; }
+
   const Tri = (typeof window !== 'undefined' && window.Triage) || null;
   if (Tri) Tri.epdisasm = { run, follow, copy, epContext, vaddrToOffset, archForElf, archForPe };
 
@@ -308,6 +311,7 @@ export const epdisasm = (function () {
       id: 'epdisasm', title: 'Entry Point (disasm)', icon: '⚙',
       applies(ctx) { return !!epContext(ctx); },
       run(ctx) { return analyze(ctx); },
+      release,
     });
   }
 

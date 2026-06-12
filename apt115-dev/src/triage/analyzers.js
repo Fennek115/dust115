@@ -20,6 +20,16 @@ export const analyzers = (function () {
   }
   function all() { return list.slice(); }
 
+  // Suelta el archivo anterior: los analyzers con estado perezoso (ctx/buffers
+  // a nivel módulo para sus botones) implementan release(); el orquestador lo
+  // llama al cargar un archivo nuevo, así el viejo no queda retenido.
+  function releaseAll() {
+    for (const a of list) {
+      if (typeof a.release !== 'function') continue;
+      try { a.release(); } catch (e) { console.warn('[triage] release', a.id, e); }
+    }
+  }
+
   // ── 1. File info ────────────────────────────────────────────
   register({
     id: 'fileinfo', title: 'File Info', icon: '📄',
@@ -560,6 +570,9 @@ export const analyzers = (function () {
         'al cargar <code>Triage.yara</code> con un método <code>scan(ctx)</code>, este panel ' +
         'pasa a correr reglas automáticamente.</div>';
     },
+    release() {
+      if (window.Triage.yara && typeof window.Triage.yara.release === 'function') window.Triage.yara.release();
+    },
   });
 
   // ── helpers de render ───────────────────────────────────────
@@ -617,7 +630,7 @@ export const analyzers = (function () {
     'pthread_create': 'crea hilo', 'daemon': 'se demoniza (persistencia)', 'setsid': 'nueva sesión (daemon)',
   };
 
-  return { register, all };
+  return { register, all, releaseAll };
 })();
 
 if (typeof window !== 'undefined') { window.Triage = window.Triage || {}; window.Triage.analyzers = analyzers; }

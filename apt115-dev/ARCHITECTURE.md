@@ -99,6 +99,36 @@ Pesados y opcionales; se cargan recién cuando el usuario los usa:
 | `data/peid-userdb.js` (4445 firmas) | ~1 MB | analyzer `peid` |
 | `data/gtfobins.js` / `lolbas.js` | — | tool `lolref` |
 
+## Memoria (decisiones de jun 2026)
+
+El costo dominante no era el pico durante el análisis sino lo retenido después.
+Reglas vigentes:
+
+- **El archivo tiene un solo dueño efímero.** Los analyzers con botones
+  perezosos (yara/pdf/epdisasm/steg) guardan `lastCtx` a nivel módulo para sus
+  handlers; TODOS implementan **`release()`**, y `triage.js` llama
+  `Triage.analyzers.releaseAll()` al cargar un archivo nuevo — ANTES de leerlo,
+  para liberar el anterior antes de alocar el siguiente. Un analyzer nuevo con
+  estado perezoso DEBE implementar `release()` (ver CONTRIBUTING).
+- **El heap WASM de Emscripten solo crece** (nunca devuelve memoria). El motor
+  YARA copia el archivo a su heap en cada `run`; tras escanear un archivo
+  > `ENGINE_RECYCLE_BYTES` (32 MB, en `src/triage/yara.js`) se suelta la
+  instancia (`enginePromise = null`) para que el GC devuelva todo el heap. El
+  próximo escaneo re-instancia: el script ya está cargado, init sub-segundo.
+- **Los packs YARA no se vuelcan al editor.** Seleccionar un pack lo deja como
+  `activePack` (run() lee `window.YARA_PACKS[id].rules` directo); el textarea
+  muestra solo un encabezado. Evita duplicar ~6 MB de texto en un nodo DOM.
+  Escribir en el editor desactiva el pack.
+- **PDF no retiene el decode latin1** del archivo (sería una copia entera como
+  string): `streams()` re-decodifica bajo demanda.
+- **steg tiene topes**: el nivel de píxel aborta por encima de 40 MP (el RGBA
+  son W×H×4 bytes), y los planos de bit se dibujan submuestreados por encima
+  de 4 MP (el χ²/stream LSB siguen usando los datos completos).
+
+Pendiente conocido (fuera de alcance por ahora): los pases pesados corren en el
+hilo principal (el escaneo YARA con signature-base congela la UI mientras
+dura); moverlos a un Web Worker es una fase aparte.
+
 ## Notas técnicas que muerden
 
 - **libyara-wasm** soporta módulos `pe/elf/math/hash/dotnet/time/console` (NO

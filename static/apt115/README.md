@@ -41,6 +41,11 @@ y export/import de la sesión completa a JSON.
 - Análisis **estático**: no ejecuta ni desempaca muestras. Ante packing real
   o anti-disasm fuerte, detecta y deriva a herramientas dinámicas.
 - El Disassembler (Capstone WASM) no funciona en file:// (sí servido).
+- Los packs YARA grandes se usan completos al escanear pero no se vuelcan al
+  editor (queda como "pack activo"); escribir en el editor pasa a usar tus
+  reglas.
+- El análisis de píxel del esteganálisis se limita a imágenes de hasta ~40 MP
+  (más grandes: reducilas externamente); el nivel de contenedor corre igual.
 - Esto orienta un triage; no reemplaza un sandbox ni a un analista.
 
 ## Para desarrollo

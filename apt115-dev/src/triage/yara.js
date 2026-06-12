@@ -20,8 +20,15 @@ export const yara = (function () {
   const MAX_ROWS = 60;        // tope de coincidencias mostradas por regla
   const HEX_BYTES = 24;       // bytes de preview por match
 
-  let enginePromise = null;   // cache del motor (instancia única)
+  // El heap WASM de Emscripten solo CRECE: engine.run() copia el archivo
+  // adentro y esa memoria nunca vuelve. Tras escanear un archivo grande,
+  // soltamos la instancia (el próximo escaneo re-instancia: el script ya está
+  // cargado, el init es sub-segundo) para que el GC devuelva todo el heap.
+  const ENGINE_RECYCLE_BYTES = 32 * 1024 * 1024;
+
+  let enginePromise = null;   // cache del motor (instancia única mientras no se recicle)
   let lastCtx = null;         // ctx del archivo actualmente cargado en el panel
+  let activePack = null;      // id del pack seleccionado (las reglas NO se vuelcan al editor)
 
   // Reglas de ejemplo: útiles y offline. Sin `import` de módulos (pe/math) para
   // que compilen en este build mínimo de libyara. Editá libremente y re-escaneá.
@@ -141,6 +148,7 @@ export const yara = (function () {
   // ── UI (devuelta por el analyzer; se inyecta vía innerHTML) ─────────────
   function scan(ctx) {
     lastCtx = ctx;
+    activePack = null; // panel nuevo → vuelve a las reglas del editor
     return '' +
       '<div class="lab-row1">Reglas YARA contra <b>' + esc(ctx.file.name) + '</b> ' +
       '<span class="lab-dim">— el motor (≈1.2 MB) se carga al primer escaneo; ' +
@@ -159,26 +167,45 @@ export const yara = (function () {
         '<span class="yr-status lab-dim"></span>' +
       '</div>' +
       '<textarea class="yr-editor" spellcheck="false" ' +
+        'oninput="Triage.yara.editorTouched(this)" ' +
         'placeholder="Pegá tus reglas YARA acá…">' + esc(DEFAULT_RULES) + '</textarea>' +
       '<div class="yr-out"></div>';
   }
 
-  // Carga un set de reglas en el editor. Los packs grandes se bajan lazy.
+  // Activa un set de reglas. Los packs grandes se bajan lazy y NO se vuelcan
+  // al editor (un textarea de ~6 MB cuesta RAM y layout): quedan como pack
+  // activo y run() los toma de window.YARA_PACKS. Escribir en el editor
+  // desactiva el pack.
   async function loadPack(sel) {
     const val = sel.value;
     const panel = sel.closest('.lab-panel-b');
     const ed = panel.querySelector('.yr-editor');
     sel.value = ''; // el select vuelve al placeholder; es una acción, no un estado
     if (!val || !ed) return;
-    if (val === 'example') { ed.value = DEFAULT_RULES; setStatus(panel, 'reglas de ejemplo cargadas'); return; }
+    if (val === 'example') {
+      activePack = null;
+      ed.value = DEFAULT_RULES;
+      setStatus(panel, 'reglas de ejemplo cargadas');
+      return;
+    }
     setStatus(panel, 'cargando pack…');
     try {
       const p = await ensurePack(val);
-      ed.value = p.rules;
+      activePack = val;
+      ed.value = '// Pack activo: ' + p.name + ' (' + p.count + ' reglas) — se usa completo al escanear.\n' +
+        '// Escribí acá para usar reglas propias (desactiva el pack).';
       setStatus(panel, p.count + ' reglas (' + p.name + ') — ⚠ set grande, el escaneo puede tardar');
     } catch (e) {
       setStatus(panel, 'no se pudo cargar el pack: ' + (e && e.message || e));
     }
+  }
+
+  // El usuario escribió en el editor → manda el texto, no el pack.
+  function editorTouched(ta) {
+    if (!activePack) return;
+    activePack = null;
+    const panel = ta.closest('.lab-panel-b');
+    if (panel) setStatus(panel, 'usando reglas del editor');
   }
 
   function setStatus(panel, msg) {
@@ -192,7 +219,9 @@ export const yara = (function () {
     const out = panel.querySelector('.yr-out');
     const ctx = lastCtx;
 
-    const rules = (ed && ed.value || '').trim();
+    // Reglas efectivas: el pack activo (completo, desde window.YARA_PACKS) o el editor.
+    const pack = activePack && window.YARA_PACKS && window.YARA_PACKS[activePack];
+    const rules = pack ? pack.rules : (ed && ed.value || '').trim();
     if (!rules) { out.innerHTML = '<div class="lab-note">Escribí o pegá al menos una regla.</div>'; return; }
     if (!ctx || !ctx.bytes) { out.innerHTML = '<div class="lab-err">No hay archivo cargado para escanear.</div>'; return; }
 
@@ -209,6 +238,9 @@ export const yara = (function () {
       await new Promise((r) => setTimeout(r, 16));
       const res = engine.run(ctx.bytes, rules); // ctx.bytes (Uint8Array) → bytes crudos
       out.innerHTML = renderResults(res, ctx);
+      // Archivo grande: soltar la instancia para devolver el heap WASM (ver
+      // ENGINE_RECYCLE_BYTES). El próximo escaneo re-instancia transparente.
+      if (ctx.bytes.length > ENGINE_RECYCLE_BYTES) enginePromise = null;
     } catch (e) {
       console.error('[triage] yara', e);
       out.innerHTML = '<div class="lab-err">Error del motor YARA: ' + esc(e && e.message || e) + '</div>';
@@ -322,5 +354,8 @@ export const yara = (function () {
     return html;
   }
 
-  window.Triage.yara = { scan, run, loadPack };
+  // Suelta el archivo retenido (lo invoca el releaseAll del registry al cargar otro).
+  function release() { lastCtx = null; activePack = null; }
+
+  window.Triage.yara = { scan, run, loadPack, editorTouched, release };
 })();

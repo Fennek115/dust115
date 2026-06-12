@@ -302,6 +302,14 @@ export const steg = (function () {
   // ── Estado para el handler perezoso de píxel ────────────────────────────────
   let lastCtx = null, lastImageData = null;
 
+  // Topes del nivel de píxel: el decode RGBA cuesta W×H×4 bytes y los planos
+  // de bit suman canvases; una imagen gigante se come cientos de MB y el χ²
+  // tarda. Por encima de MAX_PIXELS no se analiza (reducir afuera); por encima
+  // de PLANE_MAX_PIXELS los planos se dibujan submuestreados (el análisis
+  // igual corre sobre los datos completos).
+  const MAX_PIXELS = 40e6;        // ~40 MP
+  const PLANE_MAX_PIXELS = 4e6;   // ~4 MP por canvas de plano
+
   // ── UI: nivel contenedor (síncrono) + botón para el nivel de píxel ──────────
   function analyze(ctx) {
     lastCtx = ctx; lastImageData = null;
@@ -384,12 +392,26 @@ export const steg = (function () {
     const out = panel.querySelector('.steg-px');
     const ctx = lastCtx;
     if (!ctx) { out.innerHTML = '<div class="lab-err">No hay imagen cargada.</div>'; return; }
+
+    // Tope ANTES de decodificar, con las dimensiones del contenedor (cuando
+    // el formato las trae) — evita alocar el RGBA gigante de entrada.
+    const t = U().detectType(ctx.bytes);
+    const pre = containerEnd(ctx.bytes, (t && t.ext) || '');
+    if (pre && pre.width && pre.height && pre.width * pre.height > MAX_PIXELS) {
+      out.innerHTML = tooBigNote(pre.width, pre.height);
+      return;
+    }
+
     btn.disabled = true;
     out.innerHTML = '<div class="lab-loading">⬡ Decodificando la imagen…</div>';
     try {
       const id = await decode(ctx.bytes);
-      lastImageData = id;
       const W = id.width, H = id.height, d = id.data, N = W * H;
+      if (N > MAX_PIXELS) { // formatos sin dims en el contenedor: tope post-decode
+        out.innerHTML = tooBigNote(W, H);
+        return;
+      }
+      lastImageData = id;
 
       // Histogramas por canal + chi-cuadrado (global y por mitades para localizar).
       const hist = [new Uint32Array(256), new Uint32Array(256), new Uint32Array(256)];
@@ -445,6 +467,13 @@ export const steg = (function () {
     }
   }
 
+  function tooBigNote(w, h) {
+    return '<div class="lab-note">⚠ Imagen muy grande (' + w + '×' + h + ' ≈ ' +
+      Math.round(w * h / 1e6) + ' MP) para el análisis de píxel en el navegador (tope ' +
+      Math.round(MAX_PIXELS / 1e6) + ' MP). Reducila externamente y volvé a intentar; ' +
+      'el nivel de contenedor (arriba) sí corre completo.</div>';
+  }
+
   // createImageBitmap + canvas → ImageData (RGBA). 100% local.
   async function decode(bytes) {
     const blob = new Blob([bytes]);
@@ -471,27 +500,37 @@ export const steg = (function () {
   }
 
   // Dibuja el plano de bit `bit` de cada canal R/G/B en canvases dentro de `out`.
+  // Por encima de PLANE_MAX_PIXELS se submuestrea (en pantalla se ven a ~180px
+  // igual; el χ² y el stream LSB usan los datos completos, no esta vista).
   function drawPlanes(out, id, bit) {
     const host = out.querySelector('.steg-planes');
     if (!host) return;
     host.innerHTML = '';
-    const W = id.width, H = id.height, d = id.data, N = W * H, mask = 1 << bit;
+    const W = id.width, H = id.height, d = id.data, mask = 1 << bit;
+    const step = Math.max(1, Math.ceil(Math.sqrt((W * H) / PLANE_MAX_PIXELS)));
+    const w2 = Math.ceil(W / step), h2 = Math.ceil(H / step);
     ['R', 'G', 'B'].forEach((nm, c) => {
       const cv = document.createElement('canvas');
-      cv.width = W; cv.height = H;
+      cv.width = w2; cv.height = h2;
       cv.style.cssText = 'max-width:180px;height:auto;image-rendering:pixelated;border:1px solid var(--border-color)';
       const cx = cv.getContext('2d');
-      const plane = cx.createImageData(W, H);
+      const plane = cx.createImageData(w2, h2);
       const pd = plane.data;
-      for (let i = 0; i < N; i++) {
-        const v = (d[i * 4 + c] & mask) ? 255 : 0;
-        pd[i * 4] = pd[i * 4 + 1] = pd[i * 4 + 2] = v; pd[i * 4 + 3] = 255;
+      let o = 0;
+      for (let y = 0; y < h2; y++) {
+        const sy = Math.min(H - 1, y * step);
+        for (let x = 0; x < w2; x++) {
+          const sx = Math.min(W - 1, x * step);
+          const v = (d[(sy * W + sx) * 4 + c] & mask) ? 255 : 0;
+          pd[o] = pd[o + 1] = pd[o + 2] = v; pd[o + 3] = 255; o += 4;
+        }
       }
       cx.putImageData(plane, 0, 0);
       const wrap = document.createElement('div');
       wrap.style.cssText = 'text-align:center;font-size:11px';
       const lbl = document.createElement('div');
-      lbl.className = 'lab-dim'; lbl.textContent = nm + ' · bit ' + bit;
+      lbl.className = 'lab-dim';
+      lbl.textContent = nm + ' · bit ' + bit + (step > 1 ? ' · vista 1/' + step : '');
       wrap.appendChild(cv); wrap.appendChild(lbl);
       host.appendChild(wrap);
     });
@@ -515,6 +554,7 @@ export const steg = (function () {
         return !!(t && t.cat === 'image' && ['png', 'jpg', 'gif', 'bmp', 'webp'].indexOf(t.ext) >= 0);
       },
       run(ctx) { return analyze(ctx); },
+      release() { lastCtx = null; lastImageData = null; },
     });
   }
 

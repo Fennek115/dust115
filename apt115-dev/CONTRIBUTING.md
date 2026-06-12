@@ -38,6 +38,11 @@ export const miAnalyzer = (function () {
 
 2. Sumarlo a `SOURCES` **en la posición de la cadena donde debe aparecer su
    panel** (orden de registro = orden de carga) y a `CONVERTED` en `build.mjs`.
+   **Si el analyzer guarda estado perezoso** (un `lastCtx`/buffers a nivel
+   módulo para botones que corren después del render), DEBE incluir
+   `release() { lastCtx = null; /* …buffers… */ }` en el objeto registrado:
+   el orquestador llama `releaseAll()` al cargar un archivo nuevo y sin eso el
+   archivo viejo queda retenido toda la sesión (ver ARCHITECTURE §Memoria).
 3. Test en `tests/<id>.test.mjs` importando del `src/`, idealmente verificado
    contra un oráculo real (olefile/oletools, readelf, LIEF, pdfid, exiftool…)
    sobre muestras benignas. `node --check` no alcanza: correr el analyzer

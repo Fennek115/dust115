@@ -51,6 +51,10 @@ export const triage = (function () {
 
   function handleFile(file, container) {
     const results = container.querySelector('#triageResults');
+    // Soltar el archivo anterior ANTES de alocar el nuevo: los analyzers con
+    // estado perezoso retienen ctx.bytes para sus botones, y sin esto un
+    // archivo grande viejo queda vivo toda la sesión.
+    Triage.analyzers.releaseAll();
     results.innerHTML = '<div class="lab-loading">⬡ Leyendo ' + U.esc(file.name) + ' …</div>';
 
     if (file.size > BIG) {
