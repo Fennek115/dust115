@@ -67,6 +67,9 @@ const CONVERTED = {
   'tools/triage/pdf.js': './triage/pdf.js',
   'tools/triage/eml.js': './triage/eml.js',
   'tools/triage/fuzzy.js': './triage/fuzzy.js',
+  'tools/ioc/ioc.js': './tools/ioc.js',
+  'tools/urlinsp/urlinsp.js': './tools/urlinsp.js',
+  'tools/cryptolab/cryptolab.js': './tools/cryptolab.js',
 };
 
 // Empaqueta un módulo ESM convertido a un IIFE (import por efecto secundario).

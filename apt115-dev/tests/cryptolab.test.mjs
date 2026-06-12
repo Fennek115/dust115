@@ -2,9 +2,9 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { requireModule, bytesOf } from './_load.mjs';
+import { bytesOf } from './_load.mjs';
 
-const C = requireModule('tools/cryptolab/cryptolab.js');
+import { cryptolab as C } from '../src/tools/cryptolab.js';
 
 test('parseBytes: hex, base64 y texto', () => {
   assert.deepEqual([...C.parseBytes('4d5a', 'hex')], [0x4d, 0x5a]);

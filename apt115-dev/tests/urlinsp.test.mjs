@@ -2,9 +2,8 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { requireModule } from './_load.mjs';
 
-const U = requireModule('tools/urlinsp/urlinsp.js');
+import { urlinsp as U } from '../src/tools/urlinsp.js';
 
 test('lev: distancia de edición', () => {
   assert.equal(U.lev('paypal', 'paypa1'), 1);

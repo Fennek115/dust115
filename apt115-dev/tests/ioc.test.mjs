@@ -2,9 +2,8 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { requireModule } from './_load.mjs';
 
-const ioc = requireModule('tools/ioc/ioc.js');
+import { ioc } from '../src/tools/ioc.js';
 
 test('refang normaliza la ofuscación típica de reportes', () => {
   const r = ioc.refang('hxxps://evil[.]com y 185[.]220[.]101[.]4');

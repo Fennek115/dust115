@@ -111,12 +111,17 @@ Los **analyzers** que se registran aparte (pdf/eml/capa/lnk/…) tienen otra for
 `return {…}`. El registro queda como **side effect dentro del IIFE** (en Node sin window se
 saltea, guardado por `if (Tri && Tri.analyzers)`), y el `export const X` da los helpers al test.
 
-**Hechos (11 módulos ESM):** libs/parsers `util`, `pe`, `elf`, `macho`, `fuzzy`; framework
-`registry` (LAB) + `analyzers`; analyzers `capa`, `lnk`, `pdf`, `eml`. `_parity` + tests en
-verde; cadena de registro idéntica (verificado en sandbox). El **flip ya pasó** (verificado en
-navegador con `.exe`/ELF).
+Los **tools del LAB** (ioc/urlinsp/cryptolab/…) son igual a los analyzers pero registran con
+`LAB.registerTool` (guardado por `if (window.LAB)`). Viven en `src/tools/`. Misma conversión:
+IIFE→`export const X`, `module.exports`→`return`. (cryptolab: el `return CORE` va al final, tras
+`window.__CRYPTOLAB_CORE`; se borró el `module.exports = CORE` muerto que avisaba esbuild.)
+
+**Hechos (14 módulos ESM):** libs/parsers `util`, `pe`, `elf`, `macho`, `fuzzy`; framework
+`registry` (LAB) + `analyzers`; analyzers `capa`, `lnk`, `pdf`, `eml`; tools del LAB `ioc`,
+`urlinsp`, `cryptolab`. `_parity` + tests en verde; cadena de analyzers y `LAB.tools` idénticos
+(verificado en sandbox). El **flip ya pasó** (verificado en navegador con `.exe`/ELF).
 
 **Pendiente:** analyzers `vba`/`maldoc`/`peid`/`epdisasm`/`steg`/`yara`/`triage`, tools del LAB
-(`ioc`/`convert`/`revshell`/…), `app.js` y los `data/` (comparten `const` global → pasar a
-`export`/`window.` explícito). `cfb.js` necesita reestructura (usa `api` interno + asignación
-condicional). `_parity.test.mjs` y los viejos `tools/` ya migrados se borran al completar todo.
+`convert`/`revshell`/`netcalc`/`lolref`/`disasm`/`stego`, `capstone-core`, `app.js` y los `data/`
+(comparten `const` global → `export`/`window.` explícito). `cfb.js` necesita reestructura (usa
+`api` interno + asignación condicional). `_parity.test.mjs` y los viejos `tools/` se borran al final.
