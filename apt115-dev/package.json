@@ -3,11 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Tooling de desarrollo de APT115 CODEX ARCANUM: tests de regresión de los parsers y (próximamente) build con esbuild. NO se sirve ni se deploya: vive fuera de static/.",
+  "description": "Tooling de desarrollo de APT115 CODEX ARCANUM: tests de regresión, build con esbuild y type-check JSDoc. NO se sirve ni se deploya: vive fuera de static/.",
   "scripts": {
-    "test": "node --test"
+    "test": "node --test",
+    "build": "node build.mjs",
+    "typecheck": "tsc -p tsconfig.json"
   },
   "devDependencies": {
-    "esbuild": "^0.28.1"
+    "esbuild": "^0.28.1",
+    "typescript": "^6.0.3"
   }
 }

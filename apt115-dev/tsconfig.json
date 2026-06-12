@@ -1,0 +1,18 @@
+{
+  // Type-check de los módulos del cheatsheet (src/app/) vía JSDoc, sin migrar
+  // a TS ni emitir nada. `npm run typecheck`. El resto de src/ quedó verificado
+  // contra oráculos (tests) y no está tipado — sumarlo acá es trabajo aparte.
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "noEmit": true,
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "strict": false,
+    "noImplicitAny": false,
+    "skipLibCheck": true
+  },
+  "include": ["src/app/**/*.js"]
+}

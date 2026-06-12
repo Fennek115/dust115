@@ -1,4 +1,4 @@
-// Build de APT115 con esbuild — HÍBRIDO, PRESERVANDO POSICIÓN (Etapa 3 en curso).
+// Build de APT115 con esbuild — HÍBRIDO, PRESERVANDO POSICIÓN.
 //
 // Produce el bundle único que carga index.html (static/apt115/apt115.bundle.js),
 // file://-safe. El MANIFIESTO de fuentes (SOURCES) vive acá, en orden de carga
@@ -12,13 +12,13 @@
 // de lugar cambiaría la cadena. Insertar en posición permite convertir CUALQUIER
 // archivo de a uno sin reordenar nada.
 //
-// Los módulos convertidos cuelgan su API de window.Triage (back-compat con los
-// consumidores aún no migrados). Comparten estado por globals, no por imports;
-// por eso cada uno se empaqueta independiente (sin grafo compartido).
+// Los módulos convertidos cuelgan su API de window (Triage/LAB/los handlers
+// inline del cheatsheet). Comparten estado por globals, no por imports; por
+// eso cada entry se empaqueta independiente (sin grafo compartido entre
+// entries — los src/app/* sí se importan entre sí dentro de su entry).
 //
-// Las fuentes que comparten scope léxico global (data/core.js define `const
-// CORE_DATA`; app.js hace `const D=[...CORE_DATA]`) deben seguir CONCATENADAS
-// hasta que exporten explícito — el bundling por imports las aislaría.
+// Solo quedan concatenados los 2 vendor third-party (spark-md5/tlsh), que no
+// se convierten.
 //
 // Lazy fuera del bundle: libyara-wasm, capstone (import(url) dinámico), packs YARA,
 // peid-userdb, gtfobins/lolbas.
@@ -56,6 +56,7 @@ const SOURCES = [
 // efecto secundario (esto generaliza a módulos con side effects: el framework
 // se registra/auto-inicializa al cargar).
 const CONVERTED = {
+  'app.js': './app/index.js',
   'data/core.js': './data/core.js',
   'data/mitre.js': './data/mitre.js',
   'data/intel.js': './data/intel.js',
