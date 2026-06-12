@@ -102,12 +102,18 @@
         text: '', decoded: 0, stoppedAt: base,
       };
     }
+    // `decoded` = bytes que Capstone consumió en TOTAL (todas las instrucciones,
+    // no sólo las `cap` que se renderizan). Capstone decodifica linealmente y se
+    // frena en el primer byte indecodificable, así que la suma de tamaños es el
+    // tramo cubierto. Separar esto del tope de render evita el falso "se detuvo en
+    // un byte inválido" cuando en realidad sólo recortamos la tabla a `cap`.
     let decoded = 0;
+    for (const ins of insns) decoded += ins.size;
+
     const lines = [];
     let html = '<table class="lab-table ds-table"><thead><tr>' +
       '<th>Dirección</th><th>Bytes</th><th>Instrucción</th></tr></thead><tbody>';
     for (const ins of insns.slice(0, cap)) {
-      decoded += ins.size;
       const addr = '0x' + (typeof ins.address === 'bigint' ? ins.address.toString(16) : (ins.address >>> 0).toString(16));
       const hex = [...ins.bytes].map(toHex).join(' ');
       const cls = mnClass(ins.mnemonic);
@@ -121,9 +127,16 @@
 
     let note = insns.length + ' instrucciones · ' + decoded + '/' + bytes.length + ' bytes decodificados';
     if (insns.length > cap) note += ' · <span class="lab-dim">mostrando ' + cap + '</span>';
-    if (decoded < bytes.length) {
-      note += ' · <span class="ds-warn">se detuvo en un byte inválido @ 0x' +
-        (base + decoded).toString(16) + '</span>';
+    const tail = bytes.length - decoded;
+    if (tail > 0) {
+      // Hasta ~15 B sin decodificar al final = la última instrucción quedó cortada
+      // por el borde de la ventana de lectura, no un byte inválido real.
+      if (tail <= 15) {
+        note += ' · <span class="lab-dim">' + tail + ' B finales cortados por la ventana</span>';
+      } else {
+        note += ' · <span class="ds-warn">se detuvo en un byte inválido @ 0x' +
+          (base + decoded).toString(16) + '</span>';
+      }
     }
     return {
       html: '<div class="lab-row1" style="margin-bottom:6px">' + note + '</div>' + html,
