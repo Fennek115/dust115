@@ -6,5 +6,8 @@
   "description": "Tooling de desarrollo de APT115 CODEX ARCANUM: tests de regresión de los parsers y (próximamente) build con esbuild. NO se sirve ni se deploya: vive fuera de static/.",
   "scripts": {
     "test": "node --test"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.1"
   }
 }

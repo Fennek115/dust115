@@ -10,12 +10,21 @@
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { webcrypto } from 'node:crypto';
+import { createRequire } from 'node:module';
 import path from 'node:path';
 import vm from 'node:vm';
 
 export const APT_DIR = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)), '..', '..', 'static', 'apt115'
 );
+
+// Para los parsers que exponen `module.exports` (su "núcleo verificable en Node"):
+// los requerimos directo. Corren con `module` definido y `window` undefined, así
+// que toman el camino CJS y devuelven sus helpers puros.
+const _require = createRequire(import.meta.url);
+export function requireModule(rel) {
+  return _require(path.join(APT_DIR, rel));
+}
 
 // Globals del navegador que algún parser puede tocar. Los core (util/pe/elf/
 // macho) no usan ninguno; los de hash/eml/steg usan crypto/TextDecoder, ya
