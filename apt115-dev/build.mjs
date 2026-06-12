@@ -1,26 +1,24 @@
-// Build de APT115 con esbuild — ESQUELETO (Etapa 2).
+// Build de APT115 con esbuild — HÍBRIDO (Etapa 3 en curso).
 //
-// Mete esbuild en el pipeline y produce UN bundle file://-safe desde los scripts
-// que hoy carga index.html, SIN refactorizar el código.
+// Estado de la migración: los parsers core (util/pe/elf/macho) ya son módulos ESM
+// en src/triage/. El resto sigue siendo global-script en static/apt115/tools/.
+// El build refleja eso:
+//   - Los CONVERTIDOS se empaquetan con esbuild por IMPORTS reales (grafo de deps,
+//     tree-shaking) y se re-exponen en window.Triage para los consumidores aún no
+//     migrados (back-compat durante la transición).
+//   - El RESTO se CONCATENA en el orden de index.html (comparte scope léxico global;
+//     ver el hallazgo de Etapa 2 en el README).
+// A medida que se convierta más, los archivos pasan del bloque concatenado al
+// bundle de imports. Cuando todo sea ESM, desaparece la concatenación.
 //
-// POR QUÉ CONCATENACIÓN Y NO BUNDLING POR IMPORTS (hallazgo de Etapa 2):
-// el código actual comparte estado entre <script> vía el scope léxico global
-// (p.ej. data/core.js define `const CORE_DATA=…` y app.js hace
-// `const D=[...CORE_DATA,…]`). Cada <script> ve los `const`/`let` top-level de los
-// otros porque comparten el Global Lexical Environment. Si en cambio se empaqueta
-// por imports (esbuild bundle), cada archivo pasa a ser un MÓDULO ESM aislado: sus
-// `const` quedan en scope de módulo, NO se comparten, y app.js los ve undefined
-// (+ esbuild tree-shakea los data/ por no tener side-effects observables). Probado:
-// el bundle por imports dejaba afuera core/mitre/intel → app roto.
-// → Concatenar en el orden de index.html reproduce el comportamiento actual EXACTO
-//   (mismo scope de script, mismo orden). El bundling por imports es el estado FINAL
-//   de la Etapa 3, recién cuando cada archivo exporte/importe explícito.
+// El bloque ESM va PRIMERO: deja util/pe/elf/macho en window.Triage antes de que
+// corran sus consumidores (analyzers/triage/capa), que aparecen más tarde en el resto.
 //
-// Los motores/datos lazy (libyara, capstone, packs YARA, peid-userdb, gtfobins…) se
-// cargan en runtime, NO están como <script> en index.html → no entran al bundle.
+// Lazy fuera del bundle (no son <script> en index.html): libyara, capstone, packs
+// YARA, peid-userdb, gtfobins/lolbas.
 //
-// Salida → apt115-dev/dist/ (NO se sirve). El cableado en index.html (reemplazar los
-// <script> por uno solo) es el paso siguiente, tras verificar en navegador.
+// Salida → apt115-dev/dist/ (NO se sirve). Cablear index.html es el paso siguiente,
+// tras verificar en navegador.
 
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import path from 'node:path';
@@ -28,34 +26,53 @@ import * as esbuild from 'esbuild';
 
 const HERE = import.meta.dirname;
 const APT = path.resolve(HERE, '..', 'static', 'apt115');
+const SRC = path.join(HERE, 'src');
 const OUT = path.join(HERE, 'dist');
 
-// Fuente de verdad: los <script src="..."> de index.html, en orden de aparición.
+// Módulos ya convertidos a ESM: ruta vieja (en index.html) → export en src/.
+const CONVERTED = {
+  'tools/triage/util.js': { mod: './triage/util.js', name: 'util' },
+  'tools/triage/pe.js': { mod: './triage/pe.js', name: 'pe' },
+  'tools/triage/elf.js': { mod: './triage/elf.js', name: 'elf' },
+  'tools/triage/macho.js': { mod: './triage/macho.js', name: 'macho' },
+};
+
+// Fuente de verdad del orden: los <script src> de index.html.
 const html = readFileSync(path.join(APT, 'index.html'), 'utf8');
 const scripts = [...html.matchAll(/<script src="([^"]+)"><\/script>/g)].map((m) => m[1]);
-if (!scripts.length) { console.error('No encontré <script src> en index.html'); process.exit(1); }
 
-// Concatenar. El `;\n` entre archivos evita problemas de ASI al unir scripts que
-// terminan sin punto y coma (en index.html van como <script> separados).
-let bundle = '// APT115 — bundle generado por apt115-dev/build.mjs. NO editar a mano.\n' +
-  '// Concatenación de los <script> de index.html, en orden. Ver build.mjs.\n';
+// 1) Bloque ESM: importa los convertidos y los cuelga de window.Triage (back-compat).
+const names = Object.values(CONVERTED).map((c) => c.name);
+const entry =
+  Object.values(CONVERTED).map((c) => `import { ${c.name} } from ${JSON.stringify(c.mod)};`).join('\n') +
+  `\nwindow.Triage = window.Triage || {};\n` +
+  names.map((n) => `window.Triage.${n} = ${n};`).join('\n') + '\n';
+
+const esmBuild = await esbuild.build({
+  stdin: { contents: entry, resolveDir: SRC, sourcefile: '_esm-entry.js', loader: 'js' },
+  bundle: true, format: 'iife', target: ['es2020'], legalComments: 'none', write: false,
+});
+const esmBlock = esmBuild.outputFiles[0].text;
+
+// 2) Resto: concatenación de los scripts NO convertidos, en orden.
+let rest = '';
 for (const s of scripts) {
-  bundle += `\n/* ===== ${s} ===== */\n;\n`;
-  bundle += readFileSync(path.join(APT, s), 'utf8');
-  bundle += '\n';
+  if (CONVERTED[s]) continue; // ya va en el bloque ESM
+  rest += `\n/* ===== ${s} ===== */\n;\n` + readFileSync(path.join(APT, s), 'utf8') + '\n';
 }
 
+const header = '// APT115 — bundle generado por apt115-dev/build.mjs. NO editar a mano.\n';
+const banner = '\n/* ===== [esbuild] módulos ESM convertidos → window.Triage ===== */\n';
+const bundle = header + banner + esmBlock + '\n/* ===== [concat] scripts aún no migrados ===== */\n' + rest;
+
 mkdirSync(OUT, { recursive: true });
-const devPath = path.join(OUT, 'apt115.bundle.js');
-const minPath = path.join(OUT, 'apt115.bundle.min.js');
-writeFileSync(devPath, bundle);
-
-// esbuild SOLO para minificar (transform de un script, sin semántica de módulos).
+writeFileSync(path.join(OUT, 'apt115.bundle.js'), bundle);
+writeFileSync(path.join(OUT, 'esm-block.js'), esmBlock); // para verificar el bloque ESM aislado
 const min = await esbuild.transform(bundle, { minify: true, legalComments: 'none', target: 'es2020' });
-writeFileSync(minPath, min.code);
+writeFileSync(path.join(OUT, 'apt115.bundle.min.js'), min.code);
 
-const kb = (p) => (readFileSync(p).length / 1024).toFixed(0);
-console.log(`${scripts.length} scripts concatenados.`);
-console.log(`  dev:  dist/apt115.bundle.js      ${kb(devPath)} KB`);
-console.log(`  prod: dist/apt115.bundle.min.js  ${kb(minPath)} KB`);
-writeFileSync(path.join(OUT, 'bundle-inputs.txt'), scripts.join('\n') + '\n');
+const kb = (s) => (Buffer.byteLength(s) / 1024).toFixed(0);
+console.log(`convertidos a ESM (esbuild import-bundle): ${names.join(', ')}`);
+console.log(`concatenados (aún global-script): ${scripts.length - names.length}`);
+console.log(`  dev:  dist/apt115.bundle.js      ${kb(bundle)} KB`);
+console.log(`  prod: dist/apt115.bundle.min.js  ${kb(min.code)} KB`);

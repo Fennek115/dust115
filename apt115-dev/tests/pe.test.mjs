@@ -5,9 +5,14 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
-import { loadTriage } from './_load.mjs';
+import { requireModule } from './_load.mjs';
+import { pe } from '../src/triage/pe.js'; // módulo ESM convertido (Etapa 3)
 
-const { Triage, SparkMD5 } = loadTriage('vendor/spark-md5.min.js', 'tools/triage/pe.js');
+// pe.js usa el global SparkMD5 (opcional) para el imphash. Lo exponemos en
+// globalThis para que el módulo ESM lo resuelva igual que en el navegador.
+const SparkMD5 = requireModule('vendor/spark-md5.min.js');
+globalThis.SparkMD5 = SparkMD5;
+const Triage = { pe };
 
 function readPE(p) {
   if (!existsSync(p)) return null;

@@ -4,9 +4,12 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
-import { loadTriage } from './_load.mjs';
+import { elf } from '../src/triage/elf.js'; // módulo ESM convertido (Etapa 3)
 
-const { Triage } = loadTriage('tools/triage/elf.js');
+// elf.js consulta window.TLSH (opcional, para telfhash) con `typeof window.TLSH`,
+// que asume que `window` existe. Lo proveemos; sin TLSH, telfhash queda null.
+globalThis.window = globalThis;
+const Triage = { elf };
 
 function readElf(p) {
   if (!existsSync(p)) return null;

@@ -59,29 +59,51 @@ test('...', () => { /* assert sobre Triage.<parser>.parse(bytes) */ });
 `loadTriage(...rutas)` evalúa archivos (relativos a `static/apt115/`) en un mismo
 sandbox, en orden. Para imphash, cargá `vendor/spark-md5.min.js` antes de `pe.js`.
 
-## Build (esbuild) — Etapa 2, esqueleto
+## Build (esbuild) — HÍBRIDO (Etapa 3 en curso)
 
 ```bash
 node build.mjs     # → dist/apt115.bundle.js (dev) + apt115.bundle.min.js (prod)
 ```
 
 Toma los `<script src>` de `index.html` (fuente de verdad del orden) y produce un
-bundle file://-safe. `dist/` está gitignoreado (es prueba de build; el artefacto a
-deployar se decidirá al cablearlo en `index.html`).
+bundle file://-safe. `dist/` está gitignoreado (prueba de build; el artefacto a deployar
+se decide al cablear `index.html`).
 
-**Hallazgo clave (define la Etapa 3):** el build **concatena** en vez de bundlear por
-imports. Motivo: el código comparte estado entre `<script>` vía el scope léxico global
-(`data/core.js` define `const CORE_DATA=…`; `app.js` hace `const D=[...CORE_DATA,…]`).
-Empaquetar por imports convierte cada archivo en un módulo ESM aislado → esos `const`
-dejan de compartirse y `app.js` los ve `undefined` (probado: esbuild dejaba afuera
-core/mitre/intel y tree-shakeaba los data/). La concatenación reproduce el comportamiento
-actual exacto. **El bundling real por imports llega en la Etapa 3**, cuando cada archivo
-exporte/importe explícito.
+El build refleja la migración en curso:
+- **Convertidos a ESM** (`util`/`pe`/`elf`/`macho`, en `src/triage/`): esbuild los
+  empaqueta por **imports reales** (grafo de deps, tree-shaking) y los re-expone en
+  `window.Triage` para los consumidores aún no migrados (back-compat).
+- **Resto** (aún global-script en `static/apt115/tools/`): se **concatena** en orden.
+  Motivo de la concatenación: el código comparte estado entre `<script>` por el scope
+  léxico global (`data/core.js` define `const CORE_DATA=…`; `app.js` hace
+  `const D=[...CORE_DATA,…]`). Empaquetar eso por imports los aísla en módulos y rompe el
+  contrato (probado: esbuild tree-shakeaba core/mitre/intel). Se concatena hasta que esos
+  archivos también exporten/importen explícito.
 
-Lazy (NO entran al bundle, se cargan en runtime): libyara-wasm, capstone, packs YARA,
-peid-userdb, gtfobins/lolbas. `capstone-core.js` usa `import(url)` con url dinámica, así
-que esbuild no lo empaqueta solo.
+A medida que se convierte más, los archivos pasan del bloque concatenado al de imports.
 
-**Pendiente de Etapa 2** (tras verificar el bundle sirviéndolo y clickeando el tool):
-cablear `index.html` para que cargue el bundle único, y decidir dónde vive el artefacto
-(commitearlo en `static/apt115/` vs. construirlo en CI).
+Lazy (NO entran al bundle): libyara-wasm, capstone (`import(url)` dinámico), packs YARA,
+peid-userdb, gtfobins/lolbas.
+
+## Migración a ESM (Etapa 3)
+
+`src/` es el nuevo source ESM (vive en `apt115-dev/`, no se sirve). Patrón **strangler**:
+se convierte un archivo a la vez dejando el viejo intacto (runtime sin riesgo), con
+`tests/_parity.test.mjs` garantizando que el ESM nuevo da salida **byte-idéntica** al viejo
+(comparación estructural por JSON, porque el viejo corre en otro realm `vm`).
+
+Convertir un parser = cambiar el wrapper `window.Triage.X = (function(){…})()` por
+`export const X = (function(){…})()`. Las refs a globals opcionales (`SparkMD5`, `window.TLSH`,
+`window.MAGIC_EXTRA`) quedan igual (resuelven en el bundle/navegador). Luego: repuntar su
+`*.test.mjs` a `import` del src/, sumar el caso en `_parity.test.mjs`, y agregar la entrada
+en `CONVERTED` de `build.mjs`.
+
+**Hechos:** `util`, `pe`, `elf`, `macho` (los core sin deps de otros módulos). `_parity` y
+los tests de comportamiento en verde.
+**Pendiente:** el resto de parsers/analyzers, los tools del LAB, `app.js` y los `data/`
+(estos últimos comparten `const` global → convertir a `export`/`window.` explícito).
+`_parity.test.mjs` y los viejos `tools/` se borran al completar la migración + flip.
+
+**Pendiente de tu lado** (el "flip", tras verificar el bundle en navegador): cablear
+`index.html` a un `<script>` único, borrar los viejos `tools/` ya migrados, y decidir dónde
+vive el artefacto (commitear en `static/apt115/` vs build en CI).

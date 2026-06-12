@@ -3,10 +3,8 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { loadTriage, bytesOf } from './_load.mjs';
-
-const { Triage } = loadTriage('tools/triage/util.js');
-const util = Triage.util;
+import { bytesOf } from './_load.mjs';
+import { util } from '../src/triage/util.js'; // módulo ESM convertido (Etapa 3)
 
 test('detectType reconoce magic bytes de ejecutables', () => {
   assert.equal(util.detectType(bytesOf('MZ\x90\x00')).ext, 'exe/dll');
