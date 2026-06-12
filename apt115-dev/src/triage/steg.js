@@ -530,10 +530,37 @@ export const steg = (function () {
       wrap.style.cssText = 'text-align:center;font-size:11px';
       const lbl = document.createElement('div');
       lbl.className = 'lab-dim';
-      lbl.textContent = nm + ' · bit ' + bit + (step > 1 ? ' · vista 1/' + step : '');
+      const label = nm + ' · bit ' + bit + (step > 1 ? ' · vista 1/' + step : '');
+      lbl.textContent = label;
+      cv.title = 'click para ampliar';
+      cv.style.cursor = 'zoom-in';
+      cv.onclick = () => openZoom(cv, label);
       wrap.appendChild(cv); wrap.appendChild(lbl);
       host.appendChild(wrap);
     });
+  }
+
+  // Vista ampliada de un plano: overlay a pantalla con el canvas escalado
+  // (pixelated, sin re-render del plano). Click o Esc cierran.
+  function openZoom(srcCv, label) {
+    const ov = document.createElement('div');
+    ov.className = 'steg-zoom';
+    const big = document.createElement('canvas');
+    big.width = srcCv.width; big.height = srcCv.height;
+    big.getContext('2d').drawImage(srcCv, 0, 0);
+    big.className = 'steg-zoom-cv';
+    // Escalar a ~90% del viewport (también AGRANDA planos chicos; pixelated los mantiene nítidos)
+    const scale = Math.min((window.innerWidth * 0.92) / big.width, (window.innerHeight * 0.84) / big.height);
+    big.style.width = Math.max(1, Math.round(big.width * scale)) + 'px';
+    const cap = document.createElement('div');
+    cap.className = 'steg-zoom-cap lab-dim';
+    cap.textContent = label + ' · ' + srcCv.width + '×' + srcCv.height + ' — click o Esc para cerrar';
+    ov.appendChild(big); ov.appendChild(cap);
+    const close = () => { ov.remove(); document.removeEventListener('keydown', onKey); };
+    const onKey = (e) => { if (e.key === 'Escape') close(); };
+    ov.onclick = close;
+    document.addEventListener('keydown', onKey);
+    document.body.appendChild(ov);
   }
 
   // ── helper de render ────────────────────────────────────────────────────────
