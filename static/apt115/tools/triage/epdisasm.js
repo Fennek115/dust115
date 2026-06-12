@@ -72,6 +72,15 @@ if (typeof window !== 'undefined') window.Triage = window.Triage || {};
       }
       return -1;
     }
+    if (ctx.macho) {
+      const slices = ctx.macho.fat ? ctx.macho.slices.map(x => x.macho).filter(Boolean) : [ctx.macho];
+      for (const m of slices) {
+        for (const s of m.segments) {
+          if (s.filesize && va >= s.vmaddr && va < s.vmaddr + s.filesize) return m.sliceOffset + s.fileoff + (va - s.vmaddr);
+        }
+      }
+      return -1;
+    }
     return -1;
   }
 
@@ -94,6 +103,15 @@ if (typeof window !== 'undefined') window.Triage = window.Triage || {};
       case 0x28: return (elf.entry & 1) ? 'thumb' : 'arm'; // bit 0 del entry ⇒ Thumb
       case 0x08: return elf.is64 ? 'mips64' : 'mips32';
       default: return null; // RISC-V, etc.: sin soporte en el Capstone vendorizado
+    }
+  }
+  function archForMacho(cpuType) {
+    switch (cpuType >>> 0) {
+      case 0x01000007: return 'x64';   // x86_64
+      case 0x00000007: return 'x32';   // i386
+      case 0x0100000C: return 'arm64'; // ARM64
+      case 0x0000000C: return 'arm';   // ARM (32-bit)
+      default: return null;
     }
   }
 
@@ -121,6 +139,17 @@ if (typeof window !== 'undefined') window.Triage = window.Triage || {};
         entryVaddr: ctx.elf.entry,
         archId, machineName: ctx.elf.machineName, le: ctx.elf.le,
       };
+    }
+    if (ctx.macho) {
+      // fat: usamos la primera slice con entry resuelto
+      const slices = ctx.macho.fat ? ctx.macho.slices.map(x => x.macho).filter(Boolean) : [ctx.macho];
+      const m = slices.find(s => s && s.entryOffset >= 0);
+      if (m) {
+        return {
+          kind: 'Mach-O', fileOffset: m.entryOffset, displayBase: m.entry,
+          entryVaddr: m.entry, archId: archForMacho(m.cpuType), machineName: m.cpuName, le: m.le,
+        };
+      }
     }
     return null;
   }

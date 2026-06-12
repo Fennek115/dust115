@@ -45,6 +45,12 @@ Triage.analyzers = (function () {
         rows.push(['Arquitectura', U.esc(e.machineName) + ' · ' + e.classLabel + ' · ' + e.endian]);
         rows.push(['Tipo ELF', U.esc(e.typeName) + (e.isStatic ? ' <span class="lab-dim">(linkeo estático)</span>' : '')]);
         rows.push(['OS/ABI', U.esc(e.osabiName)]);
+      } else if (ctx.macho) {
+        const mo = ctx.macho;
+        const arch = mo.fat ? ('universal / fat (' + mo.slices.map(s => U.esc(s.cpuName)).join(', ') + ')') : (U.esc(mo.cpuName) + ' · ' + mo.classLabel);
+        rows.push(['Arquitectura', arch]);
+        rows.push(['Tipo Mach-O', U.esc(mo.filetypeName) + (mo.platform ? ' <span class="lab-dim">(' + U.esc(mo.platform) + ')</span>' : '')]);
+        rows.push(['Firma', mo.signed ? (mo.sig && mo.sig.adhoc ? 'ad-hoc' : 'firmado') : '<span class="lab-mit off">sin firmar</span>']);
       }
       return kvTable(rows);
     },
@@ -67,6 +73,7 @@ Triage.analyzers = (function () {
       if (ctx.pe && ctx.pe.rich && ctx.pe.rich.hash) rows.push(['richhash', hashCell(ctx.pe.rich.hash) + ' <span class="lab-dim">(toolchain de compilación · clustering)</span>']);
       if (ctx.elf && ctx.elf.buildId) rows.push(['build-id', hashCell(ctx.elf.buildId) + ' <span class="lab-dim">(GNU build-id · clustering / symbol server)</span>']);
       if (ctx.elf && ctx.elf.telfhash) rows.push(['telfhash', hashCell(ctx.elf.telfhash) + ' <span class="lab-dim">(símbolos · clustering ELF, compat. VirusTotal)</span>']);
+      if (ctx.macho && ctx.macho.uuid) rows.push(['LC_UUID', hashCell(ctx.macho.uuid) + ' <span class="lab-dim">(UUID de build · clustering)</span>']);
       const tlsh = (Triage.fuzzy && Triage.fuzzy.hashBytes) ? Triage.fuzzy.hashBytes(ctx.bytes) : null;
       if (tlsh) rows.push(['TLSH', hashCell(tlsh) + ' <span class="lab-dim">(fuzzy · similitud entre muestras)</span>']);
       else rows.push(['TLSH', '<span class="lab-dim">N/A — archivo chico o de baja complejidad</span>']);
@@ -374,6 +381,134 @@ Triage.analyzers = (function () {
       }
       if (e.warnings.length) html += '<div class="lab-note">⚠ ' + e.warnings.map(U.esc).join(' · ') + '</div>';
       return html;
+    },
+  });
+
+  // ── 4b. Mach-O (macOS / iOS) ────────────────────────────────
+  const MACHO_SUSPECT = (Triage.macho && Triage.macho.SUSPECT) || {};
+  function machoSlice(m, ctx) {
+    const hdr = [
+      ['Arquitectura', U.esc(m.cpuName) + (m.arm64e ? ' <span class="lab-dim">(arm64e · pointer auth)</span>' : '') + ' · ' + m.classLabel + ' · ' + m.endian],
+      ['Tipo', U.esc(m.filetypeName)],
+    ];
+    if (m.platform) hdr.push(['Plataforma', U.esc(m.platform) + (m.minOS ? ' · min ' + U.esc(m.minOS) : '') + (m.sdk ? ' · SDK ' + U.esc(m.sdk) : '')]);
+    if (m.entry !== null) hdr.push(['Entry point', '0x' + m.entry.toString(16) + ' <span class="lab-dim">(' + U.esc(m.entryKind || '') + ')</span>']);
+    if (m.installName) hdr.push(['Install name', '<code>' + U.esc(m.installName) + '</code>']);
+    if (m.sourceVersion) hdr.push(['Source version', U.esc(m.sourceVersion)]);
+    if (m.uuid) hdr.push(['UUID', '<code>' + U.esc(m.uuid) + '</code> <span class="lab-dim">(clustering)</span>']);
+    if (m.lang) hdr.push(['Lenguaje', '<b>' + U.esc(m.lang.name) + '</b>']);
+    if (m.initCount) hdr.push(['Constructores', m.initCount + ' en __mod_init_func <span class="lab-dim">(corren antes de main)</span>']);
+    let html = kvTable(hdr);
+
+    // Mitigaciones
+    const sec = [
+      badge(m.isPie, 'PIE'),
+      badge(m.noHeapExec, 'NX heap'),
+      badge(!m.allowStackExec, 'No stack-exec'),
+      badge(m.signed, 'Firmado'),
+      badge(!!(m.sig && m.sig.runtime), 'Hardened runtime'),
+      badge(!!(m.sig && m.sig.libraryValidation), 'Library validation'),
+    ];
+    if (m.restrictSeg) sec.push(badge(true, '__RESTRICT'));
+    html += '<div class="lab-sub">Mitigaciones</div><div class="lab-badges">' + sec.join('') + '</div>';
+
+    // Firma de código
+    if (m.signed && m.sig) {
+      const s = m.sig;
+      const sigRows = [];
+      const kind = s.hasCMS ? 'firma CMS (autoridad externa)' : s.adhoc ? '<b>ad-hoc</b> <span class="lab-dim">(sin autoridad — típico de binarios caseros/malware)</span>' : 'sin CMS';
+      sigRows.push(['Tipo de firma', kind]);
+      if (s.identifier) sigRows.push(['Identifier', '<code>' + U.esc(s.identifier) + '</code>']);
+      sigRows.push(['Team ID', s.teamId ? '<code>' + U.esc(s.teamId) + '</code>' : '<span class="lab-dim">ninguno (ad-hoc / sin notarizar)</span>']);
+      if (s.hashType) sigRows.push(['Hash', U.esc(s.hashType)]);
+      if (s.flags && s.flags.length) sigRows.push(['CS flags', s.flags.map(f => '<span class="lab-tag">' + U.esc(f) + '</span>').join(' ')]);
+      html += '<div class="lab-sub">Firma de código</div>' + kvTable(sigRows);
+      if (s.dangerousEnts && s.dangerousEnts.length) {
+        html += '<div class="lab-note">⚠ Entitlements de riesgo:<br>' +
+          s.dangerousEnts.map(e => '<code>' + U.esc(e.key) + '</code> — ' + U.esc(e.why)).join('<br>') + '</div>';
+      } else if (s.entitlements) {
+        html += '<details class="lab-dll"><summary>Entitlements (' + s.entitlements.length + ' bytes)</summary><pre class="lab-pre">' + U.esc(s.entitlements.slice(0, 4000)) + '</pre></details>';
+      }
+    } else {
+      html += '<div class="lab-note">⚠ Binario <b>sin firmar</b> — en macOS moderno Gatekeeper lo bloquearía; común en muestras de malware o builds locales.</div>';
+    }
+
+    // Señales de packing / anti-análisis
+    const pk = m.packer, flags = [];
+    if (pk.rwx.length) flags.push('segmento(s) RWX (W+X) en ' + pk.rwx.join(', ') + ' — típico de loaders / shellcode');
+    if (pk.textWritable) flags.push('__TEXT con permiso de escritura (inusual — self-modifying / unpacking)');
+    if (pk.encrypted) flags.push('cifrado FairPlay activo (cryptid=' + m.cryptId + ') — payload encriptado por el loader');
+    if (pk.entryAnomaly) flags.push('entry point fuera de __text (posible hijack del flujo / packing)');
+    const hot = [];
+    for (const s of m.segments) {
+      const start = m.sliceOffset + s.fileoff;
+      if (s.filesize && start + s.filesize <= ctx.bytes.length && s.name !== '__LINKEDIT') {
+        const en = U.entropy(ctx.bytes, start, start + s.filesize);
+        if (en >= 7.2) hot.push(s.name + ' (' + en.toFixed(2) + ')');
+      }
+    }
+    if (hot.length) flags.push('entropía alta en ' + hot.join(', ') + ' → datos comprimidos/cifrados');
+    if (flags.length) html += '<div class="lab-sub">Señales de packing / anti-análisis</div><div class="lab-note">⚠ ' + flags.map(U.esc).join('<br>⚠ ') + '</div>';
+
+    // rpaths (vector de dylib hijacking)
+    if (m.rpaths.length) {
+      html += '<div class="lab-note">⚠ RPATH(s): ' + m.rpaths.map(r => '<code>' + U.esc(r) + '</code>').join(' ') +
+        ' — rutas de búsqueda de dylibs; con @rpath/@executable_path son vector de <b>dylib hijacking</b>.</div>';
+    }
+
+    // Dependencias (dylibs)
+    if (m.dylibs.length) {
+      html += '<div class="lab-sub">Dylibs linkeadas (' + m.dylibs.length + ')</div><div class="lab-imps">' +
+        m.dylibs.map(d => '<span class="lab-imp" title="' + U.esc(d.current || '') + (d.weak ? ' · weak' : d.reexport ? ' · reexport' : d.upward ? ' · upward' : d.lazy ? ' · lazy' : '') + '">' + U.esc(d.name) + '</span>').join('') + '</div>';
+    }
+
+    // Símbolos importados (con resaltado de notables)
+    if (m.imports.length) {
+      const sus = m.imports.filter(n => MACHO_SUSPECT[n.replace(/^_/, '')]);
+      html += '<div class="lab-sub">Símbolos importados — ' + m.imports.length +
+        ' <span class="lab-dim">(' + (sus.length ? sus.length + ' notables' : 'undefined externos') + ')</span></div><div class="lab-imps">' +
+        m.imports.slice(0, 400).map(n => {
+          const why = MACHO_SUSPECT[n.replace(/^_/, '')];
+          return '<span class="lab-imp' + (why ? ' sus" title="' + U.esc(why) : '') + '">' + U.esc(n) + '</span>';
+        }).join('') + '</div>';
+      if (m.imports.length > 400) html += '<div class="lab-dim" style="font-size:10.5px;margin-top:4px">… ' + (m.imports.length - 400) + ' más (truncado).</div>';
+    }
+    if (m.exports.length) {
+      html += '<details class="lab-dll"><summary>Símbolos exportados (' + m.exports.length + ')</summary><div class="lab-imps">' +
+        m.exports.slice(0, 400).map(n => '<span class="lab-imp">' + U.esc(n) + '</span>').join('') + '</div></details>';
+    }
+
+    // Segmentos / secciones
+    if (m.segments.length) {
+      html += '<div class="lab-sub">Segmentos (' + m.segments.length + ')</div>';
+      html += '<table class="lab-table"><thead><tr><th>Nombre</th><th>VM addr</th><th>Tamaño</th><th>prot</th><th>Secciones</th></tr></thead><tbody>';
+      const P = (p) => ((p & 1 ? 'r' : '-') + (p & 2 ? 'w' : '-') + (p & 4 ? 'x' : '-'));
+      for (const s of m.segments) {
+        html += '<tr><td>' + U.esc(s.name) + '</td><td>0x' + s.vmaddr.toString(16) + '</td><td>' + U.formatBytes(s.filesize) +
+          '</td><td><code>' + P(s.initprot) + '</code></td><td class="lab-dim">' + (s.sections.map(x => U.esc(x.name)).join(' ') || '—') + '</td></tr>';
+      }
+      html += '</tbody></table>';
+    }
+    if (m.warnings && m.warnings.length) html += '<div class="lab-note">⚠ ' + m.warnings.map(U.esc).join(' · ') + '</div>';
+    return html;
+  }
+  register({
+    id: 'macho', title: 'Mach-O Structure', icon: '🍎',
+    applies(ctx) { return !!ctx.macho; },
+    run(ctx) {
+      const m = ctx.macho;
+      if (m.fat) {
+        let html = '<div class="lab-note">Binario <b>universal / fat</b>' + (m.fat64 ? ' (fat64)' : '') + ' con ' + m.slices.length + ' slice(s):</div>';
+        html += '<table class="lab-table"><thead><tr><th>Arch</th><th>Offset</th><th>Tamaño</th></tr></thead><tbody>' +
+          m.slices.map(s => '<tr><td>' + U.esc(s.cpuName) + '</td><td>0x' + s.offset.toString(16) + '</td><td>' + U.formatBytes(s.size) + '</td></tr>').join('') +
+          '</tbody></table>';
+        m.slices.forEach((s, i) => {
+          html += '<div class="lab-sub" style="margin-top:14px">▸ Slice ' + (i + 1) + ' — ' + U.esc(s.cpuName) + '</div>';
+          html += s.macho ? machoSlice(s.macho, ctx) : '<div class="lab-note">slice no parseable.</div>';
+        });
+        return html;
+      }
+      return machoSlice(m, ctx);
     },
   });
 

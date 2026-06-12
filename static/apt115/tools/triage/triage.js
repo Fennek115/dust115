@@ -78,11 +78,14 @@ Triage.copy = function (text) {
       file: { name: file.name, size: file.size },
       pe: null,
       elf: null,
+      macho: null,
     };
     try { ctx.pe = Triage.pe.parse(bytes); }
     catch (e) { console.error('[triage] PE parse', e); }
     try { if (!ctx.pe && Triage.elf) ctx.elf = Triage.elf.parse(bytes); }
     catch (e) { console.error('[triage] ELF parse', e); }
+    try { if (!ctx.pe && !ctx.elf && Triage.macho) ctx.macho = Triage.macho.parse(bytes); }
+    catch (e) { console.error('[triage] Mach-O parse', e); }
 
     results.innerHTML = '';
     const analyzers = Triage.analyzers.all().filter(a => !a.applies || a.applies(ctx));
