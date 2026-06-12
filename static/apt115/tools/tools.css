@@ -135,6 +135,16 @@
 .t-reg { color: var(--teal); background: rgba(0,229,176,.12); }
 .t-b64 { color: var(--text2); background: var(--bg3); }
 .t-email { color: var(--green); background: rgba(0,255,136,.1); }
+.t-exec { color: var(--red); background: rgba(255,45,111,.12); }
+
+/* Maldoc: módulos VBA colapsables + bloque de código */
+.lab-mod { border: 1px solid var(--border); border-radius: var(--radius-sm); margin-top: 6px; }
+.lab-mod > summary { cursor: pointer; padding: 5px 8px; font-weight: 600; user-select: none; }
+.lab-mod[open] > summary { border-bottom: 1px solid var(--border); }
+.lab-pre {
+  margin: 0; padding: 8px; max-height: 360px; overflow: auto;
+  font-size: 11px; color: var(--code); white-space: pre-wrap; word-break: break-all;
+}
 
 /* Marca el grupo LAB en el sidebar */
 .lab-sg { color: var(--purple); }
