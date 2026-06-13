@@ -1077,7 +1077,7 @@ body{
   background:rgba(0,0,0,.18);border:1px solid rgba(196,113,237,.18);
   border-radius:6px;padding:4px;
 }
-.notes-graph-svg{display:block;width:100%;height:auto}
+.notes-graph-svg{display:block;width:100%;height:auto;max-width:340px;margin:0 auto}
 .g-edge{stroke:rgba(196,113,237,.35);stroke-width:1}
 .g-dot{fill:rgba(196,113,237,.4);stroke:rgba(196,113,237,.6);stroke-width:1;transition:fill .12s}
 .g-dot-on{fill:#c471ed;stroke:#e0a3ff}
