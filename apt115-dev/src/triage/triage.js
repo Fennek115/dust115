@@ -83,9 +83,12 @@ export const triage = (function () {
       pe: null,
       elf: null,
       macho: null,
+      dotnet: null,
     };
     try { ctx.pe = Triage.pe.parse(bytes); }
     catch (e) { console.error('[triage] PE parse', e); }
+    try { if (ctx.pe && Triage.dotnet) ctx.dotnet = Triage.dotnet.parse(ctx.pe, bytes); }
+    catch (e) { console.error('[triage] .NET parse', e); }
     try { if (!ctx.pe && Triage.elf) ctx.elf = Triage.elf.parse(bytes); }
     catch (e) { console.error('[triage] ELF parse', e); }
     try { if (!ctx.pe && !ctx.elf && Triage.macho) ctx.macho = Triage.macho.parse(bytes); }
