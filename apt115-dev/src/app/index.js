@@ -21,6 +21,7 @@ import {
   toggleNote, saveNote, toggleNotesPanel, addNote, deleteNote,
   updateNoteTitle, updateNoteBody, updateNotesCount,
   editNoteBody, saveNoteBody, refreshNotesPanel, openWikiLink, focusNote, createNoteFrom,
+  toggleNotesGraph, exportVault, importVault, pickVaultImport,
 } from './notes.js';
 import {
   openCustomModal, closeCustomModal, wireCustomModal, saveCustomCommand,
@@ -43,9 +44,10 @@ Object.assign(window, {
   doCopy, doCopyCustom, do1Liner, copyText, toggleHistory, clearHistory,
   // favoritos
   toggleFavItem, toggleFav, removeFav, clearAllFavs, exportFavs,
-  // notas (por fila + panel markdown/enlaces)
+  // notas (por fila + panel markdown/enlaces + grafo + vault)
   toggleNote, saveNote, toggleNotesPanel, addNote, deleteNote, updateNoteTitle, updateNoteBody,
   editNoteBody, saveNoteBody, refreshNotesPanel, openWikiLink, focusNote,
+  toggleNotesGraph, exportVault, importVault, pickVaultImport,
   // puente desde tools: crear nota con contenido (p.ej. netmap → nota)
   apt115CreateNote: createNoteFrom,
   // checklist / grupos / secciones

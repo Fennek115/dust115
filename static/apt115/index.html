@@ -172,6 +172,13 @@
       <button class="close-btn" onclick="toggleNotesPanel()">Close ✕</button>
     </div>
   </div>
+  <div class="notes-tools">
+    <button class="notes-tool-btn" id="notesGraphBtn" onclick="toggleNotesGraph()" title="Grafo de enlaces [[wiki]]">🕸 Grafo</button>
+    <button class="notes-tool-btn" onclick="exportVault()" title="Exportar vault (.zip con un .md por nota)">⬇ Vault</button>
+    <button class="notes-tool-btn" onclick="pickVaultImport()" title="Importar .zip o .md (fusionar/reemplazar)">⬆ Import</button>
+    <input type="file" id="vaultImport" accept=".zip,.md" multiple style="display:none" onchange="importVault(this)">
+  </div>
+  <div id="notesGraph" style="display:none"></div>
   <div id="notesList"></div>
 </div>
 

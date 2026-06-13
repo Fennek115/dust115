@@ -3,10 +3,14 @@
 // [[Título]] entre notas y backlinks. Render de markdown en ./markdown.js.
 
 import { D } from './data.js';
-import { $, $in, escHtml, mkId } from './util.js';
+import { $, $in, escHtml, mkId, showToast } from './util.js';
 import { notes, activeNotes, saveNotes, notesData, setNotesData, saveNotesData } from './state.js';
 import { renderRow } from './render.js';
 import { renderMarkdown, extractWikiLinks } from './markdown.js';
+import { buildGraph, renderGraphSvg } from './graph.js';
+import {
+  buildZip, parseZip, entryText, notesToZipEntries, parseMarkdownNote, mergeNotes,
+} from './vault.js';
 
 // ─── NOTA POR FILA ───────────────────────────────────────
 
@@ -229,4 +233,103 @@ export function renderNotes() {
     if (tb) tb.value = n.body;
   });
   updateNotesCount();
+  renderGraph();
+}
+
+// ─── GRAFO de enlaces (SVG, layout circular) ──────────────
+// Nodos = notas, aristas = [[links]] resueltos. Click en un nodo → focusNote.
+// Estado solo de UI (no persiste): el grafo se re-deriva en cada render.
+
+let graphOpen = false;
+
+/** Muestra/oculta el grafo de enlaces. */
+export function toggleNotesGraph() {
+  graphOpen = !graphOpen;
+  const btn = $('notesGraphBtn');
+  if (btn) btn.classList.toggle('on', graphOpen);
+  renderGraph();
+}
+
+/** (Re)dibuja el grafo si está abierto; lo vacía si está cerrado. */
+function renderGraph() {
+  const box = $('notesGraph');
+  if (!box) return;
+  if (!graphOpen) { box.style.display = 'none'; box.innerHTML = ''; return; }
+  box.style.display = 'block';
+  box.innerHTML = renderGraphSvg(buildGraph(notesData), { size: 340 });
+}
+
+// ─── VAULT: export/import (.zip de .md, un archivo por nota) ───────────────
+
+/** Descarga el vault como .zip (un .md por nota). Handler global. */
+export function exportVault() {
+  if (!notesData.length) { showToast('No hay notas para exportar'); return; }
+  const zip = buildZip(notesToZipEntries(notesData));
+  const blob = new Blob([/** @type {BlobPart} */ (zip)], { type: 'application/zip' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'apt115_vault_' + new Date().toISOString().slice(0, 10) + '.zip';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  showToast('✓ Vault exportado (' + notesData.length + ' notas)');
+}
+
+/** Abre el selector de archivo del import (el input está oculto). */
+export function pickVaultImport() {
+  const inp = $in('vaultImport');
+  if (inp) inp.click();
+}
+
+/**
+ * Importa notas desde el file input (onchange): un .zip (un .md por nota) o
+ * .md sueltos. Si ya hay notas, pregunta FUSIONAR (misma id se actualiza) vs
+ * REEMPLAZAR todo. Re-deriva enlaces/backlinks/grafo al re-renderizar.
+ * @param {HTMLInputElement} input
+ */
+export async function importVault(input) {
+  const files = input.files;
+  if (!files || !files.length) return;
+  /** @type {import('./state.js').NoteCard[]} */
+  const incoming = [];
+  try {
+    for (const file of Array.from(files)) {
+      if (/\.zip$/i.test(file.name)) {
+        const buf = new Uint8Array(await file.arrayBuffer());
+        for (const e of parseZip(buf)) {
+          if (!/\.md$/i.test(e.name)) continue;
+          incoming.push(parseMarkdownNote(e.name, await entryText(e)));
+        }
+      } else if (/\.md$/i.test(file.name)) {
+        incoming.push(parseMarkdownNote(file.name, await file.text()));
+      }
+    }
+  } catch (err) {
+    alert('No se pudo leer el vault: ' + ((err && /** @type {Error} */ (err).message) || err));
+    input.value = '';
+    return;
+  }
+  input.value = '';
+  if (!incoming.length) { showToast('No se encontraron notas (.md) para importar'); return; }
+
+  let base = notesData;
+  if (notesData.length) {
+    const merge = confirm(
+      'Importar ' + incoming.length + ' nota(s).\n\n' +
+      'Aceptar = FUSIONAR con tus notas actuales (las de misma id se actualizan).\n' +
+      'Cancelar = ver la opción de reemplazar todo.'
+    );
+    if (!merge) {
+      const replace = confirm(
+        '¿REEMPLAZAR todas tus notas actuales por las ' + incoming.length + ' importadas?\n\n' +
+        'Esto borra las notas que tengas ahora. Cancelar = abortar la importación.'
+      );
+      if (!replace) { showToast('Importación cancelada'); return; }
+      base = [];
+    }
+  }
+  setNotesData(mergeNotes(base, incoming));
+  const panel = $('notesPanel');
+  if (panel && !panel.classList.contains('on')) panel.classList.add('on');
+  renderNotes();
+  showToast('✓ Importadas ' + incoming.length + ' nota(s)');
 }

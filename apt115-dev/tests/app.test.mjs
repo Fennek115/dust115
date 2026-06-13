@@ -89,6 +89,7 @@ function makeSandbox() {
     Blob: class { constructor() {} },
     FileReader: class { readAsText() {} },
     Date, JSON, Object, Array, String, Math, RegExp, console,
+    TextEncoder, TextDecoder, Uint8Array, DataView, ArrayBuffer, Set, Map, Promise,
     CORE_DATA: [section('test', 'Test Core')],
     MITRE_DATA: [section('mitre', 'Test Mitre')],
     INTEL_DATA: [section('intel', 'Test Intel')],
