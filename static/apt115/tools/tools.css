@@ -365,3 +365,18 @@
   max-width: 94vw; max-height: 86vh;
 }
 .steg-zoom-cap { font-size: 12px; }
+
+/* ════ Network Map ════ */
+.nm-host {
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg2); margin: 6px 0; padding: 6px 10px;
+}
+.nm-host-h { font-family: 'Fira Code', monospace; font-size: 12px; color: var(--text); }
+.nm-host-h code { color: var(--code); }
+.nm-os {
+  font-size: 10px; color: var(--text3); border: 1px solid var(--border2);
+  border-radius: 3px; padding: 1px 5px; margin-left: 4px;
+}
+.nm-juicy td { color: var(--text); }
+.nm-juicy td code { color: var(--accent); }
+.nm-star { color: var(--orange); }

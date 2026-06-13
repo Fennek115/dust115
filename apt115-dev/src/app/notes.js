@@ -97,6 +97,31 @@ export function addNote() {
   setTimeout(() => { const el = $('nt_' + note.id); if (el) el.focus(); }, 50);
 }
 
+/**
+ * Crea una nota con título + body ya dados y abre el panel (puente desde otras
+ * tools, p.ej. netmap → "mandar a una nota"). Si ya existe una nota con ese
+ * título, le agrega el body en vez de duplicar. Devuelve el id.
+ * @param {string} title @param {string} body @returns {string}
+ */
+export function createNoteFrom(title, body) {
+  const t = String(title || '').trim();
+  const b = String(body || '');
+  const existing = noteByTitle(t);
+  if (existing) {
+    existing.body = (existing.body ? existing.body + '\n\n' : '') + b;
+    existing.ts = new Date().toLocaleString();
+    persistNotesPanel();
+  } else {
+    const note = { id: 'n_' + Date.now(), title: t, body: b, ts: new Date().toLocaleString() };
+    notesData.unshift(note);
+    persistNotesPanel();
+  }
+  const panel = $('notesPanel');
+  if (panel && !panel.classList.contains('on')) panel.classList.add('on');
+  renderNotes();
+  return existing ? existing.id : notesData[0].id;
+}
+
 /** @param {string} id */
 export function deleteNote(id) {
   delete editing[id];

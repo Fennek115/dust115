@@ -20,7 +20,7 @@ import {
 import {
   toggleNote, saveNote, toggleNotesPanel, addNote, deleteNote,
   updateNoteTitle, updateNoteBody, updateNotesCount,
-  editNoteBody, saveNoteBody, refreshNotesPanel, openWikiLink, focusNote,
+  editNoteBody, saveNoteBody, refreshNotesPanel, openWikiLink, focusNote, createNoteFrom,
 } from './notes.js';
 import {
   openCustomModal, closeCustomModal, wireCustomModal, saveCustomCommand,
@@ -46,6 +46,8 @@ Object.assign(window, {
   // notas (por fila + panel markdown/enlaces)
   toggleNote, saveNote, toggleNotesPanel, addNote, deleteNote, updateNoteTitle, updateNoteBody,
   editNoteBody, saveNoteBody, refreshNotesPanel, openWikiLink, focusNote,
+  // puente desde tools: crear nota con contenido (p.ej. netmap → nota)
+  apt115CreateNote: createNoteFrom,
   // checklist / grupos / secciones
   toggleDone, toggleGrp, exportSection, refreshSection,
   // comandos custom
