@@ -199,3 +199,22 @@ test('favoritos: toggleFavItem persiste y el contador refleja', () => {
   ctx.window.clearAllFavs();
   assert.deepEqual(JSON.parse(store.get('cs_favs')), {});
 });
+
+test('notas: panel renderiza markdown + [[wiki]] + backlinks, handlers en window', () => {
+  const { ctx, byId, store } = makeSandbox();
+  // Sembrar el vault ANTES de correr el bundle (state.js lo lee al importar).
+  store.set('cs_notes_panel', JSON.stringify([
+    { id: 'n_1', title: 'Recon', body: 'ver **nmap** y [[Privesc]]', ts: 'x' },
+    { id: 'n_2', title: 'Privesc', body: 'desde [[Recon]]', ts: 'y' },
+  ]));
+  vm.runInContext(code, ctx);
+  ctx.window.toggleNotesPanel();
+  const html = byId('notesList').innerHTML;
+  assert.match(html, /<strong>nmap<\/strong>/, 'render markdown');
+  assert.match(html, /data-wl="Privesc"/, 'enlace [[wiki]]');
+  assert.match(html, /Enlazada desde/, 'backlink Recon ← Privesc');
+  assert.doesNotMatch(html, /wl-missing/, 'ambas notas existen → sin enlaces rotos');
+  for (const h of ['openWikiLink', 'focusNote', 'editNoteBody', 'saveNoteBody', 'refreshNotesPanel']) {
+    assert.equal(typeof ctx.window[h], 'function', `window.${h}`);
+  }
+});

@@ -20,6 +20,7 @@ import {
 import {
   toggleNote, saveNote, toggleNotesPanel, addNote, deleteNote,
   updateNoteTitle, updateNoteBody, updateNotesCount,
+  editNoteBody, saveNoteBody, refreshNotesPanel, openWikiLink, focusNote,
 } from './notes.js';
 import {
   openCustomModal, closeCustomModal, wireCustomModal, saveCustomCommand,
@@ -42,8 +43,9 @@ Object.assign(window, {
   doCopy, doCopyCustom, do1Liner, copyText, toggleHistory, clearHistory,
   // favoritos
   toggleFavItem, toggleFav, removeFav, clearAllFavs, exportFavs,
-  // notas (por fila + panel)
+  // notas (por fila + panel markdown/enlaces)
   toggleNote, saveNote, toggleNotesPanel, addNote, deleteNote, updateNoteTitle, updateNoteBody,
+  editNoteBody, saveNoteBody, refreshNotesPanel, openWikiLink, focusNote,
   // checklist / grupos / secciones
   toggleDone, toggleGrp, exportSection, refreshSection,
   // comandos custom

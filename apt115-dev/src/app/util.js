@@ -14,6 +14,11 @@ export function escHtml(s) {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
+/** Escapa para usar dentro de un atributo HTML entre comillas dobles. @param {string} s */
+export function escAttr(s) {
+  return escHtml(String(s)).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
 /** Id estable de un comando del dataset. @param {string} secId @param {number} gi @param {number} ci */
 export function mkId(secId, gi, ci) { return `c_${secId}_${gi}_${ci}`; }
 

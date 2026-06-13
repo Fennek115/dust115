@@ -1023,6 +1023,37 @@ body{
   font-family:'Fira Code',monospace;letter-spacing:.5px;
   margin-top:6px;text-align:right;
 }
+/* ── Notas markdown + enlaces [[wiki]] + backlinks ── */
+.note-card-edit{
+  background:transparent;border:1px solid rgba(255,210,0,.25);color:rgba(255,210,0,.6);
+  border-radius:4px;cursor:pointer;font-size:12px;padding:1px 6px;margin-right:4px;
+}
+.note-card-edit:hover{border-color:rgba(255,210,0,.6);color:#e8d88a}
+.note-card-rendered{
+  color:#e8d88a;font-size:13px;line-height:1.6;
+  font-family:'Fira Code',monospace;padding:2px 4px;word-break:break-word;
+}
+.note-card-rendered.empty{color:rgba(255,210,0,.3);font-style:italic}
+.note-card-rendered h1,.note-card-rendered h2,.note-card-rendered h3{
+  font-size:14px;margin:6px 0 3px;color:#fff3c0;font-weight:700;
+}
+.note-card-rendered code{background:rgba(255,210,0,.08);padding:1px 4px;border-radius:3px;font-size:12px}
+.note-card-rendered pre{background:rgba(0,0,0,.25);padding:8px;border-radius:4px;overflow:auto;font-size:12px}
+.note-card-rendered ul,.note-card-rendered ol{margin:4px 0 4px 18px}
+.note-card-rendered a{color:#ffd966}
+.note-card-rendered .wl,.note-backlinks .wl{
+  color:#c471ed;border-bottom:1px dotted rgba(196,113,237,.6);
+  cursor:pointer;text-decoration:none;
+}
+.note-card-rendered .wl:hover,.note-backlinks .wl:hover{color:#e0a3ff;border-bottom-style:solid}
+.note-card-rendered .wl.wl-missing{color:rgba(196,113,237,.55);border-bottom-color:rgba(196,113,237,.3)}
+.note-backlinks{
+  margin-top:8px;padding-top:6px;border-top:1px solid rgba(255,210,0,.12);
+  font-size:11px;color:rgba(255,210,0,.5);font-family:'Fira Code',monospace;
+}
+.note-bl-h{color:rgba(255,210,0,.4);margin-right:4px;font-weight:600}
+.note-flash{animation:noteFlash 1s ease}
+@keyframes noteFlash{0%{box-shadow:0 0 0 2px rgba(196,113,237,.7)}100%{box-shadow:0 0 0 2px transparent}}
 .notes-empty{
   text-align:center;padding:40px 20px;color:rgba(255,210,0,.25);
   font-family:'Fira Code',monospace;font-size:13px;
