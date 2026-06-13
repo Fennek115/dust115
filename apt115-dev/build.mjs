@@ -47,7 +47,7 @@ const SOURCES = [
   'tools/triage/fuzzy.js', 'tools/yara/yara.js', 'tools/triage/peid.js', 'tools/triage/epdisasm.js',
   'tools/triage/steg.js', 'tools/triage/triage.js',
   'tools/revshell/payloads.js', 'tools/revshell/revshell.js', 'tools/convert/convert.js',
-  'tools/lolref/lolref.js', 'tools/netcalc/netcalc.js', 'tools/netmap/netmap.js', 'tools/archive/archive.js', 'tools/ioc/ioc.js', 'tools/disasm/disasm.js',
+  'tools/lolref/lolref.js', 'tools/netcalc/netcalc.js', 'tools/netmap/netmap.js', 'tools/archive/archive.js', 'tools/x509/x509.js', 'tools/headers/headers.js', 'tools/cvss/cvss.js', 'tools/ioc/ioc.js', 'tools/disasm/disasm.js',
   'tools/stego/stego.js', 'tools/urlinsp/urlinsp.js', 'tools/cryptolab/cryptolab.js',
 ];
 
@@ -90,6 +90,9 @@ const CONVERTED = {
   'tools/netcalc/netcalc.js': './tools/netcalc.js',
   'tools/netmap/netmap.js': './tools/netmap.js',
   'tools/archive/archive.js': './tools/archive.js',
+  'tools/x509/x509.js': './tools/x509.js',
+  'tools/headers/headers.js': './tools/headers.js',
+  'tools/cvss/cvss.js': './tools/cvss.js',
   'tools/lolref/lolref.js': './tools/lolref.js',
   'tools/revshell/revshell.js': './tools/revshell.js',
   'tools/stego/stego.js': './tools/stego.js',
