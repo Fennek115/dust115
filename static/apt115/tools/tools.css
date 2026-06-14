@@ -479,3 +479,9 @@
   color: var(--text); font-family: 'Fira Code', monospace; font-size: 12px; padding: 5px 8px;
 }
 @media (max-width: 560px) { .cp-form { grid-template-columns: 1fr; } }
+
+/* regf — Registry Hive: árbol e indicadores forenses */
+.rg-children { margin-left: 14px; border-left: 1px solid var(--border); padding-left: 8px; }
+.rg-leaf { padding: 2px 0; font-size: 12px; }
+.rg-finding { padding: 6px 0; border-bottom: 1px solid var(--border); }
+.rg-finding:last-child { border-bottom: none; }
