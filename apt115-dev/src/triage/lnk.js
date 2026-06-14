@@ -324,5 +324,9 @@ export const lnk = (function () {
     });
   }
 
-  return { parse, isLnk, filetime, parseLinkInfo };
+  const api = { parse, isLnk, filetime, parseLinkInfo };
+  // Exponer el parser para reúso en runtime (ej. Jump Lists) sin reimportar el
+  // módulo, que re-registraría el analyzer. Mismo patrón que cfb.js.
+  if (typeof window !== 'undefined') { window.Triage = window.Triage || {}; window.Triage.lnk = api; }
+  return api;
 })();
