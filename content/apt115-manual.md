@@ -14,7 +14,7 @@ analista ni a un sandbox.
 ## Índice
 
 - [Triage: ejecutables y formatos](#triage-ejecutables-y-formatos)
-- Triage: documentos, red y esteganografía — próximamente
+- [Triage: documentos, red y esteganografía](#triage-documentos-red-y-esteganografía)
 - LAB / TOOLS ofensivas y utilitarias — próximamente
 - Forensics — próximamente
 
@@ -449,5 +449,317 @@ estático de APT115 a propósito.
 
 ---
 
-*Próximas secciones: Triage de documentos/red/esteganografía, LAB/TOOLS
-ofensivas y Forensics — en construcción.*
+## Triage: documentos, red y esteganografía
+
+Esta sección cubre dos cosas distintas:
+
+- Paneles que aparecen **dentro de Malware Triage** cuando soltás un
+  **documento** (Office, PDF, .eml, .lnk) o una **imagen** en vez de un
+  ejecutable: **Macros VBA**, **PDF**, **Email (.eml)**, **Windows Shortcut
+  (LNK)** y **Esteganografía (imagen)**.
+- Tools independientes del sidebar (**🧪 LAB / TOOLS**) pensadas para texto y
+  payloads sueltos en vez de un archivo completo: **IOC Extractor**,
+  **URL/Domain Inspector**, **Crypto/Payload Lab** y **Stego Lab**.
+
+### Macros VBA (maldoc)
+
+**Qué hace:** extrae el código VBA de documentos Office — tanto el formato
+OLE legacy (.doc/.xls/.ppt) como OOXML con macros (.docm/.xlsm/.pptm) — y lo
+analiza al estilo **olevba**: marca **auto-ejecución** (`AutoOpen`,
+`Document_Open`, `Workbook_Open`…), **keywords sospechosas** (`Shell`,
+`CreateObject`, `powershell`, `URLDownloadToFile`, `CreateThread`…),
+**ofuscación** (`Chr()`, `StrReverse`, `Base64`…) y extrae **IOCs** (URLs/IPs)
+directamente del código fuente de las macros.
+
+**Caso de uso:** triage de un documento adjunto sospechoso (el vector de
+phishing más común) — confirmar si tiene macros, si se auto-ejecutan al
+abrirse, y qué hacen sin necesidad de abrir el documento en Office.
+
+**Cómo usarlo:** soltá el documento en Malware Triage; el panel aparece solo
+si detecta una estructura CFB/OLE o un `vbaProject.bin` dentro del ZIP
+OOXML. Mirá primero "Indicadores" (auto-exec/sospechoso/ofuscación) y después
+desplegá cada módulo en "Código" para leer el VBA descomprimido.
+
+**Límites:** solo VBA — no cubre macros **Excel 4.0/XLM** (otro motor), RTF,
+documentos cifrados con contraseña, ni **VBA stomping** (cuando el atacante
+vacía el código fuente comprimido y el comportamiento real solo vive en el
+p-code compilado).
+
+**Para seguir investigando:** **oletools** (`olevba`, Python, mismo autor que
+inspiró este analyzer) cubre Excel 4.0/XLM y documentos cifrados con
+contraseñas comunes. Para VBA stomping, **ViperMonkey** emula el p-code
+cuando el código fuente no está disponible.
+
+### PDF (documento)
+
+**Qué hace:** triage estilo **pdfid** (Didier Stevens) en dos niveles. El
+nivel rápido (automático) cuenta keywords sospechosas (`/JavaScript`,
+`/OpenAction`, `/AA`, `/Launch`, `/EmbeddedFile`, `/JBIG2Decode`,
+`/RichMedia`…), detecta **ofuscación de nombres** (`/J#61vaScript` ≡
+`/JavaScript`), reporta la estructura (objetos/streams/xref/`%%EOF`,
+incluidas actualizaciones incrementales sospechosas), extrae **URIs** y
+destinos de `/Launch`, y avisa si hay datos tras el último `%%EOF` (payload
+apendizado / polyglot). El nivel perezoso, con un botón, **infla los streams
+`/FlateDecode`** localmente y busca JavaScript/exploits conocidos (`eval`,
+`unescape`, `Collab.*`, `media.newPlayer`, heap-spray `%u...`, comandos de
+sistema…).
+
+**Caso de uso:** un PDF adjunto que querés revisar sin abrirlo en un lector
+(que podría disparar el exploit). El nivel rápido te dice si vale la pena
+seguir; el nivel de stream te muestra el JS real si lo hay.
+
+**Cómo usarlo:** soltá el PDF en Malware Triage. Revisá "Indicadores" y
+"Keywords sospechosas" primero. Si el panel sugiere JavaScript o no estás
+seguro, click en **▶ Inflar streams y buscar JavaScript** — descomprime los
+streams `/FlateDecode`/`/ASCIIHexDecode` y resalta los fragmentos con
+indicadores, con snippets de contexto.
+
+**Límites:** no resuelve referencias entre objetos PDF ni descifra PDFs
+protegidos con contraseña.
+
+**Para seguir investigando:** el paquete **pdf-tools** de Didier Stevens
+(`pdfid.py` + `pdf-parser.py`) hace este mismo análisis con más profundidad
+(navegación objeto por objeto, filtros adicionales); **peepdf** agrega un
+shell interactivo y puede ejecutar el JS embebido en una caja controlada para
+ver qué hace de verdad — el paso natural si "Inflar streams" encontró algo.
+
+### Email (.eml)
+
+**Qué hace:** triage de correos RFC822/MIME — el vector #1 de phishing.
+Parsea headers (con *unfolding* de líneas de continuación) y el MIME
+multipart recursivo (decodifica base64 y quoted-printable). Extrae
+From/To/Subject/Date/Return-Path/Reply-To/Message-ID, evalúa
+**SPF/DKIM/DMARC** como badges pass/fail (leídos de
+`Authentication-Results`/`Received-SPF`/`DKIM-Signature`), detecta
+**spoofing** (From ≠ Return-Path, Reply-To ≠ From, *display name* que simula
+otra dirección, impersonación de marcas conocidas), reconstruye la **cadena
+de Received** (hops + IP de origen), lista **URLs** del cuerpo, y para cada
+**adjunto** decodificado calcula magic bytes + SHA-256 y marca extensiones
+peligrosas o **dobles extensiones** (`factura.pdf.exe`).
+
+**Caso de uso:** analizar un `.eml` reenviado/exportado para confirmar si es
+phishing — quién lo mandó *realmente* (vs. quién dice ser), si pasó las
+validaciones de autenticación, y si el adjunto es lo que pretende ser.
+
+**Cómo usarlo:** soltá el `.eml` en Malware Triage (se detecta por heurística
+de headers). El panel se aparece automáticamente; revisá "Autenticación"
+(badges SPF/DKIM/DMARC) y "Indicadores" de spoofing primero, luego "Adjuntos"
+para el hash/extensión real de cada archivo.
+
+**Límites:** no valida criptográficamente la firma DKIM (solo lee el
+resultado ya declarado en los headers, típicamente puesto por tu propio
+servidor de correo); sin descifrado S/MIME.
+
+**Para seguir investigando:** **MXToolbox** y similares permiten re-validar
+SPF/DKIM/DMARC contra DNS en vivo (útil si el correo no pasó por un gateway
+que ya lo evaluó). Para los adjuntos extraídos, volvé a soltarlos en Malware
+Triage (PE/PDF/maldoc, lo que corresponda). **PhishTool**/**Any.Run** son el
+siguiente paso si necesitás ver el comportamiento de URLs/adjuntos en
+ejecución.
+
+### Windows Shortcut (LNK)
+
+**Qué hace:** parser propio de [MS-SHLLINK] — los `.lnk` son un vector de
+**acceso inicial** muy común (el ícono dice "documento" pero el target es un
+intérprete). Extrae LinkFlags, timestamps, *show command*; **LinkInfo**
+(la ruta/target real, label de volumen, recurso de red si el LNK apunta a un
+share UNC); **StringData** (nombre, ruta relativa, directorio de trabajo,
+**argumentos** — donde suele ir el comando real); y **ExtraData** de alta
+señal: variables de entorno con el target real, ícono real, y el
+**TrackerDataBlock** con el **MachineID** (nombre NetBIOS de la máquina donde
+se creó el LNK — útil para atribución/clustering). Marca **datos apendizados**
+tras la estructura (payload embebido) e **indicadores**: uso de
+powershell/mshta/rundll32/`-enc`/IEX/DownloadString/rutas UNC, y **ícono
+spoofeado** (ícono de una app legítima pero el target es un intérprete).
+
+**Caso de uso:** el `.lnk` que llega en un ZIP de phishing o en un USB —
+confirmar qué ejecuta *de verdad* (vs. lo que el ícono/nombre sugieren), y
+si trae un MachineID que pueda correlacionar con otras muestras de la misma
+campaña.
+
+**Cómo usarlo:** soltá el `.lnk` en Malware Triage. Mirá primero "Qué
+ejecuta" e "Indicadores" — ahí está el target real y los argumentos.
+"MachineID (build host)" en la cabecera es el dato de atribución.
+
+**Límites:** **no parsea el `LinkTargetIDList`** (los *shell items* tipo
+"esto apunta a Mi PC → Escritorio → archivo.txt") — se salta registrando su
+tamaño; el target sale de LinkInfo/StringData/ExtraData, que en la práctica
+es donde está la señal accionable.
+
+**Para seguir investigando:** **LnkParse3** (Python) sí decodifica el
+`LinkTargetIDList` completo si necesitás esa ruta de shell items. Si el LNK
+viene de Jump Lists (`*.automaticDestinations-ms`/`*.customDestinations-ms`),
+la tool **Jump Lists** de APT115 (sección Forensics) lo procesa en su
+contexto original con el MRU de uso.
+
+### Esteganografía (imagen)
+
+**Qué hace:** dos niveles de esteganálisis sobre PNG/JPEG/GIF/BMP/WEBP. El
+nivel **contenedor** (automático): encuentra el final lógico del archivo y
+detecta **datos apendizados tras el EOF** (el truco clásico de "pegar" un ZIP
+o ejecutable después del IEND/EOI), hace **carving** de magics embebidos
+(ZIP/RAR/7z/PDF/gzip/ELF/PNG/JPEG dentro del archivo), y lee
+**metadatos/comentarios** (chunks `tEXt`/`zTXt`/`iTXt` de PNG, `COM`/`EXIF`/
+`XMP` de JPEG, comentario de GIF). El nivel **píxel** (perezoso, con botón):
+decodifica la imagen con Canvas y corre el **ataque chi-cuadrado** de
+Westfeld sobre LSB-replacement (estima la probabilidad de que haya algo
+embebido), muestra los **planos de bit** (0-7 de cada canal, estilo
+Aperi'Solve) y extrae el **stream LSB como strings**.
+
+**Caso de uso:** una imagen sospechosa de un CTF o de una campaña que usa
+esteganografía para ocultar payloads o configuración de C2 — primero el nivel
+contenedor (rápido, casi siempre el "truco" real está ahí: algo pegado al
+final), después el nivel de píxel si sospechás LSB.
+
+**Cómo usarlo:** soltá la imagen en Malware Triage. El nivel contenedor
+corre solo. Para el nivel de píxel, click en **▶ Analizar LSB y planos de
+bit** — te muestra el score chi², y podés navegar los planos de bit por canal
+y bit (0-7) buscando patrones visuales anómalos.
+
+**Límites:** detecta **LSB-replacement**, datos apendizados y metadata — **no
+rompe esquemas con clave** (Steghide, F5/matrix encoding); para esos, el panel
+detecta la posibilidad pero deriva. El nivel de píxel se limita a ~40 MP.
+
+**Para seguir investigando:** **zsteg** (Ruby) automatiza la búsqueda de LSB
+en más variantes de bit-order/canal que el plano-por-plano manual de acá.
+**binwalk** es el estándar para carving de archivos embebidos a mayor escala.
+Si sospechás **Steghide**, **stegseek** hace fuerza bruta de passphrase contra
+diccionarios — mucho más rápido que el stegcracker original.
+
+### IOC Extractor
+
+**Qué hace:** tool de texto (no de archivo) — pegás cualquier texto (un
+reporte, un log, un email) y extrae automáticamente hashes (MD5/SHA-1/
+SHA-256), URLs, emails, IPv4/IPv6, dominios, CVEs, IDs de **ATT&CK**, claves
+de registro y rutas Windows. Soporta texto **defanged** (`hxxp://`,
+`[.]`, `evil[.]com`) — lo *refanguea* antes de extraer — y puede *defanguear*
+la salida para pegarla de vuelta en un reporte sin que los IOCs sean
+clickeables/activos.
+
+**Caso de uso:** te pasaron un reporte de threat intel o un log y necesitás
+la lista limpia de IOCs para cargarlos en tu plataforma (MISP, una lista de
+bloqueo, etc.) — sin copiar/pegar y limpiar a mano cada uno.
+
+**Cómo usarlo:** pegá el texto en el textarea. La extracción corre en vivo;
+cada categoría (hashes, URLs, IPs, dominios, CVE, ATT&CK…) aparece agrupada
+con su conteo. Usá el toggle de defang/refang según necesites el resultado
+"vivo" o "seguro para pegar en un doc".
+
+**Límites:** extracción por expresiones regulares — no resuelve DNS, no
+valida que una URL/dominio exista, y dominios que coinciden con extensiones
+de archivo (`informe.pdf`) se filtran pero pueden colarse falsos positivos en
+texto ambiguo.
+
+**Para seguir investigando:** **CyberChef** tiene una receta "Extract IOCs"
+similar pero encadenable con docenas de otras transformaciones. Para
+*gestionar* IOCs a escala (deduplicar, taggear, compartir con tu equipo/la
+comunidad), **MISP** es el estándar — exportá la lista de acá y armá un evento.
+
+### URL / Domain Inspector
+
+**Qué hace:** pegás URLs o dominios (uno por línea, defanged o no) y cada uno
+se descompone y evalúa por riesgo. Decodifica **punycode → Unicode** (IDN),
+detecta **homógrafos** (mezcla de scripts dentro de un label, o un label no
+latino bajo un TLD de otro script — `аррӏе.com` sí dispara, `пример.рф` no),
+**typosquatting** (distancia de Levenshtein + sustituciones leet `1`→`l`,
+`0`→`o` sobre cada token — detecta `paypa1.com`), marca cuando el dominio
+registrado real es distinto de la marca que aparenta el subdominio
+(`paypal.com.evil.ru` → el dominio real es `evil.ru`), una heurística de
+**DGA** (entropía, ratio de vocales, corridas de consonantes, dígitos sobre
+el label), TLD abusados, IPs literales (decimal/hex), credenciales en la URL,
+sobre-encoding, puertos no estándar y esquemas peligrosos.
+
+**Caso de uso:** una lista de URLs/dominios sospechosos de un phishing,
+un log de DNS, o IOCs de un reporte — priorizar cuáles vale la pena investigar
+primero por su nivel de riesgo, y entender *por qué* un dominio parece
+sospechoso (homógrafo vs. typosquat vs. DGA son problemas distintos con
+remediaciones distintas).
+
+**Cómo usarlo:** pegá una URL o dominio por línea en el textarea. Cada uno
+aparece con su panel de riesgo (alto/medio/bajo) y el detalle de qué disparó
+cada hallazgo. Los lookups a VirusTotal/urlscan/whois son **opt-in** — solo
+abren un link al hacer click.
+
+**Límites:** 100% heurístico y local — no resuelve DNS ni consulta listas de
+reputación por sí mismo (eso son los lookups opt-in).
+
+**Para seguir investigando:** **urlscan.io** y **VirusTotal** (los lookups
+opt-in de acá) dan veredictos basados en escaneos reales y reputación
+histórica. **dnstwist** genera variaciones typosquat/homógrafo de *tu propio*
+dominio y chequea cuáles están registradas — el caso de uso inverso (defensivo
+en vez de analizar un IOC que ya tenés).
+
+### Crypto / Payload Lab
+
+**Qué hace:** para destrabar payloads ofuscados. Pegás el blob (hex, base64 o
+texto — auto-detectado) y ves su **entropía** (pista de cifrado/compresión vs.
+XOR/texto plano). Cuatro modos: **(1) XOR brute de 1 byte** — prueba las 256
+claves y ordena los candidatos por plausibilidad (texto imprimible + chi²
+contra frecuencia del inglés + keywords + **magic bytes** — un candidato con
+un magic reconocible en offset 0 va primero, casi siempre es la respuesta).
+**(2) XOR con clave repetida** — estima el largo de la clave con el **Índice
+de Coincidencia** por columnas (más robusto que Kasiski/Hamming en texto
+ASCII) y recupera la clave columna por columna. **(3) XOR/RC4 con clave**
+conocida (texto o hex). **(4) AES** (Web Crypto) CBC/CTR/GCM, cifrar o
+descifrar con clave+IV en hex.
+
+**Caso de uso:** un string en base64 que claramente no es texto plano, un
+config de malware con XOR de clave corta, o un payload que sabés que es
+AES y tenés (o querés probar) la clave.
+
+**Cómo usarlo:** pegá el blob. Elegí el modo con los botones (XOR brute es el
+default). Para "XOR clave repetida", el largo de clave estimado se muestra
+antes de recuperarla. Para "XOR/RC4 con clave" y "AES" completá los campos de
+clave/IV que aparecen. El resultado se puede copiar como texto/hex/b64, y se
+detecta el magic del resultado (si parece un archivo reconocible, esa es la
+señal de que acertaste).
+
+**Límites:** el brute de 1 byte y la recuperación por columnas asumen que el
+*plaintext* tiene sesgo estadístico (texto, scripts, binarios estructurados)
+— un payload de alta entropía real (ya cifrado con algo fuerte) no se
+destraba por XOR. No hace fuerza bruta de claves AES/RC4, solo aplica las que
+le das.
+
+**Para seguir investigando:** **CyberChef** tiene recetas equivalentes
+encadenables (XOR Brute Force, "Magic" para detección automática) y mucho
+más — el salto natural si necesitás combinar varios pasos (ej. base64 → XOR
+→ gunzip). Para fuerza bruta real de claves (AES/RC4 con diccionario), scripts
+con **pycryptodome** en Python te dan el control total.
+
+### Stego Lab
+
+**Qué hace:** la contraparte "constructora" del analyzer **Esteganografía
+(imagen)** — embebe y extrae payloads en imágenes, con tres modos: **LSB**
+(bit menos significativo de R/G/B, salida PNG sin pérdida), **Append** (pega
+el payload tras el EOF, formato original) y **Metadata** (chunk `tEXt` de PNG
+con keyword "A115"). Cifrado **AES-GCM 256** opcional con passphrase (PBKDF2-
+SHA256, 200k iteraciones) — el blob lleva salt+IV embebidos.
+
+**Caso de uso:** preparar un challenge de CTF, hacer pruebas de concepto de
+exfiltración esteganográfica, o simplemente entender cómo se ve un payload
+embebido para reconocerlo al analizar muestras reales (lo que produce esta
+tool, el analyzer de Esteganografía de Malware Triage lo detecta de vuelta).
+
+**Cómo usarlo:**
+1. Pestaña **▸ Embeber**: soltá la imagen portadora, elegí el modo (LSB/
+   Append/Metadata) con los botones, escribí o pegá el payload, opcionalmente
+   una passphrase para cifrar con AES-GCM, y click en **▶ Generar**. Descargá
+   el resultado (siempre PNG para LSB/Metadata).
+2. Pestaña **◂ Extraer**: soltá la imagen con el payload embebido, indicá el
+   modo (o probá los tres) y la passphrase si corresponde.
+
+**Límites:** LSB/Append/Metadata son detectables por las herramientas
+estándar (ese es el punto — interopera con el analyzer de Triage y con
+`exiftool`/`zsteg`). No implementa esquemas con clave tipo F5/matrix encoding
+(esos requieren su propio motor).
+
+**Para seguir investigando:** **steghide** y **OpenStego** implementan
+esquemas con clave (matrix encoding) más resistentes al chi² que el LSB
+simple de acá — el upgrade si necesitás algo menos detectable. **zsteg**
+sigue siendo la herramienta de referencia para *encontrar* lo que esta tool
+(u otras) escondieron.
+
+---
+
+*Próximas secciones: LAB/TOOLS ofensivas y utilitarias, y Forensics — en
+construcción.*
