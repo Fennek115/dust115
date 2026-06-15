@@ -5,6 +5,10 @@ client-side**: todo corre en tu navegador, nada se sube a ningún servidor.
 Vive en `https://dust115.github.io/dust115/apt115/` y también funciona abriendo
 `index.html` como archivo local (file://), sin internet.
 
+Manual de usuario de todas las herramientas (qué hacen, cuándo usarlas, cómo
+usarlas y a qué herramienta profesional derivar):
+`https://dust115.github.io/dust115/apt115-manual/`.
+
 ## Qué trae
 
 **Cheatsheet ofensivo** — comandos de recon/web/AD/privesc/tunneling con
