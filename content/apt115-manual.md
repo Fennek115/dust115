@@ -15,7 +15,7 @@ analista ni a un sandbox.
 
 - [Triage: ejecutables y formatos](#triage-ejecutables-y-formatos)
 - [Triage: documentos, red y esteganografía](#triage-documentos-red-y-esteganografía)
-- LAB / TOOLS ofensivas y utilitarias — próximamente
+- [LAB / TOOLS ofensivas y utilitarias](#lab--tools-ofensivas-y-utilitarias)
 - Forensics — próximamente
 
 ---
@@ -759,7 +759,500 @@ simple de acá — el upgrade si necesitás algo menos detectable. **zsteg**
 sigue siendo la herramienta de referencia para *encontrar* lo que esta tool
 (u otras) escondieron.
 
+## LAB / TOOLS ofensivas y utilitarias
+
+Estas tools viven en el grupo **🧪 LAB / TOOLS** del sidebar (no requieren
+soltar un archivo de muestra). Varias de ellas comparten una **barra de
+variables** arriba de la página (`LHOST`, `LPORT`, `RHOST`, `RPORT`,
+`DOMAIN`): definilas una vez y se propagan a los payloads/templates que las
+usan.
+
+### Reverse Shell & C2
+
+**Qué hace:** generador de payloads a partir de un catálogo de plantillas
+(bash, Python, PHP, PowerShell, Netcat, socat, listeners, web shells,
+persistencia, etc.), organizadas en pestañas por categoría. Cada plantilla
+usa las variables `{LHOST}`/`{LPORT}`/`{RHOST}`/`{RPORT}`/`{DOMAIN}` de la
+barra superior, y algunas categorías permiten **encoding** del resultado:
+Raw, URL, Double-URL, Base64 o `powershell -enc` (UTF-16LE → base64).
+
+**Caso de uso:** en un pentest/CTF autorizado, necesitás levantar rápido un
+listener y un one-liner de reverse shell para una víctima Linux/Windows, o
+un payload codificado para colarlo en un campo que filtra ciertos
+caracteres (espacios, comillas).
+
+**Cómo usarla:**
+1. Completá `LHOST`/`LPORT` (y `RHOST`/`RPORT`/`DOMAIN` si aplica) en la
+   barra de variables de arriba de la página.
+2. Elegí la categoría con las pestañas (bash, Python, PowerShell, etc.).
+3. Si la categoría tiene encodings, elegí uno con los botones de la fila
+   `Encoding:`.
+4. Click en cualquier payload (o en su botón **copy**) para copiarlo al
+   portapapeles, ya con tus variables sustituidas.
+
+**Límites:** es un catálogo de plantillas estáticas, no genera shellcode
+binario ni evade AV/EDR — para eso hace falta un generador real (msfvenom,
+Sliver) con encoders/stagers propios.
+
+**Para seguir investigando:** **revshells.com** y la chuleta de
+**PayloadsAllTheThings** tienen catálogos más extensos y actualizados.
+**msfvenom** (Metasploit) genera shellcode/binarios con encoders reales, y
+frameworks de C2 como **Sliver** o **Cobalt Strike** (con autorización)
+manejan el listener, la sesión y el post-explotación de punta a punta —
+acá sólo armás el one-liner inicial.
+
+### Convert / Hash
+
+**Qué hace:** una "mini-CyberChef" de operaciones puras input→output, todas
+en un mismo panel con botones por categoría: **Base64/Hex/URL/Base32/HTML**
+(encode/decode), **Cifras** (ROT-N y XOR en hex, usando el campo Key),
+**JWT** (decodifica header/payload, avisa si `alg=none` o si `exp` ya
+venció), **Hashes** (MD5/SHA-1/256/512 de un texto, y **Hash ID** que
+reconoce el formato de un hash por longitud/patrón — bcrypt, md5crypt,
+NTLM, etc.), **Timestamp** (epoch en s/ms/µs/ns o fecha → ISO/UTC/local/
+relativo, en ambos sentidos) y **Regex** (probás un patrón `/.../flags` en
+el campo Key contra el texto del input y ves cada match con sus grupos).
+
+**Caso de uso:** tenés un string que "no se ve normal" y necesitás
+decodificarlo rápido (JWT de una request, hash de una base de datos
+filtrada, timestamp de un log, blob base64/hex de un payload) sin abrir
+otra herramienta.
+
+**Cómo usarla:**
+1. Pegá el texto en el textarea de **Input**.
+2. Si la operación lo necesita (XOR, ROT-N, Regex), completá el campo
+   **Key / N / patrón**.
+3. Click en el botón de la operación deseada (agrupadas por categoría:
+   Base64, Hex, URL, Base32, HTML, Cifras, JWT, Hashes, Timestamp, Regex).
+4. El resultado aparece en el textarea de **Output**; **copy** lo manda al
+   portapapeles.
+
+**Límites:** XOR/ROT-N acá son transformaciones directas (no fuerza bruta —
+para eso está **Crypto / Payload Lab** en Triage). El "Hash ID" es por
+patrón/longitud, no es infalible (varios algoritmos comparten longitud).
+
+**Para seguir investigando:** **CyberChef** es la versión completa —
+recetas encadenables (varios pasos en pipeline) y muchas más operaciones.
+Para JWTs específicamente, **jwt.io** y **jwt_tool** permiten además
+*forjar* tokens para probar bypasses de firma.
+
+### GTFOBins / LOLBAS
+
+**Qué hace:** referencia **offline** y buscable de dos catálogos públicos:
+**GTFOBins** (binarios Unix que se pueden abusar para escalar privilegios,
+escapar de shells restringidas, etc., categorizados por técnica: suid,
+sudo, capabilities, file read/write, shell, etc.) y **LOLBAS** (binarios y
+scripts legítimos de Windows — "living off the land" — con comandos de
+ejemplo y referencia a MITRE ATT&CK). Los datasets se cargan recién al
+abrir la tool (no pesan en la carga inicial) y funcionan sin internet.
+
+**Caso de uso:** estás en una shell limitada en Linux y encontraste que
+`find` corre con bit SUID, o en una máquina Windows tenés `certutil`
+disponible y querés saber si sirve para algo más que validar certificados
+— buscás el binario y la tool te muestra los one-liners ya armados.
+
+**Cómo usarla:**
+1. Elegí la fuente con los botones **GTFOBins · Unix** / **LOLBAS ·
+   Windows**.
+2. Escribí en el buscador el nombre del binario o un comando/técnica (ej.
+   `tar`, `suid`, `certutil`, `download`).
+3. Opcionalmente filtrá por categoría con el `<select>`.
+4. Cada resultado muestra el binario, la(s) técnica(s) que aplican con su
+   comando — click en **copy** para llevarlo al portapapeles. Los
+   resultados están topeados a 60 binarios visibles; refiná la búsqueda si
+   hay más.
+
+**Límites:** son los datasets públicos tal cual (licencia GPL de los
+proyectos originales) — no valida si la técnica aplica a *tu* binario
+específico (versión, flags disponibles, etc.), eso lo confirmás en la
+máquina real.
+
+**Para seguir investigando:** los sitios oficiales
+**gtfobins.github.io** y **lolbas-project.github.io** tienen la versión
+siempre actualizada (esta tool es un snapshot). Para automatizar la
+detección de binarios SUID/capabilities en una máquina real, herramientas
+de enumeración como **linpeas**/**winpeas** cruzan el sistema contra estas
+mismas listas.
+
+### Network Calc
+
+**Qué hace:** tres calculadoras de red en una página. **IPv4**: de un
+`a.b.c.d/n` calcula netmask, wildcard, network, broadcast, rango usable,
+hosts usables y clasifica la IP (RFC1918, loopback, link-local, CGNAT,
+multicast, etc.). **IPv6**: de una dirección con `/prefijo` muestra forma
+comprimida y expandida, red, cantidad de direcciones (con BigInt) y tipo
+(loopback, ULA, link-local, global unicast, etc.). **VLSM**: dado un bloque
+base (`10.0.0.0/24`) y una lista de subredes con sus requerimientos de hosts
+(`Ventas, 50` / `TI, 25` / `Enlace, 2`), calcula el plan de subneteo
+*largest-first* con CIDR, máscara y rango de cada una. Además, una
+**referencia de puertos** comunes para pentest, buscable por número o
+servicio.
+
+**Caso de uso:** estás armando el scoping de un pentest interno y necesitás
+calcular rápido el rango de un `/26`, entender si una IP es RFC1918 o
+pública, planificar subredes para varios departamentos desde un bloque
+asignado, o recordar qué servicio corre típicamente en el puerto 5985.
+
+**Cómo usarla:** cada calculadora recalcula **en vivo** mientras escribís
+(sin botón "calcular"):
+1. **IPv4**: escribí `a.b.c.d/n` en el primer campo (por defecto
+   `10.10.14.7/24`).
+2. **IPv6**: escribí la dirección con `/prefijo` (por defecto
+   `2001:db8::1/64`).
+3. **VLSM**: poné el bloque base y, una línea por subred, `nombre, hosts`
+   en el textarea.
+4. **Puertos**: escribí un número o parte de un nombre de servicio
+   (`445`, `smb`, `ldap`) para filtrar la tabla.
+
+**Límites:** la referencia de puertos es curada a mano (no es
+`nmap-services` completo) — cubre los puertos más relevantes para pentest,
+no todos los registrados en IANA.
+
+**Para seguir investigando:** **ipcalc**/**sipcalc** en línea de comandos
+hacen lo mismo que las calculadoras IPv4/IPv6 y son útiles para
+scriptear. Para VLSM en redes grandes/complejas, herramientas de
+documentación de red (IPAM como **NetBox**) llevan el registro persistente
+que esta tool no guarda.
+
+### Network Map
+
+**Qué hace:** parsea la salida de **nmap** — XML (`-oX`) o grepable
+(`-oG`/`.gnmap`) — y arma un mapa de hosts agrupados por subred `/24`,
+mostrando IP, hostname, OS detectado (si está) y puertos abiertos con su
+servicio/producto/versión. Resalta con una ⭐ los **servicios "jugosos"**
+para pentest (SMB, LDAP, RDP, WinRM, bases de datos, Docker/K8s API,
+Redis, etc., por nombre de servicio o número de puerto conocido). Permite
+exportar el mapa como **texto**, **markdown** o **JSON**, o mandarlo
+directo a una **nota** del panel de notas de APT115.
+
+**Caso de uso:** terminaste un escaneo de nmap sobre un rango y querés una
+vista organizada por subred para priorizar — qué hosts tienen SMB/RDP/LDAP
+abiertos (candidatos a AD), cuáles tienen una base de datos expuesta, etc.,
+y dejar ese resumen como punto de partida en tus notas de la sesión.
+
+**Cómo usarla:**
+1. Pegá en el textarea la salida de `nmap -oX -` (XML) o `nmap -oG -`
+   (grepable/`.gnmap`) — se detecta el formato automáticamente y se
+   procesa en vivo mientras pegás.
+2. El mapa aparece agrupado por subred `/24`, con cada host y sus puertos
+   abiertos; los servicios jugosos quedan marcados con ⭐.
+3. Usá los botones **copiar md** / **copiar txt** / **copiar json** para
+   exportar, o **→ nota** para crearla directo en el panel de notas de
+   APT115.
+
+**Límites:** sólo lista puertos en estado `open` (u `open|filtered`); no
+interpreta scripts NSE más allá de lo que nmap ya puso en `service`/
+`product`/`version`. El agrupado por subred es siempre `/24` para IPv4
+(no configurable).
+
+**Para seguir investigando:** **nmap** mismo sigue siendo la fuente —
+para escaneos más agresivos o con NSE específico volvés a la línea de
+comandos. Para correlacionar el mapa con capturas de pantalla de servicios
+web, **EyeWitness** o **gowitness**; para orquestar el flujo completo de
+descubrimiento → enumeración, **AutoRecon**.
+
+### Archive / APK
+
+**Qué hace:** lee el **central directory** de un ZIP/JAR/APK/OOXML
+(docx/xlsx/pptx) **sin descomprimirlo**, vía el mismo parser de ZIP que usa
+el resto de APT115. Lista cada entrada con tamaño, tamaño comprimido,
+ratio y método, y marca banderas de riesgo: **zip-slip** (rutas con
+`../`), rutas absolutas o con backslash, **doble extensión señuelo**
+(`factura.pdf.exe`), entradas **ejecutables**, archivos **anidados** (zip
+dentro de zip) y **ratios de compresión absurdos** (>100×, señal de
+zip-bomb). Detecta el tipo de contenedor (ZIP/JAR/APK/OOXML/ODF-EPUB). Para
+**APK** además identifica los `classes*.dex`, las librerías nativas por ABI
+(`lib/<abi>/`) y — decodificando el string pool del
+`AndroidManifest.xml` binario (AXML) — extrae la lista de **permisos**
+declarados.
+
+**Caso de uso:** te llega un adjunto `.zip`/`.docx` o un `.apk` y antes de
+extraer/instalar nada querés saber qué hay adentro: ¿tiene un ejecutable
+disfrazado de PDF? ¿intenta escribir fuera del directorio de extracción?
+¿qué permisos pide la app Android (cámara, SMS, ubicación)?
+
+**Cómo usarla:**
+1. Soltá el archivo (`.zip`/`.jar`/`.apk`/`.ipa`/`.docx`/etc.) en la zona
+   de drop, o hacé click para elegirlo.
+2. El panel **resumen** muestra tipo de contenedor, cantidad de entradas,
+   tamaños y ratio global (con aviso si supera 50×).
+3. Si es un APK, un panel **🤖 APK** lista DEX, ABIs nativas y permisos.
+4. Si hay entradas con banderas, un panel **⚠ Riesgos** las lista con el
+   detalle de cada bandera (hover para la descripción).
+5. El panel **🗂 Entradas** (colapsado por defecto) tiene la tabla
+   completa de todo el contenido.
+
+**Límites:** lee la *estructura* — no descomprime ni ejecuta nada (salvo
+el manifiesto del APK, que se infla sólo para leer el string pool). No
+analiza el *contenido* de los archivos individuales (para eso, soltalos
+en **Malware Triage** uno por uno).
+
+**Para seguir investigando:** **apktool** y **jadx** descompilan un APK
+completo (recursos + código Java/Smali) para análisis profundo; **binwalk**
+es la referencia para extraer y recursar sobre archivos anidados/firmware.
+Si los permisos o el `AndroidManifest` te interesan en detalle, `jadx`
+también lo decodifica a XML legible directamente.
+
+### X.509 Cert
+
+**Qué hace:** decodifica un certificado **X.509** (PEM o DER) con un lector
+ASN.1/DER local — el mismo motor que usa el triage de PE para Authenticode,
+reutilizado acá de forma genérica. Muestra versión, número de serie,
+algoritmo y validez de la firma, subject/issuer (DN completo), período de
+validez, algoritmo y tamaño de la clave pública (RSA/EC/Ed25519, con
+curva si aplica), extensiones (**SAN**, **Key Usage**, **Extended Key
+Usage**, **Basic Constraints**), si es **autofirmado**, y las huellas
+**SHA-1/SHA-256**. Marca advertencias: firma MD5/SHA-1, RSA < 2048 bits,
+certificado vencido o aún no válido.
+
+**Caso de uso:** capturaste el certificado de un servidor (con `openssl
+s_client` o desde el navegador) o encontraste un `.crt`/`.pem` en una
+muestra, y querés inspeccionarlo rápido — ¿quién lo emitió, para qué
+dominios es válido, usa criptografía débil, está vencido?
+
+**Cómo usarla:**
+1. Pegá el bloque PEM (`-----BEGIN CERTIFICATE-----...`) en el textarea, o
+   click en **Cargar archivo…** para soltar un `.crt`/`.cer`/`.pem`/`.der`.
+2. Click en **Analizar**.
+3. Si hay advertencias (firma débil, clave chica, vencido), aparecen
+   primero en un bloque destacado. Después, paneles colapsables para
+   Certificado, Subject, Issuer, Extensiones y Huellas.
+
+**Límites:** es un **decodificador**, no un validador — no verifica la
+firma ni construye/valida la cadena de confianza contra una CA raíz, y no
+hace ninguna consulta de red (CRL/OCSP).
+
+**Para seguir investigando:** `openssl x509 -text -noout` da la misma
+información desde la línea de comandos y permite además **verificar la
+cadena** (`openssl verify`). **testssl.sh** evalúa un servidor TLS
+completo (cadena, protocolos, cifrados, vulnerabilidades conocidas) — el
+paso natural si el certificado vino de un servidor en vivo.
+
+### Sec Headers / CSP
+
+**Qué hace:** pegás un bloque de headers HTTP de respuesta (con o sin la
+status line) y los analiza, dando una **nota A+ a F** con un score 0-100.
+Revisa: **HSTS** (presencia, `max-age`, `includeSubDomains`, `preload`),
+**Content-Security-Policy** (ausencia, `unsafe-inline`/`unsafe-eval`,
+comodines en `script-src`, directivas faltantes como `object-src`/
+`frame-ancestors`/`base-uri`), **X-Frame-Options** vs `frame-ancestors`,
+**X-Content-Type-Options**, **Referrer-Policy**, **Permissions-Policy**,
+cada **Set-Cookie** (flags `Secure`/`HttpOnly`/`SameSite`), y fuga de
+información en `Server`/`X-Powered-By`.
+
+**Caso de uso:** estás auditando una aplicación web y querés una pasada
+rápida de hardening de headers — pegás la salida de `curl -I` o lo que ves
+en la pestaña Network del navegador y obtenés una lista priorizada de qué
+falta o está mal configurado, con la severidad de cada hallazgo.
+
+**Cómo usarla:**
+1. Pegá los headers en el textarea, uno por línea (`Nombre: valor`); la
+   status line `HTTP/1.1 200 OK` se ignora si está presente.
+2. Click en **Analizar**.
+3. Arriba aparece la nota (A+..F) y el score; debajo, la tabla de
+   **hallazgos** ordenada por severidad (✖ crítico, ⚠ aviso, ℹ info, ✓ ok).
+4. Paneles colapsables adicionales: **CSP desglosada** por directiva (si
+   hay) y la lista completa de **headers recibidos**.
+
+**Límites:** 100% estático sobre lo que pegaste — no hace ningún request,
+no evalúa configuración de TLS/cifrados (eso es otra capa) ni sigue
+redirects.
+
+**Para seguir investigando:** **Mozilla Observatory** y
+**securityheaders.com** hacen el mismo análisis pero contra el sitio en
+vivo (incluyendo seguir redirects y verificar TLS). **testssl.sh** cubre la
+capa de transporte (cifrados, protocolos) que esta tool no toca.
+
+### CVSS Calc
+
+**Qué hace:** convierte un **vector CVSS** en su score, soportando **v3.0,
+v3.1 y v4.0** con las fórmulas oficiales de FIRST. Para v3.1/v3.0 calcula
+Base, Temporal y Environmental según la especificación pública. Para v4.0
+es un **port fiel** de la calculadora de referencia de FIRST (cálculo de
+MacroVector + búsqueda en tabla + interpolación por distancia de
+severidad), con las tablas de datos vendorizadas tal cual del proyecto
+oficial (BSD-2-Clause). Valida que el vector tenga el prefijo correcto, las
+métricas obligatorias y valores permitidos.
+
+**Caso de uso:** estás redactando un hallazgo de pentest o un advisory y
+necesitás el score CVSS correspondiente al vector que armaste (o querés
+verificar el score que aparece en un CVE contra su vector publicado).
+
+**Cómo usarla:**
+1. Pegá el vector completo, incluyendo el prefijo (`CVSS:3.1/...` o
+   `CVSS:4.0/...`).
+2. Click en **Calcular** (o probá los botones de ejemplo **ej. v3.1** /
+   **ej. v4.0** para ver el formato).
+3. El resultado muestra el score grande con su severidad (None/Low/Medium/
+   High/Critical) y, para v3, el desglose Base/Temporal/Environmental. Un
+   panel colapsable lista todas las métricas parseadas.
+
+**Límites:** sólo hace **vector → score** — no ayuda a *elegir* los
+valores de las métricas (eso requiere entender la vulnerabilidad).
+
+**Para seguir investigando:** la **calculadora oficial de FIRST**
+(first.org/cvss/calculator) es la referencia canónica y permite armar el
+vector de forma interactiva, métrica por métrica, si no lo tenés armado
+todavía. El **NVD** (nvd.nist.gov) publica vectores ya calculados para CVEs
+conocidos, útiles para comparar.
+
+### Cracking-prep
+
+**Qué hace:** tres utilidades **offline** para preparar (no ejecutar) un
+ataque de diccionario en un pentest autorizado. **(1) Perfilador de
+objetivo** (lógica portada de CUPP): completás datos conocidos del objetivo
+(nombre, apellido, apodo, pareja, hijos, mascota, empresa, fechas) y genera
+candidatos combinando capitalización, variantes *leet*, concatenaciones de
+palabras, sufijos numéricos/de fecha/símbolo y *keyboard walks* comunes —
+con checkboxes para activar/desactivar cada estrategia. **(2) Estimador de
+keyspace de máscara** (estilo PACK): una máscara hashcat (`?u?l?l?l?d?d?d`)
+da el total de combinaciones y el tiempo estimado a una velocidad elegida
+(GPU, rig, o bcrypt lento). **(3) Aplicador de reglas hashcat/JtR**: una
+palabra base + reglas (una por línea, subset de funciones: `l u c C t r d f
+{ } [ ] $ ^ T D o i s @`) muestra el resultado de cada regla.
+
+**Caso de uso:** en un pentest autorizado conseguiste datos de OSINT sobre
+un empleado (redes sociales, fechas) y querés armar una wordlist dirigida en
+vez de usar `rockyou.txt` a ciegas; o necesitás decidir si una máscara de
+8 caracteres con mayúscula+minúsculas+dígitos es viable en el tiempo del
+engagement.
+
+**Cómo usarla:**
+1. **Perfilador**: completá los campos que tengas (no hace falta llenarlos
+   todos), tildá/destildá las estrategias (`leet`, `numbers`, `specials`,
+   `caps`, `combine`, `walks`) y click en **Generar wordlist**. **copiar**
+   o **descargar .txt** para usarla con hashcat/JtR.
+2. **Keyspace de máscara**: escribí la máscara, elegí una velocidad de
+   referencia y click en **Estimar**.
+3. **Reglas hashcat/JtR**: escribí la palabra base, una regla por línea, y
+   click en **Aplicar** para ver la tabla regla→resultado.
+
+**Límites:** el perfilador genera como máximo 50.000 candidatos y no
+descarga ni incluye wordlists externas (`rockyou`, etc.). El subset de
+reglas no cubre la sintaxis completa de hashcat (funciones avanzadas se
+ignoran silenciosamente).
+
+**Para seguir investigando:** **CUPP** (de donde está portada la lógica del
+perfilador) tiene más opciones y se integra directo con crackers. **PACK**
+(PEACEPESQUISH/policygen, hashcat-utils) analiza wordlists crackeadas reales
+para derivar máscaras y reglas óptimas para *tu* objetivo, en vez de
+genéricas. **hashcat** mismo es donde corren tanto las máscaras como las
+reglas reales contra los hashes.
+
+### SID / SDDL
+
+**Qué hace:** decodifica dos formatos de seguridad de Windows/Active
+Directory. Un **SID** (`S-1-5-32-544`) se resuelve a su nombre well-known
+(usando la tabla de MS-DTYP), autoridad, y — si es un SID de dominio
+(`S-1-5-21-...`) — separa el dominio del **RID** y lo resuelve contra la
+tabla de RIDs conocidos (Administrator, Domain Admins, krbtgt, etc.). Un
+descriptor **SDDL** (`O:BAG:DUD:(A;;FA;;;SY)...`) se desarma en Owner,
+Group, **DACL** y **SACL**, y cada **ACE** se desglosa en tipo (Allow/Deny/
+Audit/...), flags de herencia, derechos de acceso (resolviendo los códigos
+de 2 letras como `FA`=`FILE_ALL_ACCESS`) y trustee — resolviendo también los
+alias de SID de 2 letras (`BA`, `SY`, `WD`, etc.).
+
+**Caso de uso:** estás revisando los permisos de un objeto de AD (con
+`Get-Acl`, `dsacls`, o la salida de BloodHound) y tenés un SID o un SDDL
+crudo que necesitás entender sin memorizar las tablas de MS-DTYP — por
+ejemplo, para saber a quién corresponde un RID o qué significa exactamente
+una ACE como `(A;OICI;FA;;;BA)`.
+
+**Cómo usarla:** pegá el SID o el descriptor SDDL completo en el textarea y
+click en **Decodificar**. Se autodetecta el formato (si empieza con `S-1-`
+y no tiene `O:`/`G:`/`D:`/`S:`, se trata como SID puro). Para SDDL, el
+resultado son paneles colapsables **🔐 DACL** y **📝 SACL** con una fila por
+ACE.
+
+**Límites:** la tabla de SIDs well-known y RIDs de dominio es la estándar de
+MS-DTYP — SIDs de objetos *específicos* de tu dominio (usuarios, grupos
+custom) sólo muestran "DOMAIN principal (RID N)" sin nombre, porque ese
+mapeo vive en el AD, no en una tabla pública.
+
+**Para seguir investigando:** **BloodHound**/**SharpHound** mapean ACEs de
+todo un dominio y muestran rutas de ataque (quién puede modificar a quién)
+en lugar de un descriptor a la vez. En una máquina Windows, `Get-Acl` /
+`icacls` / `dsacls` obtienen el SDDL real de un objeto para pegarlo acá.
+
+### PowerShell deob
+
+**Qué hace:** desarma capas comunes de ofuscación de PowerShell hasta
+llegar a un punto fijo (máx. 25 iteraciones), aplicando repetidamente:
+detección y decodificación de **`-EncodedCommand`**/base64 suelto (UTF-16LE
+o UTF-8), expansión de **`[char]NN`**/`[char]0xNN` a literales, colapso del
+**operador `-f`** (`"{0}{1}" -f 'a','b'` → `"ab"`), eliminación de
+**backticks** de evasión (y expansión de `` `n``/`` `t``/`` `r``), y
+**concatenación** de literales (`'a'+'b'` → `'ab'`). Por separado,
+**descomprime** un blob base64 gzip/zlib/deflate-raw (probando los tres
+formatos). El lado generador: a partir de un comando en claro, produce el
+`-EncodedCommand` base64 correspondiente. Nada de esto se ejecuta — es
+lectura/transformación de texto.
+
+**Caso de uso:** encontraste un one-liner de PowerShell ofuscado (en un
+script, un log, o como artefacto de un maldoc) y necesitás leer qué hace
+realmente sin ejecutarlo; o al revés, necesitás generar un `-enc` para un
+PoC.
+
+**Cómo usarla:**
+1. Pegá el one-liner ofuscado en el textarea.
+2. Click en **Deofuscar** — debajo aparecen las **capas** detectadas
+   (`-EncodedCommand → UTF-16LE`, `[char] → literal`, `operador -f`,
+   `backticks`, `concatenación`) y el resultado en el textarea de salida.
+3. Si en cambio sospechás que hay un blob comprimido en base64, click en
+   **Descomprimir gzip/b64** (prueba gzip/zlib/deflate-raw automáticamente).
+4. Para generar un `-enc`, abrí el panel **🛠 Generar -EncodedCommand**,
+   escribí el comando y click en **→ -enc**.
+
+**Límites:** cubre las técnicas de ofuscación *más comunes* — no es un
+intérprete de PowerShell completo, así que lógica dinámica (variables que
+se construyen en runtime, `Invoke-Expression` sobre algo calculado) puede
+no resolverse del todo. Esta tool también se usa como motor de
+deofuscación desde el analyzer **Macros VBA (maldoc)** del Triage.
+
+**Para seguir investigando:** **CyberChef** tiene recetas "From Base64" +
+"Decode text (UTF-16LE)" encadenables para los mismos pasos, más genérico.
+**PSDecode** y **PowerDecode** son frameworks dedicados a deofuscar
+PowerShell con un intérprete más completo (manejan variables y funciones
+dinámicas) cuando esta tool no alcanza.
+
+### Disassembler
+
+**Qué hace:** desensambla bytes (hex en cualquier formato — con o sin
+espacios/`0x`/`\x` — o base64) con **Capstone v5** compilado a WASM,
+soportando **x86 (16/32/64), ARM, ARM64 y MIPS**. El motor (~1.8 MB) se
+carga de forma perezosa al primer "Desensamblar". Es el mismo motor que usa
+el analyzer **Entry Point (disasm)** del Triage para el entry point de un
+PE/ELF — acá lo aplicás a *cualquier* blob de bytes que tengas a mano,
+típicamente shellcode generado en otra tool de APT115.
+
+**Caso de uso:** generaste un payload con **Reverse Shell & C2** o lo
+extrajiste con **PowerShell deob**/**Crypto Lab**, y querés leerlo
+instrucción por instrucción para entender qué hace antes de usarlo o para
+confirmar que el encoding/decoding salió bien.
+
+**Cómo usarla:**
+1. Pegá los bytes en el textarea (hex con cualquier separador, o
+   `\x55\x48...`, o base64).
+2. Elegí la arquitectura (`x64` por defecto) y el formato (`hex`/`base64`)
+   con los `<select>`.
+3. Opcional: cambiá la dirección base (`0x1000` por defecto) si te importa
+   que las direcciones mostradas coincidan con un offset real.
+4. Click en **▶ Desensamblar** (o Ctrl/Cmd+Enter). La tabla resultante se
+   puede copiar con **copiar**.
+
+**Límites:** desensambla un blob plano — no resuelve relocations, símbolos
+ni referencias cruzadas como lo haría un desensamblador sobre un binario
+completo (para eso, soltá el binario en **Malware Triage**, no acá). En
+`file://` el motor WASM no carga por restricciones del navegador; funciona
+en el sitio servido o con `hugo server`.
+
+**Para seguir investigando:** **radare2**/**Cutter** y **objdump** son las
+opciones de línea de comandos equivalentes para un blob de bytes. Para
+análisis de un *binario completo* con control de flujo, referencias
+cruzadas y decompilación, **Ghidra** o **IDA** son el siguiente nivel —
+esta tool es para una inspección rápida de un fragmento, no un proyecto de
+reversing completo.
+
 ---
 
-*Próximas secciones: LAB/TOOLS ofensivas y utilitarias, y Forensics — en
-construcción.*
+*Próxima sección: Forensics — en construcción.*
