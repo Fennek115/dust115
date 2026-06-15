@@ -16,7 +16,7 @@ analista ni a un sandbox.
 - [Triage: ejecutables y formatos](#triage-ejecutables-y-formatos)
 - [Triage: documentos, red y esteganografía](#triage-documentos-red-y-esteganografía)
 - [LAB / TOOLS ofensivas y utilitarias](#lab--tools-ofensivas-y-utilitarias)
-- Forensics — próximamente
+- [Forensics](#forensics)
 
 ---
 
@@ -1255,4 +1255,316 @@ reversing completo.
 
 ---
 
-*Próxima sección: Forensics — en construcción.*
+## Forensics
+
+Estas tools viven en el grupo **🔬 Forensics** del sidebar. Todas trabajan
+sobre un artefacto **ya extraído** (de un disco, una imagen forense, un
+contenedor, etc.) — ninguna accede al sistema de archivos real ni monta
+imágenes; soltás el archivo puntual (un hive, un `$MFT`, un `.evtx`...) y la
+tool lo parsea byte a byte en el navegador.
+
+### Metadata Scrub
+
+**Qué hace:** lee toda la metadata "oculta" de una imagen o documento —EXIF
+(incluida geolocalización GPS), XMP, IPTC, perfil ICC en JPEG; chunks de
+texto y `tIME`/`eXIf` en PNG; propiedades de autor/empresa/plantilla en
+docx/xlsx/pptx; `/Info` y XMP en PDF— y te da una **copia limpia
+descargable** (`nombre.cleaned.ext`), sin tocar el original.
+
+**Caso de uso:** vas a compartir o publicar un archivo (una captura de
+pantalla, un documento) y querés sacarle el rastro antes: quién lo creó, con
+qué software, y sobre todo si una foto lleva coordenadas GPS de dónde se
+tomó.
+
+**Cómo usarla:**
+1. Abrí **Metadata Scrub** en el sidebar.
+2. Arrastrá el archivo a la zona de drop o hacé click para elegirlo (JPEG,
+   PNG, docx/xlsx/pptx o PDF).
+3. Se muestra la metadata detectada: EXIF con sus tags (si hay GPS, aparece
+   un link directo a OpenStreetMap con la ubicación), XMP/IPTC/ICC, o
+   `/Info`+XMP en PDF.
+4. Si es JPEG, podés tildar **conservar perfil de color ICC**.
+5. Click en **⬇ Descargar copia limpia** — descarga `nombre.cleaned.ext` y
+   te dice qué se quitó (y cuánto bajó de peso el archivo).
+
+**Límites:** sólo cubre JPEG, PNG, OOXML (docx/xlsx/pptx) y PDF. En PDF el
+scrub **blanquea los valores in-place** (preserva offsets) — no cubre
+objetos en *object streams* comprimidos ni documentos con versiones
+incrementales o firmados digitalmente.
+
+**Para seguir investigando:** **mat2** (Metadata Anonymisation Toolkit) es
+la referencia multiplataforma y cubre más formatos (audio, video, ODF...).
+**exiftool** sigue siendo la herramienta de inspección/edición de metadata
+más completa si necesitás algo más que un scrub rápido.
+
+### SQLite Forensics
+
+**Qué hace:** parser propio del formato SQLite 3 (sin motor SQL real) que
+lee el schema, recorre los b-tree de cada tabla para listar las filas
+**vivas**, y además **recupera registros borrados** haciendo *carving* del
+espacio no asignado de cada página y de las páginas de la freelist — donde
+el contenido viejo sigue ahí hasta que se sobreescribe.
+
+**Caso de uso:** la mayoría de los artefactos modernos (historial y cookies
+de navegador, bases de WhatsApp/Signal/Telegram, muchos artefactos
+iOS/macOS) son SQLite. Un visor SQL normal sólo te muestra las filas vivas;
+acá además podés recuperar mensajes o entradas de historial **borrados**.
+
+**Cómo usarla:**
+1. Abrí **SQLite Forensics**.
+2. Soltá el archivo `.db`/`.sqlite`/`.sqlite3`.
+3. Aparece el overview: page size, cantidad de páginas, encoding, páginas en
+   la freelist (= contenido borrado potencialmente recuperable), y la lista
+   de tablas.
+4. Click en una tabla para ver el `CREATE` statement y sus filas vivas.
+5. Click en **Escanear espacio no asignado + freelist** para recuperar
+   filas borradas — aparecen marcadas con ♻ junto a las vivas.
+
+**Límites:** no lee `-wal`/`-journal` (sólo el archivo principal), no
+resuelve overflow de payloads muy grandes (los marca), y el carving puede
+dar resultados parciales o nulos si la base fue compactada con `VACUUM`.
+
+**Para seguir investigando:** **DB Browser for SQLite** o el `sqlite3` CLI
+para consultas normales sobre las filas vivas. Para recuperación de borrados
+más exhaustiva (incluido WAL), **sqlite-dissect** o tallar el archivo
+completo con **bulk_extractor**.
+
+### PCAP Analyzer
+
+**Qué hace:** disecciona una captura **.pcap**/**.pcapng** de punta a punta
+— capa de enlace (Ethernet/VLAN/SLL/RAW) → IPv4/IPv6 → TCP/UDP/ICMP — y
+extrae **DNS** (consultas/respuestas), **HTTP** (host/URI/User-Agent) y el
+**SNI** de los `ClientHello` TLS. Agrupa todo en conversaciones por 5-tupla y
+arma una lista de **IOCs** (IPs, dominios, URLs) del tráfico.
+
+**Caso de uso:** tenés una captura de tráfico de una sandbox, un honeypot o
+una víctima, y querés saber rápido con qué hosts/dominios habló (posible
+C2), qué descargó por HTTP, y a qué dominios apuntaban las conexiones TLS
+(SNI) sin tener que abrir Wireshark.
+
+**Cómo usarla:**
+1. Abrí **PCAP Analyzer**.
+2. Soltá el `.pcap`/`.pcapng`/`.cap`.
+3. Arriba se muestra formato, byte order, link type, cantidad de paquetes y
+   duración. Debajo: protocolos, las **conversaciones** top por bytes, y las
+   tablas de **DNS**, **HTTP** y **TLS SNI** (sólo las que tengan datos).
+4. La sección **IOCs** agrupa IPs/dominios/URLs — usá **copiar IOCs**, **→
+   nota** (al panel de notas) o **exportar JSON** para el reporte completo.
+
+**Límites:** no reensambla streams TCP multi-segmento ni fragmentación IP,
+no descifra TLS (sólo lee el SNI en claro del ClientHello), y capa a 200.000
+paquetes por archivo.
+
+**Para seguir investigando:** **Wireshark**/**tshark** para inspección
+completa con reensamblado de streams, filtros y decodificadores de
+protocolo. **NetworkMiner** extrae automáticamente archivos/credenciales/
+objetos transferidos de la misma captura.
+
+### utmp / wtmp / btmp
+
+**Qué hace:** parsea los registros de sesión de Linux —`/var/run/utmp`
+(sesiones actuales), `/var/log/wtmp` (histórico de logins/logouts/reboots) y
+`/var/log/btmp` (intentos de login **fallidos**)— y detecta indicios de
+**manipulación**: registros en cero intercalados entre registros válidos
+(blanqueo quirúrgico, típico de un utmp editor/rootkit) y timestamps fuera
+de orden cronológico.
+
+**Caso de uso:** revisar quién entró al sistema, cuándo, desde qué IP,
+cuántos reinicios hubo, o cuántos intentos de login fallaron (fuerza bruta).
+También útil para detectar si alguien intentó borrar su rastro editando
+`wtmp` en vez de no dejarlo.
+
+**Cómo usarla:**
+1. Abrí **utmp / wtmp / btmp**.
+2. Soltá el archivo (`utmp`, `wtmp` o `btmp`).
+3. Overview: cantidad de registros, reinicios, logins de usuario, usuarios e
+   IPs remotas vistas.
+4. Si se detectan anomalías, aparece una tabla aparte con el tipo y detalle
+   de cada una.
+5. Tabla de registros estilo `utmpdump` (tipo, PID, usuario, línea, host,
+   IP, fecha) + **exportar JSON** / **→ nota**.
+
+**Límites:** asume el struct de **amd64/glibc (registros de 384 B)** — otra
+arquitectura/libc puede tener otro tamaño de registro; si el archivo no es
+múltiplo de 384 se avisa pero no se reinterpreta.
+
+**Para seguir investigando:** `utmpdump` (incluido en util-linux) para una
+segunda lectura de referencia, y `last`/`lastb`/`lastlog` directamente en el
+sistema si todavía está vivo.
+
+### Jump Lists
+
+**Qué hace:** parsea las **Jump Lists** de Windows —
+`*.automaticDestinations-ms` (contenedor CFB con el stream `DestList` +
+streams `SHLLINK`, reusando los parsers CFB y LNK propios) y
+`*.customDestinations-ms` (secuencia de LNKs sin contenedor, que se tallan
+directamente)— mostrando el orden **MRU**, último acceso, si está fijado
+("pinned") y el equipo donde se generó cada entrada.
+
+**Caso de uso:** reconstruir qué archivos o documentos abrió el usuario
+recientemente con cada aplicación —incluso si después los borró—, en qué
+unidad estaban (local, red o USB), y desde qué equipo (`MachineID`), algo
+que las Jump Lists conservan mucho más tiempo que el "Recientes" visible.
+
+**Cómo usarla:**
+1. Abrí **Jump Lists**.
+2. Soltá el archivo, típicamente desde
+   `…\Recent\AutomaticDestinations\<AppID>.automaticDestinations-ms` o
+   `…\CustomDestinations\<AppID>.customDestinations-ms`.
+3. El overview muestra el tipo de Jump List y el **AppID** — si está en la
+   base curada de APT115 (Explorer, Chrome, Edge, Word, PowerShell, etc.) se
+   resuelve el nombre de la app.
+4. Si hay indicadores (rutas de red UNC, unidades USB, ejecutables/scripts,
+   MachineIDs), aparecen en un panel separado.
+5. Tabla de entradas/destinos en orden MRU + **exportar JSON** / **→ nota**.
+
+**Límites:** la base de AppIDs es **parcial** (curada a mano) — apps no
+listadas se muestran con su AppID en hex sin nombre resuelto.
+
+**Para seguir investigando:** **JLECmd** (Eric Zimmerman) parsea Jump Lists
+con cobertura completa y una base de AppIDs mucho más extensa; **LECmd** del
+mismo autor para analizar LNKs individuales con todo el detalle.
+
+### $MFT (NTFS)
+
+**Qué hace:** parsea un `$MFT` de NTFS ya extraído, reconstruyendo el
+**timeline del filesystem** (fechas MACE de cada archivo), listando
+**archivos borrados** (registros marcados como no-en-uso) y data
+**residente** (contenido chico embebido directo en el registro MFT). Además
+detecta **timestomping**: compara los timestamps de `$STANDARD_INFORMATION`
+(triviales de alterar con `SetFileTime`) contra los de `$FILE_NAME` (mucho
+más difíciles de modificar), y marca discrepancias.
+
+**Caso de uso:** armar una línea de tiempo de actividad del filesystem y
+detectar si alguien intentó camuflar la fecha real de creación/modificación
+de un archivo (técnica anti-forense clásica tras dejar caer un payload).
+
+**Cómo usarla:**
+1. Abrí **$MFT (NTFS)**.
+2. Soltá el `$MFT` ya extraído (registros `FILE` de 1024 B).
+3. Overview: registros parseados, archivos/directorios, borrados, cuántos
+   tienen data residente, y si hubo problemas de *fixup* (sector
+   inconsistente).
+4. Si hay señales de timestomping, aparece una tabla con el número de
+   registro, nombre y el detalle de cada señal (ej. "SI.crtime anterior a
+   FN.crtime").
+5. Tabla de registros (nombre, padre, tamaño, fechas SI) + **exportar JSON**
+   / **→ nota**.
+
+**Límites:** `$DATA` no-residente lista los *runs* pero no resuelve su
+contenido; no sigue `$ATTRIBUTE_LIST` hacia registros de extensión.
+
+**Para seguir investigando:** **MFTECmd** (Eric Zimmerman) / **analyzeMFT**
+para un parseo completo con export a CSV o bodyfile, listo para cargar en
+**Plaso**/**timeline tools** y cruzar con otras fuentes.
+
+### Registry Hive (regf)
+
+**Qué hace:** parsea un hive del registro de Windows (`NTUSER.DAT`,
+`SOFTWARE`, `SYSTEM`, `SAM`...), recorriendo el árbol completo de claves y
+valores con su fecha de **last-write**. Resalta automáticamente **hallazgos
+forenses** sobre rutas curadas de alto valor —`Run`/`RunOnce` (persistencia),
+`Services`, `UserAssist`, `RecentDocs`, `TypedPaths`/`TypedURLs`, `RunMRU`,
+`USBSTOR`/`MountPoints2` (USB), `AppCompatCache` (ShimCache), `BAM`, IFEO,
+`Winlogon`, `MUICache`— y avisa si el hive está **sucio** (logs de
+transacción sin aplicar). También **recupera claves y valores borrados**
+tallando las celdas libres del hive por firma `nk`/`vk`.
+
+**Caso de uso:** cazar persistencia (claves Run, servicios, IFEO,
+Winlogon) y reconstruir actividad/ejecución del usuario (UserAssist,
+RecentDocs, ShimCache, BAM, dispositivos USB conectados) en un hive
+extraído de una máquina comprometida.
+
+**Cómo usarla:**
+1. Abrí **Registry Hive (regf)**.
+2. Soltá el hive (debe tener el magic `regf`).
+3. Overview: versión, nombre interno, última escritura, y si el hive está
+   limpio o **sucio**.
+4. **Hallazgos forenses**: lista de claves curadas con su por qué (ej.
+   "Persistencia (Run)") y los valores que contienen.
+5. Si hay celdas libres con `nk`/`vk` recuperables, aparece **Recuperados de
+   celdas libres** (claves y valores borrados).
+6. **Árbol de claves** navegable completo (`<details>` colapsables) +
+   **exportar JSON** / **→ nota**.
+
+**Límites:** no aplica los logs `.LOG1`/`.LOG2` (sólo avisa si el hive está
+sucio); valores "big data" (>16 KB) listan tamaño pero no se reensamblan;
+los descriptores de seguridad (`sk`) no se decodifican, sólo se cuentan.
+
+**Para seguir investigando:** **RegRipper** corre plugins específicos por
+cada hallazgo (Run keys, UserAssist, ShimCache...) con interpretación más
+profunda. **Registry Explorer** (Eric Zimmerman) permite navegación completa
+y recuperación avanzada, incluyendo los logs de transacción.
+
+### Event Log (EVTX)
+
+**Qué hace:** parsea un `.evtx` (Windows Event Log) decodificando su
+**Binary XML** —el sistema de templates + arrays de substitución que hace
+que este formato sea de los más difíciles— y reconstruye cada evento como
+XML, extrayendo `<System>`/`<EventData>`. Resalta los **EventID de alto
+valor forense** (4624/4625 logons, 4688 procesos, 7045/4697 servicios
+instalados, 1102/104 borrado de logs, 4104 PowerShell script block, 4720+
+gestión de cuentas, Kerberos, etc.) y detecta **contenido sospechoso**
+(patrones de LOLBins/ofuscación: `-enc`, `downloadstring`, `iex`,
+`certutil`, `rundll32`...).
+
+**Caso de uso:** timeline forense de un Windows comprometido — quién inició
+sesión y cuándo, qué procesos se crearon, qué servicios se instalaron
+(persistencia), si se ejecutó PowerShell con contenido sospechoso, o si se
+borró el log de eventos (anti-forense).
+
+**Cómo usarla:**
+1. Abrí **Event Log (EVTX)**.
+2. Soltá el `.evtx` ya extraído (magic `ElfFile`).
+3. Overview: versión, cantidad de chunks, eventos parseados, próximo
+   record#, y si el log está limpio o **sucio**/lleno.
+4. **Hallazgos forenses**: tabla con record#, EventID, hora, qué significa,
+   y un resumen de los datos del evento — marcados con ⚠ si coinciden con un
+   patrón sospechoso.
+5. Tabla completa de eventos (record#, EventID, nivel, hora, proveedor,
+   canal) + **exportar JSON** / **→ nota**.
+
+**Límites:** no procesa templates que cruzan chunks (caso raro); los valores
+binarios se muestran en hex; no resuelve los mensajes legibles que dependen
+de la DLL del proveedor (los datos crudos sí se extraen).
+
+**Para seguir investigando:** **python-evtx** o `Get-WinEvent`/`wevtutil`
+(PowerShell) para una segunda lectura. Para *threat hunting* con reglas
+sobre EVTX, **Chainsaw** o **Hayabusa** aplican detecciones Sigma
+directamente sobre estos mismos archivos.
+
+### journald (systemd)
+
+**Qué hace:** es el equivalente Linux de la tool EVTX — parsea un
+**journal binario de systemd** (`.journal`, formato **COMPACT**),
+recorriendo la cadena de *entry arrays* → objetos `ENTRY` → objetos `DATA`
+para reconstruir cada entrada con todos sus campos (`MESSAGE`, `_PID`,
+`_UID`, `_COMM`, `_SYSTEMD_UNIT`, `PRIORITY`, `_HOSTNAME`...). Resalta
+**señales forenses**: logins SSH (exitosos/fallidos), uso de `sudo`/`su`
+(con el comando ejecutado), aperturas/cierres de sesión, crashes/OOM,
+servicios caídos y mensajes de prioridad error/crítico.
+
+**Caso de uso:** timeline de actividad de un Linux comprometido — accesos
+SSH (incluido fuerza bruta), escaladas con `sudo`, procesos que crashearon,
+servicios systemd que fallaron.
+
+**Cómo usarla:**
+1. Abrí **journald (systemd)**.
+2. Soltá el `.journal` ya extraído (magic `LPKSHHRH`).
+3. Overview: Machine ID, Boot ID, flags del archivo (COMPACT, KEYED-HASH,
+   compresión ZSTD/LZ4/XZ si aplica), cantidad de entradas y rango temporal
+   cubierto.
+4. **Hallazgos forenses**: tabla con hora, qué es (ej. "SSH login fallido",
+   "sudo — comando"), proceso/PID y el mensaje.
+5. Tabla completa de entradas (hora, unit/proceso, PID, prioridad, mensaje)
+   + **exportar JSON** / **→ nota**.
+
+**Límites:** soporta el formato moderno COMPACT; los payloads `DATA`
+grandes (>512 B) comprimidos con ZSTD/LZ4/XZ se **marcan** pero no se
+descomprimen (los campos chicos, la inmensa mayoría en la práctica, se leen
+directo sin problema).
+
+**Para seguir investigando:** `journalctl` sobre el mismo archivo
+(`journalctl --file=...`) para todos los filtros y formatos de salida
+nativos de systemd. Para centralizar y correlacionar logs de muchas
+máquinas, **Loki** o un stack **ELK**.
