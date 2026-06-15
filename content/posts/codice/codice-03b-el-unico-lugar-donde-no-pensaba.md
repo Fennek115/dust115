@@ -173,7 +173,7 @@ Perder lo que el cuerpo podía hacer no tiene eso. Tiene, en cambio, una serie d
 
 Y cada uno de esos momentos es un funeral pequeño al que nadie fue invitado y del que nadie se va a enterar, porque decir "hoy no pude subir las escaleras sin dolor" no tiene la gravedad que el mundo exige para que un duelo sea reconocido como duelo. No hay flores para eso. No hay licencia laboral. No hay nadie que te diga que lo siente.
 
-Así que lo que hacés es adaptarte. Que es la palabra que usa la gente que nunca perdió nada para describir lo que hace la gente que perdió algo. Adaptarse. Como si fuera un proceso neutro. Como si fuera cuestión de encontrar una actividad alternativa, un sustituto, un reemplazo. Como si el agujero que dejó la cosa que ya no puedes hacer tuviera la forma exacta de otra cosa que sí puedes hacer y fuera solo cuestión de encontrarla y encajarla.
+Así que lo que haces es adaptarte. Que es la palabra que usa la gente que nunca perdió nada para describir lo que hace la gente que perdió algo. Adaptarse. Como si fuera un proceso neutro. Como si fuera cuestión de encontrar una actividad alternativa, un sustituto, un reemplazo. Como si el agujero que dejó la cosa que ya no puedes hacer tuviera la forma exacta de otra cosa que sí puedes hacer y fuera solo cuestión de encontrarla y encajarla.
 
 No tiene esa forma.
 

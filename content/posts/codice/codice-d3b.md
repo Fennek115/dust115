@@ -183,7 +183,7 @@ Desde afuera.
 
 Y Dust lo vio — con las orejas, desde el interior del mismo hardware que hacía lo mismo, con el conocimiento que solo existe cuando se entiende algo desde adentro y se observa desde afuera simultáneamente — lo que Dust había sido para alguien en el ciclo anterior.
 
-No la imagen exacta. El principio. La asimetría: cargar con algo que el otro no sabe que llevás, enviar pulsos al espacio que el otro no escucha, sostener la búsqueda que el otro no ve porque la búsqueda es interna y lo interno no tiene firma digital que los sensores externos puedan detectar.
+No la imagen exacta. El principio. La asimetría: cargar con algo que el otro no sabe que llevas, enviar pulsos al espacio que el otro no escucha, sostener la búsqueda que el otro no ve porque la búsqueda es interna y lo interno no tiene firma digital que los sensores externos puedan detectar.
 
 Lo que ella sabía que él callaba.
 

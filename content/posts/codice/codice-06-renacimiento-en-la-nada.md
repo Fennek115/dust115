@@ -15,7 +15,7 @@ summary: "La consciencia es irrelevante para una realidad indiferente."
 
 Algo cedió
 
-No en la cabeza — la cabeza ya había terminado su trabajo. Lo que cedió fue más abajo. En el lugar donde el nombre se une al cuerpo. En la costura entre lo que creés que eres y lo que realmente hay debajo.
+No en la cabeza — la cabeza ya había terminado su trabajo. Lo que cedió fue más abajo. En el lugar donde el nombre se une al cuerpo. En la costura entre lo que crees que eres y lo que realmente hay debajo.
 
 La costura se abrió.
 

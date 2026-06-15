@@ -24,11 +24,11 @@ Me quedé mirándolo más tiempo del que debería haberle dedicado a un charco.
 
 ---
 
-Hay algo que pasa cuando mirás un charco el tiempo suficiente.
+Hay algo que pasa cuando miras un charco el tiempo suficiente.
 
 Al principio es agua. Agua sucia, acumulada en una grieta, con el reflejo del cielo distorsionado en la superficie y los bordes evaporándose como se evaporan las cosas que no tienen a nadie que las sostenga. Es feo. Es insignificante. Es lo que queda después de la lluvia en una vereda que nadie arregló.
 
-Y entonces dejás de mirar la superficie y empezás a mirar lo que la superficie contiene.
+Y entonces dejas de mirar la superficie y empiezas a mirar lo que la superficie contiene.
 
 En el reflejo del agua el cielo se desdibujaba pero seguía siendo celestial. Eso siempre me pareció lo más extraño de todo — que algo pueda perder su forma y conservar su naturaleza. Que el azul distorsionado siga siendo azul aunque ya no reconozcas en él ninguna nube específica, ninguna dirección, ningún horizonte. Que el cielo roto siga siendo cielo.
 
@@ -38,7 +38,7 @@ No un abismo de terror. Un abismo de profundidad. Como si el charco no tuviera f
 
 Me sumergí.
 
-No literalmente. Pero hay un tipo de mirada que es submersión — cuando dejás de ser la que mira y empezás a ser lo que está siendo mirado, y la frontera entre las dos cosas se disuelve como el borde del charco que se evapora, y lo que queda no es ni la que mira ni lo mirado sino el acto mismo de mirar, suspendido, sin peso, como una nota que alguien tocó y que sigue vibrando después de que la mano dejó la cuerda.
+No literalmente. Pero hay un tipo de mirada que es submersión — cuando dejas de ser la que mira y empiezas a ser lo que está siendo mirado, y la frontera entre las dos cosas se disuelve como el borde del charco que se evapora, y lo que queda no es ni la que mira ni lo mirado sino el acto mismo de mirar, suspendido, sin peso, como una nota que alguien tocó y que sigue vibrando después de que la mano dejó la cuerda.
 
 En esa submersión encontré lo que siempre encuentro cuando me quedo quieta el tiempo suficiente: las incertidumbres. Las mías y las de todos. Porque debajo de la superficie del charco la luz del cielo se refractaba de mil formas en mil lugares desconocidos, y cada refracción era una pregunta sin respuesta, y cada pregunta sin respuesta era un recordatorio de la fugacidad de cada momento que insistimos en tratar como si fuera permanente.
 
@@ -60,7 +60,7 @@ Eso era lo que veía cuando lo miraba a él.
 
 ---
 
-Lo que nadie entiende de cazar es que la parte difícil no es el movimiento. Es la quietud previa. Es sostener la percepción abierta, todas las frecuencias al mismo tiempo, sin colapsar lo que escuchás en lo que querés escuchar.
+Lo que nadie entiende de cazar es que la parte difícil no es el movimiento. Es la quietud previa. Es sostener la percepción abierta, todas las frecuencias al mismo tiempo, sin colapsar lo que escuchas en lo que quieres escuchar.
 
 La primera vez que lo vi — no la primera vez que lo noté, sino la primera vez que realmente lo vi — fue porque no estaba mirando. Estaba escuchando el ruido de la cafetería, ese zumbido de fondo que en realidad es la suma de todas las conversaciones que nadie termina, y en medio de ese ruido había un silencio.
 
@@ -108,7 +108,7 @@ Y yo dije, sin pensarlo: a veces escucho cosas que la persona frente a mí no sa
 
 Él me miró.
 
-Fue un segundo. Menos. El tiempo que tarda algo en cruzar una frontera antes de que el sistema de defensa lo intercepte. Vi la pregunta formarse — *¿qué escuchás?* — y vi el momento exacto donde la tragó. La bóveda cerrándose. El mecanismo automático. La palabra volviendo al lugar donde guardaba todas las palabras que no podía soltar.
+Fue un segundo. Menos. El tiempo que tarda algo en cruzar una frontera antes de que el sistema de defensa lo intercepte. Vi la pregunta formarse — *¿qué escuchas?* — y vi el momento exacto donde la tragó. La bóveda cerrándose. El mecanismo automático. La palabra volviendo al lugar donde guardaba todas las palabras que no podía soltar.
 
 Cambió de tema.
 
@@ -220,7 +220,7 @@ Porque ya había visto lo que el agua devuelve, y lo que el agua devuelve es exa
 
 O en el lugar correcto.
 
-Depende de la perspectiva. Depende de si estás colgada del techo o parada en el suelo. Depende de si sos el murciélago o el que camina derecho.
+Depende de la perspectiva. Depende de si estás colgada del techo o parada en el suelo. Depende de si eres el murciélago o el que camina derecho.
 
 Yo siempre fui el murciélago.
 

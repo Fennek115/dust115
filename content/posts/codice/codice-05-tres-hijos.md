@@ -77,8 +77,8 @@ No era una revelación. Era un inventario.
 Todos hacemos lo mismo. Nacemos sin manual. Sobrevivimos, que es diferente a vivir. Construimos héroes y los enterramos. Diferenciamos entre el bien y el mal con la certeza de quien nunca tuvo que elegir de verdad entre los dos. Y al final, cuando la retrospectiva ilumina lo que la experiencia oscureció, el camino de cada uno se parece al de todos los demás lo suficiente como para que la diferencia sea anecdótica.
 
 Nuestros héroes ya murieron. Los matamos nosotros, que es lo que se hace con los héroes. Lo demás es ornamento.
-Todos ven lo que quieren ver. Todos creen lo que nunca realmente han visto. Y la distancia entre las dos cosas — entre lo que ves y lo que creés que ves — es el espacio exacto donde viven las mentiras que sostienen todo lo demás.
-Nunca lo sabés hasta que lo buscás. Y la mayoría no busca. Porque buscar requiere aceptar que lo que encuentres puede no ser lo que querías encontrar, y eso es más de lo que la mayoría puede administrar un martes a las tres de la tarde.
+Todos ven lo que quieren ver. Todos creen lo que nunca realmente han visto. Y la distancia entre las dos cosas — entre lo que ves y lo que crees que ves — es el espacio exacto donde viven las mentiras que sostienen todo lo demás.
+Nunca lo sabes hasta que lo buscas. Y la mayoría no busca. Porque buscar requiere aceptar que lo que encuentres puede no ser lo que querías encontrar, y eso es más de lo que la mayoría puede administrar un martes a las tres de la tarde.
 No era especial.
 
 El tercer hijo de la Libertad nació muerto, y eso me dio una paz extraña. Porque romper el ciclo no era mi problema ni el de nadie. Era simplemente un testigo más en la procesión infinita de seres que nacen, viven sin saber cómo, mueren sin entender, y tal vez regresan para repetir el proceso.

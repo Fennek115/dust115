@@ -152,7 +152,7 @@ La diferencia entre las dos no es invertida en seguridad. Es entendimiento de la
 
 **Una última.**
 
-Cuando llevás suficiente tiempo estudiando ataques, dejás de sentir el bucle como tragedia y empiezas a sentirlo mas como respiración. Inspiración, expiración. Crisis, calma. Aprendizaje, olvido. Es el ritmo del campo. Lo único que cambia es la profundidad con que cada organización lo respira, y la velocidad con que el ciclo se repite.
+Cuando llevas suficiente tiempo estudiando ataques, dejas de sentir el bucle como tragedia y empiezas a sentirlo mas como respiración. Inspiración, expiración. Crisis, calma. Aprendizaje, olvido. Es el ritmo del campo. Lo único que cambia es la profundidad con que cada organización lo respira, y la velocidad con que el ciclo se repite.
 
 No sé escribir esto sin que suene a resignación, y no es resignación. La resignación deja de actuar. Esto es lo contrario: es seguir actuando con plena conciencia de que la acción no va a producir el estado de paz permanente que la gente fuera del campo cree que es el objetivo. El objetivo, cuando se entiende bien, no es la paz. Es la disciplina sostenida dentro de una condición de conflicto que no termina.
 

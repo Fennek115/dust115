@@ -23,7 +23,7 @@ La cafetería quedaba a seis cuadras. Lo suficientemente lejos como para que cam
 
 No era una cafetería especial. Mesas de madera, sillas incómodas, carta con opciones que nadie lee porque todo el mundo pide lo mismo. Café con leche. Tostada. Una ventana que daba a la calle donde no pasaba nada interesante, que era exactamente lo que necesitaba: un lugar donde no pasara nada interesante para poder estar sin que la ausencia de interés fuera mi culpa.
 
-Los martes a las doce y media. Esa fue la rutina que se instaló sin que yo la instalara, como se instalan las rutinas cuando no tenés nada mejor que ofrecer al calendario.
+Los martes a las doce y media. Esa fue la rutina que se instaló sin que yo la instalara, como se instalan las rutinas cuando no tienes nada mejor que ofrecer al calendario.
 
 ---
 
@@ -43,7 +43,7 @@ El tercer martes me senté más cerca. No a propósito. La mesa de siempre estab
 
 Y entonces sentí algo.
 
-No sé cómo describir lo que sentí porque lo que sentí no tenía las propiedades de las cosas que puedo describir. No fue una mirada — no levanté la vista para verificar si me estaba mirando. No fue un sonido — la cafetería tenía el mismo ruido de siempre. Fue algo más parecido a una presión. Sutil. Constante. Como cuando alguien abre una ventana en un cuarto cerrado y no ves la ventana pero sentís que el aire cambió.
+No sé cómo describir lo que sentí porque lo que sentí no tenía las propiedades de las cosas que puedo describir. No fue una mirada — no levanté la vista para verificar si me estaba mirando. No fue un sonido — la cafetería tenía el mismo ruido de siempre. Fue algo más parecido a una presión. Sutil. Constante. Como cuando alguien abre una ventana en un cuarto cerrado y no ves la ventana pero sientes que el aire cambió.
 
 El aire había cambiado.
 
@@ -95,7 +95,7 @@ Una oreja giró hacia la mesa de al lado donde una pareja discutía en voz baja.
 
 —Significa que escucho cosas que la persona frente a mí no sabe que está diciendo.
 
-Me miró. Un segundo. Menos. El tiempo que tarda algo en cruzar una frontera antes de que el sistema de defensa lo intercepte. Sentí la pregunta formarse en mi garganta — *¿qué escuchás?* — y sentí el momento exacto donde la tragué.
+Me miró. Un segundo. Menos. El tiempo que tarda algo en cruzar una frontera antes de que el sistema de defensa lo intercepte. Sentí la pregunta formarse en mi garganta — *¿qué escuchas?* — y sentí el momento exacto donde la tragué.
 
 Cambié de tema.
 
