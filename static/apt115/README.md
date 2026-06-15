@@ -7,7 +7,7 @@ Vive en `https://dust115.github.io/dust115/apt115/` y también funciona abriendo
 
 Manual de usuario de todas las herramientas (qué hacen, cuándo usarlas, cómo
 usarlas y a qué herramienta profesional derivar):
-`https://dust115.github.io/dust115/apt115-manual/`.
+`https://dust115.github.io/dust115/posts/apt115-manual/`.
 
 ## Qué trae
 
@@ -18,7 +18,7 @@ y export/import de la sesión completa a JSON.
 
 **LAB / TOOLS:**
 
-- **Malware Triage** — soltá un archivo y corre la cadena de analyzers que
+- **Malware Triage** — suelta un archivo y corre la cadena de analyzers que
   aplican: PE/ELF/Mach-O (parsers propios: headers, imports, mitigaciones,
   firma de código), hashes (md5/sha/imphash/TLSH/telfhash), entropía, Rich
   Header, recursos/Authenticode, strings, capacidades estilo capa con tags
@@ -33,12 +33,12 @@ y export/import de la sesión completa a JSON.
 
 ## Privacidad
 
-- Los archivos que analizás **no salen de tu navegador**. No hay backend, no
+- Los archivos que analizas **no salen de tu navegador**. No hay backend, no
   hay telemetría, no hay requests a internet en ejecución.
 - Los lookups externos (VirusTotal, MalwareBazaar, urlscan, whois) son
-  **opt-in**: solo abren un link en otra pestaña cuando los clickeás.
+  **opt-in**: solo abren un link en otra pestaña cuando los haces clic.
 - El estado del cheatsheet (favoritos, notas, intel) vive en el localStorage
-  de tu navegador. Usá Export Session para respaldarlo.
+  de tu navegador. Usa Export Session para respaldarlo.
 
 ## Límites conocidos
 

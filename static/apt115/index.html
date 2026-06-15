@@ -46,6 +46,7 @@
     <button class="hdr-btn" onclick="toggleFav()">★ FAVS <span id="favCount">0</span></button>
     <button class="hdr-btn" onclick="toggleHistory()">⏱ HIST</button>
     <button class="hdr-btn" onclick="exportFavs()">↓ EXPORT</button>
+    <button class="hdr-btn" onclick="window.open('../posts/apt115-manual/','_blank','noopener')" title="Manual de usuario de APT115">📖 MANUAL</button>
     <button class="hdr-btn" onclick="exportSession()" title="Backup: export full session (favs, notes, custom, intel...) to a .json">⬇ SESSION</button>
     <button class="hdr-btn" onclick="document.getElementById('sessionImport').click()" title="Import / switch session from a .json (overwrites current state)">⬆ IMPORT</button>
     <input type="file" id="sessionImport" accept="application/json,.json" style="display:none" onchange="importSession(this)">
