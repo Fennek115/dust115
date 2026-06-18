@@ -1,0 +1,19 @@
+---
+title: "Códice | X — Lo Que Se Cierra Sin Sonido"
+date: 2024-04-01T03:00:00-03:00
+weight: 2040
+aliases: ["/posts/codice-10-lo-que-se-cierra-sin-sonido/"]
+draft: false
+tags: ["códice", "skull-fox-era"]
+series: ["Códice del Polvo"]
+summary: "No son las cadenas que se ven. Son las otras. Las que no hacen ruido al cerrarse."
+---
+
+{{< listening track="Vermilion Pt. 2" artist="Slipknot" album="Vol. 3: The Subliminal Verses" >}}
+
+{{< ascii >}}
+[tu ascii aquí]
+{{< /ascii >}}
+
+
+{{< commit hash="40d6277" date="2024-04-01T03:00:00-03:00" message="[añade tu mensaje de commit aquí]" >}}

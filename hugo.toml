@@ -41,6 +41,7 @@ enableRobotsTXT = true
       missingBackButtonLabel = "← Volver al inicio"
       minuteReadingTime = "min de lectura"
       words = "palabras"
+      tocTitle = "Índice"
 
       [languages.en.params.logo]
         logoText = "dust115$"

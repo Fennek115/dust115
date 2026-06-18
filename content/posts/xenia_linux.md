@@ -254,7 +254,7 @@ El **repositorio Git de Xenia** en git.gay/Efi/xenia, mantenido por **Efi (Efime
 
 ## Las mascotas del software libre: una tradición profunda
 
-Xenia no existe en un vacío. La cultura hacker tiene una larga tradición de mascotas que cumplen funciones específicas: humanizan tecnología compleja, expresan humor antiautoritario, generan identidad comunitaria y —a diferencia de los logos corporativos— pueden ser libremente modificadas por cualquiera.
+Xenia no existe en un vacío. La [[de-la-inercia-a-la-libertad|cultura hacker tiene una larga]] tradición de mascotas que cumplen funciones específicas: humanizan tecnología compleja, expresan humor antiautoritario, generan identidad comunitaria y —a diferencia de los logos corporativos— pueden ser libremente modificadas por cualquiera.
 
 El primer precedente significativo data de **1976**, cuando el dibujante **Phil Foglio** creó pequeños demonios rojos trepando por una computadora PDP-11 para una reunión de UNIX. Representaban los «daemons» de Unix: procesos que corren en segundo plano. De ahí nació **Beastie**, el demonio de BSD, cuya primera versión fue dibujada en escala de grises por **John Lasseter** en 1984 para los manuales de 4.2BSD — cuando Lasseter trabajaba en Lucasfilm, antes de cofundar Pixar. La versión icónica a color llegó en 1988, para el libro *The Design and Implementation of the 4.3BSD Operating System*. Sí, el futuro director de *Toy Story* dibujó una mascota de software libre. El tridente de Beastie simboliza la llamada al sistema `fork()`, que crea procesos nuevos. No es un demonio cristiano sino un *daimon* griego: un espíritu servicial.
 

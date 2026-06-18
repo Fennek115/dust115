@@ -34,7 +34,7 @@ Una memoria que nunca fue asignada tiene un patrón específico. No es negro, no
 
 Una memoria que fue asignada, escrita, y luego borrada con cuidado, tiene un patrón distinto. Puede parecer idéntica a la primera. Si lo único que tienes es el dato y no el tiempo, las dos son indistinguibles. Pero si tienes el tiempo — si puedes observar la evolución de los voltajes, los microtiempos de acceso, las trazas térmicas residuales en las celdas vecinas — entonces distingues. La memoria que fue algo queda, aunque haya sido limpiada, con una cicatriz térmica que la memoria original no tiene. No porque el dato persista. El dato no persiste. Lo que persiste es que *ahí pasó algo*.
 
-`dissolve.o` intenta resolver ese problema. Intenta producir una nada post-uso que sea indistinguible de la nada previa al uso. Lo consigue mal — ningún borrado en hardware real es perfecto. Lo consigue lo suficiente para la mayoría de los observadores. Contra un análisis forense muy paciente, no alcanza. Contra el olvido del universo a escala larga, alcanza de sobra.
+`dissolve.o` intenta resolver ese problema. Intenta producir una nada post-uso que sea indistinguible de la nada previa al uso. Lo consigue mal — ningún borrado en hardware real es perfecto. Lo consigue lo suficiente para la mayoría de los observadores. Contra un [[apt115-manual|análisis forense muy paciente]], no alcanza. Contra el olvido del universo a escala larga, alcanza de sobra.
 
 Y acá está el punto que me interesa, el que no había terminado de pensar la primera vez:
 

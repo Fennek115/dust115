@@ -1,0 +1,18 @@
+{{- /*
+  Lista capítulos del Códice en un rango de weight, ordenados por weight asc.
+  Uso: {{< codice-list min="1000" max="1999" >}}
+  Autogenera la lista a partir de los archivos de la sección codice (orden de
+  lectura = weight), así el índice no se desincroniza al agregar/quitar capítulos.
+  El prefijo "Códice | " / "Códice del Polvo — " se recorta para etiquetas limpias.
+*/ -}}
+{{- $min := .Get "min" | int -}}
+{{- $max := .Get "max" | int -}}
+{{- $pages := where (where site.RegularPages "Section" "codice") "Weight" ">=" $min -}}
+{{- $pages = where $pages "Weight" "<=" $max -}}
+{{- $pages = sort $pages "Weight" -}}
+<ul class="codice-index">
+{{- range $pages }}
+  {{- $label := .Title | strings.TrimPrefix "Códice | " | strings.TrimPrefix "Códice del Polvo — " -}}
+  <li><a href="{{ .RelPermalink }}">{{ $label }}</a></li>
+{{- end }}
+</ul>

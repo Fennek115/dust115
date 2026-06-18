@@ -1,2 +1,6 @@
 public/
 resources/
+.vulpine-marrow-design/
+.vulpine-marrow-design2/
+migrate_blog.py
+*:Zone.Identifier

@@ -26,7 +26,7 @@ verdad. La herramienta es necesaria y no es suficiente, y casi todo el daño que
 se hace con estas cosas viene de confundir esas dos palabras —de leer un "no
 detecté nada" como un "no hay nada".
 
-Hay además una asimetría que conviene tener presente. Encontrar un indicador es
+Hay además una [[encontrar-uno-bloquear-todos|asimetría que conviene tener presente]]. Encontrar un indicador es
 un problema de búsqueda: basta con que aparezca uno. Descartar que el archivo
 sea malicioso es un problema de cobertura: habría que descartarlos todos, y eso
 no se hace leyendo una cabecera en el navegador. Por eso, para cada herramienta,

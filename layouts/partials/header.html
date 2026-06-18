@@ -1,0 +1,14 @@
+{{/* Header Vulpine Marrow: una fila — logo izquierda, nav + toggle de tema derecha. */}}
+<header class="header header--vm">
+  <div class="header__row">
+    <div class="header__logo">{{ partial "logo.html" . }}</div>
+    <nav class="header__nav">
+      {{ range .Site.Menus.main }}
+        {{- $ext := eq .Identifier "apt115" -}}
+        <a href="{{ .URL | relLangURL }}"{{ if $ext }} class="header__nav-ext"{{ end }}>{{ .Name }}{{ if $ext }} ↗{{ end }}</a>
+      {{ end }}
+      <button id="vm-theme-toggle" class="header__theme" type="button"
+              aria-label="Cambiar entre modo claro y oscuro" title="Tema claro / oscuro">☾</button>
+    </nav>
+  </div>
+</header>

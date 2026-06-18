@@ -1,0 +1,149 @@
+/* ============================================================
+   Vulpine Marrow — Color tokens
+   "Negro profundo con violeta." Deep violet-black surfaces,
+   a single magenta-purple accent, and a tight set of neon
+   signal colors borrowed from the APT115 toolkit (offensive-
+   security HUD). Light mode keeps the violet identity over bone-white surfaces.
+   ============================================================ */
+
+:root {
+  /* ---- Surfaces (darkest → lightest) ---- */
+  --vm-bg-0:        #14101e;   /* deepest void, page backdrop edges */
+  --vm-bg-1:        #1a1525;   /* app background (apt115 --bg) */
+  --vm-bg-2:        #1f1a2e;   /* panels, sidebar, vars-bar */
+  --vm-bg-3:        #251f38;   /* raised surfaces */
+  --vm-bg-4:        #2a2340;   /* hover / elevated chips */
+  --vm-bg-blog:     #241f31;   /* the long-form archive background */
+  --vm-code-bg:     rgba(0,10,24,.70);   /* code wells inside rows */
+
+  /* ---- Ink ---- */
+  --vm-text-1:      #e8d8f0;   /* primary text */
+  --vm-text-2:      #b08ac8;   /* secondary / muted lilac */
+  --vm-text-3:      #6b4d80;   /* tertiary / labels, disabled */
+  --vm-text-pure:   #ffffff;   /* max-contrast (blog headings) */
+  --vm-text-cmd:    #c8f0ff;   /* command / payload text (cyan-white) */
+  --vm-text-desc:   #8ec8e8;   /* row descriptions (steel blue) */
+
+  /* ---- Brand accent (violet/magenta) ---- */
+  --vm-accent:      #9141ac;   /* the one true purple */
+  --vm-accent-2:    #7a35a0;   /* pressed / deeper */
+  --vm-accent-soft: #b19cd9;   /* link hover, lifted */
+  --vm-purple:      #c471ed;   /* bright violet — variables, highlights */
+  --vm-code-violet: #d4a8e8;   /* inline-code violet */
+  --vm-code-violet2:#e0b0ff;   /* code text on blog */
+
+  /* ---- Neon signal colors (HUD semantics) ---- */
+  --vm-green:       #00ff88;   /* success / done / safe */
+  --vm-teal:        #00e5b0;   /* custom / export / loot */
+  --vm-red:         #ff2d6f;   /* critical / danger / delete */
+  --vm-pink:        #ff2d8f;   /* intel / target */
+  --vm-orange:      #ff8c20;   /* high / favorite */
+  --vm-orange-2:    #ffaa40;   /* high (text-legible) */
+  --vm-yellow:      #ffe066;   /* notes / pinned */
+
+  /* ---- Borders & hairlines ---- */
+  --vm-border:      rgba(145,65,172,.15);
+  --vm-border-2:    rgba(145,65,172,.35);
+  --vm-border-3:    rgba(196,113,237,.25);   /* variable / purple wells */
+  --vm-hairline:    rgba(145,65,172,.10);
+
+  /* ---- Tints (translucent accent washes) ---- */
+  --vm-tint-04:     rgba(145,65,172,.04);
+  --vm-tint-08:     rgba(145,65,172,.08);
+  --vm-tint-10:     rgba(145,65,172,.10);
+  --vm-tint-15:     rgba(145,65,172,.15);
+
+  /* ---- Accent gradient (used sparingly: titles, save CTA) ---- */
+  --vm-accent-grad:   linear-gradient(135deg, #9141ac, #c471ed);          /* @kind color */
+  --vm-accent-grad-3: linear-gradient(135deg, #9141ac, #c471ed, #ff6b9d);  /* @kind color */
+  --vm-title-grad:    linear-gradient(135deg, #6528a0, #9141ac, #c471ed);  /* @kind color */
+
+  /* ============================================================
+     Semantic aliases — reference THESE in components
+     ============================================================ */
+  --surface-app:     var(--vm-bg-1);
+  --surface-panel:   var(--vm-bg-2);
+  --surface-card:    rgba(6,12,28,.85);
+  --surface-raised:  var(--vm-bg-3);
+  --surface-hover:   var(--vm-tint-04);
+  --surface-code:    var(--vm-code-bg);
+
+  --text-body:       var(--vm-text-1);
+  --text-muted:      var(--vm-text-2);
+  --text-faint:      var(--vm-text-3);
+  --text-heading:    var(--vm-text-1);
+  --text-link:       var(--vm-accent);
+  --text-link-hover: var(--vm-accent-soft);
+  --text-code:       var(--vm-code-violet);
+
+  --border-default:  var(--vm-border);
+  --border-strong:   var(--vm-border-2);
+  --border-focus:    var(--vm-accent);
+
+  --signal-success:  var(--vm-green);
+  --signal-danger:   var(--vm-red);
+  --signal-warning:  var(--vm-orange-2);
+  --signal-info:     var(--vm-purple);
+  --signal-special:  var(--vm-teal);
+  --signal-note:     var(--vm-yellow);
+}
+
+/* ============================================================
+   Light mode — violet daylight (keeps the brand aesthetic)
+   The same "negro profundo con violeta" identity, inverted:
+   bone-white violet-tinted surfaces, the one true purple held
+   as the accent, neon signals darkened just enough to read on
+   light. Apply by adding class="vm-light" to <html> or <body>.
+   ============================================================ */
+.vm-light {
+  /* ---- Surfaces (lightest → tinted) ---- */
+  --vm-bg-0:        #e8e3f0;   /* page backdrop edges, violet-gray */
+  --vm-bg-1:        #f7f4fb;   /* app background, near-white violet */
+  --vm-bg-2:        #f1ecf7;   /* panels, sidebar, vars-bar */
+  --vm-bg-3:        #e9e2f2;   /* raised surfaces */
+  --vm-bg-4:        #ded3ec;   /* hover / elevated chips */
+  --vm-bg-blog:     #f7f4fb;   /* the long-form archive background */
+  --vm-code-bg:     rgba(40,16,60,.05);  /* faint violet code wells */
+
+  /* ---- Ink (deep violet-black on light) ---- */
+  --vm-text-1:      #2a1d3d;   /* primary text */
+  --vm-text-2:      #5e4878;   /* secondary / muted lilac */
+  --vm-text-3:      #9079a8;   /* tertiary / labels, disabled */
+  --vm-text-pure:   #14101e;   /* max-contrast headings */
+  --vm-text-cmd:    #0d6e7a;   /* command / payload (deep teal-cyan) */
+  --vm-text-desc:   #45667a;   /* row descriptions (steel blue) */
+
+  /* ---- Brand accent (violet/magenta, held) ---- */
+  --vm-accent:      #9141ac;   /* the one true purple */
+  --vm-accent-2:    #7a35a0;   /* pressed / deeper */
+  --vm-accent-soft: #7e4aa8;   /* link hover */
+  --vm-purple:      #9a2fc8;   /* bright violet — variables, highlights */
+  --vm-code-violet: #7a2fa0;   /* inline-code violet */
+  --vm-code-violet2:#7a2fa0;   /* code text on blog */
+
+  /* ---- Neon signals, darkened to read on light ---- */
+  --vm-green:       #00803f;
+  --vm-teal:        #008a72;
+  --vm-red:         #d4204f;
+  --vm-pink:        #d4206f;
+  --vm-orange:      #c25c00;
+  --vm-orange-2:    #c25c00;
+  --vm-yellow:      #997a00;
+
+  /* ---- Borders & hairlines (violet) ---- */
+  --vm-border:      rgba(145,65,172,.20);
+  --vm-border-2:    rgba(145,65,172,.38);
+  --vm-border-3:    rgba(154,47,200,.28);
+  --vm-hairline:    rgba(145,65,172,.12);
+
+  /* ---- Tints (violet washes) ---- */
+  --vm-tint-04:     rgba(145,65,172,.05);
+  --vm-tint-08:     rgba(145,65,172,.09);
+  --vm-tint-10:     rgba(145,65,172,.11);
+  --vm-tint-15:     rgba(145,65,172,.16);
+
+  --vm-accent-grad:   linear-gradient(135deg, #9141ac, #c471ed);          /* @kind color */
+  --vm-title-grad:    linear-gradient(135deg, #6528a0, #9141ac, #c471ed);  /* @kind color */
+  --surface-card:     rgba(255,255,255,.92);
+  color-scheme: light;
+}

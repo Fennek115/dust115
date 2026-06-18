@@ -1,0 +1,35 @@
+{{- /*
+  Wikilinks para el digital garden.
+  Recibe la Page; devuelve el HTML de .Content con los [[ ]] expandidos.
+
+  Se opera sobre el HTML YA renderizado (.Content), no sobre .RawContent,
+  para no romper shortcodes (listening/callout/ascii), TOC ni mermaid:
+  los [[ ]] sobreviven como texto literal en el HTML final.
+
+  Sintaxis:
+    [[clave]]            -> enlace con el título de la nota destino como texto
+    [[clave|alias]]      -> enlace con texto personalizado
+  La "clave" es el último segmento del RelPermalink de la nota
+  (p. ej. /posts/vigilancia-masiva/ -> "vigilancia-masiva";
+          /posts/codice/codice-00-nota-de-archivo/ -> "codice-00-nota-de-archivo").
+  Un [[ ]] sin nota coincidente queda marcado como enlace roto.
+*/ -}}
+{{- $page := . -}}
+{{- $content := $page.Content -}}
+{{- if strings.Contains $content "[[" -}}
+  {{- range $page.Site.RegularPages -}}
+    {{- $key := path.Base (strings.TrimRight "/" .RelPermalink) -}}
+    {{- $url := .RelPermalink -}}
+    {{- $title := .Title | replaceRE `\$` `$$$$` -}}
+    {{- /* alias primero: [[clave|alias]] */ -}}
+    {{- $reAlias := printf `\[\[%s\|([^\]]+)\]\]` $key -}}
+    {{- $content = replaceRE $reAlias (printf `<a class="wikilink" href="%s">$1</a>` $url) $content -}}
+    {{- /* forma simple: [[clave]] -> título de la nota */ -}}
+    {{- $rePlain := printf `\[\[%s\]\]` $key -}}
+    {{- $content = replaceRE $rePlain (printf `<a class="wikilink" href="%s">%s</a>` $url $title) $content -}}
+  {{- end -}}
+  {{- /* lo que quede sin resolver = enlace roto */ -}}
+  {{- $content = replaceRE `\[\[([^\]|]+)\|([^\]]+)\]\]` `<span class="wikilink wikilink--broken" title="nota inexistente: $1">$2</span>` $content -}}
+  {{- $content = replaceRE `\[\[([^\]|]+)\]\]` `<span class="wikilink wikilink--broken" title="nota inexistente: $1">$1</span>` $content -}}
+{{- end -}}
+{{- return $content -}}

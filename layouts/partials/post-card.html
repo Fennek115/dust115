@@ -1,0 +1,18 @@
+{{/* Ítem del listado del blog (Vulpine Marrow — archive listing).
+     Feed de terminal en una columna: serie, título, meta, summary, tags. Sin cover. */}}
+{{- $label := "" -}}
+{{- with .Params.series }}{{ $label = index . 0 }}{{ else }}{{ with .Params.categories }}{{ $label = index . 0 }}{{ end }}{{ end -}}
+<article class="post-item">
+  {{- with $label }}<div class="post-item__series">⟐ {{ . }}</div>{{ end }}
+  <h2 class="post-item__title"><a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a></h2>
+  <div class="post-item__meta">
+    {{- if .Date }}{{ partial "post-date" . }}{{ end -}}
+    <span> · {{ .ReadingTime }} {{ $.Site.Params.minuteReadingTime | default "min de lectura" }}</span>
+  </div>
+  <p class="post-item__summary">{{ .Summary | plainify | truncate 200 }}</p>
+  {{- with .Params.tags }}
+  <div class="post-item__tags">
+    {{- range first 5 . }}<a class="post-item__tag" href="{{ (urlize (printf "tags/%s/" .)) | absLangURL }}">{{ . }}</a>{{ end -}}
+  </div>
+  {{- end }}
+</article>

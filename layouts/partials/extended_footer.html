@@ -1,0 +1,39 @@
+{{/* Handler del toggle de modo claro/oscuro. El botón #vm-theme-toggle vive en el
+     header (partials/header.html); este script lo cablea tras cargar el DOM.
+     El estado inicial lo fija el script anti-FOUC de extended_head.html. */}}
+<script>
+(function(){
+  var btn = document.getElementById('vm-theme-toggle');
+  var root = document.documentElement;
+  function sync(){ btn.textContent = root.classList.contains('vm-light') ? '☀' : '☾'; }
+  sync();
+  btn.addEventListener('click', function(){
+    root.classList.toggle('vm-light');
+    try { localStorage.setItem('vm-theme', root.classList.contains('vm-light') ? 'light' : 'dark'); } catch(e){}
+    sync();
+  });
+})();
+</script>
+
+{{/* mermaid.js — solo en páginas que tienen diagramas (flag puesto por el render hook).
+     Tema violeta Vulpine Marrow sobre superficies oscuras. */}}
+{{ if .Store.Get "hasMermaid" }}
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      darkMode: true,
+      background: '#1a1525',
+      primaryColor: '#1f1a2e',
+      primaryTextColor: '#e8d8f0',
+      primaryBorderColor: '#9141ac',
+      secondaryColor: '#251f38',
+      tertiaryColor: '#14101e',
+      lineColor: '#c471ed',
+      fontFamily: "'Fira Code', monospace"
+    }
+  });
+</script>
+{{ end }}

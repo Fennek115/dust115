@@ -1,0 +1,31 @@
+{{- /*
+  Backlinks del digital garden: lista de notas que enlazan a la nota actual
+  vía wikilink [[clave]] o [[clave|alias]].
+  Se escanea el .RawContent del resto de páginas buscando la clave de la
+  página actual (último segmento de su RelPermalink).
+*/ -}}
+{{- $cur := path.Base (strings.TrimRight "/" .RelPermalink) -}}
+{{- $needlePlain := printf "[[%s]]" $cur -}}
+{{- $needleAlias := printf "[[%s|" $cur -}}
+{{- $mentions := slice -}}
+{{- range .Site.RegularPages -}}
+  {{- if ne .RelPermalink $.RelPermalink -}}
+    {{- $raw := .RawContent -}}
+    {{- if or (strings.Contains $raw $needlePlain) (strings.Contains $raw $needleAlias) -}}
+      {{- $mentions = $mentions | append . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- with $mentions -}}
+  <aside class="backlinks">
+    <h2 class="backlinks__title">Mencionado en</h2>
+    <ul class="backlinks__list">
+      {{- range (sort . "Date" "desc") }}
+        <li class="backlinks__item">
+          <a class="backlinks__link" href="{{ .RelPermalink }}">{{ .Title }}</a>
+          {{- with .Params.summary }}<span class="backlinks__summary">{{ . }}</span>{{ end -}}
+        </li>
+      {{- end }}
+    </ul>
+  </aside>
+{{- end -}}

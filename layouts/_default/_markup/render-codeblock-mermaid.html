@@ -1,0 +1,7 @@
+{{/* Code block render hook para diagramas mermaid.
+     Envuelve ```mermaid en <pre class="mermaid"> y marca la página
+     para que extended_footer.html cargue mermaid.js solo donde hace falta. */}}
+<pre class="mermaid">
+{{- .Inner | safeHTML -}}
+</pre>
+{{- .Page.Store.Set "hasMermaid" true -}}

@@ -62,7 +62,7 @@ Si no hubiera sido por esa registracion de MFA — un detalle minúsculo notado 
 
 **Lo que SolarWinds enseña que casi nadie quiere aceptar.**
 
-La lección obvia es técnica: hay que verificar la cadena de suministro, implementar Zero Trust, hacer threat hunting proactivo, asumir compromiso. Todo eso es correcto y todo eso está documentado en el mejor material técnico que se ha producido sobre el tema. No voy a repetirlo aquí porque ya está repetido en mil lados.
+La lección obvia es técnica: hay que [[proyecto-ouroboros|verificar la cadena de suministro]], implementar Zero Trust, hacer [[cuando-no-pasa-nada|threat hunting proactivo]], asumir compromiso. Todo eso es correcto y todo eso está documentado en el mejor material técnico que se ha producido sobre el tema. No voy a repetirlo aquí porque ya está repetido en mil lados.
 
 La lección menos obvia, y más importante, es esta: **la vulnerabilidad no estaba en el código de SolarWinds. Estaba en la confianza que dieciocho mil organizaciones depositaban en SolarWinds.**
 

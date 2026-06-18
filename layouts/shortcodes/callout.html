@@ -1,0 +1,8 @@
+{{/* Callout / aviso destacado. Reemplaza los "prompt" de Chirpy.
+     Uso: {{< callout type="info|tip|warning|danger" >}}texto markdown{{< /callout >}} */}}
+{{- $type := (.Get "type") | default "info" -}}
+<div class="callout callout-{{ $type }}">
+  <div class="callout-body">
+    {{ .Inner | markdownify }}
+  </div>
+</div>

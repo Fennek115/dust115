@@ -1,0 +1,18 @@
+{{ define "main" }}
+  {{ with .Content }}
+    <div class="index-content">{{ . }}</div>
+  {{ end }}
+
+  {{/* Índice del blog — EXCLUYE el Códice del Polvo (su índice está en /codice) */}}
+  {{ $all := where .Site.RegularPages "Type" "posts" }}
+  {{ $codice := where $all "Params.series" "intersect" (slice "Códice del Polvo") }}
+  {{ $blog := complement $codice $all }}
+  {{ $paginator := .Paginate $blog }}
+
+  <div class="post-list">
+    {{ range $paginator.Pages }}
+      {{ partial "post-card.html" . }}
+    {{ end }}
+  </div>
+  {{ partial "pagination.html" . }}
+{{ end }}

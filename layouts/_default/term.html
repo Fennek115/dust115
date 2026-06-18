@@ -1,0 +1,14 @@
+{{ define "main" }}
+  <h1 class="term-title">#{{ .Title }}</h1>
+  {{ with .Content }}
+    <div class="index-content">{{ . }}</div>
+  {{ end }}
+
+  {{/* Páginas de tag: aquí SÍ se muestra todo lo etiquetado (incluido el códice) */}}
+  <div class="post-list">
+    {{ range .Paginator.Pages }}
+      {{ partial "post-card.html" . }}
+    {{ end }}
+  </div>
+  {{ partial "pagination.html" . }}
+{{ end }}

@@ -1,0 +1,53 @@
+{{- /*
+  Navegación anterior/siguiente consciente de la serie (override del tema).
+  - Capítulos del Códice del Polvo: orden por `weight` (orden de lectura del libro),
+    navegando SOLO dentro del Códice.
+  - Resto del blog: orden por fecha, navegando SOLO entre posts del blog (sin Códice).
+  Así el next/prev nunca se fuga de un grupo al otro.
+*/ -}}
+{{- $series := "Códice del Polvo" -}}
+{{- $isCodice := false -}}
+{{- with .Params.series }}{{ if in . $series }}{{ $isCodice = true }}{{ end }}{{ end -}}
+
+{{- $ordered := slice -}}
+{{- if $isCodice -}}
+  {{- $ordered = sort (where .Site.RegularPages "Params.series" "intersect" (slice $series)) "Weight" -}}
+{{- else -}}
+  {{- $posts := where .Site.RegularPages "Type" "posts" -}}
+  {{- $cod := where $posts "Params.series" "intersect" (slice $series) -}}
+  {{- $ordered = sort (complement $cod $posts) "Date" -}}
+{{- end -}}
+
+{{- $prev := false -}}
+{{- $next := false -}}
+{{- $cur := .RelPermalink -}}
+{{- range $i, $p := $ordered -}}
+  {{- if eq $p.RelPermalink $cur -}}
+    {{- if gt $i 0 -}}{{- $prev = index $ordered (sub $i 1) -}}{{- end -}}
+    {{- if lt $i (sub (len $ordered) 1) -}}{{- $next = index $ordered (add $i 1) -}}{{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{ if or $prev $next }}
+<div class="pagination">
+  <div class="pagination__title">
+    <span class="pagination__title-h">{{ if $isCodice }}Códice del Polvo{{ else }}{{ $.Site.Params.ReadOtherPosts }}{{ end }}</span>
+    <hr />
+  </div>
+  <div class="pagination__buttons">
+    {{ with $prev }}
+      <a href="{{ .RelPermalink }}" class="button inline prev">
+        &lt; [<span class="button__text">{{ .Title }}</span>]
+      </a>
+    {{ end }}
+    {{ if and $prev $next }}
+      ::
+    {{ end }}
+    {{ with $next }}
+      <a href="{{ .RelPermalink }}" class="button inline next">
+        [<span class="button__text">{{ .Title }}</span>] &gt;
+      </a>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

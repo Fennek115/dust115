@@ -1,0 +1,88 @@
+/* ============================================================
+   Vulpine Marrow — Spacing, radii, borders, shadows, motion
+   Tight, dense, HUD-like. Small radii (4–8px), hairline borders,
+   heavy ambient shadows on floating panels, and a faint 40px
+   grid texture behind the app. Almost no glow in the resting
+   state — the aesthetic is "terminal-clean", glow on intent only.
+   ============================================================ */
+
+:root {
+  /* ---- Spacing scale (4px base) ---- */
+  --vm-sp-0:   0;      /* @kind spacing */
+  --vm-sp-1:   2px;
+  --vm-sp-2:   4px;
+  --vm-sp-3:   6px;
+  --vm-sp-4:   8px;
+  --vm-sp-5:   10px;
+  --vm-sp-6:   12px;
+  --vm-sp-7:   14px;
+  --vm-sp-8:   16px;
+  --vm-sp-10:  20px;
+  --vm-sp-12:  24px;
+  --vm-sp-14:  28px;
+  --vm-sp-16:  32px;
+  --vm-sp-20:  40px;
+
+  /* ---- Radii ---- */
+  --vm-radius-xs:  3px;   /* tags, badges, kbd */
+  --vm-radius-sm:  4px;   /* buttons, inputs, chips */
+  --vm-radius:     6px;   /* rows, code wells */
+  --vm-radius-md:  8px;   /* cards, panels (apt115 --radius) */
+  --vm-radius-lg:  10px;  /* modals */
+  --vm-radius-pill:20px;  /* profile, stat pills, toggles */
+  --vm-radius-full:50%;
+
+  /* ---- Border widths ---- */
+  --vm-bw-hair:    1px;
+  --vm-bw:         1px;
+  --vm-bw-accent:  2px;   /* button outlines, header rules */
+  --vm-bw-left:    3px;   /* row status spine, blockquote */
+
+  /* ---- Shadows ---- */
+  --vm-shadow-panel:  0 8px 48px rgba(0,0,0,.90);
+  --vm-shadow-float:  0 2px 30px rgba(0,0,0,.80), 0 1px 0 rgba(145,65,172,.15);
+  --vm-shadow-drawer: -10px 0 50px rgba(145,65,172,.10), -20px 0 60px rgba(0,0,0,.80);
+  --vm-shadow-modal:  0 0 60px rgba(145,65,172,.15), 0 20px 60px rgba(0,0,0,.90), inset 0 1px 0 rgba(145,65,172,.20);
+
+  /* ---- Glows (intent only: focus, active, success) ---- */
+  --vm-glow-accent: 0 0 12px rgba(145,65,172,.45);
+  --vm-glow-purple: 0 0 12px rgba(196,113,237,.40);
+  --vm-glow-green:  0 0 12px rgba(0,255,136,.40);
+  --vm-glow-red:    0 0 12px rgba(255,45,111,.40);
+  --vm-glow-teal:   0 0 12px rgba(0,229,176,.35);
+
+  /* ---- Focus ring ---- */
+  --vm-focus-ring:  0 0 0 2px rgba(145,65,172,.18);
+
+  /* ---- Motion ---- */
+  --vm-ease:        cubic-bezier(.4, 0, .2, 1);  /* @kind other */
+  --vm-dur-fast:    .12s;   /* @kind other */
+  --vm-dur:         .15s;   /* @kind other */
+  --vm-dur-slow:    .25s;   /* @kind other */
+
+  /* ---- Layout constants ---- */
+  --vm-sidebar-w:   240px;
+  --vm-grid-size:   40px;   /* background grid texture */
+
+  /* ---- Semantic aliases ---- */
+  --radius-control:  var(--vm-radius-sm);
+  --radius-card:     var(--vm-radius-md);
+  --space-inset:     var(--vm-sp-6);
+  --space-stack:     var(--vm-sp-4);
+}
+
+/* ---- The signature faint grid backdrop (opt-in) ---- */
+.vm-grid-bg {
+  position: relative;
+}
+.vm-grid-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(145,65,172,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(145,65,172,.04) 1px, transparent 1px);
+  background-size: var(--vm-grid-size) var(--vm-grid-size);
+}

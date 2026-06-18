@@ -1,0 +1,20 @@
+{{ define "main" }}
+  {{ if .Content }}
+    <div class="index-content {{ if .Params.framed -}}framed{{- end -}}">
+      {{ .Content }}
+    </div>
+  {{ end }}
+  {{ with .Site.Params.subtitle }}<p class="dust-subtitle">{{ . }}</p>{{ end }}
+
+  {{/* Home curada: últimos posts del blog (excluye Códice). Archivo completo en /posts. */}}
+  {{ $all := where .Site.RegularPages "Type" "posts" }}
+  {{ $codice := where $all "Params.series" "intersect" (slice "Códice del Polvo") }}
+  {{ $blog := complement $codice $all }}
+
+  <div class="post-list">
+    {{ range first 6 $blog }}
+      {{ partial "post-card.html" . }}
+    {{ end }}
+  </div>
+  <a class="archive-more" href="{{ "posts/" | relLangURL }}">ver archivo completo →</a>
+{{ end }}

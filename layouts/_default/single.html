@@ -1,0 +1,52 @@
+{{ define "main" }}
+<article class="post post--single">
+  {{/* Etiqueta de serie/categoría (Vulpine Marrow) — series si existe, si no la 1ª categoría */}}
+  {{- $label := "" -}}
+  {{- with .Params.series }}{{ $label = index . 0 }}{{ else }}{{ with .Params.categories }}{{ $label = index . 0 }}{{ end }}{{ end -}}
+  {{- with $label }}
+    <div class="post-series">⟐ {{ . }}</div>
+  {{- end }}
+
+  <h1 class="post-title">{{ .Title | markdownify }}</h1>
+
+  <div class="post-meta">
+    {{- $sep := "" -}}
+    {{- if .Date -}}
+      <time class="post-date">{{ partial "post-date" . }}</time>
+      {{- $sep = " · " -}}
+    {{- end -}}
+    <span class="post-reading-time">{{ $sep }}{{ .ReadingTime }} {{ $.Site.Params.minuteReadingTime | default "min de lectura" }}</span>
+    {{- with .Params.tags }} · <span class="post-meta-tags">{{ delimit . " / " }}</span>{{- end -}}
+  </div>
+
+  <hr>
+
+  {{ partial "cover.html" . }}
+
+  {{ if (.Params.Toc | default .Site.Params.Toc) }}
+    <div class="table-of-contents">
+      <h2>{{ (.Params.TocTitle | default .Site.Params.TocTitle) | default "Table of Contents" }}</h2>
+      {{ .TableOfContents }}
+    </div>
+  {{ end }}
+
+  <div class="post-content">
+    {{- $body := partial "wikilinks.html" . -}}
+    {{- with $body -}}
+      <div>
+        {{ . | replaceRE "(<h[1-9] id=\"([^\"]+)\".+)(</h[1-9]+>)" `${1}<a href="#${2}" class="hanchor" ariaLabel="Anchor">#</a> ${3}` | safeHTML }}
+      </div>
+    {{- end -}}
+  </div>
+
+  {{ partial "backlinks.html" . }}
+
+  {{ if or (eq .Type $.Site.Params.contentTypeName) (eq .Type "codice") }}
+    {{ partial "posts_pagination.html" . }}
+  {{ end }}
+
+  {{ if not (.Params.hideComments | default false) }}
+    {{ partial "comments.html" . }}
+  {{ end }}
+</article>
+{{ end }}

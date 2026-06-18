@@ -1,0 +1,5 @@
+Fira Code — https://github.com/tonsky/FiraCode
+Copyright (c) 2014-2024, The Fira Code Project Authors.
+Licensed under the SIL Open Font License 1.1 (OFL).
+woff2 subsets obtenidos de Google Fonts y vendorizados localmente
+para que APT115 funcione 100% offline (sin CDN en runtime).
