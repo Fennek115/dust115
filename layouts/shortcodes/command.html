@@ -1,0 +1,28 @@
+{{/* Bloque de comando con botón de copiar (estilo CommandRow del design system).
+     Uso:  {{< command >}}nxc smb 10.10.4.0/24{{< /command >}}
+           {{< command prompt="PS>" >}}Get-Process{{< /command >}}
+     El prompt es decorativo (no se copia); se copia solo el comando. */}}
+{{- $prompt := (.Get "prompt") | default "$" -}}
+{{- $cmd := trim .Inner "\n" -}}
+<div class="cmd-block">
+  <span class="cmd-prompt" aria-hidden="true">{{ $prompt }}</span>
+  <code class="cmd-code">{{ $cmd }}</code>
+  <button class="cmd-copy" type="button" title="Copiar al portapapeles" aria-label="Copiar comando">⧉ copiar</button>
+</div>
+{{- if not (.Page.Store.Get "hasCmd") -}}
+{{- .Page.Store.Set "hasCmd" true -}}
+<script>
+document.addEventListener('click', function(e){
+  var btn = e.target.closest('.cmd-copy');
+  if (!btn) return;
+  var code = btn.parentElement.querySelector('.cmd-code');
+  if (!code || !navigator.clipboard) return;
+  navigator.clipboard.writeText(code.textContent).then(function(){
+    var prev = btn.textContent;
+    btn.textContent = '✓ copiado';
+    btn.classList.add('cmd-copy--ok');
+    setTimeout(function(){ btn.textContent = prev; btn.classList.remove('cmd-copy--ok'); }, 1400);
+  });
+});
+</script>
+{{- end -}}

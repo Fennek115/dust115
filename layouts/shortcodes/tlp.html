@@ -1,0 +1,10 @@
+{{/* Banner TLP (Traffic Light Protocol) para posts de intel.
+     Uso:  {{< tlp amber >}}                              (solo el banner)
+           {{< tlp level="red" >}}distribución limitada{{< /tlp >}}   (con nota)
+     Niveles: clear (default), green, amber, red. */}}
+{{- $lvl := lower ((.Get "level") | default (.Get 0) | default "clear") -}}
+<div class="vm-tlp vm-tlp--{{ $lvl }}">
+  <span class="vm-tlp__band" aria-hidden="true"></span>
+  <span class="vm-tlp__label">TLP:{{ upper $lvl }}</span>
+  {{- with .Inner }}<span class="vm-tlp__note">{{ . }}</span>{{ end -}}
+</div>

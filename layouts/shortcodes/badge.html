@@ -1,0 +1,6 @@
+{{/* Etiqueta / insignia inline de color por token (severidad, estado, categoría).
+     Uso:  {{< badge color="red" >}}CRÍTICO{{< /badge >}}
+           {{< badge green >}}resuelto{{< /badge >}}   (forma posicional)
+     Colores: accent (default), purple, green, teal, red, pink, orange, yellow. */}}
+{{- $color := (.Get "color") | default (.Get 0) | default "accent" -}}
+<span class="vm-badge vm-badge--{{ $color }}">{{ .Inner }}</span>

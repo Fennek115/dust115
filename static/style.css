@@ -530,3 +530,109 @@ pre.mermaid {
 .menu__inner > li > a:hover {
   color: var(--accent);
 }
+
+/* ── Shortcodes Vulpine Marrow: command / figure / badge / tlp ──
+   Glow only on intent: borde hairline en reposo, glow al hover. */
+
+/* command — comando copiable (estilo CommandRow del DS) */
+.cmd-block {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 16px 0;
+  padding: 10px 12px;
+  background: var(--vm-code-bg);
+  border: 1px solid var(--vm-border);
+  border-left: 3px solid var(--vm-accent);
+  border-radius: 6px;
+  font-family: "Fira Code", monospace;
+  font-size: 0.9em;
+  transition: border-color .15s, box-shadow .15s;
+}
+.cmd-block:hover { border-color: var(--vm-border-2); }
+.cmd-prompt { color: var(--vm-accent); user-select: none; }
+.cmd-code {
+  flex: 1;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: var(--vm-text-cmd);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.cmd-copy {
+  flex: none;
+  background: transparent;
+  color: var(--vm-text-2);
+  border: 1px solid var(--vm-border-2);
+  border-radius: 4px;
+  padding: 3px 8px;
+  font-family: inherit;
+  font-size: .85em;
+  cursor: pointer;
+  transition: all .15s;
+}
+.cmd-copy:hover {
+  color: var(--vm-accent-soft);
+  border-color: var(--vm-accent);
+  box-shadow: 0 0 12px var(--vm-tint-15);
+}
+.cmd-copy--ok { color: var(--vm-green); border-color: var(--vm-green); }
+
+/* figure — imagen con caption + crédito */
+.vm-figure { margin: 24px 0; text-align: center; }
+.vm-figure img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  border: 1px solid var(--vm-border);
+}
+.vm-figure figcaption {
+  margin-top: 8px;
+  font-size: .85em;
+  color: var(--vm-text-2);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.vm-figure__credit { color: var(--vm-text-3); font-size: .9em; }
+
+/* badge — etiqueta inline; el color lo da currentColor (borde + texto) */
+.vm-badge {
+  display: inline-block;
+  padding: 1px 7px;
+  border-radius: 3px;
+  font-size: .82em;
+  font-weight: 600;
+  letter-spacing: .3px;
+  border: 1px solid currentColor;
+  background: var(--vm-tint-10);
+}
+.vm-badge--accent { color: var(--vm-accent-soft); }
+.vm-badge--purple { color: var(--vm-purple); }
+.vm-badge--green  { color: var(--vm-green); }
+.vm-badge--teal   { color: var(--vm-teal); }
+.vm-badge--red    { color: var(--vm-red); }
+.vm-badge--pink   { color: var(--vm-pink); }
+.vm-badge--orange { color: var(--vm-orange-2); }
+.vm-badge--yellow { color: var(--vm-yellow); }
+
+/* tlp — banner Traffic Light Protocol */
+.vm-tlp {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 16px 0;
+  padding: 8px 12px;
+  border: 1px solid var(--vm-border-2);
+  border-radius: 6px;
+  font-family: "Fira Code", monospace;
+  font-size: .85em;
+}
+.vm-tlp__band { width: 4px; align-self: stretch; border-radius: 2px; background: currentColor; }
+.vm-tlp__label { font-weight: 700; letter-spacing: 1px; }
+.vm-tlp__note { color: var(--vm-text-2); font-weight: 400; }
+.vm-tlp--clear { color: var(--vm-text-2); }
+.vm-tlp--green { color: var(--vm-green); }
+.vm-tlp--amber { color: var(--vm-orange-2); }
+.vm-tlp--red   { color: var(--vm-red); }

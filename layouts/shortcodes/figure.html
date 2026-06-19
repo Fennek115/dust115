@@ -1,0 +1,15 @@
+{{/* Imagen con caption y crédito opcional (formaliza cover/coverCredit).
+     Uso: {{< figure src="diag.png" alt="texto alt" caption="Flujo C2" credit="Vulpine Marrow" >}}
+     `src` se resuelve como recurso del page bundle si existe; si no, se usa tal cual. */}}
+{{- $src := .Get "src" -}}
+{{- $url := $src -}}
+{{- with .Page.Resources.GetMatch $src }}{{ $url = .RelPermalink }}{{ end -}}
+<figure class="vm-figure">
+  <img src="{{ $url }}" alt="{{ .Get "alt" | default (.Get "caption") }}" loading="lazy">
+  {{- if or (.Get "caption") (.Get "credit") }}
+  <figcaption>
+    {{- with .Get "caption" }}<span class="vm-figure__cap">{{ . }}</span>{{ end -}}
+    {{- with .Get "credit" }}<span class="vm-figure__credit">crédito: {{ . }}</span>{{ end -}}
+  </figcaption>
+  {{- end }}
+</figure>
