@@ -1,0 +1,4 @@
+---
+title: "Synapsis"
+layout: "synapsis"
+---

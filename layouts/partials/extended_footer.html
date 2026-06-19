@@ -64,6 +64,7 @@
     mermaid.initialize({
       startOnLoad: false,
       theme: 'base',
+      securityLevel: 'loose',
       themeVariables: light ? THEMES.light : THEMES.dark
     });
     mermaid.run({ querySelector: 'pre.mermaid' });

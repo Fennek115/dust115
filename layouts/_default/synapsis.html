@@ -1,0 +1,88 @@
+{{ define "main" }}
+<article class="post post--single synapsis">
+  <h1 class="post-title">Synapsis</h1>
+  <div class="post-meta"><span>mapa de conexiones del jardín · índice del archivo</span></div>
+  <hr>
+
+  {{/* ============================================================
+       Grafo de notas — dirigido y jerárquico.
+       Hugo arma la definición mermaid desde los wikilinks [[ ]];
+       mermaid (dagre) la dibuja en capas. Clave = path.Base, igual
+       que partials/wikilinks.html y backlinks.html.
+       ============================================================ */}}
+  {{- $pages := where .Site.RegularPages "Type" "in" (slice "posts" "codice") -}}
+  {{- $byKey := dict -}}
+  {{- range $pages -}}
+    {{- $byKey = merge $byKey (dict (path.Base .RelPermalink) .) -}}
+  {{- end -}}
+
+  {{- $edges := slice -}}
+  {{- $nodes := slice -}}
+  {{- $seen := dict -}}
+  {{- range $pages -}}
+    {{- $src := path.Base .RelPermalink -}}
+    {{- range findRE `\[\[[^\]]+\]\]` .RawContent -}}
+      {{- $inner := replaceRE `^\[\[|\]\]$` "" . -}}
+      {{- $tgt := trim (index (split $inner "|") 0) " " -}}
+      {{- if and (isset $byKey $tgt) (ne $src $tgt) -}}
+        {{- $edges = $edges | append (dict "s" $src "t" $tgt) -}}
+        {{- range (slice $src $tgt) -}}
+          {{- if not (isset $seen .) -}}
+            {{- $seen = merge $seen (dict . true) -}}
+            {{- $nodes = $nodes | append . -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{/* key -> id secuencial; conteo de entradas (backlinks) para el hub */}}
+  {{- $idmap := dict -}}
+  {{- range $i, $k := $nodes -}}{{- $idmap = merge $idmap (dict $k (printf "n%d" $i)) -}}{{- end -}}
+  {{- $incount := dict -}}
+  {{- range $e := $edges -}}
+    {{- $t := $e.t -}}
+    {{- $incount = merge $incount (dict $t (add (int (index $incount $t | default 0)) 1)) -}}
+  {{- end -}}
+
+  <section class="syn-section">
+    <h2 class="syn-h">Grafo de notas</h2>
+    {{- if gt (len $nodes) 0 }}
+    <p class="syn-note">{{ len $nodes }} notas conectadas · {{ len $edges }} enlaces. Cada flecha va de la nota que cita hacia la citada; hacé clic en un nodo para abrir el post.</p>
+    {{- $lines := slice "flowchart TD" -}}
+    {{- range $k := $nodes -}}{{- $p := index $byKey $k -}}{{- $lbl := replaceRE `"` "'" $p.Title -}}{{- $lines = $lines | append (printf `  %s["%s"]` (index $idmap $k) $lbl) -}}{{- end -}}
+    {{- range $e := $edges -}}{{- $lines = $lines | append (printf `  %s --> %s` (index $idmap $e.s) (index $idmap $e.t)) -}}{{- end -}}
+    {{- range $k := $nodes -}}{{- $p := index $byKey $k -}}{{- $lines = $lines | append (printf `  click %s "%s"` (index $idmap $k) $p.RelPermalink) -}}{{- end -}}
+    {{- $lines = $lines | append `  classDef hub fill:#9141ac,stroke:#c471ed,color:#fff,stroke-width:2px;` -}}
+    {{- range $k := $nodes -}}{{- if ge (int (index $incount $k | default 0)) 2 -}}{{- $lines = $lines | append (printf `  class %s hub` (index $idmap $k)) -}}{{- end -}}{{- end -}}
+    <div class="syn-graph">
+<pre class="mermaid">
+{{ delimit $lines "\n" | safeHTML }}
+</pre>
+    </div>
+    {{- .Store.Set "hasMermaid" true -}}
+    {{- else }}
+    <p class="syn-note">Todavía no hay notas enlazadas con <code>[[wikilinks]]</code>.</p>
+    {{- end }}
+  </section>
+
+  {{/* ============================================================
+       Índice cronológico — posts del blog agrupados por año.
+       ============================================================ */}}
+  {{- $posts := (where .Site.RegularPages "Type" "posts").ByDate.Reverse -}}
+  <section class="syn-section">
+    <h2 class="syn-h">Índice cronológico</h2>
+    <p class="syn-note">{{ len $posts }} entradas del blog por fecha. El Códice tiene su propio orden de lectura en <a href="{{ "/codice/" | relLangURL }}">/codice</a>.</p>
+    {{- range $posts.GroupByDate "2006" }}
+    <div class="syn-year">
+      <h3 class="syn-year-h">{{ .Key }}</h3>
+      <ul class="syn-index">
+        {{- range .Pages }}
+        <li><time class="syn-date">{{ .Date.Format "01-02" }}</time> <a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{- end }}
+      </ul>
+    </div>
+    {{- end }}
+  </section>
+</article>
+{{ end }}
