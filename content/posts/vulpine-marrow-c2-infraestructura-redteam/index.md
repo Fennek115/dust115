@@ -17,25 +17,6 @@ El proyecto no es un laboratorio de "instala Metasploit y listo". Es una arquite
 
 También documento los **8 errores reales** que tuve durante el deploy — desde un double-firewall invisible en Oracle hasta un mismatch de protocolos HTTP/HTTPS que mantuvo al beacon girando en vacío durante horas.
 
----
-
-## Índice
-
-1. [Filosofía de diseño: Relay vs Redirector](#1-filosofía-de-diseño-relay-vs-redirector)
-2. [Nomenclatura: Conceptos alquimicos como sistema de naming](#2-nomenclatura-conceptos-alquimicos-como-sistema-de-naming)
-3. [Inventario de recursos](#3-inventario-de-recursos)
-4. [Fase 1 — Oracle Cloud VMs + WireGuard de gestión](#4-fase-1--oracle-cloud-vms--wireguard-de-gestión)
-5. [Fase 2 — Sliver C2 en Proxmox](#5-fase-2--sliver-c2-en-proxmox)
-6. [Fase 3 — Redirector: Cloudflare + Nginx + Let's Encrypt](#6-fase-3--redirector-cloudflare--nginx--lets-encrypt)
-7. [Fase 4 — VM víctima y verificación end-to-end](#7-fase-4--vm-víctima-y-verificación-end-to-end)
-8. [Fricciones reales y sus resoluciones](#8-fricciones-reales-y-sus-resoluciones)
-9. [Flujo completo de un implant](#9-flujo-completo-de-un-implant)
-10. [Lo que ve el Blue Team vs lo que no ve](#10-lo-que-ve-el-blue-team-vs-lo-que-no-ve)
-11. [Próximos pasos: Redirector backup y evasión AV/EDR](#11-próximos-pasos-redirector-backup-y-evasión-avedr)
-12. [Referencias](#12-referencias)
-
----
-
 ## 1. Filosofía de diseño: Relay vs Redirector
 
 Antes de poner una sola VM en producción, hay que entender por qué la arquitectura distribuida existe. La respuesta directa: **el C2 expuesto directamente a internet es un C2 quemado en horas**. Los Blue Teams tienen OSINT, los investigadores de seguridad tienen Shodan, y las herramientas de threat intelligence mapean IPs activas en tiempo real. Si Sliver escucha en `0.0.0.0:443`, su IP aparece en alguna base de datos en 24h.
