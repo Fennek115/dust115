@@ -1,29 +1,31 @@
 {{/* Handler del toggle de modo claro/oscuro. El botón #vm-theme-toggle vive en el
      header (partials/header.html); este script lo cablea tras cargar el DOM.
-     El estado inicial lo fija el script anti-FOUC de extended_head.html. */}}
+     El estado inicial lo fija el script anti-FOUC de extended_head.html.
+     Si la página tiene diagramas mermaid, al togglear se re-renderizan con la
+     paleta del tema activo (mermaid hornea los colores en el SVG al renderizar). */}}
 <script>
 (function(){
   var btn = document.getElementById('vm-theme-toggle');
   var root = document.documentElement;
-  function sync(){ btn.textContent = root.classList.contains('vm-light') ? '☀' : '☾'; }
+  function sync(){ if(btn) btn.textContent = root.classList.contains('vm-light') ? '☀' : '☾'; }
   sync();
-  btn.addEventListener('click', function(){
+  if(btn) btn.addEventListener('click', function(){
     root.classList.toggle('vm-light');
     try { localStorage.setItem('vm-theme', root.classList.contains('vm-light') ? 'light' : 'dark'); } catch(e){}
     sync();
+    if (window.__vmRenderMermaid) window.__vmRenderMermaid();
   });
 })();
 </script>
 
 {{/* mermaid.js — solo en páginas que tienen diagramas (flag puesto por el render hook).
-     Tema violeta Vulpine Marrow sobre superficies oscuras. */}}
+     Dos paletas Vulpine Marrow: violeta sobre superficie oscura / sobre bone-white. */}}
 {{ if .Store.Get "hasMermaid" }}
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-  mermaid.initialize({
-    startOnLoad: true,
-    theme: 'base',
-    themeVariables: {
+
+  var THEMES = {
+    dark: {
       darkMode: true,
       background: '#1a1525',
       primaryColor: '#1f1a2e',
@@ -33,7 +35,41 @@
       tertiaryColor: '#14101e',
       lineColor: '#c471ed',
       fontFamily: "'Fira Code', monospace"
+    },
+    light: {
+      darkMode: false,
+      background: '#f4f0ea',
+      primaryColor: '#ece4f5',
+      primaryTextColor: '#2a2340',
+      primaryBorderColor: '#9141ac',
+      secondaryColor: '#e3d7f0',
+      tertiaryColor: '#f6f1ec',
+      lineColor: '#9141ac',
+      fontFamily: "'Fira Code', monospace"
     }
+  };
+
+  // Guardar el código fuente de cada diagrama antes del primer render
+  // (mermaid reemplaza el contenido del <pre> por un SVG al procesarlo).
+  document.querySelectorAll('pre.mermaid').forEach(function(el){
+    el.dataset.vmSrc = el.textContent;
   });
+
+  function render(){
+    var light = document.documentElement.classList.contains('vm-light');
+    document.querySelectorAll('pre.mermaid').forEach(function(el){
+      if (el.dataset.vmSrc != null) el.textContent = el.dataset.vmSrc;
+      el.removeAttribute('data-processed');
+    });
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'base',
+      themeVariables: light ? THEMES.light : THEMES.dark
+    });
+    mermaid.run({ querySelector: 'pre.mermaid' });
+  }
+
+  window.__vmRenderMermaid = render;
+  render();
 </script>
 {{ end }}
