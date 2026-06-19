@@ -49,7 +49,7 @@ a {
 }
 
 a:hover {
-  color: #b19cd9;
+  color: var(--vm-accent-soft);
   text-decoration: underline;
 }
 
@@ -62,7 +62,7 @@ a:hover {
 }
 
 .tags .tag:hover {
-  background-color: #b19cd9;
+  background-color: var(--vm-accent-soft);
 }
 
 /* Botones */
@@ -92,7 +92,7 @@ pre {
 
 code {
   background: rgba(145, 65, 172, 0.1);
-  color: #e0b0ff;
+  color: var(--vm-code-violet2);
   border: 1px solid rgba(145, 65, 172, 0.25);
   padding: 2px 6px;
   border-radius: 3px;
@@ -410,11 +410,11 @@ th {
 
 ::-webkit-scrollbar-thumb {
   background: var(--accent);
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #b19cd9;
+  background: var(--vm-accent-soft);
 }
 
 /* Selection color */
