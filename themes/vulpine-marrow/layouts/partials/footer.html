@@ -1,0 +1,22 @@
+{{/* Footer Vulpine Marrow: lema alquímico + enlace al repo del tema.
+     «Mortui vivos docent» — los muertos enseñan a los vivos (eco del subtítulo
+     del sitio). La atribución al tema base (panr/Terminal, MIT) vive en LICENSE.md. */}}
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="copyright copyright--user">
+      <span class="footer__motto" lang="la" title="«los muertos enseñan a los vivos»">mortui vivos docent</span>
+      <span class="footer__sep" aria-hidden="true">::</span>
+      <a class="footer__theme" href="https://github.com/dust115/vulpine-marrow" target="_blank" rel="noopener">vulpine-marrow ↗</a>
+    </div>
+  </div>
+</footer>
+
+{{ $menu := resources.Get "js/menu.js" | js.Build }}
+{{ $cp := resources.Get "js/code.js" | js.Build }}
+
+{{ $bundle := slice $menu $cp | resources.Concat "bundle.js" | resources.Minify }}
+
+<script type="text/javascript" src="{{ $bundle.RelPermalink }}"></script>
+
+<!-- Extended footer section-->
+{{ partial "extended_footer.html" . }}

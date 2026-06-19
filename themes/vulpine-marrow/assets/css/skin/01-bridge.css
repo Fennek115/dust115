@@ -1,0 +1,156 @@
+:root {
+  /* Puente: variables del tema terminal -> tokens Vulpine Marrow.
+     En oscuro --vm-bg-blog == #241f31 (sin regresión); en .vm-light
+     todos estos cambian solos porque referencian los tokens por var(). */
+  --background: var(--vm-bg-blog);
+  --foreground: var(--vm-text-pure);
+  --accent: var(--vm-accent);
+
+  /* Variables adicionales para Terminal */
+  --color: var(--vm-text-1);
+  --border-color: var(--vm-border-2);
+  --code-background: var(--vm-tint-10);
+
+  --font-mono: var(--vm-font-mono);
+}
+
+/* Fuerza Fira Code en todo el sitio */
+body {
+  font-family: "Fira Code", "JetBrains Mono", Monaco, Consolas, "Ubuntu Mono", monospace !important;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Logo en violeta */
+.logo__mark,
+.logo__text,
+.logo__cursor {
+  background-color: var(--accent) !important;
+}
+
+/* Links */
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--vm-accent-soft);
+  text-decoration: underline;
+}
+
+/* Tags */
+.tags .tag {
+  background-color: var(--accent);
+  color: var(--background);
+  border-radius: 3px;
+  padding: 3px 8px;
+}
+
+.tags .tag:hover {
+  background-color: var(--vm-accent-soft);
+}
+
+/* Botones */
+button,
+.button {
+  background: transparent;
+  color: var(--accent);
+  border: 2px solid var(--accent);
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+button:hover,
+.button:hover {
+  background: rgba(145, 65, 172, 0.15);
+}
+
+/* Code blocks */
+pre {
+  background: rgba(145, 65, 172, 0.05) !important;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 16px;
+  overflow-x: auto;
+}
+
+code {
+  background: rgba(145, 65, 172, 0.1);
+  color: var(--vm-code-violet2);
+  border: 1px solid rgba(145, 65, 172, 0.25);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.95em;
+}
+
+pre code {
+  background: transparent !important;
+  border: none;
+  padding: 0;
+}
+
+/* Header y Footer */
+.header {
+  border-bottom: 2px solid var(--border-color);
+  padding: 20px 0;
+}
+
+.footer {
+  border-top: 2px solid var(--border-color);
+  padding: 20px 0;
+  color: #888;
+  margin-top: 40px;
+}
+
+/* Lema alquímico + enlace al repo del tema */
+.footer__motto {
+  font-style: italic;
+  letter-spacing: 0.04em;
+}
+
+.footer__sep {
+  opacity: 0.5;
+  margin: 0 0.6ch;
+}
+
+.footer__theme {
+  color: var(--accent);
+}
+
+.footer__theme:hover {
+  color: var(--vm-accent-soft);
+}
+
+/* Paginación */
+.pagination {
+  border-top: 1px solid var(--border-color);
+  margin-top: 40px;
+  padding-top: 20px;
+}
+
+.pagination__title-h {
+  color: var(--accent);
+}
+
+/* Posts */
+.post {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+}
+
+.post-title a {
+  color: var(--foreground);
+}
+
+.post-title a:hover {
+  color: var(--accent);
+}
+
+.post-meta {
+  color: #888;
+  font-size: 0.9em;
+}
+

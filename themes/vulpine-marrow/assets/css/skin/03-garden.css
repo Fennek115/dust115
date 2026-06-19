@@ -1,0 +1,66 @@
+/* ── Digital garden: wikilinks + backlinks ────────────────────────── */
+
+/* Enlace [[wiki]] dentro de la prosa: distinto del link normal por su
+   subrayado punteado; glow (color pleno) solo en hover/foco. */
+.wikilink {
+  color: var(--vm-accent-soft);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--vm-border-2);
+  transition: color .15s ease, border-color .15s ease;
+}
+.wikilink:hover,
+.wikilink:focus {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+.wikilink--broken {
+  color: var(--vm-text-3);
+  border-bottom: 1px dashed var(--vm-text-3);
+  cursor: help;
+}
+
+/* Bloque "Mencionado en" al pie de la nota */
+.backlinks {
+  margin: 48px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--vm-border-2);
+}
+.backlinks__title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--vm-text-2);
+  margin: 0 0 14px;
+}
+.backlinks__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.backlinks__item {
+  margin: 0 0 12px;
+  padding-left: 16px;
+  position: relative;
+}
+.backlinks__item::before {
+  content: "⟐";
+  position: absolute;
+  left: 0;
+  color: var(--vm-accent-soft);
+  font-size: 11px;
+  top: 2px;
+}
+.backlinks__link {
+  color: var(--vm-text-1);
+  text-decoration: none;
+  font-weight: 600;
+}
+.backlinks__link:hover { color: var(--accent); }
+.backlinks__summary {
+  display: block;
+  font-size: 13px;
+  color: var(--vm-text-3);
+  margin-top: 2px;
+}
+

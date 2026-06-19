@@ -1,0 +1,114 @@
+/* Blockquotes estilo terminal */
+blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 20px;
+  margin-left: 0;
+  font-style: italic;
+  color: #ccc;
+}
+
+blockquote::before {
+  content: ">";
+  color: var(--accent);
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+/* Horizontal rule */
+hr {
+  border: none;
+  height: 2px;
+  background: var(--accent);
+  margin: 30px 0;
+}
+
+/* Tablas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+th,
+td {
+  border: 1px solid var(--border-color);
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background: rgba(145, 65, 172, 0.1);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Scrollbar personalizada (solo Chromium) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--vm-accent-soft);
+}
+
+/* Selection color */
+::selection {
+  background: var(--accent);
+  color: var(--background);
+}
+
+::-moz-selection {
+  background: var(--accent);
+  color: var(--background);
+}
+
+/* Callouts (reemplazan los "prompt" de Chirpy) — color por tipo vía tokens */
+.callout {
+  border-left: 3px solid var(--vm-purple);
+  background: var(--vm-tint-08);
+  border-radius: 4px;
+  padding: 12px 18px;
+  margin: 22px 0;
+}
+.callout-info    { border-left-color: var(--vm-purple); }
+.callout-tip     { border-left-color: var(--vm-green); }
+.callout-warning { border-left-color: var(--vm-orange-2); }
+.callout-danger  { border-left-color: var(--vm-red); }
+.callout-body > :first-child { margin-top: 0; }
+.callout-body > :last-child  { margin-bottom: 0; }
+
+/* Índice (TOC) del tema terminal — alineado a la paleta */
+.table-of-contents {
+  border: 1px solid var(--border-color);
+  background: var(--vm-tint-04);
+  border-radius: 4px;
+  padding: 8px 20px 14px;
+  margin: 24px 0;
+  font-size: 0.92em;
+}
+.table-of-contents h2 {
+  font-size: 1em;
+  color: var(--accent);
+  margin: 10px 0;
+}
+.table-of-contents ul { margin: 0; }
+
+/* Diagramas mermaid — sin el chrome de bloque de código, centrado */
+pre.mermaid {
+  background: transparent !important;
+  border: none;
+  padding: 0;
+  text-align: center;
+  margin: 24px 0;
+}
+

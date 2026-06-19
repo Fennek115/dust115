@@ -1,0 +1,63 @@
+/* ── Header Vulpine Marrow: una fila (logo | nav + toggle) ── */
+.header--vm { border-bottom: 2px solid var(--border-color); margin-bottom: 30px; padding: 0; }
+.header--vm .header__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 26px 0 18px;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+/* quita la barra "ticker" de líneas violeta del tema (el design no la tiene) */
+.header--vm .header__logo { flex: 0 0 auto; }
+.header--vm .header__logo::after { content: none; display: none; }
+.header--vm .header__nav { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.header--vm .header__nav a { color: var(--foreground); font-size: 14px; text-decoration: none; }
+.header--vm .header__nav a:hover { color: var(--accent); }
+.header--vm .header__nav-ext { color: var(--accent); }
+
+/* Logo de texto dust115$ */
+.dust-logo { display: inline-flex; align-items: center; text-decoration: none; }
+.dust-logo__text,
+.dust-logo__cursor {
+  background: var(--accent);
+  color: var(--background);
+  font-weight: 700;
+  font-size: 18px;
+  border-radius: 3px;
+}
+.dust-logo__text { padding: 3px 8px; }
+.dust-logo__cursor { padding: 3px 3px 3px 0; animation: dust-blink 1.1s step-end infinite; }
+@keyframes dust-blink { 50% { opacity: .25; } }
+
+/* Botón de tema integrado en el header */
+.header__theme {
+  background: var(--vm-tint-08);
+  border: 1px solid var(--vm-border-2);
+  color: var(--foreground);
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, border-color 0.15s;
+}
+.header__theme:hover { background: var(--vm-tint-15); border-color: var(--accent); }
+
+/* Menu items */
+.menu__inner > li {
+  margin: 0 10px;
+}
+
+.menu__inner > li > a {
+  color: var(--foreground);
+}
+
+.menu__inner > li > a:hover {
+  color: var(--accent);
+}
+

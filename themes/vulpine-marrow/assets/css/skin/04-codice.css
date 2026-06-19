@@ -1,0 +1,23 @@
+/* Índice del Códice (lista autogenerada por el shortcode codice-list) */
+.codice-index {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
+}
+.codice-index li {
+  margin: 0 0 6px;
+  padding-left: 18px;
+  position: relative;
+}
+.codice-index li::before {
+  content: "·";
+  position: absolute;
+  left: 4px;
+  color: var(--vm-accent-soft);
+}
+.codice-index a {
+  color: var(--vm-text-1);
+  text-decoration: none;
+}
+.codice-index a:hover { color: var(--accent); }
+

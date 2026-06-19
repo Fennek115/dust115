@@ -1,0 +1,21 @@
+name = "Vulpine Marrow"
+license = "MIT"
+licenselink = "https://github.com/dust115/dust115/blob/main/themes/vulpine-marrow/LICENSE.md"
+description = "Tema Hugo del archivo digital Dust115: violeta profundo sobre negro, Fira Code, HUD terminal-clean, modo claro/oscuro, digital garden (wikilinks/backlinks) y diagramas mermaid theme-aware."
+homepage = "https://dust115.github.io/dust115/"
+demosite = "https://dust115.github.io/dust115/"
+tags = ["blog", "dark", "light", "minimal", "monospace", "personal", "technical", "digital-garden", "mermaid", "responsive", "spanish"]
+features = ["blog", "shortcodes", "syntax highlighting", "dark/light toggle", "wikilinks", "backlinks", "mermaid", "table of contents"]
+min_version = "0.128.0"
+
+# Sistema de diseño "Vulpine Marrow" (fuente de verdad: la herramienta /apt115/).
+# Deriva del tema Terminal de panr (MIT); ver LICENSE.md para la atribución.
+[author]
+  name = "dust115"
+  homepage = "https://dust115.github.io/dust115/"
+
+[original]
+  name = "Terminal"
+  homepage = "https://github.com/panr/hugo-theme-terminal"
+  author = "panr"
+  authorHomepage = "https://rkoziel.com"

@@ -1,0 +1,46 @@
+/* ── Synapsis: hub de grafo de notas + índice cronológico ── */
+.synapsis .syn-section { margin: 32px 0; }
+.syn-h {
+  font-size: 18px;
+  color: var(--vm-purple);
+  border-bottom: 1px solid var(--vm-border);
+  padding-bottom: 6px;
+  margin-bottom: 10px;
+}
+.syn-note { font-size: .85em; color: var(--vm-text-2); margin: 0 0 14px; }
+
+/* grafo: permite que el SVG respire más ancho que la columna de 720 */
+.syn-graph {
+  border: 1px solid var(--vm-border);
+  border-radius: 8px;
+  background: var(--vm-code-bg);
+  padding: 12px;
+  overflow-x: auto;
+}
+.syn-graph pre.mermaid { margin: 0; text-align: center; }
+
+/* índice cronológico — denso, escaneable */
+.syn-year { margin: 0 0 18px; }
+.syn-year-h {
+  font-size: 14px;
+  color: var(--vm-text-3);
+  letter-spacing: 2px;
+  margin: 0 0 6px;
+}
+.syn-index { list-style: none; padding: 0; margin: 0; }
+.syn-index li {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  padding: 3px 0;
+  border-bottom: 1px solid var(--vm-hairline);
+}
+.syn-index li::before { content: none; }
+.syn-date {
+  flex: none;
+  font-variant-numeric: tabular-nums;
+  color: var(--vm-text-3);
+  font-size: .85em;
+}
+.syn-index a { color: var(--vm-text-1); }
+.syn-index a:hover { color: var(--vm-accent-soft); }
