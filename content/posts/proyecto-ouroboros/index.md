@@ -15,7 +15,7 @@ En la alquimia, el **Ouroboros** simboliza el ciclo eterno de renovación. En el
 > 🔗 **Código Fuente:** Puedes consultar el repositorio completo y su evolución en GitHub:  
 > [**github.com/Fennek115/Ouroboros-proyect**](https://github.com/Fennek115/Ouroboros-proyect)
 
-Para mi segundo proyecto de laboratorio, decidí implementar una pipeline **DevSecOps** real. El objetivo: automatizar la detección de "impurezas" (vulnerabilidades) antes de que el código toque producción, aplicando la filosofía *Shift Left*.
+Para mi segundo proyecto de laboratorio, decidí implementar una pipeline **DevSecOps** real. El objetivo: automatizar la detección de "impurezas" ([[pentest-teorico-vs-practico|vulnerabilidades]]) antes de que el código toque producción, aplicando la filosofía *Shift Left*.
 
 ## 🧪 La Materia Prima: Un Entorno Vulnerable
 

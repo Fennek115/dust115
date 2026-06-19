@@ -33,7 +33,7 @@ La solución es separación de capas. Cada nodo cumple exactamente una función:
 
 **Nginx actúa como redirector**: cuando el tráfico llega a Oracle, Nginx inspecciona la URI. Si coincide con el patrón del beacon de Sliver (`/assets/bundle/...`), hace `proxy_pass` al C2 por el túnel WireGuard. Cualquier otra petición —un scanner, el Blue Team, un investigador— recibe un `302 → https://www.microsoft.com`. Inocente.
 
-Esta arquitectura viene documentada en el [Red Team Infrastructure Wiki de bluscreenofjeff](https://github.com/bluscreenofjeff/Red-Team-Infrastructure-Wiki), el documento de referencia para infra red team profesional.
+Esta arquitectura viene documentada en el [Red Team Infrastructure Wiki de bluscreenofjeff](https://github.com/bluscreenofjeff/Red-Team-Infrastructure-Wiki), el documento de referencia para [[redteam-infraestructura-vs-malware|infra red team profesional]].
 
 ### Topología completa
 
