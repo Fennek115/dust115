@@ -140,7 +140,7 @@ El cambio que se necesita es cultural, organizacional y económico antes que té
 
 **Una observación final desde el otro lado.**
 
-Cuando uno ha operado, en algún momento de su vida, del lado del atacante — sea como red teamer pagado o en circunstancias menos formales — hay una sensación que no se olvida y que conviene nombrar.
+Cuando uno ha operado, en algún momento de su vida, del lado del atacante — unas veces con permiso, otras por cuenta propia — hay una sensación que no se olvida y que conviene nombrar.
 
 Es la sensación de estar adentro de un sistema que cree que no estás. Toda la conversación pública sobre ciberseguridad, todas las certificaciones, todas las inversiones, todos los productos vendidos en RSA Conference, parten del supuesto implícito de que el defensor sabe cuándo está siendo atacado. Esa premisa es falsa. La premisa correcta es que el defensor sabe cuándo está siendo atacado *torpemente*. Los ataques sofisticados están dentro y se quedan dentro hasta que un detalle minúsculo, casi siempre humano, casi siempre por casualidad, abre una grieta por la que se ve algo.
 

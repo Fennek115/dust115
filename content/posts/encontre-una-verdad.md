@@ -62,9 +62,9 @@ Lo más violento de estos shocks no es el shock en sí. Es que el discurso merit
 
 ---
 
-**Lo que no se sigue de todo lo anterior.**
+**Las conclusiones que no saco.**
 
-Si me detengo acá, el ensayo es un panfleto contra el discurso del esfuerzo. Hay muchos panfletos así. La mayoría son ciertos en lo que dicen y aun así me parecen insuficientes, porque dejan al lector en un lugar donde no tiene qué hacer mañana cuando se levante.
+Todo lo anterior, por sí solo, no pasa de panfleto contra el discurso del esfuerzo. Hay muchos así. La mayoría son ciertos en lo que dicen y aun así me parecen insuficientes, porque dejan al lector en un lugar donde no tiene qué hacer mañana cuando se levante.
 
 Quiero ser explícito sobre lo que no se sigue.
 

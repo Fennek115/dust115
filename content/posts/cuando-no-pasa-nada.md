@@ -100,7 +100,7 @@ Y la pregunta correcta no es cómo evitarlo, porque no se puede evitar. La pregu
 
 Mi respuesta honesta es: parcialmente.
 
-Lo que se puede hacer es introducir en el diseño elementos que generen presión adversarial *aunque no haya adversario presente*. Esa presión sintética cumple, dentro del sistema, la función que cumpliría una presión real, sin requerir la presencia del enemigo y sin pagar el costo de la brecha real.
+Se puede, en cambio, introducir en el diseño elementos que generen presión adversarial *aunque no haya adversario presente*. Esa presión sintética cumple, dentro del sistema, la función que cumpliría una presión real, sin requerir la presencia del enemigo y sin pagar el costo de la brecha real.
 
 Las técnicas concretas existen y están relativamente bien documentadas, aunque casi nadie las implementa con rigor porque cuestan dinero y generan fricción operativa sin retornos visibles inmediatos.
 
@@ -118,7 +118,7 @@ Cada una de estas prácticas es cara. Cada una genera fricción. Cada una compit
 
 ---
 
-**Lo que se puede sostener cuando se entiende esto.**
+**La posición que queda en pie.**
 
 Hay una posición operativa que se vuelve disponible cuando uno acepta que el bucle es estructural, que la comodidad es propiedad y no falla, y que el diseño completamente seguro contra estos efectos es imposible. La posición es la siguiente.
 
