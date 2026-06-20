@@ -114,13 +114,12 @@
   margin: 0 0 24px;
 }
 
-/* ── Post individual: columna única de lectura (--vm-read) ──
-   Todo el artículo —prosa, imágenes, figuras, tablas, código y diagramas—
-   vive dentro de la misma columna y respeta sus márgenes (sin breakout).
-   El contenedor del post se ajusta a --vm-read, así el header y el footer
-   (hijos directos de .container) se alinean solos con el texto. */
-.container:has(.post--single) { max-width: var(--vm-read); }
-.post--single { max-width: var(--vm-read); }
+/* ── Post individual: mismo ancho que todo el sitio (--vm-home) ──
+   El blog entero —Inicio, archivo y posts— comparte el ancho del
+   contenedor por defecto (--vm-home), así que el post NO lo estrecha:
+   header, prosa, imágenes, figuras, tablas, código, diagramas y footer
+   viven todos en la misma columna y se alinean solos. Sin breakout. */
+.post--single { max-width: 100%; }
 
 /* medios dentro del texto: nunca exceden la columna */
 .post--single .post-content :is(img, figure, .vm-figure, table, .highlight, pre, .mermaid) {
