@@ -1,26 +1,57 @@
 #!/usr/bin/env bash
-# Sincroniza la copia del tema en este sitio (themes/vulpine-marrow) con su repo
-# standalone, usando git subtree. El sitio conserva su copia vendorizada (la build
-# de GitHub Pages la necesita), pero podés publicar/traer cambios con un comando.
+# Publica la copia del tema de este sitio (themes/vulpine-marrow) en su repo
+# standalone (Fennek115/vulpine-marrow), por espejo (rsync), no por git subtree.
 #
-#   scripts/sync-theme.sh push   # sitio  -> repo del tema (publicar cambios)
-#   scripts/sync-theme.sh pull   # repo del tema -> sitio (traer cambios)
+# El sitio es la FUENTE DE VERDAD: editás el tema en themes/vulpine-marrow/ y la
+# build de GitHub Pages usa esa copia vendorizada. El repo del tema es solo una
+# COPIA DE DISTRIBUCIÓN publicada aparte; se actualiza a mano cuando querés sacar
+# un release.
 #
-# Antes de 'push' commiteá tus cambios del tema en el sitio (subtree push parte de
-# los commits ya hechos). El primer 'push' siembra el repo del tema (debe existir
-# vacío en GitHub).
+#   scripts/sync-theme.sh push ["mensaje de commit"]   # sitio -> repo del tema (publicar)
+#   scripts/sync-theme.sh pull                          # repo del tema -> sitio (traer)
+#
+# 'push' refleja themes/vulpine-marrow/ sobre un clon local del repo del tema,
+# commitea (te pedirá la passphrase PGP si firmás commits) y pushea por SSH.
+# 'pull' hace lo inverso (raro: solo si alguien editó el repo del tema directo);
+# después revisás y commiteás vos en el repo del SITIO.
+#
+# El clon local del repo del tema (por defecto ~/projects/vulpine-marrow) se puede
+# cambiar con la variable de entorno VM_THEME_CLONE.
 set -euo pipefail
 
 PREFIX="themes/vulpine-marrow"
-REMOTE="vm-theme"
+CLONE="${VM_THEME_CLONE:-$HOME/projects/vulpine-marrow}"
 URL="git@github.com:Fennek115/vulpine-marrow.git"
-BRANCH="main"
 
-cd "$(git rev-parse --show-toplevel)"
-git remote get-url "$REMOTE" >/dev/null 2>&1 || git remote add "$REMOTE" "$URL"
+ROOT="$(git rev-parse --show-toplevel)"
+SRC="$ROOT/$PREFIX"
+
+[ -d "$SRC" ] || { echo "error: no existe $SRC"; exit 1; }
+if [ ! -d "$CLONE/.git" ]; then
+  echo "error: no encuentro el clon del repo del tema en: $CLONE"
+  echo "cloná primero:  git clone $URL \"$CLONE\""
+  echo "o apuntá a otra ruta:  VM_THEME_CLONE=/ruta $0 $*"
+  exit 1
+fi
 
 case "${1:-}" in
-  push) git subtree push --prefix="$PREFIX" "$REMOTE" "$BRANCH" ;;
-  pull) git subtree pull --prefix="$PREFIX" "$REMOTE" "$BRANCH" --squash ;;
-  *)    echo "uso: $0 {push|pull}"; exit 1 ;;
+  push)
+    rsync -a --delete --exclude='.git/' "$SRC/" "$CLONE/"
+    cd "$CLONE"
+    git add -A
+    if git diff --cached --quiet; then
+      echo "nada que publicar: el repo del tema ya está al día."
+      exit 0
+    fi
+    git status --short
+    git commit -m "${2:-sync: actualizar tema desde el sitio}"
+    git push
+    echo "✓ publicado en $URL"
+    ;;
+  pull)
+    rsync -a --delete --exclude='.git/' "$CLONE/" "$SRC/"
+    echo "✓ traído al sitio en $PREFIX/. Revisá 'git status' y commiteá vos en el repo del sitio."
+    ;;
+  *)
+    echo "uso: $0 {push [\"mensaje\"] | pull}"; exit 1 ;;
 esac
