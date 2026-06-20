@@ -114,74 +114,16 @@
   margin: 0 0 24px;
 }
 
-/* ── Breakout reading layout (solo posts individuales) ──
-   La prosa se queda en una columna cómoda (--vm-read); las imágenes,
-   tablas, diagramas mermaid y bloques de código se ensanchan (--vm-wide).
-   El chrome (header/footer) se alinea a la columna de lectura.
+/* ── Post individual: columna única de lectura (--vm-read) ──
+   Todo el artículo —prosa, imágenes, figuras, tablas, código y diagramas—
+   vive dentro de la misma columna y respeta sus márgenes (sin breakout).
+   El contenedor del post se ajusta a --vm-read, así el header y el footer
+   (hijos directos de .container) se alinean solos con el texto. */
+.container:has(.post--single) { max-width: var(--vm-read); }
+.post--single { max-width: var(--vm-read); }
 
-   NB: single.html envuelve el markdown renderizado en un <div> sin clase
-   dentro de .post-content (para inyectar los anchors de headings), así que
-   el grid de columna+breakout vive en `.post-content > div`, no en los
-   hijos directos de .post-content. */
-.container:has(.post--single) { max-width: var(--vm-wide); }
-
-/* el artículo ocupa el contenedor ensanchado */
-.post--single { max-width: var(--vm-wide); }
-
-/* hijos directos NO-contenido (serie, título, meta, hr, cover, toc,
-   backlinks, paginación): centrados en la columna de lectura */
-.post--single > *:not(.post-content) {
-  max-width: var(--vm-read);
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* la portada rompe a lo ancho (igual que los medios del cuerpo) */
-.post--single > .post-cover { max-width: var(--vm-wide); }
-
-/* el wrapper de contenido sí es ancho; el grid interno controla a sus hijos */
-.post--single > .post-content { max-width: var(--vm-wide); }
-
-/* grid: 1fr | columna de lectura | 1fr → la prosa cae en la columna central */
-.post--single .post-content > div {
-  display: grid;
-  grid-template-columns: 1fr min(var(--vm-read), 100%) 1fr;
-  column-gap: 0;
-}
-.post--single .post-content > div > * { grid-column: 2; }
-
-/* elementos que rompen a lo ancho (columna completa, tope --vm-wide) */
-.post--single .post-content > div > :is(
-  figure, .vm-figure, table, .highlight, pre, pre.mermaid, .mermaid, img
-) {
-  grid-column: 1 / -1;
-  width: 100%;
-  max-width: var(--vm-wide);
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* header y footer se mantienen alineados a la columna de lectura */
-.container:has(.post--single) > .header--vm,
-.container:has(.post--single) > footer {
-  max-width: var(--vm-read);
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* ── Tipografía de lectura: SÓLO el cuerpo de los posts en proporcional ──
-   Títulos (h1 fuera de .post-content), código, UI y el Inicio siguen en
-   Fira Code. base/code.css no fija familia en code/pre (heredan del body),
-   así que hay que re-afirmar mono adentro de la prosa. */
-.post--single .post-content {
-  font-family: var(--vm-font-sans);
-  font-size: 17px;
-  line-height: 1.7;
-}
-.post--single .post-content :is(h2, h3, h4, h5, h6),
-.post--single .post-content :is(code, kbd, samp, pre, tt),
-.post--single .post-content .highlight,
-.post--single .post-content .chroma {
-  font-family: var(--vm-font-mono);
+/* medios dentro del texto: nunca exceden la columna */
+.post--single .post-content :is(img, figure, .vm-figure, table, .highlight, pre, .mermaid) {
+  max-width: 100%;
 }
 

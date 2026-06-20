@@ -167,10 +167,11 @@
       img.src = el.currentSrc || el.src;
       img.alt = el.alt || "";
       img.draggable = false;
-      // aspecto del original (ya cargado en la página) → centrado correcto y
-      // síncrono; fallback al rect mostrado (p. ej. SVG sin tamaño intrínseco)
-      let aw = el.naturalWidth, ah = el.naturalHeight;
-      if (!aw || !ah) { const r = el.getBoundingClientRect(); aw = r.width; ah = r.height; }
+      // aspecto del RECT renderizado del original (refleja la relación real para
+      // raster y SVG; naturalWidth puede ser el default falso 300×150 en SVG)
+      const r = el.getBoundingClientRect();
+      let aw = r.width, ah = r.height;
+      if (!aw || !ah) { aw = el.naturalWidth; ah = el.naturalHeight; }
       sizeTo(img, aw, ah);
       return img;
     }

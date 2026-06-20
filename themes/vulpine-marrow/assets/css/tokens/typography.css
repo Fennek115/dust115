@@ -9,12 +9,10 @@
   /* ---- Family ---- */
   --vm-font-mono: 'Fira Code', 'JetBrains Mono', 'Monaco', 'Consolas',
                   'Ubuntu Mono', monospace;
-  /* Proporcional sólo para el cuerpo de lectura de los posts; el chrome,
-     títulos, código y UI siguen en mono. */
-  --vm-font-sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI',
-                  Roboto, Helvetica, Arial, sans-serif;
+  /* Single-family system: there is no serif / sans. Alias kept so
+     consumers that ask for a "body" or "display" font still resolve. */
   --font-mono:    var(--vm-font-mono);
-  --font-body:    var(--vm-font-sans);
+  --font-body:    var(--vm-font-mono);
   --font-display: var(--vm-font-mono);
 
   /* ---- Weights ---- */

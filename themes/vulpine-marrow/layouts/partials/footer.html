@@ -15,7 +15,9 @@
 {{ $cp := resources.Get "js/code.js" | js.Build }}
 {{ $lb := resources.Get "js/lightbox.js" | js.Build }}
 
-{{ $bundle := slice $menu $cp $lb | resources.Concat "bundle.js" | resources.Minify }}
+{{/* fingerprint: el nombre del bundle cambia con el contenido → invalida la caché
+     del navegador cuando se edita el JS (si no, queda cacheado bundle.min.js). */}}
+{{ $bundle := slice $menu $cp $lb | resources.Concat "bundle.js" | resources.Minify | fingerprint }}
 
 <script type="text/javascript" src="{{ $bundle.RelPermalink }}"></script>
 
