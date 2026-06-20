@@ -26,6 +26,7 @@
 
 <!-- Header -->
 <div class="hdr">
+  <button class="hdr-burger" onclick="toggleSidebarDrawer()" aria-label="Abrir menú de navegación" title="Menú">☰</button>
   <a class="hdr-home" href="../" title="Volver a dust115">‹ inicio</a>
   <div class="hdr-logo">
     <span class="hdr-sigil">⬡</span>
@@ -84,6 +85,7 @@
 
 <!-- Body -->
 <div class="body">
+  <div class="sb-backdrop" id="sbBackdrop" onclick="closeSidebarDrawer()" aria-hidden="true"></div>
   <div class="sidebar" id="sidebar">
     <div class="sb-top">
       <span class="sb-label">NAV_MENU</span>

@@ -33,7 +33,8 @@ import {
 import { wireSearch, doSearch, refreshAllCmds } from './search.js';
 import { exportSession, importSession } from './session.js';
 import {
-  toggleShortcuts, toggleSidebar, initTheme, toggleTheme, wireKeyboard,
+  toggleShortcuts, toggleSidebar, toggleSidebarDrawer, closeSidebarDrawer,
+  initTheme, toggleTheme, wireKeyboard,
   initTimers, wireJumpTop, initOrb,
 } from './ui.js';
 
@@ -59,7 +60,7 @@ Object.assign(window, {
   // sesión
   exportSession, importSession,
   // chrome / vars
-  toggleShortcuts, toggleSidebar, toggleTheme, toggleVarsBar,
+  toggleShortcuts, toggleSidebar, toggleSidebarDrawer, closeSidebarDrawer, toggleTheme, toggleVarsBar,
   // resetVars también refresca los comandos visibles (como el original)
   resetVars: () => { resetVars(); refreshAllCmds(); },
   // helpers globales

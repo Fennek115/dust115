@@ -11,6 +11,15 @@ export function toggleShortcuts() {
   $('shortcutPanel').classList.toggle('on');
 }
 
+// Drawer del sidebar en móvil (off-canvas). En desktop el sidebar es fijo;
+// en pantallas chicas se abre/cierra con la hamburguesa del header + backdrop.
+export function toggleSidebarDrawer() {
+  document.body.classList.toggle('sb-drawer-open');
+}
+export function closeSidebarDrawer() {
+  document.body.classList.remove('sb-drawer-open');
+}
+
 export function toggleSidebar() {
   const sb = $('sidebar');
   const btn = $('sbCollapseBtn');

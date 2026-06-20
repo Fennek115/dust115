@@ -114,3 +114,43 @@
   margin: 0 0 24px;
 }
 
+/* ── Breakout reading layout (solo posts individuales) ──
+   La prosa se queda en una columna cómoda (~760px); las imágenes,
+   tablas, diagramas mermaid y bloques de código se ensanchan (~1040px).
+   El chrome (header/footer) se alinea a la columna de lectura. */
+.container:has(.post--single) { max-width: 1040px; }
+
+/* el artículo ocupa el contenedor ensanchado */
+.post--single { max-width: 1040px; }
+
+/* prosa y metadatos: columna de lectura centrada */
+.post--single > *,
+.post--single .post-content > * {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* el wrapper de contenido sí es ancho; sus hijos los controla la regla de arriba */
+.post--single > .post-content { max-width: 1040px; }
+
+/* elementos que rompen a lo ancho */
+.post--single > .post-cover,
+.post--single .post-content > .vm-figure,
+.post--single .post-content > figure,
+.post--single .post-content > table,
+.post--single .post-content > .highlight,
+.post--single .post-content > pre,
+.post--single .post-content > pre.mermaid,
+.post--single .post-content > .mermaid {
+  max-width: 1040px;
+}
+
+/* header y footer se mantienen alineados a la columna de lectura */
+.container:has(.post--single) > .header--vm,
+.container:has(.post--single) > footer {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+

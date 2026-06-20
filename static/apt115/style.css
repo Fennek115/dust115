@@ -1112,6 +1112,17 @@ body.light-mode .hdr-home{color:var(--text2);background:rgba(145,65,172,.04);bor
 body.light-mode .hdr-home:hover{color:var(--accent);border-color:var(--accent)}
 
 /* ── RESPONSIVE ── */
+/* ── Drawer chrome móvil: hamburguesa + backdrop ── */
+.hdr-burger{
+  display:none;align-items:center;justify-content:center;
+  background:rgba(145,65,172,.10);border:1px solid rgba(145,65,172,.35);
+  color:var(--purple);border-radius:6px;font-size:16px;line-height:1;
+  padding:4px 9px;cursor:pointer;flex-shrink:0;
+}
+.hdr-burger:active{transform:scale(.96)}
+.sb-backdrop{display:none;position:fixed;inset:0;z-index:990;background:rgba(0,0,0,.55)}
+body.sb-drawer-open .sb-backdrop{display:block}
+
 @media (max-width:1280px){
   .hdr{padding:6px 12px;gap:8px}
 }
@@ -1125,10 +1136,22 @@ body.light-mode .hdr-home:hover{color:var(--accent);border-color:var(--accent)}
   .vars-bar-inner{gap:5px}
   .row{flex-wrap:wrap}
   .row-actions{flex-wrap:wrap}
+
+  /* sidebar -> drawer off-canvas (se abre con la hamburguesa) */
+  .hdr-burger{display:inline-flex}
+  .sidebar{
+    position:fixed;top:0;left:0;height:100%;
+    width:min(280px,84vw);min-width:0;
+    transform:translateX(-100%);transition:transform .22s ease;
+    z-index:1000;box-shadow:var(--shadow);overflow-y:auto;
+  }
+  body.sb-drawer-open .sidebar{transform:translateX(0)}
+  .sidebar.collapsed{width:min(280px,84vw);min-width:0}  /* sin colapso-icono en móvil */
+  .main{width:100%}
+  #histPanel{left:0}  /* el sidebar ya no ocupa flujo */
 }
 @media (max-width:560px){
-  .sidebar{position:absolute;z-index:120;height:100%;box-shadow:var(--shadow)}
   .hdr-home{font-size:10px;padding:3px 7px}
-  #favPanel,#intelPanel,#notesPanel{width:100%;left:0;right:0}
+  #favPanel,#intelPanel,#notesPanel,#histPanel{width:100%;left:0;right:0}
+  #shortcutPanel{width:min(290px,94vw);right:8px;left:auto}
 }
-</style>

@@ -57,12 +57,12 @@
 .vm-figure figcaption {
   margin-top: 8px;
   font-size: .85em;
-  color: var(--vm-text-2);
+  color: var(--vm-text-1);
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
-.vm-figure__credit { color: var(--vm-text-3); font-size: .9em; }
+.vm-figure__credit { color: var(--vm-text-2); font-size: .9em; }
 
 /* badge — etiqueta inline; el color lo da currentColor (borde + texto) */
 .vm-badge {
