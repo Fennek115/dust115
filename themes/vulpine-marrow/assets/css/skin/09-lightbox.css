@@ -1,0 +1,103 @@
+/* ── Lightbox (zoom + pan) para imágenes, SVG y diagramas mermaid ──
+   Lógica en assets/js/lightbox.js. Estética terminal-clean: fondo oscuro,
+   barra violeta, Fira Code. */
+
+/* cursor "ampliar" en los disparadores dentro de un post */
+.post--single .post-content :is(img, svg),
+.post--single .post-content pre.mermaid {
+  cursor: zoom-in;
+}
+
+/* mientras hay overlay abierto, se bloquea el scroll del documento */
+html.vm-lightbox-open,
+html.vm-lightbox-open body {
+  overflow: hidden;
+}
+
+.vm-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: color-mix(in srgb, var(--vm-bg-blog) 90%, #000);
+  overflow: hidden;
+  animation: vm-lightbox-in var(--vm-dur, .15s) var(--vm-ease, ease);
+}
+.vm-lightbox[hidden] { display: none; }
+
+@keyframes vm-lightbox-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vm-lightbox { animation: none; }
+}
+
+/* capa transformable (translate + scale lo maneja el JS) */
+.vm-lightbox__stage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  will-change: transform;
+  cursor: grab;
+  touch-action: none;
+}
+.vm-lightbox__stage.is-grabbing { cursor: grabbing; }
+.vm-lightbox__stage > * {
+  display: block;
+  max-width: 90vw;
+  max-height: 86vh;
+  border-radius: var(--vm-radius-sm, 4px);
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.vm-lightbox__stage > svg {
+  background: var(--vm-bg-blog);
+}
+
+/* barra de herramientas */
+.vm-lightbox__bar {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+  display: flex;
+  gap: 8px;
+}
+.vm-lightbox__bar button {
+  font-family: 'Fira Code', monospace;
+  font-size: 16px;
+  line-height: 1;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  color: var(--vm-text-pure, #fff);
+  background: color-mix(in srgb, var(--vm-accent) 22%, transparent);
+  border: 1px solid color-mix(in srgb, var(--vm-accent) 55%, transparent);
+  border-radius: var(--vm-radius-sm, 4px);
+  cursor: pointer;
+  transition: background var(--vm-dur-fast, .12s) var(--vm-ease, ease);
+}
+.vm-lightbox__bar button:hover {
+  background: color-mix(in srgb, var(--vm-accent) 45%, transparent);
+}
+.vm-lightbox__bar button:focus-visible {
+  outline: none;
+  box-shadow: var(--vm-focus-ring, 0 0 0 2px rgba(145,65,172,.4));
+}
+
+/* caption (toma el figcaption si existe) */
+.vm-lightbox__cap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 12px 16px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--vm-text-3, #aaa);
+  background: linear-gradient(to top, color-mix(in srgb, var(--vm-bg-blog) 85%, #000), transparent);
+  pointer-events: none;
+}

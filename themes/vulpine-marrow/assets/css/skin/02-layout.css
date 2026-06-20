@@ -115,41 +115,56 @@
 }
 
 /* ── Breakout reading layout (solo posts individuales) ──
-   La prosa se queda en una columna cómoda (~760px); las imágenes,
-   tablas, diagramas mermaid y bloques de código se ensanchan (~1040px).
-   El chrome (header/footer) se alinea a la columna de lectura. */
-.container:has(.post--single) { max-width: 1040px; }
+   La prosa se queda en una columna cómoda (--vm-read); las imágenes,
+   tablas, diagramas mermaid y bloques de código se ensanchan (--vm-wide).
+   El chrome (header/footer) se alinea a la columna de lectura.
+
+   NB: single.html envuelve el markdown renderizado en un <div> sin clase
+   dentro de .post-content (para inyectar los anchors de headings), así que
+   el grid de columna+breakout vive en `.post-content > div`, no en los
+   hijos directos de .post-content. */
+.container:has(.post--single) { max-width: var(--vm-wide); }
 
 /* el artículo ocupa el contenedor ensanchado */
-.post--single { max-width: 1040px; }
+.post--single { max-width: var(--vm-wide); }
 
-/* prosa y metadatos: columna de lectura centrada */
-.post--single > *,
-.post--single .post-content > * {
-  max-width: 760px;
+/* hijos directos NO-contenido (serie, título, meta, hr, cover, toc,
+   backlinks, paginación): centrados en la columna de lectura */
+.post--single > *:not(.post-content) {
+  max-width: var(--vm-read);
   margin-left: auto;
   margin-right: auto;
 }
 
-/* el wrapper de contenido sí es ancho; sus hijos los controla la regla de arriba */
-.post--single > .post-content { max-width: 1040px; }
+/* la portada rompe a lo ancho (igual que los medios del cuerpo) */
+.post--single > .post-cover { max-width: var(--vm-wide); }
 
-/* elementos que rompen a lo ancho */
-.post--single > .post-cover,
-.post--single .post-content > .vm-figure,
-.post--single .post-content > figure,
-.post--single .post-content > table,
-.post--single .post-content > .highlight,
-.post--single .post-content > pre,
-.post--single .post-content > pre.mermaid,
-.post--single .post-content > .mermaid {
-  max-width: 1040px;
+/* el wrapper de contenido sí es ancho; el grid interno controla a sus hijos */
+.post--single > .post-content { max-width: var(--vm-wide); }
+
+/* grid: 1fr | columna de lectura | 1fr → la prosa cae en la columna central */
+.post--single .post-content > div {
+  display: grid;
+  grid-template-columns: 1fr min(var(--vm-read), 100%) 1fr;
+  column-gap: 0;
+}
+.post--single .post-content > div > * { grid-column: 2; }
+
+/* elementos que rompen a lo ancho (columna completa, tope --vm-wide) */
+.post--single .post-content > div > :is(
+  figure, .vm-figure, table, .highlight, pre, pre.mermaid, .mermaid, img
+) {
+  grid-column: 1 / -1;
+  width: 100%;
+  max-width: var(--vm-wide);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* header y footer se mantienen alineados a la columna de lectura */
 .container:has(.post--single) > .header--vm,
 .container:has(.post--single) > footer {
-  max-width: 760px;
+  max-width: var(--vm-read);
   margin-left: auto;
   margin-right: auto;
 }
