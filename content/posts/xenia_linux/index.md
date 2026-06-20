@@ -70,7 +70,7 @@ Esto es, ante todo, una carta de amor. A la comunidad que crea cosas increíbles
 
 ## Antes del zorro: qué es GNU/Linux y por qué importa
 
-![Tux, el pingüino de Linux, junto al ñu de GNU](/dust115/img/xenia/fossmascot_Gnu-and-penguin-color.png)
+![Tux, el pingüino de Linux, junto al ñu de GNU](fossmascot_Gnu-and-penguin-color.png)
 *Tux y el ñu de GNU: las dos mitades de un sistema operativo libre. Arte bajo dominio público.*
 
 Para entender a LinuxFox hay que entender el mundo donde nació. Linux no es un programa: es el corazón de un sistema operativo, la pieza de software que permite que el hardware de una computadora se comunique con todo lo demás. Lo creó **Linus Torvalds**, un estudiante finlandés de 21 años, en 1991. Su mensaje al mundo fue desarmantemente modesto: «Estoy haciendo un sistema operativo (gratuito) (solo un hobby, no será grande y profesional como gnu)».
@@ -81,7 +81,7 @@ Para 1992, GNU tenía compiladores, editores y herramientas, pero le faltaba un 
 
 Conviene señalar una distinción filosófica que resuena en toda esta historia. La FSF de Stallman entiende el software libre como un **imperativo ético**: el software no libre es un problema social porque niega libertades fundamentales a los usuarios. La **Open Source Initiative** (OSI), fundada en 1998 por Eric S. Raymond y Bruce Perens, comparte casi todo el software pero cambia el enfoque: para la OSI, el código abierto es una **metodología práctica superior**, no una cuestión moral. Ambas tradiciones coexisten bajo el paraguas FOSS (Free and Open Source Software), pero la tensión entre ética y pragmatismo marca toda la cultura del software libre, incluida la manera en que sus comunidades adoptan mascotas y símbolos.
 
-![Sticker de Xenia con software propietario](/dust115/img/xenia/sticker_xenia_proprietary_artist-JF049.png)
+![Sticker de Xenia con software propietario](sticker_xenia_proprietary_artist-JF049.png)
 *Xenia tiene opiniones sobre el software propietario. Sticker por JF049.*
 
 ---
@@ -92,7 +92,7 @@ La historia de LinuxFox comienza con un concurso. A principios de 1996, la comun
 
 **Larry Ewing**, programador de la Universidad Texas A&M, tomó la descripción y creó a **Tux** usando GIMP 0.54 en una máquina 486 DX2/50 con pantalla de 8 bits. En junio de 1996, James Hughes propuso el nombre «Tux» —por **(T)orvalds (U)ni(X)**— y porque los pingüinos parecen llevar esmoquin (*tuxedo*).
 
-![Tux, el pingüino original de Larry Ewing](/dust115/img/xenia/tux_artist-LarryEwing.png)
+![Tux, el pingüino original de Larry Ewing](tux_artist-LarryEwing.png)
 *Tux, creado por Larry Ewing con GIMP 0.54. Libre para uso con atribución.*
 
 Pero Tux no fue la única opción. Se realizaron al menos tres rondas de votación durante 1996, y la más grande duró casi un año completo. Cuando los resultados finales se registraron a finales de mayo de 1997, el panorama era este:
@@ -109,10 +109,10 @@ Un dato que suele olvidarse: **técnicamente, Tux no ganó la votación**. El lo
 
 Y en tercer lugar, con una «impresionante remontada desde atrás» según Roelofs, estaba la propuesta de **Alan T. Mackey**: un zorro antropomórfico con cabello rubio, gafas, jeans y una camiseta negra con «LINUX» en verde. Roelofs lo describió como «una mascota de Linux con significado real (y actitud real)». Mackey lo presentó en una página titulada **«But Penguins aren't even Furry!»** («¡Pero si los pingüinos ni siquiera son peludos!»), alojada en el sitio web de su hermano Ed Mackey.
 
-![El LinuxFox original de 1996 por Alan Mackey](/dust115/img/xenia/Xenia_the_Linux_Fox_1996_by_Alan_M.gif)
+![El LinuxFox original de 1996 por Alan Mackey](Xenia_the_Linux_Fox_1996_by_Alan_M.gif)
 *El dibujo original de 1996. Un zorro con actitud, gafas y una camiseta de Linux. Dibujado en una Amiga con ratón. CC0 / Dominio público.*
 
-![Captura de la página original de Ed Mackey en la Wayback Machine](/dust115/img/xenia/pag_EdMackey_waybackmachine_penguinnotfurry.png)
+![Captura de la página original de Ed Mackey en la Wayback Machine](pag_EdMackey_waybackmachine_penguinnotfurry.png)
 *«But Penguins aren't even Furry!» — La página original tal como fue capturada por la Wayback Machine el 25 de junio de 1997.*
 
 La ironía tecnológica de la creación es extraordinaria. Al Mackey dibujó a LinuxFox el **14 de julio de 1996** en una **computadora Amiga**, usando solo un ratón. **Al día siguiente**, el 15 de julio, Escom AG —la empresa alemana que había comprado los restos de Commodore y la marca Amiga— declaró la bancarrota. Mackey creó arte para un sistema operativo naciente en una plataforma que estaba siendo literalmente enterrada mientras él dibujaba. La Amiga, célebre por sus capacidades gráficas avanzadas y su multitarea elegante, desaparecía del mercado justo cuando un artista la usaba para imaginar el futuro de otro sistema operativo.
@@ -125,14 +125,14 @@ La ironía tecnológica de la creación es extraordinaria. Al Mackey dibujó a L
 
 Después de perder contra Tux, LinuxFox desapareció casi por completo. El personaje apareció brevemente en 1997 en una camiseta dibujada por Mackey que mostraba a «Nervick», la fursona de Tomas Manley. En 1999, fue reutilizado como logotipo para **The fOX Project** (foxproject.org), un proyecto efímero. Y después: silencio absoluto durante dos décadas.
 
-![Captura de la página personal furry de Al Mackey](/dust115/img/xenia/sreenshot_mackeyal_personalfurrypage.png)
+![Captura de la página personal furry de Al Mackey](sreenshot_mackeyal_personalfurrypage.png)
 *La página personal de Al Mackey (Nanimoose/ATM) en la comunidad furry, donde LinuxFox era solo uno más de sus personajes.*
 
 Alan Mackey, conocido en la comunidad furry como **Nanimoose** o simplemente **ATM** (sus iniciales), continuó su carrera. Trabajó en **Hewlett-Packard** entre junio de 1998 y junio de 2000, y luego en **Virage** de octubre de 2000 a agosto de 2002. Vendió un CD-ROM de arte a través de Rabbit Valley, un distribuidor de la comunidad furry, con más de 200 ilustraciones y una hora de música. Su trabajo artístico quedó preservado en el **Yerf Historical Archive**, donde LinuxFox aparecía catalogado como «A hacker fox! My entry for the Linux logo competition» («¡Un zorro hacker! Mi entrada para la competencia del logo de Linux»).
 
 La página original en el sitio de Ed Mackey desapareció cuando el dominio expiró. Pero la **Wayback Machine de Internet Archive** —ese proyecto monumental de Brewster Kahle que ha preservado más de un billón de páginas web— la había capturado el **25 de junio de 1997**. Sin esa instantánea digital, la historia que sigue probablemente nunca habría ocurrido.
 
-![Xenia comiendo pizza](/dust115/img/xenia/xenia_eatingpizza_luavixen.jpeg)
+![Xenia comiendo pizza](xenia_eatingpizza_luavixen.jpeg)
 *Xenia en su hábitat natural: comiendo pizza frente a la pantalla. Arte por luavixen.*
 
 ---
@@ -141,10 +141,10 @@ La página original en el sitio de Ed Mackey desapareció cuando el dominio expi
 
 El **20 de noviembre de 2019**, una artista y diseñadora gráfica trans que usaba el nombre **cathodegaytube** (nombre real: **Finley**, también identificada como Finley Sinclaire) publicó un tuit que cambiaría la historia de LinuxFox para siempre. Su novia, **Amy Wright** (@AmyWrightDev), le había mostrado la página archivada del zorro de Linux. Finley, asumiendo que el personaje era femenino, lo redibujó como una chica zorro y escribió: «Aparentemente, la mascota de Linux casi fue una chica zorro genial y todo el mundo parece haberla olvidado, así que naturalmente la dibujé».
 
-![El rediseño de cathodegaytube que lo empezó todo](/dust115/img/xenia/redising_by-cathode.jpeg)
+![El rediseño de cathodegaytube que lo empezó todo](redising_by-cathode.jpeg)
 *El rediseño de noviembre de 2019 por cathodegaytube. Un dibujo espontáneo que resucitó un personaje de 23 años.*
 
-![Tweet original de cathodegaytube](/dust115/img/xenia/tweet_cathode_reedit_nov20-2019-andoriginthenamexenia.png)
+![Tweet original de cathodegaytube](tweet_cathode_reedit_nov20-2019-andoriginthenamexenia.png)
 *El tweet del 20 de noviembre de 2019. Amy Wright propuso el nombre «Xenia» ese mismo día.*
 
 Lo que Finley no sabía era que Al Mackey había concebido originalmente al personaje como masculino. Pero algo notable había ocurrido en el diseño original: Mackey lo había dibujado **deliberadamente andrógino**. Esta ambigüedad, que en 1996 era simplemente una elección estética de un artista furry, se convertiría en el eje narrativo más poderoso de toda esta historia.
@@ -163,10 +163,10 @@ Y luego:
 
 > «¡Y claro, la hiciste trans! Sí, siéntete libre de publicar estos emails también. Xenia parece un nombre muy apropiado. Acabo de leer *Mythos* de Stephen Fry y tiene mucho que decir sobre el antiguo concepto griego de Xenia. Qué coincidencia tan rara.»
 
-![Capturas del hilo de Twitter con los emails de Al Mackey - Parte 1](/dust115/img/xenia/hilotwitter_mail_cathodegaytube_part1.png)
+![Capturas del hilo de Twitter con los emails de Al Mackey - Parte 1](hilotwitter_mail_cathodegaytube_part1.png)
 *Los emails de Al Mackey publicados por cathodegaytube durante el Mes del Orgullo de 2020.*
 
-![Capturas del hilo de Twitter con los emails de Al Mackey - Parte 2](/dust115/img/xenia/hilotwitter_mail_cathodegaytube_part2.png)
+![Capturas del hilo de Twitter con los emails de Al Mackey - Parte 2](hilotwitter_mail_cathodegaytube_part2.png)
 *Al Mackey bendice la reinterpretación de su personaje y conecta el nombre con el concepto griego de hospitalidad.*
 
 La referencia a **Stephen Fry** no es menor. *Mythos* (2017) es un libro de divulgación sobre mitología griega que dedica atención especial al concepto de **ξενία** (xenía): la hospitalidad sagrada, el deber religioso de recibir al extranjero con generosidad. Zeus era invocado como **Zeus Xenios**, protector de los extraños y los viajeros. En la Grecia antigua, violar la xenía era una ofensa contra los dioses mismos.
@@ -177,7 +177,7 @@ A partir de este momento, la comunidad adoptó el nombre y los pronombres femeni
 
 > *Uno está en constante transición. Lo estático es la muerte. Desde que empecé a usar un ordenador en el lejano Windows 98, siempre me sorprendió cómo las comunidades de internet se ayudan entre sí: tutoriales, guías, foros en español de dudosa procedencia que de alguna forma te enseñaban a formatear una PC. Esa transición que muchos hacemos — puede que algo nerd — de cambiar de Windows a Linux, requiere un cambio de mentalidad total. Algo que ocurre progresivamente hasta que lo aceptas y es complicado volver atrás. No digo que sea lo mismo que una transición de identidad. Pero creo que todos entendemos ese momento en que dejas de ser lo que otros esperan y empiezas a ser lo que necesitas ser. Aunque no pertenezca a la comunidad trans, creo que coincidimos en ciertos puntos, igual que pasa con el Open Source y el Software Libre: diferentes en concepto, similares en lo esencial.* — Dust
 
-![Xenia is back — arte por Flying Hyena](/dust115/img/xenia/xenia_isback_artist-flyinghyena.jpeg)
+![Xenia is back — arte por Flying Hyena](xenia_isback_artist-flyinghyena.jpeg)
 *Xenia is back. Arte por Flying Hyena, 2021. Más de 800 retuits y 1.800 likes.*
 
 ---
@@ -188,47 +188,47 @@ Lo que siguió fue una avalancha creativa. La combinación de una historia emoti
 
 En mayo de 2020, antes incluso del hilo de los emails, artistas del Fediverso como **FirstProgenitor** (mastodon.art), **HeatherHorns** (plush.city) y **Marbles** (en la ya desaparecida instancia Snouts Online) crearon versiones simplificadas de Xenia que **Shadow8t4/Alice** (bark.lgbt) convirtió en pegatinas físicas. Esta cadena de producción colaborativa entre instancias del Fediverso es un ejemplo perfecto de creación cultural descentralizada.
 
-![Xenia por Chimmie — versión Skylar](/dust115/img/xenia/artist-Chimmie_-_Xenia_the_Linux_Vixen_-_Skylar.svg.png)
+![Xenia por Chimmie — versión Skylar](artist-Chimmie_-_Xenia_the_Linux_Vixen_-_Skylar.svg.png)
 *Xenia the Linux Vixen por Chimmie, la contribuyente más prolífica en Wikimedia Commons con 35 archivos bajo CC BY-SA 4.0.*
 
-![Hoja de referencia de RiniDisc](/dust115/img/xenia/RiniDisc_Reference.png)
+![Hoja de referencia de RiniDisc](RiniDisc_Reference.png)
 *Hoja de referencia del personaje por RiniDisc. El diseño que muchos artistas usan como base.*
 
 La comunidad artística de Xenia creció rápidamente. **Cathodegaytube (Finley Sinclaire)** sigue produciendo arte y vendiendo merchandise en Redbubble. **RiniDisc**, activa en meow.social y Tumblr, creó emotes ampliamente usados y tiene 8 archivos en Wikimedia Commons. **Flying_Hyena** produjo la pieza de abril de 2021 que superó los 800 retuits. **Chimmie** es la contribuyente más prolífica en Wikimedia Commons con 35 archivos. **Neotheta** (uno de mis artistas favoritos) trabaja desde Fur Affinity y finfur.net. **DanCrescentWolf** distribuye fan art en Fur Affinity. **The Green Herring** creó arte ANSI de Xenia en formato VGA 9×16 desde Neocities. **QuestForTori** diseñó iconos de logotipo liberados como gratuitos con atribución. **Nickisdoge** creó un modelo 3D low-poly en Blender e incluso comisionó un títere físico. Y **David Revoy**, artista del cómic libre *Pepper & Carrot*, incluyó a Xenia en su pieza «Dorlotons-Degooglisons».
 
-![Arte por bnnuyblood](/dust115/img/xenia/artist-bnnuyblood_xenia.jpg)
+![Arte por bnnuyblood](artist-bnnuyblood_xenia.jpg)
 *Xenia por bnnuyblood.*
 
-![Arte por cawfeecrow](/dust115/img/xenia/artist-cawfeecrow_xenia.webp)
+![Arte por cawfeecrow](artist-cawfeecrow_xenia.webp)
 *Xenia por cawfeecrow.*
 
-![Pixel art original de Xenia por The Green Herring](/dust115/img/xenia/pixelartXENIA_OG_artist-thegreenherring.png)
+![Pixel art original de Xenia por The Green Herring](pixelartXENIA_OG_artist-thegreenherring.png)
 *Xenia en pixel art ANSI por The Green Herring. La estética retro de terminal sigue viva.*
 
 El arte de Xenia ha aparecido en prácticamente todas las plataformas imaginables: Twitter, Mastodon, Fur Affinity, DeviantArt, Tumblr, Pixiv, Newgrounds, Neocities, e621, OpenGameArt (con sprites bajo CC0), Sketchfab (modelos 3D), e incluso como skin de Winamp y arte ASCII para neofetch. Se han producido peluches, pegatinas físicas, títeres y camisetas. En enero de 2021, el canal de YouTube **Linux Lounge** publicó «The Story of Xenia – Linux's Forgotten Mascot!», consolidando la historia para audiencias más amplias.
 
-![Meme: Xenia hacker](/dust115/img/xenia/meme_xeniahacker_artist-JmesFostr.png)
+![Meme: Xenia hacker](meme_xeniahacker_artist-JmesFostr.png)
 *Xenia en modo hacker. Arte por JmesFostr.*
 
-![Meme: Xenia ¿quieres?](/dust115/img/xenia/meme_xenia_quieres_artist-wafermouse1.jpeg)
+![Meme: Xenia ¿quieres?](meme_xenia_quieres_artist-wafermouse1.jpeg)
 *¿Quieres usar Linux? Arte por wafermouse.*
 
-![Meme: Xenia opiniones](/dust115/img/xenia/meme_xenia_artist-Koko_opinions.png)
+![Meme: Xenia opiniones](meme_xenia_artist-Koko_opinions.png)
 *Xenia tiene opiniones. Arte por Koko.*
 
-![Meme: techbros](/dust115/img/xenia/meme_techbros_artist-apt.png)
+![Meme: techbros](meme_techbros_artist-apt.png)
 *La comunidad tiene sentido del humor. Arte por apt.*
 
-![Sticker: RTFM](/dust115/img/xenia/sticker_xenia_rtfm_artist-JF049.png)
+![Sticker: RTFM](sticker_xenia_rtfm_artist-JF049.png)
 *RTFM (Read The Fucking Manual). Cultura hacker pura. Sticker por JF049.*
 
-![Sticker: fuck nvidia](/dust115/img/xenia/sticker_xenia_fuck-nvidia_artist-JF049.png)
+![Sticker: fuck nvidia](sticker_xenia_fuck-nvidia_artist-JF049.png)
 *Un clásico de la comunidad Linux. Sticker por JF049.*
 
-![Sticker: no idea what I'm doing](/dust115/img/xenia/sticker_xenia_no-idea_artist-JF049.png)
+![Sticker: no idea what I'm doing](sticker_xenia_no-idea_artist-JF049.png)
 *Todos hemos estado ahí. Sticker por JF049.*
 
-![Sticker: Xenia en server room](/dust115/img/xenia/artist-JF049_sticker_xenia_hot_serverroom.png)
+![Sticker: Xenia en server room](artist-JF049_sticker_xenia_hot_serverroom.png)
 *Xenia en una sala de servidores: el cuarto de servidores y la molesta termodinamica. Sticker por JF049.*
 
 ---
@@ -247,7 +247,7 @@ El **repositorio Git de Xenia** en git.gay/Efi/xenia, mantenido por **Efi (Efime
 
 > *Desde la lógica actual de rendimiento, lo que hace la comunidad FOSS parece absurdo. Un grupo enorme de personas, en su tiempo libre, sin ningún ánimo de lucro, sin que nadie les pague, sin absolutamente nada como motivación excepto las ganas de hacer cosas, crean en comunidad desde sistemas operativos hasta arte de un zorro con polera de Linux. Es ese concepto de libertad que dice Stallman en su libro «Software Libre para una Sociedad Libre»: no es libertad de gratis, es libertad de expresión. Tener la libertad para expresarse independientemente de lo que uno es o crea. Lo hago porque quiero y puedo. ¿Quieres usar mis herramientas para tus fines? Claro, hazlo. Ni siquiera tienes que mencionarme, porque el objetivo nunca fue el reconocimiento. Es la libertad de acción en su máxima expresión. Y es algo que la humanidad mantiene vivo desde la prehistoria: no cazamos mamuts porque fuera fácil. No se viajó a la luna por una necesidad urgente. Se hizo porque podemos.* — Dust
 
-![Xenia y Tux juntos](/dust115/img/xenia/artist-le-musky_xenia-tux.webp)
+![Xenia y Tux juntos](artist-le-musky_xenia-tux.webp)
 *Xenia y Tux: el pingüino y la mascota alternativa, juntos al fin. Arte por le-musky.*
 
 ---
@@ -258,24 +258,24 @@ Xenia no existe en un vacío. La [[de-la-inercia-a-la-libertad|cultura hacker ti
 
 El primer precedente significativo data de **1976**, cuando el dibujante **Phil Foglio** creó pequeños demonios rojos trepando por una computadora PDP-11 para una reunión de UNIX. Representaban los «daemons» de Unix: procesos que corren en segundo plano. De ahí nació **Beastie**, el demonio de BSD, cuya primera versión fue dibujada en escala de grises por **John Lasseter** en 1984 para los manuales de 4.2BSD — cuando Lasseter trabajaba en Lucasfilm, antes de cofundar Pixar. La versión icónica a color llegó en 1988, para el libro *The Design and Implementation of the 4.3BSD Operating System*. Sí, el futuro director de *Toy Story* dibujó una mascota de software libre. El tridente de Beastie simboliza la llamada al sistema `fork()`, que crea procesos nuevos. No es un demonio cristiano sino un *daimon* griego: un espíritu servicial.
 
-![Beastie, el demonio de BSD](/dust115/img/xenia/fossmascot_By-Poul-HenningKamp-bsdDaemon.png)
+![Beastie, el demonio de BSD](fossmascot_By-Poul-HenningKamp-bsdDaemon.png)
 *Beastie, el daemon de BSD. Copyright Marshall Kirk McKusick.*
 
 El **ñu de GNU** es obra de **Etienne Suvasa**, elegido porque «gnu» es tanto el nombre del animal (el ñu africano, *Connochaetes*) como el acrónimo del proyecto. **Konqi**, el dragón de KDE, fue introducido en 1999 y rediseñado en 2012 por el artista conceptual chino **Tyson Tan**, quien también creó a **Kiki**, la ardilla cibernética de Krita, nombrada así porque *krita* significa «ardilla» en albanés. **Suzanne**, la cabeza de mono de Blender, fue añadida como huevo de Pascua en febrero de 2002 cuando la empresa matriz de Blender enfrentaba el cierre, un gesto melancólico similar al de Mackey dibujando en una Amiga moribunda.
 
-![Konqi, el dragón de KDE por Tyson Tan](/dust115/img/xenia/KDE_fossMascot_Konqi_by_Tyson_Tan.png)
+![Konqi, el dragón de KDE por Tyson Tan](KDE_fossMascot_Konqi_by_Tyson_Tan.png)
 *Konqi, el dragón de KDE, rediseñado por Tyson Tan en 2012.*
 
-![Kiki, la ardilla de Krita por Tyson Tan](/dust115/img/xenia/fossmascotKiki_krita_By-Tyson-Tan.png)
+![Kiki, la ardilla de Krita por Tyson Tan](fossmascotKiki_krita_By-Tyson-Tan.png)
 *Kiki, la ardilla cibernética de Krita. También por Tyson Tan.*
 
-![Ferris, el cangrejo de Rust](/dust115/img/xenia/fossmascotFerris_By-KarenRustadTolva.png)
+![Ferris, el cangrejo de Rust](fossmascotFerris_By-KarenRustadTolva.png)
 *Ferris, el cangrejo de Rust, por Karen Rustad Tölva.*
 
-![elePHPant, la mascota de PHP](/dust115/img/xenia/fossmascotphp_ByVincentPontier.png)
+![elePHPant, la mascota de PHP](fossmascotphp_ByVincentPontier.png)
 *El elePHPant de PHP, por Vincent Pontier.*
 
-![Kitty, la mascota de AROS](/dust115/img/xenia/By-Eric-W.Schwartz_fossmascotAROS_mascot_Kitty.png)
+![Kitty, la mascota de AROS](By-Eric-W.Schwartz_fossmascotAROS_mascot_Kitty.png)
 *Kitty, la mascota de AROS, por Eric W. Schwartz.*
 
 El caso de **Firefox** es particularmente interesante para la historia de Xenia: el nombre «Firefox» es un apodo del **panda rojo** (*Ailurus fulgens*), llamado 火狐 (*huǒ hú*, «zorro de fuego») en chino. Pero el diseñador del logo, **Jon Hicks**, consideró que un panda rojo «no evocaba la imagen correcta» y se inspiró en una pintura japonesa de un zorro. El *nombre* referencia un panda; el *logo* muestra un zorro. Dos cánidos míticos compitiendo por representar al software libre.
@@ -284,7 +284,7 @@ En el extremo opuesto está **Clippy** (oficialmente Clippit), el clip de Micros
 
 La Wikipedia mantiene una lista extensa de mascotas informáticas que incluye, entre las FOSS: Geeko (SUSE, un camaleón), Puffy (OpenBSD, un pez globo), Glenda (Plan 9, una conejita), Ferris (Rust, un cangrejo), el elePHPant de PHP y el Gopher de Go. Todas comparten la característica señalada por el propio artículo de Wikipedia: «Dentro de los proyectos de software colaborativo, el uso de mascotas permite la existencia de un símbolo sin marca registrada para uso de la comunidad del software».
 
-![Xenia vs Mac — arte por RiniDisc](/dust115/img/xenia/xenia_macvslinux_artist-rinidisc.jpg)
+![Xenia vs Mac — arte por RiniDisc](xenia_macvslinux_artist-rinidisc.jpg)
 *Xenia tiene opiniones sobre otros sistemas operativos. Arte por RiniDisc.*
 
 ---
@@ -299,7 +299,7 @@ Este ecosistema descentralizado ofrece ventajas específicas para un fenómeno c
 
 Existe una superposición demográfica notable entre las comunidades furry, trans y de Linux/FOSS en el Fediverso. Instancias como **furry.engineer** (para «furries e ingenieros de todo tipo, LGBTQ+ friendly»), bark.lgbt y tech.lgbt operan explícitamente en esa intersección. El fenómeno tiene raíces profundas: en 2010 se lanzó **Ubuntu Furry Remix**, una distribución completa de Linux «creada para furries por furries», con temas, sonidos e ilustraciones personalizadas. En 2008 le había precedido **Furbuntu**. El propio Al Mackey era artista furry; LinuxFox siempre fue un personaje antropomórfico. La comunidad de Xenia en Lemmy (!xenia@lemmy.blahaj.zone) es otro ejemplo de esta convergencia.
 
-![Meme de Xenia por RiniDisc](/dust115/img/xenia/meme_xenia_artist-rinidisc.png)
+![Meme de Xenia por RiniDisc](meme_xenia_artist-rinidisc.png)
 *La comunidad de Xenia produce memes a la velocidad de un kernel panic. Arte por RiniDisc.*
 
 ---
@@ -314,7 +314,7 @@ La **Organization for Transformative Works** (OTW), que opera Archive of Our Own
 
 Lo que distingue a Xenia de otros personajes revividos es la **aprobación explícita del creador original**, no solo del uso del personaje sino específicamente de su reinterpretación identitaria. Al Mackey no se limitó a decir «sí, pueden usarla»; escribió que la transición «tiene mucho sentido, especialmente en el contexto del tiempo» y que «coincide con las transiciones de muchos de los usuarios de Linux más inteligentes y nerds que conozco». Esta validación transformó lo que podría haber sido simple fan art en algo que la comunidad experimentó como una **revelación narrativa legítima**.
 
-![Xenia navideña por tacophox](/dust115/img/xenia/xeniacrismax_artist-tacophox.webp)
+![Xenia navideña por tacophox](xeniacrismax_artist-tacophox.webp)
 *Xenia también celebra las fiestas. Arte por tacophox.*
 
 ---
@@ -331,7 +331,7 @@ Y eso, en última instancia, es lo que las mejores mascotas del software libre h
 
 > *Gibran escribió: «Eres bueno cuando te esfuerzas en dar de ti. Pero no eres malo cuando buscas ganar algo para ti. Porque cuando te esfuerzas por obtener no eres sino una raíz que se aferra a la tierra y mama de su pecho. Claro que la fruta no puede decirle a la raíz: Sé como yo, madura y completa y da siempre de tu abundancia. Pues para la fruta dar es una necesidad, como recibir es una necesidad para la raíz.» Quizás la comunidad que creó a Xenia, que mantiene GNU/Linux, que dibuja arte libre, que escribe código sin pedir nada, no lo hace por bondad ni por altruismo. Lo hace porque dar es su naturaleza, como recibir es la nuestra al usarlo. Y esa es la libertad que Stallman imaginó, expresada no en código fuente sino en un dibujo de un zorro con camiseta de Linux. Si quieres leer el poema completo, busca «El Bien y el Mal» en «El Profeta» de Khalil Gibran.* — Dust
 
-![Xenia — arte de portada por magpi](/dust115/img/xenia/xenia_quiero.que.sea.la.img.head_artist-magpi.png)
+![Xenia — arte de portada por magpi](xenia_quiero.que.sea.la.img.head_artist-magpi.png)
 *Xenia por magpi.*
 
 {{< ascii >}}
@@ -368,25 +368,25 @@ El proyecto está alojado en [GitLab](https://gitlab.com/xenia-group/xenia-linux
 
 La comunidad de Xenia tiene un sentido del humor tan afilado como un `segfault` en producción un viernes por la tarde. Estos son algunos de los memes y piezas de arte que circularon por el Fediverso y no tuvieron lugar en las secciones anteriores, pero que merecen existir documentados. Son parte de la misma cultura viva.
 
-![Xenia — arte de artista desconocido (cuenta eliminada)](/dust115/img/xenia/xenia-the-linux-fox-art-by-deletedaccount.webp)
+![Xenia — arte de artista desconocido (cuenta eliminada)](xenia-the-linux-fox-art-by-deletedaccount.webp)
 *Una de las tantas piezas circulando sin atribución clara — la cuenta del artista fue eliminada. Un recordatorio constante de por qué archivar importa.*
 
-![Meme de Xenia por KinkyTurtle](/dust115/img/xenia/meme_xenia_artist-KinkyTurtle.jpg)
+![Meme de Xenia por KinkyTurtle](meme_xenia_artist-KinkyTurtle.jpg)
 *La comunidad convierte cualquier situación en material. Arte por KinkyTurtle.*
 
-![Meme de Xenia — artista desconocido](/dust115/img/xenia/meme_xenia_artist-unknown.jpg)
+![Meme de Xenia — artista desconocido](meme_xenia_artist-unknown.jpg)
 *Autor posiblemente RiniDisc. Si sabes quién hizo el edit, dímelo.*
 
-![Xenia — meme por itsswumbo](/dust115/img/xenia/xenia_meme_artist-itsswumbo.png)
+![Xenia — meme por itsswumbo](xenia_meme_artist-itsswumbo.png)
 *Arte por itsswumbo.*
 
-![Xenia — meme artista desconocido](/dust115/img/xenia/xenia_meme_artist-unknown.png)
+![Xenia — meme artista desconocido](xenia_meme_artist-unknown.png)
 *Otro clásico que me cuesta encontrar se ve una firma jdl20 posiblemente (jdl_werewolf). El anonimato también es una forma de CC0.*
 
-![Xenia — hahahyes](/dust115/img/xenia/xeniahahahyes_by-desconocido.png)
+![Xenia — hahahyes](xeniahahahyes_by-desconocido.png)
 *Mirando a través de windows como acaba de compilar el kernel sin errores después de tres horas.*
 
-![Xenia en formato revista — arte por tacophox](/dust115/img/xenia/xeniamagazin_artist-tacophox.jpeg)
+![Xenia en formato revista — arte por tacophox](xeniamagazin_artist-tacophox.jpeg)
 *Xenia en formato revista. Arte por tacophox, el mismo artista del Xenia navideño.*
 
 ---
@@ -395,22 +395,22 @@ La comunidad de Xenia tiene un sentido del humor tan afilado como un `segfault` 
 
 Para cerrar, una selección de wallpapers de Xenia por artistas de la comunidad. Si te gustan, visita sus páginas y apóyalos directamente.
 
-![Wallpaper por DanCrescentWolf — favorito del autor](/dust115/img/xenia/myfavwallpaper_Xenia_artist-DanCrescentWolf.png)
+![Wallpaper por DanCrescentWolf — favorito del autor](myfavwallpaper_Xenia_artist-DanCrescentWolf.png)
 *Wallpaper por DanCrescentWolf. Mi favorito personal. Puedes descargarlo gratis y apoyar al artista en [su Ko-fi](https://ko-fi.com/s/594c1ab898).*
 
-![Wallpaper por DanCrescentWolf](/dust115/img/xenia/wallpaper_xenia_artist-DanCrescentWolf.png)
+![Wallpaper por DanCrescentWolf](wallpaper_xenia_artist-DanCrescentWolf.png)
 *Wallpaper por DanCrescentWolf.*
 
-![Wallpaper por Neotheta](/dust115/img/xenia/xenia_wallpaper1_artist-neotheta.png)
+![Wallpaper por Neotheta](xenia_wallpaper1_artist-neotheta.png)
 *Wallpaper por Neotheta.*
 
-![Wallpaper por kiri](/dust115/img/xenia/wallpaper_xenia_artist-kiri.png)
+![Wallpaper por kiri](wallpaper_xenia_artist-kiri.png)
 *Wallpaper por kiri.*
 
-![Wallpaper por yellowdog](/dust115/img/xenia/wallpaper_xenia_artist-yellowdog.png)
+![Wallpaper por yellowdog](wallpaper_xenia_artist-yellowdog.png)
 *Wallpaper por yellowdog.*
 
-![Wallpaper Xenia typing por lizzieliz](/dust115/img/xenia/wallpaper_xeniatyping_artist-lizzieliz.jpg)
+![Wallpaper Xenia typing por lizzieliz](wallpaper_xeniatyping_artist-lizzieliz.jpg)
 *Xenia programando. Wallpaper por lizzieliz.*
 
 ---
