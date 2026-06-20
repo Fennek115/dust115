@@ -41,8 +41,13 @@ theme = "vulpine-marrow"
 
 ### Logo
 
-El header usa un logo de texto fijo `dust115$` (`partials/logo.html`). Para
-cambiarlo, editá ese partial (es deliberadamente simple, no parametrizado).
+El header usa un logo de texto `<logoText>$` (el `$` es un cursor parpadeante
+decorativo). El texto sale de `params.logo.logoText` (default `dust115`):
+
+```toml
+[params.logo]
+  logoText = "mi-sitio"   # se renderiza como  mi-sitio$
+```
 
 ## Menú
 

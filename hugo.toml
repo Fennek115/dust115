@@ -44,7 +44,7 @@ enableRobotsTXT = true
       tocTitle = "Índice"
 
       [languages.en.params.logo]
-        logoText = "dust115$"
+        logoText = "dust115"
         logoHomeLink = "/dust115"
 
     [[languages.en.menu.main]]

@@ -10,6 +10,8 @@ del tema (ver `LICENSE.md`).
 > de verdad en la herramienta **/apt115/** del sitio; este tema es la
 > implementación de ese lenguaje visual para el blog.
 
+![Vista previa de la home](images/screenshot.png)
+
 ## Instalación
 
 ```toml
@@ -19,6 +21,22 @@ theme = "vulpine-marrow"
 
 Coloca el tema en `themes/vulpine-marrow/`. Requiere Hugo **extended** ≥ 0.128
 (usa `resources.Concat`, `minify`, `fingerprint` y `Page.Store`).
+
+## Sitio de ejemplo
+
+`exampleSite/` trae una demo con posts genéricos que ejercitan todas las
+features (código, callouts, comandos copiables, mermaid, figuras, wikilinks,
+backlinks y la página Synapsis). Para previsualizarla:
+
+```bash
+cd exampleSite
+hugo server --themesDir ../..
+```
+
+|  |  |
+|---|---|
+| ![home oscuro](images/screenshot.png) | ![home claro](images/home-light.png) |
+| ![post con mermaid](images/post.png) | ![Synapsis](images/synapsis.png) |
 
 ## Documentación
 

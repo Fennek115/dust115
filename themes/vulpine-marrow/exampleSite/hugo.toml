@@ -1,0 +1,53 @@
+baseURL = "https://example.org/"
+languageCode = "es"
+title = "Vulpine Marrow — demo"
+theme = "vulpine-marrow"
+
+# Para previsualizar desde aquí:
+#   hugo server --themesDir ../..
+
+[pagination]
+  pagerSize = 10
+
+enableRobotsTXT = true
+
+[permalinks]
+  posts = "/posts/:contentbasename/"
+
+[markup.highlight]
+  noClasses = false
+
+[params]
+  contentTypeName = "posts"
+  subtitle = "Demo del tema Vulpine Marrow: violeta sobre negro, modo claro/oscuro, digital garden, mermaid y shortcodes."
+  autoCover = true
+  Toc = false
+  minuteReadingTime = "min de lectura"
+  ReadOtherPosts = "Otros posts"
+  newerPosts = "Más recientes"
+  olderPosts = "Más antiguos"
+  missingContentMessage = "404: por aquí no hay nada…"
+  missingBackButtonLabel = "← Volver al inicio"
+  tocTitle = "Índice"
+  dateFormat = "2006-01-02"
+
+  [params.logo]
+    logoText = "demo"
+
+[[menu.main]]
+  identifier = "about"
+  name = "about"
+  url = "/about"
+  weight = 1
+
+[[menu.main]]
+  identifier = "archive"
+  name = "archive"
+  url = "/posts"
+  weight = 2
+
+[[menu.main]]
+  identifier = "synapsis"
+  name = "synapsis"
+  url = "/synapsis"
+  weight = 3

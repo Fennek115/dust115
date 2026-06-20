@@ -24,4 +24,8 @@ Hugo autónomo.
   `command`, `figure`, `badge`, `tlp`.
 - Pipeline de CSS en un bundle ordenado (tokens → base → skin),
   `Concat`+`minify`+`fingerprint`.
+- Logo de texto parametrizable vía `params.logo.logoText` (default `dust115`).
+- `exampleSite/` con posts de demostración que ejercitan todas las features.
+- Capturas en `images/` (`screenshot.png`, `tn.png` y showcase) + footer con
+  lema «mortui vivos docent» y enlace al repo.
 - Documentación en `docs/` (architecture, configuration, features, shortcodes).

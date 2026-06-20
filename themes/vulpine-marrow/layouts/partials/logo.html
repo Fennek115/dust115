@@ -1,4 +1,8 @@
-{{/* Logo de texto Vulpine Marrow: dust115$ con cursor parpadeante */}}
+{{/* Logo de texto Vulpine Marrow: <texto>$ con cursor parpadeante.
+     El texto sale de params.logo.logoText (default "dust115"); el "$" es el
+     cursor decorativo. */}}
+{{- $txt := "dust115" -}}
+{{- with .Site.Params.logo }}{{ with .logoText }}{{ $txt = . }}{{ end }}{{ end -}}
 <a class="dust-logo" href="{{ .Site.BaseURL }}">
-  <span class="dust-logo__text">dust115</span><span class="dust-logo__cursor">$</span>
+  <span class="dust-logo__text">{{ $txt }}</span><span class="dust-logo__cursor">$</span>
 </a>
