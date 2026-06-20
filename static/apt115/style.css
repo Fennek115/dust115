@@ -1133,7 +1133,9 @@ body.sb-drawer-open .sb-backdrop{display:block}
   .hdr-right{gap:4px}
   .hdr-btn,.theme-toggle{font-size:10px;padding:3px 7px}
   .warn-badge{display:none}
-  .vars-bar-inner{gap:5px}
+  /* vars-bar: una sola fila con scroll horizontal (sin recortarse a 60px) */
+  .vars-bar-inner{gap:5px;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+  .vars-bar-inner > *{flex-shrink:0}
   .row{flex-wrap:wrap}
   .row-actions{flex-wrap:wrap}
 
