@@ -87,17 +87,21 @@ html.vm-lightbox-open body {
   box-shadow: var(--vm-focus-ring, 0 0 0 2px rgba(145,65,172,.4));
 }
 
-/* caption (toma el figcaption si existe) */
+/* caption compacto centrado (toma el figcaption si existe) */
 .vm-lightbox__cap {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
   z-index: 2;
-  padding: 12px 16px;
+  max-width: min(90vw, var(--vm-wide, 1200px));
+  padding: 7px 14px;
   text-align: center;
   font-size: 12px;
-  color: var(--vm-text-3, #aaa);
-  background: linear-gradient(to top, color-mix(in srgb, var(--vm-bg-blog) 85%, #000), transparent);
+  line-height: 1.5;
+  color: var(--vm-text-2, #ccc);
+  background: color-mix(in srgb, var(--vm-bg-blog) 80%, #000);
+  border: 1px solid color-mix(in srgb, var(--vm-accent) 30%, transparent);
+  border-radius: var(--vm-radius-pill, 20px);
   pointer-events: none;
 }

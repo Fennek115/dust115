@@ -39,6 +39,14 @@
     apply();
   }
 
+  // dimensiona el clon por aspecto, encajado en el viewport
+  function sizeTo(node, aw, ah) {
+    if (!aw || !ah) { aw = 4; ah = 3; }
+    const k = Math.min(window.innerWidth * 0.92 / aw, window.innerHeight * 0.88 / ah);
+    node.style.width = (aw * k) + "px";
+    node.style.height = (ah * k) + "px";
+  }
+
   function build() {
     overlay = document.createElement("div");
     overlay.className = "vm-lightbox";
@@ -78,6 +86,9 @@
       if (e.target === overlay) close();
     });
 
+    // matar el drag nativo de imágenes (rompía el pan)
+    overlay.addEventListener("dragstart", (e) => e.preventDefault());
+
     overlay.addEventListener("wheel", (e) => {
       e.preventDefault();
       const factor = e.deltaY < 0 ? STEP : 1 / STEP;
@@ -86,6 +97,7 @@
 
     // pan
     stage.addEventListener("pointerdown", (e) => {
+      e.preventDefault();                         // evita selección / ghost-drag
       dragging = true;
       sx = e.clientX; sy = e.clientY; ox = tx; oy = ty;
       try { stage.setPointerCapture(e.pointerId); } catch (_) {}
@@ -154,23 +166,32 @@
       const img = new Image();
       img.src = el.currentSrc || el.src;
       img.alt = el.alt || "";
+      img.draggable = false;
+      // aspecto del original (ya cargado en la página) → centrado correcto y
+      // síncrono; fallback al rect mostrado (p. ej. SVG sin tamaño intrínseco)
+      let aw = el.naturalWidth, ah = el.naturalHeight;
+      if (!aw || !ah) { const r = el.getBoundingClientRect(); aw = r.width; ah = r.height; }
+      sizeTo(img, aw, ah);
       return img;
     }
-    // svg (mermaid u otro): clonar por outerHTML y dimensionar por aspecto
+    // svg inline (mermaid u otro): clonar por outerHTML, reescribiendo el id
+    // para no romper el <style> interno de mermaid (scopea por #<id>) ni los
+    // duplicados de id en el documento.
+    const id = el.id;
+    let html = el.outerHTML;
+    if (id) {
+      const nid = id + "-vmlb";
+      html = html.split(id).join(nid);          // id, #id en <style>, url(#marker)
+    }
     const wrap = document.createElement("div");
-    wrap.innerHTML = el.outerHTML;
+    wrap.innerHTML = html;
     const svg = wrap.firstElementChild;
-    svg.removeAttribute("id");
     const [w, h] = svgAspect(svg);
-    const maxW = window.innerWidth * 0.9;
-    const maxH = window.innerHeight * 0.86;
-    const k = Math.min(maxW / w, maxH / h);
     svg.removeAttribute("width");
     svg.removeAttribute("height");
     svg.style.maxWidth = "none";
-    svg.style.width = (w * k) + "px";
-    svg.style.height = (h * k) + "px";
     svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+    sizeTo(svg, w, h);
     return svg;
   }
 

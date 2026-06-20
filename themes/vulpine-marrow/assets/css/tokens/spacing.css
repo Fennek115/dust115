@@ -63,8 +63,9 @@
   /* ---- Layout constants ---- */
   --vm-sidebar-w:   240px;
   --vm-grid-size:   40px;   /* background grid texture */
-  --vm-read:        820px;  /* columna de lectura de prosa (posts) */
+  --vm-read:        720px;  /* columna de lectura de prosa (posts) ~75-80 CPL */
   --vm-wide:        1200px; /* breakout de medios: img/tabla/código/mermaid */
+  --vm-home:        880px;  /* Inicio / archivo / listados (tarjetas) */
 
   /* ---- Semantic aliases ---- */
   --radius-control:  var(--vm-radius-sm);

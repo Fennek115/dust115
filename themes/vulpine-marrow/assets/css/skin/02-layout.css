@@ -1,6 +1,6 @@
-/* ── Ancho de lectura del sitio (design: columna única 720px) ── */
+/* ── Ancho del sitio: Inicio/archivo/listados más anchos (tarjetas) ── */
 .container,
-.container.center { max-width: 720px; }
+.container.center { max-width: var(--vm-home); }
 
 /* Home curada: subtítulo + enlace al archivo */
 .dust-subtitle { font-size: 13px; color: var(--vm-text-3); margin: -8px 0 30px; line-height: 1.6; }
@@ -167,5 +167,21 @@
   max-width: var(--vm-read);
   margin-left: auto;
   margin-right: auto;
+}
+
+/* ── Tipografía de lectura: SÓLO el cuerpo de los posts en proporcional ──
+   Títulos (h1 fuera de .post-content), código, UI y el Inicio siguen en
+   Fira Code. base/code.css no fija familia en code/pre (heredan del body),
+   así que hay que re-afirmar mono adentro de la prosa. */
+.post--single .post-content {
+  font-family: var(--vm-font-sans);
+  font-size: 17px;
+  line-height: 1.7;
+}
+.post--single .post-content :is(h2, h3, h4, h5, h6),
+.post--single .post-content :is(code, kbd, samp, pre, tt),
+.post--single .post-content .highlight,
+.post--single .post-content .chroma {
+  font-family: var(--vm-font-mono);
 }
 
