@@ -99,7 +99,7 @@ coherente con ese tipo.
 **Detect It Easy (DIE)** en Windows hacen esta misma identificación con bases
 de firmas mucho más grandes y dan más detalle sobre packers/instaladores. Si
 "File Info" te tira algo raro (magic que no encaja, tamaño inconsistente),
-confirmalo con `file -b <archivo>` antes de seguir.
+confírmalo con `file -b <archivo>` antes de seguir.
 
 ### Hashes
 
@@ -142,7 +142,7 @@ tendría 5-6) es una señal fuerte de que el código real está empacado y lo qu
 ves es un stub de descompresión.
 
 **Cómo usarlo:** no requiere acción. Mira qué sección o bloque tiene el valor
-más alto — combinalo con el panel de **YARA** o **PEiD** para confirmar si
+más alto — combínalo con el panel de **YARA** o **PEiD** para confirmar si
 hay una firma de packer conocida ahí.
 
 **Límites:** una entropía alta es una *señal*, no una prueba — un recurso PNG
@@ -298,7 +298,7 @@ locales sin notarizar), qué entitlements peligrosos tiene, y si hay rpaths
 explotables para *dylib hijacking*.
 
 **Cómo usarlo:** no requiere acción. Para un binario *fat*, cada slice
-(arquitectura) se muestra en su propia subsección — revisalas todas, a veces
+(arquitectura) se muestra en su propia subsección — revísalas todas, a veces
 solo una arquitectura lleva el payload malicioso. Prestá atención a "Tipo de
 firma" y a "Entitlements de riesgo" si aparecen.
 
@@ -415,12 +415,12 @@ ni mandar el archivo a ningún lado.
 1. Elige un pack del selector "cargar reglas…" (la primera vez tarda un poco
    en bajar/compilar el pack — queda "activo" sin volcarse entero al editor).
 2. Click en **▶ Escanear**.
-3. Si quieres usar tus propias reglas, escribilas/pegalas en el editor — eso
+3. Si quieres usar tus propias reglas, escríbelas/pégalas en el editor — eso
    desactiva el pack activo y usa solo lo que está en el textarea.
 
 **Límites:** la compilación es todo-o-nada: si tus reglas tienen errores, no
 corre ninguna. Los packs grandes (signature-base, ~6MB) se cargan lazy la
-primera vez que los elegís.
+primera vez que los eliges.
 
 **Para seguir investigando:** el binario **`yara`** CLI (o **YARA-X**, el
 reescrito en Rust) corre los mismos packs sobre directorios enteros o sets
@@ -465,7 +465,7 @@ un stub de descompresión/loader.
 
 **Cómo usarlo:**
 1. Click en **▶ Desensamblar EP**. Si la arquitectura no se infirió bien,
-   elegila manualmente en el selector.
+   elígela manualmente en el selector.
 2. Ajustá "instr" (cantidad de instrucciones) y "desfase" (re-sincronizar
    ±N bytes) si el desensamblado se ve corrupto.
 3. Si una instrucción temprana es un `jmp`/`call` con destino inmediato,
@@ -801,7 +801,7 @@ sigue siendo la herramienta de referencia para *encontrar* lo que esta tool
 Estas tools viven en el grupo **🧪 LAB / TOOLS** del sidebar (no requieren
 soltar un archivo de muestra). Varias de ellas comparten una **barra de
 variables** arriba de la página (`LHOST`, `LPORT`, `RHOST`, `RPORT`,
-`DOMAIN`): definilas una vez y se propagan a los payloads/templates que las
+`DOMAIN`): defínelas una vez y se propagan a los payloads/templates que las
 usan.
 
 ### Reverse Shell & C2
@@ -930,7 +930,7 @@ calcular rápido el rango de un `/26`, entender si una IP es RFC1918 o
 pública, planificar subredes para varios departamentos desde un bloque
 asignado, o recordar qué servicio corre típicamente en el puerto 5985.
 
-**Cómo usarla:** cada calculadora recalcula **en vivo** mientras escribís
+**Cómo usarla:** cada calculadora recalcula **en vivo** mientras escribes
 (sin botón "calcular"):
 1. **IPv4**: escribe `a.b.c.d/n` en el primer campo (por defecto
    `10.10.14.7/24`).
@@ -1021,7 +1021,7 @@ disfrazado de PDF? ¿intenta escribir fuera del directorio de extracción?
 
 **Límites:** lee la *estructura* — no descomprime ni ejecuta nada (salvo
 el manifiesto del APK, que se infla sólo para leer el string pool). No
-analiza el *contenido* de los archivos individuales (para eso, soltalos
+analiza el *contenido* de los archivos individuales (para eso, suéltalos
 en **Malware Triage** uno por uno).
 
 **Para seguir investigando:** **apktool** y **jadx** descompilan un APK
@@ -1156,7 +1156,7 @@ engagement.
 
 **Cómo usarla:**
 1. **Perfilador**: completa los campos que tengas (no hace falta llenarlos
-   todos), tildá/destildá las estrategias (`leet`, `numbers`, `specials`,
+   todos), marca/desmarca las estrategias (`leet`, `numbers`, `specials`,
    `caps`, `combine`, `walks`) y click en **Generar wordlist**. **copiar**
    o **descargar .txt** para usarla con hashcat/JtR.
 2. **Keyspace de máscara**: escribe la máscara, elige una velocidad de
