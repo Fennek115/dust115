@@ -1,6 +1,23 @@
+# Hugo
 public/
 resources/
+
+# Design system handoffs (locales)
 .vulpine-marrow-design/
 .vulpine-marrow-design2/
+
+# Scripts de migración / one-off (locales)
 migrate_blog.py
+fix_dates.py
+
+# Basura de WSL/Windows (marcador de "descargado de internet")
 *:Zone.Identifier
+
+# Internos: se conservan en disco pero NO van a GitHub
+CLAUDE.md
+GEMINI.md
+/index.html
+content/prompt context/
+newcaps/
+MALO_INTEGRATION.md
+*HANDOFF.md
