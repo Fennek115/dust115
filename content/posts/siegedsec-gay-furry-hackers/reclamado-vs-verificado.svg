@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 620" font-family="'Fira Code','JetBrains Mono',monospace">
+  <rect width="1100" height="620" rx="18" fill="#241f31"/>
+  <rect x="0.5" y="0.5" width="1099" height="619" rx="18" fill="none" stroke="#9141ac" stroke-opacity="0.35"/>
+
+  <text x="60" y="64" font-size="30" fill="#f6f5f4" font-weight="700">Reclamado vs. verificado</text>
+  <text x="60" y="98" font-size="17" fill="#9a8fb0">qué proporción de cada reclamo se confirmó de forma independiente</text>
+
+  <!-- legend -->
+  <rect x="60" y="120" width="22" height="14" rx="3" fill="#9141ac" fill-opacity="0.22"/>
+  <text x="90" y="132" font-size="14" fill="#9a8fb0">reclamado</text>
+  <rect x="200" y="120" width="22" height="14" rx="3" fill="#9141ac"/>
+  <text x="230" y="132" font-size="14" fill="#9a8fb0">verificado</text>
+
+  <!-- rows: y track at 170,250,330,410 -->
+  <!-- Heritage -->
+  <text x="60" y="180" font-size="17" fill="#f6f5f4">Heritage Foundation — volumen de datos</text>
+  <rect x="60" y="192" width="900" height="26" rx="6" fill="#9141ac" fill-opacity="0.20"/>
+  <rect x="60" y="192" width="9" height="26" rx="4" fill="#9141ac"/>
+  <text x="975" y="211" font-size="15" fill="#cdb4db">~1%</text>
+  <text x="64" y="241" font-size="13" fill="#9a8fb0">reclamó 200 GB · publicó 2 GB de un archivo viejo de terceros</text>
+
+  <!-- Israel OT -->
+  <text x="60" y="282" font-size="17" fill="#f6f5f4">Israel — ataques OT/SCADA</text>
+  <rect x="60" y="294" width="900" height="26" rx="6" fill="#9141ac" fill-opacity="0.20"/>
+  <rect x="60" y="294" width="4" height="26" rx="4" fill="#ed6b5e"/>
+  <text x="975" y="313" font-size="15" fill="#ed6b5e">~0%</text>
+  <text x="64" y="343" font-size="13" fill="#9a8fb0">"mass attacks" a infra crítica · desmentido por SecurityScorecard (NetFlow)</text>
+
+  <!-- NATO -->
+  <text x="60" y="384" font-size="17" fill="#f6f5f4">NATO — portales web</text>
+  <rect x="60" y="396" width="900" height="26" rx="6" fill="#9141ac" fill-opacity="0.20"/>
+  <rect x="60" y="396" width="450" height="26" rx="6" fill="#9141ac"/>
+  <text x="975" y="415" font-size="15" fill="#cdb4db">parcial</text>
+  <text x="64" y="445" font-size="13" fill="#9a8fb0">archivos reales pero no clasificados · volumen sin confirmar</text>
+
+  <!-- INL outlier -->
+  <text x="60" y="486" font-size="17" fill="#f6f5f4">Idaho National Laboratory — PII de empleados <tspan fill="#ffa348">*</tspan></text>
+  <rect x="60" y="498" width="900" height="26" rx="6" fill="#ffa348" fill-opacity="0.18"/>
+  <rect x="60" y="498" width="900" height="26" rx="6" fill="#ffa348"/>
+  <text x="975" y="517" font-size="15" fill="#241f31" font-weight="700"></text>
+  <text x="64" y="547" font-size="13" fill="#9a8fb0">45.047 personas con SSN · confirmado por INL, FBI y CISA</text>
+
+  <line x1="60" y1="572" x2="1040" y2="572" stroke="#9141ac" stroke-opacity="0.25"/>
+  <text x="60" y="598" font-size="14" fill="#ffa348">* la excepción: acá el daño real superó al teatro.</text>
+</svg>

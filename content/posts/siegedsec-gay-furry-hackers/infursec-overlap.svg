@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 640" font-family="'Fira Code','JetBrains Mono',monospace">
+  <rect width="1100" height="640" rx="18" fill="#241f31"/>
+  <rect x="0.5" y="0.5" width="1099" height="639" rx="18" fill="none" stroke="#9141ac" stroke-opacity="0.35"/>
+
+  <text x="60" y="62" font-size="28" fill="#f6f5f4" font-weight="700">infursec: una superposición real</text>
+  <text x="60" y="94" font-size="16" fill="#9a8fb0">por qué hay tantos furros en seguridad informática (FurScience / DEF CON Furs)</text>
+
+  <!-- Venn -->
+  <g transform="translate(0,40)">
+    <circle cx="430" cy="320" r="190" fill="#9141ac" fill-opacity="0.22" stroke="#9141ac" stroke-opacity="0.6"/>
+    <circle cx="640" cy="320" r="190" fill="#57e389" fill-opacity="0.16" stroke="#57e389" stroke-opacity="0.55"/>
+    <text x="330" y="225" text-anchor="middle" font-size="20" fill="#cdb4db">Fandom</text>
+    <text x="330" y="250" text-anchor="middle" font-size="20" fill="#cdb4db">furry</text>
+    <text x="740" y="225" text-anchor="middle" font-size="20" fill="#8ff0bb">Infosec /</text>
+    <text x="740" y="250" text-anchor="middle" font-size="20" fill="#8ff0bb">hacking</text>
+    <text x="535" y="318" text-anchor="middle" font-size="22" fill="#f6f5f4" font-weight="700">infursec</text>
+    <text x="535" y="346" text-anchor="middle" font-size="13" fill="#9a8fb0">fursonas en X,</text>
+    <text x="535" y="364" text-anchor="middle" font-size="13" fill="#9a8fb0">DEF CON Furs</text>
+  </g>
+
+  <!-- factors -->
+  <g font-size="15" fill="#e8e3f0">
+    <circle cx="72" cy="190" r="4" fill="#9141ac"/><text x="86" y="195">~75% LGBTQ+ (FurScience)</text>
+    <circle cx="72" cy="230" r="4" fill="#9141ac"/><text x="86" y="235">neurodivergencia ≥2.25× autismo</text>
+    <circle cx="72" cy="500" r="4" fill="#57e389"/><text x="86" y="505">raíces en IRC / MUCK / BBS</text>
+    <circle cx="72" cy="540" r="4" fill="#57e389"/><text x="86" y="545">privacidad como autodefensa</text>
+    <text x="1040" y="505" text-anchor="end">DEF CON Furs: con-within-a-con ·</text>
+    <text x="1040" y="545" text-anchor="end">badgelife · charlas técnicas</text>
+  </g>
+
+  <!-- SiegedSec marker: edge / misfit -->
+  <g>
+    <circle cx="430" cy="478" r="7" fill="#ed6b5e"/>
+    <line x1="430" y1="478" x2="300" y2="600" stroke="#ed6b5e" stroke-opacity="0.6" stroke-dasharray="4 4"/>
+    <text x="60" y="606" font-size="14" fill="#ed6b5e">SiegedSec → identidad genuina, pero actividad criminal: misfit cultural, no la comunidad.</text>
+  </g>
+</svg>
