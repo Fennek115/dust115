@@ -8,7 +8,7 @@ theme = "vulpine-marrow"
 
 enableRobotsTXT = true
 [permalinks]
-  posts = "/posts/:contentbasename/"
+  posts = "/posts/:slug/"
 
 # Necesario para Chroma (syntax highlighting)
 [markup.highlight]
