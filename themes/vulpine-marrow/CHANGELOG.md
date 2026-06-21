@@ -5,10 +5,27 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/).
 ## [0.2.0] — 2026-06-20
 
 ### Added
+- **Lightbox** sin dependencias (`js/lightbox.js` + `09-lightbox.css`): click/tap
+  en imágenes, SVG o diagramas mermaid abre un overlay a pantalla completa con
+  zoom (rueda), *pan* (arrastre), **pinch** táctil de dos dedos, barra de
+  controles y atajos de teclado (`+`/`-`/`0`/`Esc`). Delegación de eventos sobre
+  `.post-content` para que funcione con SVG renderizados async.
+- **Tablas responsive** (`layouts/_default/_markup/render-table.html`): las tablas
+  markdown se envuelven en `.table-wrap` con scroll horizontal **dentro de su
+  caja** (no empujan el ancho de la página), *scroll shadows* sin JS como pista de
+  desplazamiento, y celdas que ya no se cortan a mitad de palabra.
 - Botón flotante **«subir al inicio»** (`#vm-top`): aparece tras desplazarse,
   scroll suave (respeta `prefers-reduced-motion`), violeta sólido con flecha
   blanca y `env(safe-area-inset-bottom)` para el notch. Vive en el footer y se
-  suma al bundle JS (`js/backtotop.js`). Ver `docs/features.md`.
+  suma al bundle JS (`js/backtotop.js`).
+
+### Changed
+- **Tipografía y ancho de lectura** de los posts: columna de lectura unificada y
+  anchos manejados por tokens de espaciado; prosa justificada e imágenes/figuras
+  centradas para una lectura más pareja (`02-layout.css`, `tokens/spacing.css`,
+  `07-shortcodes.css`).
+
+Detalle de cada feature en [`docs/features.md`](docs/features.md).
 
 ## [0.1.0] — 2026-06-19
 
