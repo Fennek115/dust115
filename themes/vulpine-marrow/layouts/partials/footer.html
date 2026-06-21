@@ -11,13 +11,17 @@
   </div>
 </footer>
 
+{{/* Botón flotante "subir al inicio" — visible tras desplazarse (ver backtotop.js). */}}
+<button id="vm-top" class="vm-top" type="button" aria-label="Subir al inicio" title="Subir al inicio">↑</button>
+
 {{ $menu := resources.Get "js/menu.js" | js.Build }}
 {{ $cp := resources.Get "js/code.js" | js.Build }}
 {{ $lb := resources.Get "js/lightbox.js" | js.Build }}
+{{ $top := resources.Get "js/backtotop.js" | js.Build }}
 
 {{/* fingerprint: el nombre del bundle cambia con el contenido → invalida la caché
      del navegador cuando se edita el JS (si no, queda cacheado bundle.min.js). */}}
-{{ $bundle := slice $menu $cp $lb | resources.Concat "bundle.js" | resources.Minify | fingerprint }}
+{{ $bundle := slice $menu $cp $lb $top | resources.Concat "bundle.js" | resources.Minify | fingerprint }}
 
 <script type="text/javascript" src="{{ $bundle.RelPermalink }}"></script>
 

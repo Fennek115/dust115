@@ -339,6 +339,15 @@ body{
   font-family:monospace;
 }
 .sb-collapse-btn:hover{border-color:var(--accent);color:var(--accent);box-shadow:var(--glow-c)}
+/* Cerrar drawer (solo móvil; en desktop el sidebar es fijo y se colapsa con la flecha) */
+.sb-close-btn{
+  display:none;align-items:center;justify-content:center;
+  padding:3px 8px;background:rgba(255,45,111,.06);
+  border:1px solid rgba(255,45,111,.3);border-radius:4px;
+  color:var(--text2);cursor:pointer;font-size:13px;line-height:1;flex-shrink:0;
+  font-family:monospace;transition:all .15s;
+}
+.sb-close-btn:hover{border-color:var(--red);color:var(--red);box-shadow:var(--glow-r)}
 .sidebar.collapsed .sb-label{display:none}
 .sb-label{
   font-family:'Fira Code',monospace;
@@ -1211,6 +1220,9 @@ body.light-mode .m-bottomnav{background:rgba(247,244,251,.94);border-top-color:r
     padding-bottom:calc(76px + env(safe-area-inset-bottom));
   }
   body.sb-drawer-open .sidebar{transform:translateX(0)}
+  /* en móvil la flecha de colapso no aplica (el drawer es full-width); se cierra con ✕ */
+  .sb-collapse-btn{display:none}
+  .sb-close-btn{display:inline-flex}
   /* .body crea un stacking context (z-index:1); sin esto el drawer y el backdrop
      quedan POR DEBAJO del header (z-index:100) y se ven solapados. Al abrir el
      drawer elevamos .body por encima del header/vars-bar, pero por debajo de la

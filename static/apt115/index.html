@@ -90,6 +90,7 @@
     <div class="sb-top">
       <span class="sb-label">NAV_MENU</span>
       <button class="sb-collapse-btn" onclick="toggleSidebar()" id="sbCollapseBtn" title="Collapse sidebar">‹</button>
+      <button class="sb-close-btn" onclick="closeSidebarDrawer()" id="sbCloseBtn" title="Cerrar menú" aria-label="Cerrar menú">✕</button>
     </div>
     <!-- Acciones del header reubicadas en el drawer (solo visibles en móvil) -->
     <div class="sb-actions" aria-label="Acciones">
@@ -210,7 +211,10 @@
 
 <!-- Keyboard Shortcuts Panel -->
 <div id="shortcutPanel">
-  <div style="font-family:'Orbitron',monospace;font-size:10px;font-weight:700;color:var(--accent);margin-bottom:10px;letter-spacing:.5px;text-shadow:0 0 10px rgba(145,65,172,.5)">⌨ KEYBOARD_SHORTCUTS</div>
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px">
+    <span style="font-family:'Orbitron',monospace;font-size:10px;font-weight:700;color:var(--accent);letter-spacing:.5px;text-shadow:0 0 10px rgba(145,65,172,.5)">⌨ KEYBOARD_SHORTCUTS</span>
+    <button class="close-btn" onclick="toggleShortcuts()">Close ✕</button>
+  </div>
   <div class="sc-row"><span class="sc-desc">Focus search</span><kbd class="sc-key">Ctrl+K</kbd></div>
   <div class="sc-row"><span class="sc-desc">Clear search</span><kbd class="sc-key">Esc</kbd></div>
   <div class="sc-row"><span class="sc-desc">Next section</span><kbd class="sc-key">Ctrl+→</kbd></div>
