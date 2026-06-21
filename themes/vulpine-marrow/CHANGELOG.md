@@ -13,7 +13,8 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/).
 - **Tablas responsive** (`layouts/_default/_markup/render-table.html`): las tablas
   markdown se envuelven en `.table-wrap` con scroll horizontal **dentro de su
   caja** (no empujan el ancho de la página), *scroll shadows* sin JS como pista de
-  desplazamiento, y celdas que ya no se cortan a mitad de palabra.
+  desplazamiento (sombra **violeta** de la paleta, visible en móvil), y celdas que
+  ya no se cortan a mitad de palabra.
 - Botón flotante **«subir al inicio»** (`#vm-top`): aparece tras desplazarse,
   scroll suave (respeta `prefers-reduced-motion`), violeta sólido con flecha
   blanca y `env(safe-area-inset-bottom)` para el notch. Vive en el footer y se

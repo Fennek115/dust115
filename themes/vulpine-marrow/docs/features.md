@@ -132,10 +132,15 @@ de su caja** en vez de empujar el ancho de toda la página.
 - **Sin cortes a mitad de palabra**: la base aplica `word-break: break-word` a
   *todo* (selector universal), que partía «Sofisticació|n». Se desactiva en
   `th, td` (`word-break: normal`), así las celdas rompen sólo entre palabras.
-- **Pista de scroll** sin JS: el wrapper pinta dos sombras en los bordes con la
-  técnica de *scroll shadows* (`background-attachment: local` para las "tapas" +
-  `scroll` para las sombras). Sólo aparecen cuando hay más tabla para deslizar;
-  si la tabla entra entera (desktop), no se ve degradado.
+- **Pista de scroll** sin JS: en móvil, cuando la tabla se desborda, el wrapper
+  pinta una sombra **violeta** (`rgba(196, 113, 237, .5)`, el `--vm-purple` de la
+  paleta) en el borde hacia el que hay más tabla, como señal de que se puede
+  deslizar. Usa la técnica de *scroll shadows*: dos "tapas" del color de fondo
+  con `background-attachment: local` (se mueven con el contenido) sobre dos
+  sombras fijas al borde (`scroll`). Sólo aparecen cuando hay más tabla para
+  deslizar; si entra entera (desktop), las tapas las cubren y no se ve degradado.
+  El violeta reemplaza al negro original, que casi no se distinguía sobre el
+  fondo oscuro.
 
 ## Lightbox
 
