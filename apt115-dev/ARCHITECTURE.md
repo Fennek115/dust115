@@ -68,6 +68,37 @@ entries del bundle (dentro de `src/app/` sí hay imports reales: es un solo
 entry). Cada módulo convertido se auto-cuelga de window al cargar
 (`if (typeof window !== 'undefined') window.Triage.X = X`).
 
+## UI responsive (móvil)
+
+El layout de escritorio (sidebar fijo + header denso) no servía en el teléfono:
+el header se desbordaba y los paneles flotantes se solapaban. La adaptación es
+**CSS-first** (media queries en `static/apt115/style.css`, breakpoints 720/560px)
+con una capa fina de JS para la navegación inferior.
+
+- **Bottom nav** (`src/app/mobilenav.js`, global `window.mobileNav`): barra fija
+  inferior (`#mBottomNav`, visible solo ≤720px) con 5 destinos — Menú (drawer),
+  Buscar, Favs, Intel, Notas. `mobileNav(dest)` **cierra los demás paneles antes
+  de abrir** (un panel a la vez = sin solape) reutilizando los toggles existentes
+  (`toggleSidebarDrawer`, `toggleFav`, `toggleIntel`, `toggleNotesPanel`). Un
+  `MutationObserver` (guardado: no existe en el entorno de tests) sincroniza el
+  tab activo aunque se cierre con ✕ o `Esc`. Cableado en `index.js`
+  (`wireMobileNav()` en el init).
+- **Sidebar → drawer off-canvas**: en móvil el sidebar pasa a `position:fixed`
+  con `transform`. Trampa de apilado resuelta: `.body` crea un *stacking context*
+  (`z-index:1`), así que el drawer quedaba **por debajo del header** (`z-index:100`);
+  al abrir se eleva `body.sb-drawer-open .body{z-index:1050}` (sobre el header,
+  bajo la bottom nav 1100). Cierre por backdrop, por el tab Menú o por un botón ✕
+  propio del móvil (la flecha de colapso del escritorio se oculta).
+- **Header**: en móvil los botones secundarios se ocultan y se reubican en un
+  bloque ACTIONS dentro del drawer; quedan timer/progreso/tema. En escritorio el
+  search vive en la fila 2 (junto a las utilidades, acortado a 280px) y el badge
+  `VULPES CRANII` es un adorno en la fila 1. El atajo `Ctrl+K` se oculta en táctil.
+- **Paneles**: a pantalla completa con `padding-bottom` + `env(safe-area-inset-*)`
+  para que el botón Close no quede bajo la bottom nav.
+
+Esto vive en `style.css` (no en el tema Hugo) porque APT115 es una app standalone
+servida desde `static/`. El único JS nuevo es `mobilenav.js`; el resto es CSS.
+
 ## Build: un bundle, posición preservada
 
 `build.mjs` tiene el manifiesto `SOURCES` (las 37 fuentes en orden de carga) y

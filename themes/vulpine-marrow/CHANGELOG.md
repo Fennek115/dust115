@@ -2,6 +2,14 @@
 
 Formato basado en [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.2.0] — 2026-06-20
+
+### Added
+- Botón flotante **«subir al inicio»** (`#vm-top`): aparece tras desplazarse,
+  scroll suave (respeta `prefers-reduced-motion`), violeta sólido con flecha
+  blanca y `env(safe-area-inset-bottom)` para el notch. Vive en el footer y se
+  suma al bundle JS (`js/backtotop.js`). Ver `docs/features.md`.
+
 ## [0.1.0] — 2026-06-19
 
 Primera versión: extracción del *skin* Vulpine Marrow del sitio dust115 a un tema

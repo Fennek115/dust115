@@ -182,7 +182,8 @@ body{
   box-shadow:var(--glow-c);
   text-transform:uppercase;
 }
-.search-wrap{flex:1;max-width:360px;min-width:0;position:relative}
+/* search en la fila 2 (junto a las utilidades): más corto y pegado a la izquierda */
+.search-wrap{flex:0 1 280px;max-width:280px;min-width:0;position:relative;margin-right:auto}
 .search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:12px;pointer-events:none}
 .search-kbd{
   position:absolute;right:8px;top:50%;transform:translateY(-50%);
@@ -231,9 +232,10 @@ body{
   border-color:var(--accent);color:var(--accent);
   box-shadow:var(--glow-c);
 }
+/* badge decorativo en la fila 1, empujado a la derecha (embellecedor de marca) */
 .warn-badge{
   font-family:'Fira Code',monospace;
-  font-size:7.5px;padding:3px 8px;
+  font-size:7.5px;padding:3px 8px;margin-left:auto;
   background:rgba(255,140,32,.08);border:1px solid rgba(255,140,32,.4);
   border-radius:3px;color:var(--orange2);white-space:nowrap;
   letter-spacing:.5px;
@@ -1175,7 +1177,7 @@ body.light-mode .m-bottomnav{background:rgba(247,244,251,.94);border-top-color:r
 }
 @media (max-width:720px){
   :root{--sidebar-w:170px}
-  .search-wrap{order:3;flex-basis:100%;max-width:none}
+  .search-wrap{order:-1;flex-basis:100%;max-width:none;margin-right:0}
   /* el atajo Ctrl+K no aplica en táctil y pisaba el placeholder */
   .search-kbd{display:none}
   #searchInput{padding-right:14px}

@@ -155,3 +155,19 @@ Controles:
 - **Teclado** → `+` / `-` zoom, `0` restablecer, `Esc` cerrar.
 
 El caption se toma del `figcaption` de la figura si existe.
+
+## Botón «subir al inicio»
+
+`js/backtotop.js` + estilos en `05-elements.css`. El botón `#vm-top` vive en
+`partials/footer.html` (presente en todas las páginas) y forma parte del bundle
+JS junto a `menu`, `code` y `lightbox`.
+
+- **Aparición**: oculto al cargar; aparece (`.is-visible`) tras desplazarse más de
+  `500px`. El scroll se escucha con `passive` + `requestAnimationFrame` (sin
+  *layout thrashing*).
+- **Acción**: vuelve arriba con scroll suave; respeta `prefers-reduced-motion`
+  (salto instantáneo si el usuario lo pide).
+- **Estilo**: cuadrado redondeado, violeta sólido (`--vm-accent`) con flecha
+  blanca; al pasar el cursor vira a `--vm-purple` con glow. Posición fija abajo a
+  la derecha, respetando el notch con `env(safe-area-inset-bottom)`. Funciona en
+  claro y oscuro sin reglas duplicadas (el violeta es el mismo token en ambos).
