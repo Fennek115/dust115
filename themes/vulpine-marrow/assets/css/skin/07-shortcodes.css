@@ -47,7 +47,9 @@
 .cmd-copy--ok { color: var(--vm-green); border-color: var(--vm-green); }
 
 /* figure — imagen con caption + crédito */
-.vm-figure { margin: 24px 0; text-align: center; }
+/* base pone `figure { width: fit-content }` sin margen automático, así que la
+   figura queda pegada a la izquierda; margin:auto la centra en la columna. */
+.vm-figure { margin: 24px auto; text-align: center; }
 .vm-figure img {
   max-width: 100%;
   height: auto;

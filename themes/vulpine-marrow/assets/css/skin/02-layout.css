@@ -107,6 +107,10 @@
   max-width: 100%;
   height: auto;
   border-radius: 4px;
+  /* las imágenes en markdown plano (![](...)) son display:block por base;
+     centrarlas en la columna en vez de dejarlas pegadas a la izquierda */
+  margin-left: auto;
+  margin-right: auto;
 }
 .post--single .post-cover {
   width: 100%;
@@ -124,5 +128,24 @@
 /* medios dentro del texto: nunca exceden la columna */
 .post--single .post-content :is(img, figure, .vm-figure, table, .highlight, pre, .mermaid) {
   max-width: 100%;
+}
+
+/* prosa justificada (sin guiones: el sitio renderiza lang="en" y partiría
+   en inglés sobre texto español). Sólo el cuerpo de párrafos y listas. */
+.post--single .post-content :is(p, li) {
+  text-align: justify;
+  text-align-last: left;
+}
+
+/* ── Tablas: sin cortes a mitad de palabra ──
+   base aplica `word-break: break-word` a TODO (selector universal), lo que
+   parte "Sofisticació|n" cuando la columna queda estrecha. Lo desactivamos en
+   las tablas: las celdas vuelven a romper sólo entre palabras y las columnas
+   se dimensionan por contenido (table-layout: auto), así no quedan feas. */
+.post--single .post-content table { table-layout: auto; }
+.post--single .post-content :is(th, td) {
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
 }
 
