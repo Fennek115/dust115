@@ -1167,6 +1167,9 @@ body.light-mode .m-bottomnav{background:rgba(247,244,251,.94);border-top-color:r
 @media (max-width:720px){
   :root{--sidebar-w:170px}
   .search-wrap{order:3;flex-basis:100%;max-width:none}
+  /* el atajo Ctrl+K no aplica en táctil y pisaba el placeholder */
+  .search-kbd{display:none}
+  #searchInput{padding-right:14px}
   .hdr-title{font-size:12px;letter-spacing:.5px}
   .hdr-right{gap:4px}
   .hdr-btn,.theme-toggle{font-size:10px;padding:3px 7px}
@@ -1204,8 +1207,15 @@ body.light-mode .m-bottomnav{background:rgba(247,244,251,.94);border-top-color:r
     width:min(280px,84vw);min-width:0;
     transform:translateX(-100%);transition:transform .22s ease;
     z-index:1000;box-shadow:var(--shadow);overflow-y:auto;
+    /* deja sitio al final para que la última acción no quede bajo la bottom nav */
+    padding-bottom:calc(76px + env(safe-area-inset-bottom));
   }
   body.sb-drawer-open .sidebar{transform:translateX(0)}
+  /* .body crea un stacking context (z-index:1); sin esto el drawer y el backdrop
+     quedan POR DEBAJO del header (z-index:100) y se ven solapados. Al abrir el
+     drawer elevamos .body por encima del header/vars-bar, pero por debajo de la
+     bottom nav (z-index:1100), que sigue accesible para cerrar. */
+  body.sb-drawer-open .body{z-index:1050}
   .sidebar.collapsed{width:min(280px,84vw);min-width:0}  /* sin colapso-icono en móvil */
   .main{width:100%}
   #histPanel{left:0}  /* el sidebar ya no ocupa flujo */
