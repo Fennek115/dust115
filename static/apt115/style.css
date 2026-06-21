@@ -1123,6 +1123,44 @@ body.light-mode .hdr-home:hover{color:var(--accent);border-color:var(--accent)}
 .sb-backdrop{display:none;position:fixed;inset:0;z-index:990;background:rgba(0,0,0,.55)}
 body.sb-drawer-open .sb-backdrop{display:block}
 
+/* ── BOTTOM NAV (móvil) ── */
+/* Oculta en desktop; el media query ≤720px la muestra. z-index por encima de los
+   paneles (200) y del drawer (1000) para poder cambiar/cerrar sin que se solapen. */
+.m-bottomnav{display:none}
+.m-bottomnav .m-nav-btn{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
+  padding:7px 0 5px;border:none;background:none;cursor:pointer;position:relative;
+  border-radius:10px;transition:all .15s ease;
+  font-family:'Fira Code',monospace;
+}
+.m-nav-ico{font-size:18px;line-height:1;filter:grayscale(1) opacity(.5);transition:all .15s ease}
+.m-nav-lbl{font-size:9px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--text3)}
+.m-bottomnav .m-nav-btn.on .m-nav-ico{filter:none;text-shadow:0 0 12px rgba(196,113,237,.7)}
+.m-bottomnav .m-nav-btn.on .m-nav-lbl{color:var(--purple)}
+.m-bottomnav .m-nav-btn.on::before{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:24px;height:2px;border-radius:2px;background:var(--accent);box-shadow:0 0 8px var(--accent);
+}
+.m-bottomnav .m-nav-btn:active{transform:scale(.96)}
+body.light-mode .m-bottomnav{background:rgba(247,244,251,.94);border-top-color:rgba(145,65,172,.22)}
+
+/* ── ACCIONES EN EL DRAWER (móvil) ── */
+/* Reubican los botones secundarios del header que en móvil se ocultan del .hdr-right. */
+.sb-actions{display:none;flex-direction:column;gap:5px;padding:10px 10px 4px;margin-top:auto;border-top:1px solid rgba(196,113,237,.12)}
+.sb-actions-lbl{
+  font-family:'Fira Code',monospace;font-size:9px;font-weight:700;text-transform:uppercase;
+  letter-spacing:1.5px;color:var(--text3);padding:2px 2px 4px;
+}
+.sb-action-btn{
+  text-align:left;padding:8px 10px;border-radius:5px;cursor:pointer;
+  background:rgba(145,65,172,.04);border:1px solid rgba(145,65,172,.2);
+  color:var(--text2);font-family:'Fira Code',monospace;font-size:12px;font-weight:700;
+  transition:all .15s;
+}
+.sb-action-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(145,65,172,.1)}
+.sb-action-btn:active{transform:scale(.98)}
+.sidebar.collapsed .sb-actions{display:none}
+
 @media (max-width:1280px){
   .hdr{padding:6px 12px;gap:8px}
 }
@@ -1133,6 +1171,26 @@ body.sb-drawer-open .sb-backdrop{display:block}
   .hdr-right{gap:4px}
   .hdr-btn,.theme-toggle{font-size:10px;padding:3px 7px}
   .warn-badge{display:none}
+  /* header compacto: los botones secundarios viven ahora en el drawer (ACTIONS)
+     y en la bottom nav; en el header quedan timer, progreso y tema */
+  .hdr-right .hdr-btn{display:none}
+  #sessionImport{display:none}
+  /* drawer: mostrar el bloque de acciones reubicadas */
+  .sb-actions{display:flex}
+  /* bottom nav visible, fija al fondo, con safe-area para el notch */
+  .m-bottomnav{
+    display:flex;position:fixed;bottom:0;left:0;right:0;z-index:1100;
+    padding:6px 10px calc(8px + env(safe-area-inset-bottom));
+    background:rgba(26,21,37,.94);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    border-top:1px solid rgba(145,65,172,.25);
+    box-shadow:0 -4px 30px rgba(0,0,0,.6);
+  }
+  /* hueco para que la nav no tape el contenido ni el botón Close de los paneles */
+  .main{padding-bottom:calc(64px + env(safe-area-inset-bottom))}
+  #favPanel,#intelPanel,#notesPanel{padding-bottom:calc(70px + env(safe-area-inset-bottom))}
+  #histPanel{bottom:calc(58px + env(safe-area-inset-bottom))}
+  #jumpTop{bottom:calc(76px + env(safe-area-inset-bottom))}
+  .copy-toast{bottom:calc(76px + env(safe-area-inset-bottom))}
   /* vars-bar: una sola fila con scroll horizontal (sin recortarse a 60px) */
   .vars-bar-inner{gap:5px;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
   .vars-bar-inner > *{flex-shrink:0}
@@ -1156,4 +1214,6 @@ body.sb-drawer-open .sb-backdrop{display:block}
   .hdr-home{font-size:10px;padding:3px 7px}
   #favPanel,#intelPanel,#notesPanel,#histPanel{width:100%;left:0;right:0}
   #shortcutPanel{width:min(290px,94vw);right:8px;left:auto}
+  /* la frase latina de la status bar desborda en pantallas chicas */
+  .cyber-status-right{display:none}
 }

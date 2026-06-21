@@ -32,6 +32,7 @@ import {
 } from './intel.js';
 import { wireSearch, doSearch, refreshAllCmds } from './search.js';
 import { exportSession, importSession } from './session.js';
+import { mobileNav, wireMobileNav } from './mobilenav.js';
 import {
   toggleShortcuts, toggleSidebar, toggleSidebarDrawer, closeSidebarDrawer,
   initTheme, toggleTheme, wireKeyboard,
@@ -61,6 +62,8 @@ Object.assign(window, {
   exportSession, importSession,
   // chrome / vars
   toggleShortcuts, toggleSidebar, toggleSidebarDrawer, closeSidebarDrawer, toggleTheme, toggleVarsBar,
+  // navegación móvil (bottom nav)
+  mobileNav,
   // resetVars también refresca los comandos visibles (como el original)
   resetVars: () => { resetVars(); refreshAllCmds(); },
   // helpers globales
@@ -100,4 +103,5 @@ initTheme();
 updateNotesCount();
 initTimers();
 wireJumpTop();
+wireMobileNav();
 initOrb();

@@ -91,6 +91,17 @@
       <span class="sb-label">NAV_MENU</span>
       <button class="sb-collapse-btn" onclick="toggleSidebar()" id="sbCollapseBtn" title="Collapse sidebar">‹</button>
     </div>
+    <!-- Acciones del header reubicadas en el drawer (solo visibles en móvil) -->
+    <div class="sb-actions" aria-label="Acciones">
+      <span class="sb-actions-lbl">ACTIONS</span>
+      <button class="sb-action-btn" onclick="openCustomModal()">＋ Add command</button>
+      <button class="sb-action-btn" onclick="toggleHistory()">⏱ History</button>
+      <button class="sb-action-btn" onclick="exportFavs()">↓ Export favs</button>
+      <button class="sb-action-btn" onclick="window.open('../posts/apt115-manual/','_blank','noopener')">📖 Manual</button>
+      <button class="sb-action-btn" onclick="exportSession()">⬇ Export session</button>
+      <button class="sb-action-btn" onclick="document.getElementById('sessionImport').click()">⬆ Import session</button>
+      <button class="sb-action-btn" onclick="toggleShortcuts()">⌨ Shortcuts</button>
+    </div>
   </div>
   <div class="main" id="main">
     <div id="searchResults"></div>
@@ -278,6 +289,15 @@
   </div>
 </div>
 
+
+  <!-- Bottom nav (solo móvil): destinos/paneles principales. Reutiliza los handlers globales. -->
+  <nav class="m-bottomnav" id="mBottomNav" aria-label="Navegación principal">
+    <button class="m-nav-btn" data-dest="menu" onclick="mobileNav('menu')"><span class="m-nav-ico">☰</span><span class="m-nav-lbl">Menú</span></button>
+    <button class="m-nav-btn" data-dest="search" onclick="mobileNav('search')"><span class="m-nav-ico">⌕</span><span class="m-nav-lbl">Buscar</span></button>
+    <button class="m-nav-btn" data-dest="favs" onclick="mobileNav('favs')"><span class="m-nav-ico">★</span><span class="m-nav-lbl">Favs</span></button>
+    <button class="m-nav-btn" data-dest="intel" onclick="mobileNav('intel')"><span class="m-nav-ico">🎯</span><span class="m-nav-lbl">Intel</span></button>
+    <button class="m-nav-btn" data-dest="notes" onclick="mobileNav('notes')"><span class="m-nav-ico">📓</span><span class="m-nav-lbl">Notas</span></button>
+  </nav>
 
   <!-- App + tools, empaquetados por apt115-dev/build.mjs (fuente: src/ ESM + tools/ en migracion). Regenerar tras cambios. -->
   <script src="apt115.bundle.js"></script>
