@@ -148,4 +148,17 @@
   overflow-wrap: normal;
   hyphens: none;
 }
+/* wrapper (render-table.html): en móvil la tabla scrollea dentro de su caja
+   en vez de desbordar la página; en desktop llena la columna. */
+.post--single .post-content .table-wrap {
+  overflow-x: auto;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+.post--single .post-content .table-wrap > table {
+  width: max-content;   /* crece a su contenido si no entra (→ scroll) */
+  min-width: 100%;      /* pero llena la columna cuando hay espacio */
+  max-width: none;      /* anula el tope del 100% para permitir el scroll */
+  margin: 20px 0;
+}
 

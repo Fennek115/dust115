@@ -1,0 +1,31 @@
+{{- /* Envuelve cada tabla markdown en un contenedor con scroll horizontal.
+       En pantallas angostas (móvil) la tabla se desplaza DENTRO de su caja en
+       vez de empujar el ancho de toda la página. En desktop llena la columna.
+       Render hook de tabla de Hugo (≥0.134): .THead/.TBody son filas de celdas
+       con .Alignment y .Text (HTML ya renderizado). */ -}}
+<div class="table-wrap">
+  <table>
+    {{- with .THead }}
+    <thead>
+      {{- range . }}
+      <tr>
+        {{- range . }}
+        <th{{ with .Alignment }} style="text-align: {{ . }}"{{ end }}>{{ .Text }}</th>
+        {{- end }}
+      </tr>
+      {{- end }}
+    </thead>
+    {{- end }}
+    {{- with .TBody }}
+    <tbody>
+      {{- range . }}
+      <tr>
+        {{- range . }}
+        <td{{ with .Alignment }} style="text-align: {{ . }}"{{ end }}>{{ .Text }}</td>
+        {{- end }}
+      </tr>
+      {{- end }}
+    </tbody>
+    {{- end }}
+  </table>
+</div>

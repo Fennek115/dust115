@@ -9,6 +9,8 @@
   let overlay, stage, capEl;
   let scale = 1, tx = 0, ty = 0;                 // transform actual del stage
   let dragging = false, sx = 0, sy = 0, ox = 0, oy = 0;
+  const pointers = new Map();                    // punteros activos (pan/pinch)
+  let lastDist = 0;                              // distancia previa del pinch
   let lastFocus = null;
   const MIN = 0.2, MAX = 8, STEP = 1.25;
 
@@ -95,25 +97,56 @@
       zoomBy(factor, { x: e.clientX, y: e.clientY });
     }, { passive: false });
 
-    // pan
+    // pan (un dedo / mouse) + pinch-zoom (dos dedos, táctil).
+    // touch-action:none en el stage entrega TODOS los gestos al JS, así que el
+    // pinch lo calculamos a mano por la distancia entre los dos punteros.
+    const pinchMid = () => {
+      const p = [...pointers.values()];
+      return { x: (p[0].x + p[1].x) / 2, y: (p[0].y + p[1].y) / 2 };
+    };
+    const pinchDist = () => {
+      const p = [...pointers.values()];
+      return Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y);
+    };
+
     stage.addEventListener("pointerdown", (e) => {
       e.preventDefault();                         // evita selección / ghost-drag
-      dragging = true;
-      sx = e.clientX; sy = e.clientY; ox = tx; oy = ty;
+      pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
       try { stage.setPointerCapture(e.pointerId); } catch (_) {}
-      stage.classList.add("is-grabbing");
+      if (pointers.size === 1) {
+        dragging = true;
+        sx = e.clientX; sy = e.clientY; ox = tx; oy = ty;
+        stage.classList.add("is-grabbing");
+      } else if (pointers.size === 2) {
+        dragging = false;                         // de pan a pinch
+        lastDist = pinchDist();
+      }
     });
     stage.addEventListener("pointermove", (e) => {
-      if (!dragging) return;
-      tx = ox + (e.clientX - sx);
-      ty = oy + (e.clientY - sy);
-      apply();
+      if (!pointers.has(e.pointerId)) return;
+      pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (pointers.size >= 2) {                   // pinch
+        const d = pinchDist();
+        if (lastDist > 0) zoomBy(d / lastDist, pinchMid());
+        lastDist = d;
+      } else if (dragging) {                      // pan
+        tx = ox + (e.clientX - sx);
+        ty = oy + (e.clientY - sy);
+        apply();
+      }
     });
     const endDrag = (e) => {
-      if (!dragging) return;
-      dragging = false;
-      stage.classList.remove("is-grabbing");
+      if (!pointers.has(e.pointerId)) return;
+      pointers.delete(e.pointerId);
       try { stage.releasePointerCapture(e.pointerId); } catch (_) {}
+      if (pointers.size < 2) lastDist = 0;
+      if (pointers.size === 1) {                  // reanudar pan con el dedo que queda
+        const [p] = [...pointers.values()];
+        dragging = true; sx = p.x; sy = p.y; ox = tx; oy = ty;
+      } else if (pointers.size === 0) {
+        dragging = false;
+        stage.classList.remove("is-grabbing");
+      }
     };
     stage.addEventListener("pointerup", endDrag);
     stage.addEventListener("pointercancel", endDrag);
