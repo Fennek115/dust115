@@ -101,3 +101,57 @@ con `.TableOfContents` y `TocTitle`. Los headings reciben un ancla `#` al hover.
 `partials/footer.html` muestra un lema en latín (`mortui vivos docent`) y un
 enlace al repo del tema. Es deliberadamente opinado; editá el partial para tu
 propio lema/enlace.
+
+## Layout de lectura del post
+
+Todo el sitio —home, archivo y posts— comparte **un único ancho** (`--vm-home`,
+880px por defecto): el header, la prosa, las imágenes y el footer se alinean al
+mismo borde. No hay *breakout* (los medios no se ensanchan más que el texto), lo
+que evita el desajuste visual entre artículo y figuras.
+
+Dentro del post (`02-layout.css`, scope `.post--single .post-content`):
+
+- **Prosa justificada** en párrafos y listas (`text-align: justify` con
+  `text-align-last: left`). **Sin guiones**: el sitio renderiza `lang="en"`, así
+  que `hyphens: auto` partiría en inglés sobre texto en español.
+- **Imágenes y figuras centradas.** La base de Terminal trae `img{display:block}`
+  y `figure{width:fit-content}` sin centrado, así que las imágenes en markdown
+  plano quedaban a la izquierda; se les agrega `margin-inline: auto`, y a
+  `.vm-figure` (shortcode `figure`) `margin: 24px auto`.
+
+## Tablas (responsive)
+
+Las tablas markdown se envuelven automáticamente en `<div class="table-wrap">`
+vía el render hook `layouts/_default/_markup/render-table.html`. El wrapper hace
+scroll horizontal, de modo que en pantallas angostas la tabla se desliza **dentro
+de su caja** en vez de empujar el ancho de toda la página.
+
+- **Anchos** (`02-layout.css`): la tabla usa `width: 100%` (en desktop llena la
+  columna y envuelve el contenido) con `min-width: 34rem` (en móvil no se achica
+  más allá de ~544px, así que se desborda → scroll).
+- **Sin cortes a mitad de palabra**: la base aplica `word-break: break-word` a
+  *todo* (selector universal), que partía «Sofisticació|n». Se desactiva en
+  `th, td` (`word-break: normal`), así las celdas rompen sólo entre palabras.
+- **Pista de scroll** sin JS: el wrapper pinta dos sombras en los bordes con la
+  técnica de *scroll shadows* (`background-attachment: local` para las "tapas" +
+  `scroll` para las sombras). Sólo aparecen cuando hay más tabla para deslizar;
+  si la tabla entra entera (desktop), no se ve degradado.
+
+## Lightbox
+
+`js/lightbox.js` + `09-lightbox.css`. Al hacer click/tap en una imagen, SVG o
+diagrama mermaid dentro de un post, se abre un overlay a pantalla completa. Usa
+**delegación de eventos** sobre `.post-content`, así que funciona aunque mermaid
+renderice su `<svg>` de forma asíncrona. Sin dependencias.
+
+Controles:
+
+- **Rueda del mouse** → zoom alrededor del cursor.
+- **Arrastrar** (mouse o un dedo) → *pan*.
+- **Pinch con dos dedos** (táctil) → zoom alrededor del punto medio. El stage
+  tiene `touch-action: none`, así que el gesto lo calcula el JS rastreando los
+  punteros activos.
+- **Barra** (esquina) → alejar / restablecer / acercar / cerrar.
+- **Teclado** → `+` / `-` zoom, `0` restablecer, `Esc` cerrar.
+
+El caption se toma del `figcaption` de la figura si existe.

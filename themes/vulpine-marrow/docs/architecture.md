@@ -75,29 +75,41 @@ subpath del `baseURL` (p. ej. `…/dust115/`). Si entrara al bundle fingerprinte
 (servido desde `/css/…`), esa ruta relativa se rompería. Las fuentes son los
 únicos archivos con `url()`, por eso son la única excepción al bundle.
 
-### El *skin* está partido en 8
+### El *skin* está partido en 9
 
-`skin/01..08.css` son cortes contiguos del antiguo `static/style.css`. El número
-fija el orden de carga (se concatena en secuencia). Reparto:
+`skin/01..09.css` son cortes contiguos del antiguo `static/style.css` (más el
+lightbox, agregado después). El número fija el orden de carga (se concatena en
+secuencia). Reparto:
 
 | Archivo | Contenido |
 |---------|-----------|
 | `01-bridge.css` | bridge de variables, body/fuente, links, tags, botones, code, header/footer, paginación, posts base |
-| `02-layout.css` | ancho de lectura (720px), home curada, listado feed, vista de post |
+| `02-layout.css` | ancho único del sitio (`--vm-home`), home curada, listado feed, vista de post (prosa justificada, imágenes/figuras centradas, tablas responsive) |
 | `03-garden.css` | wikilinks + backlinks |
 | `04-codice.css` | índice del Códice |
-| `05-elements.css` | blockquotes, hr, tablas, scrollbar, selección, callouts, TOC, mermaid |
+| `05-elements.css` | blockquotes, hr, estilo base de tablas, scrollbar, selección, callouts, TOC, mermaid |
 | `06-header.css` | header de una fila, logo `dust115$`, botón de tema, menú |
-| `07-shortcodes.css` | command / figure / badge / tlp |
+| `07-shortcodes.css` | command / figure (centrada) / badge / tlp |
 | `08-synapsis.css` | página Synapsis |
+| `09-lightbox.css` | lightbox de imágenes/SVG/mermaid (overlay, barra, sombras) |
 
 ## Pipeline de JS
 
-`footer.html` concatena `js/menu.js` + `js/code.js` (vía `js.Build`) en un
-`bundle.js` minificado. `code.js` agrega el botón de copia a los bloques de
-código; `menu.js` es el menú móvil de Terminal (inerte si no hay `.menu`, se
-conserva por compatibilidad). El resto del JS (toggle de tema, mermaid) lo
-maneja `extended_footer.html` inline.
+`footer.html` concatena `js/menu.js` + `js/code.js` + `js/lightbox.js` (vía
+`js.Build`) en un `bundle.js` minificado **y con `fingerprint`** (el hash en el
+nombre invalida la caché del navegador cuando cambia el JS). `code.js` agrega el
+botón de copia a los bloques de código; `lightbox.js` da el visor de imágenes
+(ver *Features*); `menu.js` es el menú móvil de Terminal (inerte si no hay
+`.menu`, se conserva por compatibilidad). El resto del JS (toggle de tema,
+mermaid) lo maneja `extended_footer.html` inline.
+
+### Render hooks
+
+`layouts/_default/_markup/` contiene los render hooks de markdown:
+
+- `render-codeblock-mermaid.html` — detecta los bloques ```` ```mermaid ````.
+- `render-table.html` — envuelve cada tabla en `<div class="table-wrap">` para
+  el scroll horizontal responsive (ver *Features → Tablas*).
 
 ## Requisitos
 

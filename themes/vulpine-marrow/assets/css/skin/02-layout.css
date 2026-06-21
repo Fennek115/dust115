@@ -149,15 +149,29 @@
   hyphens: none;
 }
 /* wrapper (render-table.html): en móvil la tabla scrollea dentro de su caja
-   en vez de desbordar la página; en desktop llena la columna. */
+   en vez de desbordar la página; en desktop llena la columna.
+   Pista de scroll ("scroll shadows", sin JS): dos "tapas" del color de fondo
+   que se desplazan CON el contenido (background-attachment: local) y dos
+   sombras fijas al borde visible (scroll). Cuando hay más tabla hacia un lado,
+   la tapa se corre y deja ver la sombra; en los extremos la tapa la oculta.
+   Si la tabla entra entera (desktop), ambas tapas cubren las sombras → sin
+   degradado. */
 .post--single .post-content .table-wrap {
   overflow-x: auto;
   max-width: 100%;
   -webkit-overflow-scrolling: touch;
+  background:
+    linear-gradient(to right, var(--background) 30%, transparent) 0 0,
+    linear-gradient(to left,  var(--background) 30%, transparent) 100% 0,
+    radial-gradient(farthest-side at 0 50%,    rgba(0, 0, 0, .28), transparent) 0 0,
+    radial-gradient(farthest-side at 100% 50%, rgba(0, 0, 0, .28), transparent) 100% 0;
+  background-repeat: no-repeat;
+  background-size: 36px 100%, 36px 100%, 16px 100%, 16px 100%;
+  background-attachment: local, local, scroll, scroll;
 }
 .post--single .post-content .table-wrap > table {
-  width: max-content;   /* crece a su contenido si no entra (→ scroll) */
-  min-width: 100%;      /* pero llena la columna cuando hay espacio */
+  width: 100%;          /* desktop: llena la columna y envuelve el contenido */
+  min-width: 34rem;     /* móvil: no baja de ~544px → se desborda y scrollea */
   max-width: none;      /* anula el tope del 100% para permitir el scroll */
   margin: 20px 0;
 }
