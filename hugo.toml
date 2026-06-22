@@ -7,6 +7,10 @@ theme = "vulpine-marrow"
   pagerSize = 10
 
 enableRobotsTXT = true
+
+[outputs]
+  home = ["HTML", "RSS", "robots"]
+
 [permalinks]
   posts = "/posts/:slug/"
 

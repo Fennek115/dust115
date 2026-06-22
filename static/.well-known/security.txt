@@ -1,0 +1,5 @@
+# https://securitytxt.org/ — RFC 9116
+Contact: mailto:franco.cchavarria@protonmail.com
+Expires: 2027-06-21T23:59:59.000Z
+Preferred-Languages: es, en
+Canonical: https://fennek.org/.well-known/security.txt
