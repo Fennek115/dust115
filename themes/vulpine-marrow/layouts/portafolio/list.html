@@ -1,0 +1,21 @@
+{{ define "main" }}
+  {{ with .Content }}
+    <div class="index-content">{{ . }}</div>
+  {{ end }}
+
+  {{/* Landing del portafolio: lista automática por fecha de los posts etiquetados
+       con `proyecto`. Los posts NO salen del stream del blog — esto sólo los reúne
+       bajo una URL propia. Para sumar/quitar uno: agregá/sacá el tag `proyecto`. */}}
+  {{ $proyectos := where .Site.RegularPages "Params.tags" "intersect" (slice "proyecto") }}
+  {{ $proyectos = $proyectos.ByDate.Reverse }}
+
+  {{ with $proyectos }}
+  <div class="post-list portafolio-list">
+    {{ range . }}
+      {{ partial "post-card.html" . }}
+    {{ end }}
+  </div>
+  {{ else }}
+    <p class="portafolio-empty">Todavía no hay proyectos etiquetados.</p>
+  {{ end }}
+{{ end }}

@@ -1,0 +1,26 @@
+{{ define "main" }}
+<article class="post post--single">
+  <h1 class="post-title">{{ .Title }}</h1>
+
+  {{ with .Content }}<div class="index-content">{{ . }}</div>{{ end }}
+
+  {{/* Buscador full-text client-side. El índice se genera en build (layouts/index.json)
+       y lo carga js/search.js vía fetch. Sin CDN ni dependencias externas. */}}
+  <div class="vm-search" data-index="{{ "index.json" | relLangURL }}">
+    <form class="vm-search__form" role="search" autocomplete="off" onsubmit="return false;">
+      <input
+        id="vm-search-input"
+        class="vm-search__input"
+        type="search"
+        name="q"
+        placeholder="buscar en el archivo…"
+        aria-label="Buscar"
+        autocapitalize="off"
+        spellcheck="false">
+    </form>
+
+    <p id="vm-search-status" class="vm-search__status" role="status" aria-live="polite"></p>
+    <div id="vm-search-results" class="post-list vm-search__results"></div>
+  </div>
+</article>
+{{ end }}

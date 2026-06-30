@@ -4,7 +4,7 @@ title: "Project Athanor: 5,000 Ataques en 4 Horas - Análisis Forense de un Hone
 date: 2026-01-28T19:00:00-03:00
 draft: false
 categories: [Ciberseguridad, Blue Team]
-tags: [Azure, Honeypot, T-Pot, Malware Analysis, OOM Killer, Forensics]
+tags: [Azure, Honeypot, T-Pot, Malware Analysis, OOM Killer, Forensics, proyecto]
 cover: elastic_dashboard.png
 coverCredit: "Dashboard de T-Pot mostrando mapa de amenazas"
 toc: true

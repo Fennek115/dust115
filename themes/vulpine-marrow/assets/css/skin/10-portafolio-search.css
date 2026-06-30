@@ -1,0 +1,56 @@
+/* ── Portafolio + Buscador ────────────────────────────────────────────────
+   Landing /portafolio/ (reusa .post-item del feed) y el buscador full-text
+   de /buscar/. Paleta --vm-*; glow sólo on intent (focus). */
+
+/* Buscador */
+.vm-search {
+  margin-top: 1.5rem;
+}
+
+.vm-search__form {
+  margin: 0 0 1rem;
+}
+
+.vm-search__input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.7rem 0.9rem;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--vm-text-1);
+  background: var(--vm-bg-2);
+  border: 1px solid var(--vm-border-2);
+  border-radius: 6px;
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.vm-search__input::placeholder {
+  color: var(--vm-text-3);
+}
+
+.vm-search__input:focus {
+  border-color: var(--vm-accent);
+  box-shadow: var(--vm-focus-ring, 0 0 0 2px rgba(145, 65, 172, .4));
+}
+
+.vm-search__status {
+  margin: 0 0 1.25rem;
+  font-size: 0.85rem;
+  color: var(--vm-text-3);
+  min-height: 1.2em;
+}
+
+/* Resaltado de coincidencias */
+.vm-search mark {
+  background: rgba(196, 113, 237, .22);
+  color: var(--vm-purple);
+  border-radius: 3px;
+  padding: 0 .12em;
+}
+
+/* Landing del portafolio */
+.portafolio-empty {
+  color: var(--vm-text-3);
+  font-style: italic;
+}

@@ -4,7 +4,7 @@ title: "Proyecto Ouroboros: Automatizando la Inmortalidad del Código con DevSec
 date: 2026-01-30
 draft: false
 categories: [DevSecOps, Snyk, GitHub Actions]
-tags: [cybersecurity, ci-cd, python, snyk]
+tags: [cybersecurity, ci-cd, python, snyk, proyecto]
 cover: snyk.png
 toc: true
 ---

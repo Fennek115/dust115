@@ -9,7 +9,7 @@ theme = "vulpine-marrow"
 enableRobotsTXT = true
 
 [outputs]
-  home = ["HTML", "RSS", "robots"]
+  home = ["HTML", "RSS", "robots", "JSON"]
 
 [permalinks]
   posts = "/posts/:slug/"
@@ -64,19 +64,31 @@ enableRobotsTXT = true
       weight = 2
 
     [[languages.en.menu.main]]
+      identifier = "portafolio"
+      name = "portafolio"
+      url = "/portafolio/"
+      weight = 3
+
+    [[languages.en.menu.main]]
       identifier = "codice"
       name = "códice"
       url = "/codice"
-      weight = 3
+      weight = 4
 
     [[languages.en.menu.main]]
       identifier = "synapsis"
       name = "synapsis"
       url = "/synapsis"
-      weight = 4
+      weight = 5
+
+    [[languages.en.menu.main]]
+      identifier = "buscar"
+      name = "buscar"
+      url = "/buscar/"
+      weight = 6
 
     [[languages.en.menu.main]]
       identifier = "apt115"
       name = "apt115"
       url = "/apt115/"
-      weight = 5
+      weight = 7

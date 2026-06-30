@@ -4,7 +4,7 @@ title: "Project Athanor: Forjando el Horno Alquímico - Despliegue de Honeypot e
 date: 2026-01-28T18:00:00-03:00
 draft: false
 categories: [Ciberseguridad, Blue Team]
-tags: [Azure, Honeypot, T-Pot, DevSecOps, Infrastructure, SSH]
+tags: [Azure, Honeypot, T-Pot, DevSecOps, Infrastructure, SSH, proyecto]
 cover: tpot_dashboard_main.png
 coverCredit: "Dashboard principal de T-Pot mostrando la interfaz de administración"
 toc: true

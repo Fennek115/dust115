@@ -27,7 +27,8 @@
   "css/base/post.css" "css/base/syntax.css" "css/base/terminal.css" "css/base/terms.css"
   "css/skin/01-bridge.css" "css/skin/02-layout.css" "css/skin/03-garden.css"
   "css/skin/04-codice.css" "css/skin/05-elements.css" "css/skin/06-header.css"
-  "css/skin/07-shortcodes.css" "css/skin/08-synapsis.css" "css/skin/09-lightbox.css" }}
+  "css/skin/07-shortcodes.css" "css/skin/08-synapsis.css" "css/skin/09-lightbox.css"
+  "css/skin/10-portafolio-search.css" }}
 {{ $sheets := slice }}
 {{ range $order }}{{ with resources.Get . }}{{ $sheets = $sheets | append . }}{{ end }}{{ end }}
 {{ $bundle := $sheets | resources.Concat "css/vm-bundle.css" | minify | fingerprint }}

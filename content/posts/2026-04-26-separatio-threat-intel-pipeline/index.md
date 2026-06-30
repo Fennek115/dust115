@@ -4,7 +4,7 @@ title: "Separatio: Construyendo un Pipeline de Threat Intelligence Autónomo con
 date: 2026-04-26
 draft: false
 categories: [Proyectos, Ciberseguridad]
-tags: [threat-intelligence, miniflux, ollama, openai, rss, automation, python, proxmox, siem, cve, llm, homelab]
+tags: [threat-intelligence, miniflux, ollama, openai, rss, automation, python, proxmox, siem, cve, llm, homelab, proyecto]
 cover: 19-pipeline-day6-259-articulos-multiphase.png
 coverCredit: "Pipeline Separatio procesando 259 artículos con el modelo multi-fase en 9 minutos"
 toc: true

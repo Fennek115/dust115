@@ -4,7 +4,7 @@ title: "Vulpine Marrow: Infraestructura C2 Red Team con Sliver, WireGuard y Clou
 date: 2026-05-03
 draft: false
 categories: [Red Team, Infraestructura]
-tags: [sliver, wireguard, nginx, cloudflare, oracle-cloud, proxmox, c2, red-team, opsec, linux, azure, lets-encrypt, beacon]
+tags: [sliver, wireguard, nginx, cloudflare, oracle-cloud, proxmox, c2, red-team, opsec, linux, azure, lets-encrypt, beacon, proyecto]
 cover: postimagevulpinemarrow.png
 coverCredit: "Vulpine Marrow — Infraestructura C2 Red Team Distribuida"
 toc: true

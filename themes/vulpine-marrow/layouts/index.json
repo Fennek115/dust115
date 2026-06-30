@@ -1,0 +1,19 @@
+{{- /* Índice de búsqueda full-text generado en build. Lo consume js/search.js
+       (fetch a /index.json) para el buscador client-side, sin CDN ni dependencias.
+       Incluye todas las páginas regulares (blog + códice), excluyendo las que
+       marquen `noindex` en su front matter. */ -}}
+{{- $idx := slice -}}
+{{- range where .Site.RegularPages "Params.noindex" "!=" true -}}
+  {{- $entry := dict
+      "title" .Title
+      "url" .RelPermalink
+      "date" (.Date.Format "2006-01-02")
+      "section" .Section
+      "series" (index (.Params.series | default slice) 0)
+      "summary" (.Summary | plainify | htmlUnescape)
+      "tags" (.Params.tags | default slice)
+      "content" (.Plain | htmlUnescape)
+  -}}
+  {{- $idx = $idx | append $entry -}}
+{{- end -}}
+{{- $idx | jsonify -}}
