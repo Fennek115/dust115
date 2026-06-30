@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 560" font-family="'Fira Code','JetBrains Mono',monospace">
+  <rect width="1100" height="560" rx="18" fill="#241f31"/>
+  <rect x="0.5" y="0.5" width="1099" height="559" rx="18" fill="none" stroke="#9141ac" stroke-opacity="0.35"/>
+
+  <text x="60" y="60" font-size="28" fill="#f6f5f4" font-weight="700">Atribución: evidencia, no etiquetas</text>
+  <text x="60" y="92" font-size="16" fill="#9a8fb0">dos veredictos sobre la misma muestra — qué los sostiene</text>
+
+  <!-- Panel izq: Grandoreiro confirmado -->
+  <rect x="60" y="120" width="480" height="404" rx="12" fill="#6ab04c" fill-opacity="0.06" stroke="#6ab04c" stroke-opacity="0.55"/>
+  <text x="84" y="160" font-size="20" fill="#f6f5f4" font-weight="700">Grandoreiro</text>
+  <text x="84" y="184" font-size="14" fill="#6ab04c">CONFIRMADO · evidencia convergente</text>
+
+  <g font-size="14.5" fill="#e8e6ea">
+    <text x="84" y="226">✓ Multi-AV: ESET / Fortinet / Alibaba</text>
+    <text x="104" y="246" fill="#9a8fb0">→ trojan.grandoreiro (firma, no asociación)</text>
+    <text x="84" y="280">✓ Compilador Embarcadero Delphi</text>
+    <text x="104" y="300" fill="#9a8fb0">→ RTTI Software\Borland\Delphi\Locales</text>
+    <text x="84" y="334">✓ Algoritmo de descifrado de strings</text>
+    <text x="104" y="354" fill="#9a8fb0">→ clave triple-base64 + AES (IBM X-Force)</text>
+    <text x="84" y="388">✓ DGA de 14 semillas vía DoH</text>
+    <text x="104" y="408" fill="#9a8fb0">→ stronghealth.mlbfan.org, apex diario</text>
+    <text x="84" y="442">✓ Banker: keylogger, captura, clipboard, EWM</text>
+    <text x="104" y="462" fill="#9a8fb0">→ overlay de banca, hooks, BTC wallets</text>
+    <text x="84" y="496">✓ Geofencing: excluye RU / CZ / PL / NL</text>
+  </g>
+
+  <!-- Panel der: RatonRAT falso positivo -->
+  <rect x="560" y="120" width="480" height="404" rx="12" fill="#ed6b5e" fill-opacity="0.06" stroke="#ed6b5e" stroke-opacity="0.55"/>
+  <text x="584" y="160" font-size="20" fill="#f6f5f4" font-weight="700">RatonRAT</text>
+  <text x="584" y="184" font-size="14" fill="#ed6b5e">FALSO POSITIVO · etiqueta de sandbox</text>
+
+  <g font-size="14.5" fill="#e8e6ea">
+    <text x="584" y="226">✗ Joe Sandbox: sin firma YARA ni config</text>
+    <text x="604" y="246" fill="#9a8fb0">→ "No yara matches", "No configs found"</text>
+    <text x="584" y="280">✗ Etiqueta por contactar ip-api.com</text>
+    <text x="604" y="300" fill="#9a8fb0">→ IP de geolocalización compartida (ruido)</text>
+    <text x="584" y="334">✗ RatonRAT está escrito en C#</text>
+    <text x="604" y="354" fill="#9a8fb0">→ el payload es Delphi: imposible mecánico</text>
+    <text x="584" y="388">⚠ El malware evadió el sandbox</text>
+    <text x="604" y="408" fill="#9a8fb0">→ 1 proceso, 0 red, 0 archivos: datos pobres</text>
+    <text x="584" y="448" fill="#cdb4db">El auto-label es una hipótesis,</text>
+    <text x="584" y="470" fill="#cdb4db">no una sentencia. Hay que corroborar.</text>
+  </g>
+</svg>

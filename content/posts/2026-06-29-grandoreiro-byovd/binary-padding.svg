@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 380" font-family="'Fira Code','JetBrains Mono',monospace">
+  <rect width="1100" height="380" rx="18" fill="#241f31"/>
+  <rect x="0.5" y="0.5" width="1099" height="379" rx="18" fill="none" stroke="#9141ac" stroke-opacity="0.35"/>
+
+  <text x="60" y="62" font-size="28" fill="#f6f5f4" font-weight="700">Binary padding: 116 MB de los que ~94% es relleno</text>
+  <text x="60" y="94" font-size="16" fill="#9a8fb0">el payload Delphi de Grandoreiro inflado para superar el límite de escaneo de AV/sandbox</text>
+
+  <!-- defs: hatch para el relleno -->
+  <defs>
+    <pattern id="pad" width="14" height="14" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+      <rect width="14" height="14" fill="#9141ac" fill-opacity="0.14"/>
+      <line x1="0" y1="0" x2="0" y2="14" stroke="#9141ac" stroke-opacity="0.40" stroke-width="2"/>
+    </pattern>
+  </defs>
+
+  <!-- barra proporcional: total 980px = 116 MB -->
+  <!-- .text 6.6MB ~ 5.7% ~ 56px ; otras secciones ~1.5% ~ 22px ; .rsrc 109MB ~ 94% ~ 902px -->
+  <text x="60" y="150" font-size="14" fill="#9a8fb0">mapa del PE (proporcional al tamaño en disco)</text>
+  <g>
+    <!-- .text -->
+    <rect x="60"  y="162" width="56"  height="58" fill="#9141ac"/>
+    <!-- otras secciones -->
+    <rect x="116" y="162" width="22"  height="58" fill="#cdb4db" fill-opacity="0.55"/>
+    <!-- .rsrc relleno -->
+    <rect x="138" y="162" width="902" height="58" fill="url(#pad)"/>
+    <rect x="60"  y="162" width="980" height="58" fill="none" stroke="#9141ac" stroke-opacity="0.5" rx="2"/>
+  </g>
+
+  <!-- etiquetas de segmentos -->
+  <text x="62"  y="240" font-size="13" fill="#cdb4db">.text · ~6.6 MB</text>
+  <text x="62"  y="258" font-size="12" fill="#9a8fb0">código real</text>
+  <text x="150" y="240" font-size="13" fill="#cdb4db">.rsrc · ~109 MB de relleno (imágenes BMP / ceros)</text>
+  <text x="150" y="258" font-size="12" fill="#9a8fb0">entropía global del archivo ≈ 0.42 → casi todo es padding repetitivo</text>
+
+  <!-- callouts -->
+  <line x1="60" y1="300" x2="1040" y2="300" stroke="#9141ac" stroke-opacity="0.25"/>
+  <text x="60"  y="330" font-size="15" fill="#f6f5f4">SizeOfImage  <tspan fill="#cdb4db">121.565.184 B (~116 MB)</tspan></text>
+  <text x="60"  y="356" font-size="15" fill="#f6f5f4">en disco  <tspan fill="#cdb4db">284 MB</tspan>   ·   comprime a  <tspan fill="#cdb4db">~3.7 MB</tspan> en el ZIP   ·   coste de descarga casi nulo</text>
+  <text x="700" y="330" font-size="15" fill="#ed6b5e">el escáner ve 116–284 MB</text>
+  <text x="700" y="356" font-size="15" fill="#ed6b5e">y se rinde antes del código</text>
+</svg>
