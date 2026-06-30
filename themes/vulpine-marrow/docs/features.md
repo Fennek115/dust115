@@ -115,7 +115,10 @@ Buscador client-side **sin dependencias ni CDN**, en tres piezas:
    y precarga la query desde `?q=` en la URL. Debounce de 120 ms.
 
 Estilos en `10-portafolio-search.css`. Para cambiar el alcance (incluir otras
-secciones, o todo el sitio) se edita el filtro de `layouts/index.json`.
+secciones, o todo el sitio) se edita el filtro de `layouts/index.json`. El
+`content` se **capa a 8000 chars** por entrada (`substr`) para acotar el peso del
+índice sin perder la búsqueda en el cuerpo de un post típico; subí ese número si
+tus posts son muy largos y querés recall total.
 
 ## Portafolio (landing por tag)
 
@@ -126,6 +129,11 @@ secciones, o todo el sitio) se edita el filtro de `layouts/index.json`.
 del stream del blog** —el tag sólo los agrupa—, así que sumar/quitar uno es
 agregar/sacar el tag. El tag objetivo está hardcodeado en el layout; cambiá el
 `intersect (slice "proyecto")` si usás otro nombre.
+
+Como `proyecto` es un marcador **interno** (no un tema del post), se **oculta** de
+los chips de tags en `post-card.html` y de la lista de términos en `terms.html`
+(ambos filtran `ne . "proyecto"`); la página `/tags/proyecto/` sigue existiendo
+pero no se enlaza. Si renombrás el tag, actualizá esos dos filtros también.
 
 ## Tabla de contenidos
 

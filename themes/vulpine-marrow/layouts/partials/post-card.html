@@ -10,7 +10,9 @@
     <span> · {{ .ReadingTime }} {{ $.Site.Params.minuteReadingTime | default "min de lectura" }}</span>
   </div>
   <p class="post-item__summary">{{ .Summary | plainify | truncate 200 }}</p>
-  {{- with .Params.tags }}
+  {{- /* `proyecto` es un tag interno (alimenta /portafolio/), no se muestra como chip */ -}}
+  {{- $tags := slice }}{{ range .Params.tags }}{{ if ne . "proyecto" }}{{ $tags = $tags | append . }}{{ end }}{{ end }}
+  {{- with $tags }}
   <div class="post-item__tags">
     {{- range first 5 . }}<a class="post-item__tag" href="{{ (urlize (printf "tags/%s/" .)) | absLangURL }}">{{ . }}</a>{{ end -}}
   </div>

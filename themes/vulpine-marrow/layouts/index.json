@@ -15,7 +15,7 @@
       "series" (index (.Params.series | default slice) 0)
       "summary" (.Summary | plainify | htmlUnescape)
       "tags" (.Params.tags | default slice)
-      "content" (.Plain | htmlUnescape)
+      "content" (substr (.Plain | htmlUnescape) 0 8000)
   -}}
   {{- $idx = $idx | append $entry -}}
 {{- end -}}

@@ -11,11 +11,14 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/).
   resaltado `<mark>`, snippet de contexto, carga **perezosa** del índice y prefill
   desde `?q=`). Página `/buscar/` (`layout: "search"`, `layouts/_default/search.html`)
   y acceso con **icono de lupa** en el header, junto al toggle de tema. El índice
-  cubre **sólo el blog** (`Type == "posts"`, excluida la serie del Códice). Estilos
-  en `10-portafolio-search.css`; `search.js` se suma al bundle JS del footer.
+  cubre **sólo el blog** (`Type == "posts"`, excluida la serie del Códice), con el
+  `content` **capado a 8000 chars** por entrada para acotar el peso del índice.
+  Estilos en `10-portafolio-search.css`; `search.js` se suma al bundle JS del footer.
 - **Landing de portafolio por tag** (`layouts/portafolio/list.html`): reúne los
   posts etiquetados `proyecto` bajo `/portafolio/` (orden por fecha, reusa
-  `post-card.html`) sin sacarlos del stream del blog.
+  `post-card.html`) sin sacarlos del stream del blog. El tag `proyecto` es
+  **interno**: se oculta de los chips de los posts (`post-card.html`) y de la lista
+  de términos (`terms.html`).
 
 Detalle de cada feature en [`docs/features.md`](docs/features.md).
 
