@@ -8,6 +8,7 @@ tags: [threat-intelligence, miniflux, ollama, openai, rss, automation, python, p
 cover: 19-pipeline-day6-259-articulos-multiphase.png
 coverCredit: "Pipeline Separatio procesando 259 artículos con el modelo multi-fase en 9 minutos"
 toc: true
+summary: "Un pipeline de threat intelligence construido en 6 días: lee feeds RSS, analiza cada artículo con LLM (Ollama local u OpenAI/Claude/Gemini), correlaciona CVEs contra CISA KEV y EPSS, y entrega un briefing diario con IOCs listos para SIEM. De 4000 artículos sin leer a un informe antes de las 8am."
 ---
 
 ## Abstract

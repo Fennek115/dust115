@@ -8,6 +8,7 @@ tags: [opsec, wifi-security, mac-randomization, surveillance, nsa, snowden, exfi
 cover: header-surveillance.jpg
 coverCredit: "Técnicas avanzadas de evasión y OpSec en la era de la vigilancia masiva"
 toc: true
+summary: "Análisis técnico de la vigilancia masiva de Permanent Record (STELLARWIND, PRISM), OpSec moderna y vectores Wi-Fi: MAC randomization y sus fallas, piggybacking para exfiltración anónima, y el forense que estas técnicas deben evadir."
 ---
 
 ## Abstract

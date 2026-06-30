@@ -5,6 +5,7 @@ date: 2026-06-29T18:00:00-04:00
 draft: false
 categories: [Blue Team, Análisis de Malware]
 tags: ["malware", "blue-team", "soc", "analisis", "byovd", "grandoreiro", "mitre-attack", "threat-intel", "proyecto"]
+toc: true
 summary: "Una muestra real que analicé en una práctica SOC. Yo dije Grandoreiro; el sandbox dijo RatonRAT. Writeup técnico de toda la cadena —del ISO falso al kernel— y de por qué la etiqueta automática de un sandbox no es un veredicto: era Grandoreiro, con la rareza de traer su propio driver vulnerable."
 ---
 

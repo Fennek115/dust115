@@ -8,6 +8,7 @@ tags: [sliver, wireguard, nginx, cloudflare, oracle-cloud, proxmox, c2, red-team
 cover: postimagevulpinemarrow.png
 coverCredit: "Vulpine Marrow — Infraestructura C2 Red Team Distribuida"
 toc: true
+summary: "Una infraestructura C2 red team multicapa sobre cloud gratuito y hardware doméstico: operador en WSL, Sliver en Proxmox, Cloudflare como relay y Nginx en Oracle como redirector L7, todo en túneles WireGuard cifrados. Incluye los 8 errores reales del deploy."
 ---
 
 ## Abstract
