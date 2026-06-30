@@ -82,12 +82,6 @@ enableRobotsTXT = true
       weight = 5
 
     [[languages.en.menu.main]]
-      identifier = "buscar"
-      name = "buscar"
-      url = "/buscar/"
-      weight = 6
-
-    [[languages.en.menu.main]]
       identifier = "apt115"
       name = "apt115"
       url = "/apt115/"

@@ -1,9 +1,12 @@
 {{- /* Índice de búsqueda full-text generado en build. Lo consume js/search.js
        (fetch a /index.json) para el buscador client-side, sin CDN ni dependencias.
-       Incluye todas las páginas regulares (blog + códice), excluyendo las que
-       marquen `noindex` en su front matter. */ -}}
+       Sólo el BLOG: se excluye el Códice del Polvo (es un libro aparte) igual que
+       en el índice del blog (_default/list.html), y las páginas con `noindex`. */ -}}
+{{- $all := where .Site.RegularPages "Type" "posts" -}}
+{{- $codice := where $all "Params.series" "intersect" (slice "Códice del Polvo") -}}
+{{- $blog := complement $codice $all -}}
 {{- $idx := slice -}}
-{{- range where .Site.RegularPages "Params.noindex" "!=" true -}}
+{{- range where $blog "Params.noindex" "!=" true -}}
   {{- $entry := dict
       "title" .Title
       "url" .RelPermalink

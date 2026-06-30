@@ -30,8 +30,9 @@
 .dust-logo__cursor { padding: 3px 3px 3px 0; animation: dust-blink 1.1s step-end infinite; }
 @keyframes dust-blink { 50% { opacity: .25; } }
 
-/* Botón de tema integrado en el header */
-.header__theme {
+/* Botón de tema + lupa de búsqueda integrados en el header (misma caja) */
+.header__theme,
+.header__search {
   background: var(--vm-tint-08);
   border: 1px solid var(--vm-border-2);
   color: var(--foreground);
@@ -44,9 +45,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.15s, border-color 0.15s;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
 }
-.header__theme:hover { background: var(--vm-tint-15); border-color: var(--accent); }
+.header__theme:hover,
+.header__search:hover { background: var(--vm-tint-15); border-color: var(--accent); color: var(--accent); }
 
 /* Menu items */
 .menu__inner > li {

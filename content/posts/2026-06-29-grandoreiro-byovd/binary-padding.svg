@@ -29,8 +29,8 @@
   <!-- etiquetas de segmentos -->
   <text x="62"  y="240" font-size="13" fill="#cdb4db">.text · ~6.6 MB</text>
   <text x="62"  y="258" font-size="12" fill="#9a8fb0">código real</text>
-  <text x="150" y="240" font-size="13" fill="#cdb4db">.rsrc · ~109 MB de relleno (imágenes BMP / ceros)</text>
-  <text x="150" y="258" font-size="12" fill="#9a8fb0">entropía global del archivo ≈ 0.42 → casi todo es padding repetitivo</text>
+  <text x="320" y="240" font-size="13" fill="#cdb4db">.rsrc · ~109 MB de relleno (imágenes BMP / ceros)</text>
+  <text x="320" y="258" font-size="12" fill="#9a8fb0">entropía global del archivo ≈ 0.42 → casi todo es padding repetitivo</text>
 
   <!-- callouts -->
   <line x1="60" y1="300" x2="1040" y2="300" stroke="#9141ac" stroke-opacity="0.25"/>
