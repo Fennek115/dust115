@@ -3,7 +3,7 @@ slug: "grandoreiro-byovd"
 title: "Sí era Grandoreiro: anatomía de un banker LATAM con BYOVD"
 date: 2026-06-29T18:00:00-04:00
 draft: false
-tags: ["malware", "blue-team", "soc", "analisis", "byovd", "grandoreiro", "mitre-attack", "threat-intel"]
+tags: ["malware", "blue-team", "soc", "analisis", "byovd", "grandoreiro", "mitre-attack", "threat-intel", "proyecto"]
 summary: "Una muestra real que analicé en una práctica SOC. Yo dije Grandoreiro; el sandbox dijo RatonRAT. Writeup técnico de toda la cadena —del ISO falso al kernel— y de por qué la etiqueta automática de un sandbox no es un veredicto: era Grandoreiro, con la rareza de traer su propio driver vulnerable."
 ---
 
@@ -38,7 +38,7 @@ Severidad que le asigno: {{< badge red >}}CRÍTICA{{< /badge >}} (robo de creden
 
 ## Metodología: el orden que doma el caos
 
-Analizar una muestra se siente caótico —saltás de un string a una IP, de un driver a un hash, de una corazonada a otra—. Mi propia investigación arrancó así. Pero hay un pipeline que ordena ese desorden, y la regla es simple: **lo barato primero, lo caro al final, y nada se ejecuta hasta tener el laboratorio listo.** Es el modelo de cuatro niveles de *[Practical Malware Analysis](https://nostarch.com/malware)* (Sikorski & Honig) y de [SANS FOR610](https://www.sans.org/cyber-security-courses/reverse-engineering-malware-tools-techniques/), resumido en la [pirámide de fases de Lenny Zeltser](https://zeltser.com/stages-of-malware-analysis-pyramid/). Las secciones que siguen recorren estas fases en orden.
+Analizar una muestra se siente caótico —saltas de un string a una IP, de un driver a un hash, de una corazonada a otra—. Mi propia investigación arrancó así. Pero hay un pipeline que ordena ese desorden, y la regla es simple: **lo barato primero, lo caro al final, y nada se ejecuta hasta tener el laboratorio listo.** Es el modelo de cuatro niveles de *[Practical Malware Analysis](https://nostarch.com/malware)* (Sikorski & Honig) y de [SANS FOR610](https://www.sans.org/cyber-security-courses/reverse-engineering-malware-tools-techniques/), resumido en la [pirámide de fases de Lenny Zeltser](https://zeltser.com/stages-of-malware-analysis-pyramid/). Las secciones que siguen recorren estas fases en orden.
 
 | Fase | Qué se hace | Herramientas | Dónde, en este post |
 |---|---|---|---|
@@ -75,6 +75,8 @@ Una usuaria de una oficina regional del cliente recibió, a través del **portal
 No es casualidad. Desde que Microsoft empezó a bloquear macros de Office descargadas de internet, las **imágenes de disco (ISO/IMG/VHD)** se volvieron el contenedor de moda: Windows las **monta con doble clic**, y durante años el **`Mark-of-the-Web` (MOTW)** no se propagaba a los archivos *dentro* de la imagen, así que el VBS arrancaba sin la advertencia de "este archivo vino de internet".
 
 La respuesta del SOC fue de manual: aislamiento vía EDR, deshabilitación de la cuenta en AD, *full disk scan* con SentinelOne, y —dada la presencia de drivers— sospecha de **BYOVD**. Un detalle que más adelante cobra sentido: **el full disk scan no encontró nada**.
+
+> **Dust —** Un escaneo que vuelve limpio debería tranquilizar. Aquí hizo lo contrario: cuando la herramienta dice "nada" y el contexto grita "algo", el silencio deja de ser ausencia de amenaza y se vuelve un dato. Me quedé con esa incomodidad; al final era la punta del hilo.
 
 ---
 
@@ -207,11 +209,13 @@ La sección `.rsrc` ocupa **114.179.584 bytes (~109 MB)** de un binario de 116 M
 **Por qué importa.** Muchos AV/sandboxes —y agentes EDR como SentinelOne— imponen un **límite de tamaño** de archivo a escanear (50–100 MB por defecto). Inflar el binario por encima de ese umbral con relleno barato hace que el escáner **se rinda o trunque**. El relleno comprime a casi nada (284 MB → 3.7 MB en el ZIP), así que no hay coste de descarga. Es la técnica que Rising etiqueta, literalmente, como `Malware.SwollenFile`.
 {{< /callout >}}
 
+> **Dust —** Hay algo casi insolente en derrotar a un motor de análisis con relleno. Nada de criptografía elegante ni de un día cero: 109 MB de imágenes y ceros, apostando a que la defensa se canse antes de llegar al código. La evasión más efectiva no siempre es la más sofisticada; a veces solo abusa de un límite que alguien puso por comodidad.
+
 ---
 
 ## 5. Confirmando la familia: esto es Grandoreiro
 
-Acá es donde el envoltorio deja de importar y el payload habla. Cinco líneas de evidencia, independientes, convergen en Grandoreiro.
+Aquí es donde el envoltorio deja de importar y el payload habla. Cinco líneas de evidencia, independientes, convergen en Grandoreiro.
 
 ### 5.1 Detección multi-AV (firma, no asociación)
 
@@ -275,7 +279,7 @@ Los imports del payload son un manual de troyano bancario:
 | **Descubrimiento de red** | `NetWkstaGetInfo` | enumera máquinas/dominio |
 | **C2 multiprotocolo** | `wsock32` (socket crudo) + `winhttp` | dos canales |
 
-Sumá un **CAPTCHA falso imitando Adobe Reader** ("Update Needed: PDF Not Compatible") para exigir interacción humana y frustrar sandboxes, la búsqueda de un IOC de **BTC wallets**, y el **geofencing** que IBM documenta: excluye Rusia, Chequia, Polonia y Holanda, y evita máquinas Windows 7 en EE.UU. sin antivirus —coherente con el modelo MaaS, donde el operador que paga elige sus *targets*—.
+Suma un **CAPTCHA falso imitando Adobe Reader** ("Update Needed: PDF Not Compatible") para exigir interacción humana y frustrar sandboxes, la búsqueda de un IOC de **BTC wallets**, y el **geofencing** que IBM documenta: excluye Rusia, Chequia, Polonia y Holanda, y evita máquinas Windows 7 en EE.UU. sin antivirus —coherente con el modelo MaaS, donde el operador que paga elige sus *targets*—.
 
 {{< callout type="tip" >}}
 Ninguna de estas cinco líneas —multi-AV, Delphi, algoritmo de strings, DGA, módulos de banca— es asociación débil. Convergen. **Es Grandoreiro.**
@@ -285,7 +289,7 @@ Ninguna de estas cinco líneas —multi-AV, Delphi, algoritmo de strings, DGA, m
 
 ## 6. El giro: BYOVD — Grandoreiro con drivers
 
-Acá está lo que esta muestra tiene de **inusual** para la familia. El dropper escribe **15 drivers `.sys`** en `C:\ProgramData\WareGridiwlgyUpgradeZone\`. Las entropías delatan que la mayoría son drivers **legítimos y firmados** (entropía 1–3), no payloads cifrados.
+Aquí está lo que esta muestra tiene de **inusual** para la familia. El dropper escribe **15 drivers `.sys`** en `C:\ProgramData\WareGridiwlgyUpgradeZone\`. Las entropías delatan que la mayoría son drivers **legítimos y firmados** (entropía 1–3), no payloads cifrados.
 
 | Driver | Tamaño | Entropía | MD5 |
 |---|---|---|---|
@@ -358,6 +362,8 @@ Y hay un argumento que lo cierra: **RatonRAT es un RAT escrito en C#** (open-sou
 **Por qué el sandbox vio tan poco.** La emulación fue mínima: **1 proceso, 0 conexiones de red, 0 archivos generados**. El malware **detectó el entorno de análisis** (CAPTCHA falso que exige clic humano, chequeo de 12 herramientas —Wireshark, Process Hacker, Fiddler, OllyDbg, x64dbg, Procmon…—, detección de VMware/debuggers) y **no ejecutó su payload**. Con datos conductuales tan pobres, el sandbox cayó en su heurística más débil. Una etiqueta automática de sandbox es una **hipótesis**, no un veredicto: hay que corroborarla con multi-AV, fingerprint de compilador y TTPs de familia.
 {{< /callout >}}
 
+> **Dust —** Nombrar una amenaza da una falsa sensación de control: con un nombre, el caos parece domesticado. Por eso cuesta resistir la etiqueta cómoda y volver a la evidencia. Tenía razón en el nombre, pero si lo hubiera defendido por orgullo en vez de por pruebas, habría acertado por accidente. Y acertar por accidente no es método: es suerte con buena prensa.
+
 ---
 
 ## 9. Tabla de IOCs
@@ -416,7 +422,7 @@ Dos reglas: el **loader VBS** (el rasgo más estable de la campaña) y el **patr
 rule LATAM_ISO_VBS_Inflated_Loader
 {
     meta:
-        author      = "Franco Castro"
+        author      = "dust"
         description = "Loader VBS del kit de entrega LATAM (Grandoreiro/Valyria): deobfuscador por Replace de cadena basura + decode base64 vía ADODB.Stream, renombrado .cwl"
         date        = "2026-06-29"
         tlp         = "CLEAR"
@@ -436,7 +442,7 @@ import "pe"
 rule Bloated_Delphi_PE_AntiSandbox
 {
     meta:
-        author      = "Franco Castro"
+        author      = "dust"
         description = "PE Delphi inflado anti-sandbox (Grandoreiro 'SwollenFile'): SizeOfImage enorme con .rsrc desproporcionada de relleno"
         date        = "2026-06-29"
     strings:
@@ -453,7 +459,7 @@ rule Bloated_Delphi_PE_AntiSandbox
 
 **Por qué cada condición.** En la primera, `$junk` con `#junk > 100` es el indicador fuerte (ningún VBS legítimo repite esa cadena cientos de veces); el rango de `filesize` descarta scripts normales y blobs sueltos. En la segunda, el par `.rsrc` desproporcionada + `SizeOfImage` enorme caza la **técnica** de inflado, y la clave de registro de Embarcadero ancla el **runtime Delphi**.
 
-> Podés reproducir el triage PE y probar YARA contra muestras en el navegador con [**APT115**](/apt115/) (libyara compilada a WASM, parser PE y extractor de IOCs, todo offline).
+> Puedes reproducir el triage PE y probar YARA contra muestras en el navegador con [**APT115**](/apt115/) (libyara compilada a WASM, parser PE y extractor de IOCs, todo offline).
 
 ---
 
@@ -509,4 +515,4 @@ Tenía razón en el llamado (Grandoreiro), pero la certeza no vino de la corazon
 
 ---
 
-*Análisis estático reproducido localmente sobre las muestras; comportamiento dinámico vía Joe Sandbox; atribución corroborada con VirusTotal multi-AV y el [informe de Grandoreiro de IBM X-Force](https://www.ibm.com/think/x-force/grandoreiro-banking-trojan-unleashed). Datos de cliente anonimizados. Las herramientas de [APT115](/apt115/) (triage PE/ELF, YARA, disasm, IOCs) corren offline en el navegador si querés repetir el triage.*
+*Análisis estático reproducido localmente sobre las muestras; comportamiento dinámico vía Joe Sandbox; atribución corroborada con VirusTotal multi-AV y el [informe de Grandoreiro de IBM X-Force](https://www.ibm.com/think/x-force/grandoreiro-banking-trojan-unleashed). Datos de cliente anonimizados. Las herramientas de [APT115](/apt115/) (triage PE/ELF, YARA, disasm, IOCs) corren offline en el navegador si quieres repetir el triage.*
