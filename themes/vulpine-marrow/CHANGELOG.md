@@ -2,6 +2,23 @@
 
 Formato basado en [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.3.0] — 2026-06-29
+
+### Added
+- **Búsqueda full-text** sin dependencias ni CDN: índice `index.json` generado en
+  build (output JSON de la home, `layouts/index.json`) + `js/search.js` (tokeniza
+  sin diacríticos, scoring AND con peso por campo —título/tag/summary/cuerpo—,
+  resaltado `<mark>`, snippet de contexto, carga **perezosa** del índice y prefill
+  desde `?q=`). Página `/buscar/` (`layout: "search"`, `layouts/_default/search.html`)
+  y acceso con **icono de lupa** en el header, junto al toggle de tema. El índice
+  cubre **sólo el blog** (`Type == "posts"`, excluida la serie del Códice). Estilos
+  en `10-portafolio-search.css`; `search.js` se suma al bundle JS del footer.
+- **Landing de portafolio por tag** (`layouts/portafolio/list.html`): reúne los
+  posts etiquetados `proyecto` bajo `/portafolio/` (orden por fecha, reusa
+  `post-card.html`) sin sacarlos del stream del blog.
+
+Detalle de cada feature en [`docs/features.md`](docs/features.md).
+
 ## [0.2.0] — 2026-06-20
 
 ### Added

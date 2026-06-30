@@ -91,6 +91,42 @@ de tag. Lo usan la home (`index.html`, primeros 6 + «ver archivo completo»),
 `/posts` (`list.html`, paginado) y las páginas de tag (`term.html`). La home y
 `/posts` **excluyen** la serie del Códice; las páginas de tag muestran todo.
 
+## Búsqueda full-text
+
+Buscador client-side **sin dependencias ni CDN**, en tres piezas:
+
+1. **Índice** (`layouts/index.json`): un output JSON de la home (requiere
+   `"JSON"` en `[outputs] home` — ver [`configuration.md`](configuration.md)).
+   Emite un array con `title`, `url`, `date`, `section`, `series`, `summary`,
+   `tags` y `content` (`.Plain`) de cada página. **Alcance: sólo el blog** —
+   filtra `Type == "posts"` y resta la serie del Códice (mismo criterio que el
+   listado feed), además de las páginas con `noindex`. Así el índice no carga el
+   peso del Códice (que es un libro aparte).
+2. **UI** (`layouts/_default/search.html`, activada por `layout: "search"` en una
+   página, p. ej. `content/buscar.md` → `/buscar/`): un input y un contenedor de
+   resultados. El acceso es un **icono de lupa** en el header
+   (`partials/header.html`), junto al toggle de tema, que enlaza a `/buscar/`.
+3. **Motor** (`js/search.js`, en el bundle JS del footer; sólo actúa si la página
+   tiene `.vm-search`): hace `fetch` del índice **una vez** (carga perezosa al
+   enfocar el input o al primer tecleo), normaliza sin diacríticos, tokeniza y
+   **rankea con AND** (todos los tokens deben aparecer) ponderando por campo —
+   título ×8, tag exacto ×6, summary ×3, cuerpo ×1—. Resalta las coincidencias con
+   `<mark>`, arma un *snippet* de contexto cuando el match está sólo en el cuerpo,
+   y precarga la query desde `?q=` en la URL. Debounce de 120 ms.
+
+Estilos en `10-portafolio-search.css`. Para cambiar el alcance (incluir otras
+secciones, o todo el sitio) se edita el filtro de `layouts/index.json`.
+
+## Portafolio (landing por tag)
+
+`layouts/portafolio/list.html` (sección `portafolio`, activada por
+`content/portafolio/_index.md`) reúne los posts etiquetados con el tag
+**`proyecto`** bajo una URL propia `/portafolio/`, presentados con el mismo
+`post-card.html` del feed y ordenados por fecha descendente. Los posts **no salen
+del stream del blog** —el tag sólo los agrupa—, así que sumar/quitar uno es
+agregar/sacar el tag. El tag objetivo está hardcodeado en el layout; cambiá el
+`intersect (slice "proyecto")` si usás otro nombre.
+
 ## Tabla de contenidos
 
 Opt-in con `toc: true` por página (o `Toc` global). `single.html` arma el bloque

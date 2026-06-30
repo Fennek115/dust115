@@ -65,6 +65,35 @@ externo tiene otro identifier.
 # … archive, etc.
 ```
 
+Además del menú, el header trae un **icono de lupa** fijo (no es un ítem de menú)
+que enlaza a `/buscar/`; su URL está hardcodeada en `partials/header.html`.
+
+## Búsqueda y portafolio
+
+La **búsqueda full-text** (ver [`features.md`](features.md)) necesita que la home
+emita el índice JSON:
+
+```toml
+[outputs]
+  home = ["HTML", "RSS", "JSON"]   # "JSON" genera /index.json (el índice)
+```
+
+Y una página que dispare la UI del buscador:
+
+```yaml
+# content/buscar.md
+---
+title: "Buscar"
+layout: "search"
+noindex: true
+---
+```
+
+La **landing de portafolio** es la sección `portafolio`: creá
+`content/portafolio/_index.md` (su prosa se muestra como intro) y el layout
+`portafolio/list.html` lista los posts con el tag `proyecto`. Sumá ese tag en el
+front matter de los posts que quieras incluir.
+
 ## Estructura de contenido esperada
 
 - **Blog**: páginas con `Type == "posts"` (por `contentTypeName`). El listado
